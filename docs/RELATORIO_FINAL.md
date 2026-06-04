@@ -43,17 +43,22 @@ componentes (qual evidência sustenta qual alegação) e a veracidade em si.
 
 ### 1.2 Do Seminário 1 a este relatório
 
-No Seminário 1, apresentou-se a proposta: a tarefa de AM aplicada às notas em português, o corpus
-de origem e um primeiro plano de extração por regras. O percurso até aqui guardou o núcleo e moveu
-as bordas. Três mudanças merecem registro. Primeiro, a comparação deixou de ser apenas
-regra-contra-humano e passou a contrapor *duas* estratégias automáticas — acrescentou-se E2, um
-modelo de linguagem, e com ele a pergunta sobre o que cada paradigma enxerga. Segundo, atenderam-se
-duas recomendações trazidas pela disciplina: adotou-se o formato *BIO* para as anotações e
-incorporou-se uma avaliação semiautomática, em nível de *token* (seqeval), além da comparação com o
-humano. Terceiro, agregaram-se camadas interpretativas que não estavam na proposta inicial —
-assinatura léxica por Dunning, uma lente que cruza tipo de entidade e papel argumentativo, e a
-agência sintática das entidades —, materializadas num explorador interativo. O *gold*, por fim,
-permanece provisório: foi anotado por uma única pessoa, e o relatório trata isso como limite
+No Seminário 1, apresentou-se a proposta no essencial: a tarefa de AM sobre as notas em português, o
+corpus de origem e as *duas* estratégias de extração — a simbólica (E1) e a do modelo de linguagem
+(E2), ambas já no plano desde o início. Esse núcleo se manteve. O que mudou foi a rota, em quatro
+pontos.
+
+O primeiro é metodológico e responde a recomendações da disciplina: normalizou-se a anotação para o
+formato *BIO*, em nível de *token*, e acrescentou-se uma avaliação semiautomática (seqeval) ao lado da
+comparação com o humano. O segundo é de proveniência, e talvez o mais consequente: passou-se a
+*persistir*, no dataset, a anotação linguística — POS e dependências — que o notebook anterior
+calculava e descartava. Guardá-la (campo `sintaxe_json`) custou pouco e rendeu muito, porque é dela
+que vivem as análises que vieram depois. O terceiro são essas análises — assinatura léxica por
+Dunning, a lente que cruza tipo de entidade e papel, a agência sintática —, ausentes da proposta
+inicial. E o quarto é o próprio explorador interativo que as materializa, também novidade em relação
+à apresentação.
+
+O *gold*, por fim, permanece provisório: anotado por uma única pessoa, é tratado como limite
 declarado, não como detalhe.
 
 ### 1.3 Tarefa, perguntas e objetivo
@@ -137,11 +142,27 @@ momentos: na seleção do recorte humano, que as exclui, e na avaliação, em qu
 
 ### 3.4 Normalização BIO
 
-Os *spans* das três fontes — E1, E2 e humano — foram projetados, de forma determinística, para
-rótulos de *token* `B-TIPO` / `I-TIPO` / `O`. A projeção preserva os *offsets* de caractere e a
-tokenização da árvore de dependências (campo `sintaxe_json`), de modo que a leitura por *span* e a
-leitura por *token* descrevem o mesmo objeto. Foi o que viabilizou a avaliação por seqeval e
-atendeu à recomendação de adotar o formato BIO.
+Anotar por *span* e avaliar por *token* não são a mesma operação, e a ponte entre elas é uma
+projeção — o ponto em que uma marcação contínua, feita sobre caracteres, é forçada à grade discreta
+dos *tokens*. Toda projeção desse tipo decide casos difíceis por regra; o honesto é dizer qual.
+
+As três fontes — E1, E2 e humano — passaram por um *mesmo* tokenizador (`spacy_pt_blank_v1`). Não é
+detalhe de implementação: é a condição para que as três sequências BIO fiquem alinhadas *token* a
+*token* e, portanto, comparáveis diretamente pelo seqeval. Cada *token* carrega seus *offsets* de
+caractere (`bio_offsets_json`); um *token* é atribuído a um *span* quando os dois intervalos se
+sobrepõem. O primeiro *token* de um *span* recebe `B-TIPO`, os seguintes `I-TIPO`, e o que nenhum
+*span* cobre recebe `O`.
+
+Resta o caso de fronteira — o *token* que cavalga a borda de um *span* ou que poderia caber em mais de
+um. A política de conflito o resolve de forma fixa e versionada
+(`token_max_overlap_then_longest_then_type_priority`, projeção 2.0.0): vence o *span* com maior
+sobreposição de caracteres com o *token*; no empate, o *span* mais longo; persistindo, uma prioridade
+de tipo. Na prática, os *spans* de uma mesma estratégia não se sobrepõem — zero ocorrências no E2 —,
+de modo que a regra governa sobretudo os *tokens* de borda, e o faz sem depender da ordem em que os
+*spans* aparecem.
+
+Como a projeção preserva os *offsets*, a leitura por *span* e a leitura por *token* descrevem o mesmo
+objeto em duas resoluções. Foi o que viabilizou o seqeval e atendeu à recomendação de adotar o BIO.
 
 ### 3.5 Medidas de avaliação
 
@@ -156,7 +177,7 @@ que casam com a referência), os falsos positivos ($FP$, *spans* do sistema sem 
 negativos ($FN$, *spans* da referência não recuperados):
 
 $$
-P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R} = \frac{2\,TP}{2\,TP + FP + FN}.
+P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R}.
 $$
 
 A precisão pergunta quanto do que o sistema marcou estava certo; a revocação, quanto do que existia
@@ -177,39 +198,24 @@ sobreposição, desde que o tipo coincida. A diferença entre as duas F1 não é
 medida. F1 relaxada alta com F1 estrita baixa significa que o sistema *achou a região certa e errou a
 borda*; a distância entre elas aproxima, assim, o erro de fronteira.
 
-A F1 ignora aquilo que ambos deixaram *em branco* — todo o texto que nenhum dos dois marcou. O *kappa*
-de Cohen corrige isso e, de quebra, desconta o acaso. Rotula-se cada uma das $N$ posições de caractere
-do corpus com um rótulo de $\mathcal{L} = \{\text{CLAIM, EVIDENCIA, FONTE, QUALIFICADOR},\, O\}$ — em
-que $O$ é "fora de qualquer span" —, segundo cada estratégia. Com a concordância observada $p_o$
-(fração de caracteres com rótulo idêntico) e a concordância esperada ao acaso $p_e$, obtida das
-distribuições marginais $p_a(\ell)$ e $p_b(\ell)$ de cada rótulo:
+A F1 ignora o que ambos *não* marcaram; o *kappa* de Cohen corrige isso e desconta o acaso. Rotulando
+cada um dos $N$ caracteres com um rótulo de $\mathcal{L}=\{\text{CLAIM, EVIDENCIA, FONTE,
+QUALIFICADOR},\, O\}$, e tomando a concordância observada $p_o$ e a esperada ao acaso
+$p_e=\sum_{\ell}p_a(\ell)\,p_b(\ell)$ (das marginais de cada rótulo):
 
 $$
-p_o = \frac{1}{N}\sum_{i=1}^{N} \mathbb{1}\!\left[\ell_a(i) = \ell_b(i)\right],
-\qquad
-p_e = \sum_{\ell \in \mathcal{L}} p_a(\ell)\, p_b(\ell),
-\qquad
 \kappa = \frac{p_o - p_e}{1 - p_e}.
 $$
 
-O valor $1$ é acordo perfeito; $0$, o que se esperaria de duas marcações independentes; negativo,
-acordo *pior* que o acaso — foi o que ocorreu com E1 contra o humano. Para leitura qualitativa,
-adota-se a escala usual (Landis e Koch, 1977): até $0{,}2$, ligeiro; $0{,}2$–$0{,}4$, razoável;
-$0{,}4$–$0{,}6$, moderado; $0{,}6$–$0{,}8$, substancial; acima, quase perfeito. Medir em caractere, e
-não em *token*, é deliberado: dispensa um acordo prévio sobre tokenização e capta a sobreposição na
-resolução mais fina possível.
+Vale $1$ no acordo perfeito, $0$ no esperado ao acaso e negativo abaixo dele — foi o caso de E1 contra
+o humano —, e lê-se pela escala de Landis e Koch (1977). Medir em caractere, e não em *token*,
+dispensa um acordo prévio sobre tokenização.
 
-Projetados os *spans* para BIO, a leitura por *token* usa o seqeval. Cada *token* recebe `B-TIPO`,
-`I-TIPO` ou `O`, e uma *entidade* é uma sequência maximal `B-T I-T …`; um acerto exige, na referência,
-uma entidade de mesmo tipo *e mesmas fronteiras de token* — é o casamento estrito transposto para a
-grade dos *tokens*. As mesmas $P$, $R$ e $F_1$ se aplicam, agora sobre entidades BIO. Reporta-se a
-versão *micro* — que agrega $TP$, $FP$ e $FN$ de todos os tipos antes de calcular as taxas, e portanto
-pondera pela frequência — e a F1 *por tipo*, que mostra onde o acordo se concentra (na §5.5, em FONTE).
-
-As quatro medidas leem o mesmo fenômeno em escalas distintas. O par estrito/relaxado isola a
-fronteira; o *kappa* desconta o acaso e mede a sobreposição em caractere; o seqeval recoloca tudo na
-grade de *tokens*, onde os modelos de sequência de fato operam. Nenhuma basta sozinha — e é da leitura
-cruzada delas que sai o argumento do §5.
+A leitura por *token* (seqeval) aplica as mesmas $P$, $R$ e $F_1$ sobre as entidades BIO: um acerto
+exige mesmo tipo *e* mesmas fronteiras de *token* — o casamento estrito transposto para a grade dos
+*tokens*. Reporta-se a versão *micro* (que agrega $TP$, $FP$ e $FN$ de todos os tipos) e a F1 por
+tipo. As medidas não se substituem — o par estrito/relaxado isola a fronteira, o *kappa* desconta o
+acaso, o seqeval recoloca tudo onde os modelos de sequência operam.
 
 ## 4. Estratégias
 
