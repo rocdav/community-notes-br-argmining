@@ -381,8 +381,30 @@ pelo filtro do provedor.
 
 ### 5.7 Assinatura léxica por tipo (Dunning)
 
-Cada papel tem vocabulário próprio. O *log-likelihood* de Dunning, sobre a base do E2, isola os
-lemas que distinguem cada tipo:
+Contar palavra crua não serve. As mais frequentes em qualquer *span* seriam as mais frequentes da
+língua — artigos, preposições, o ruído de fundo do português. A pergunta certa não é *o que é
+frequente*, mas *o que é frequente demais, aqui, para ser acaso*. É o que mede o *log-likelihood* de
+Dunning (1993).
+
+Para um lema $w$ e um tipo-alvo — digamos, FONTE —, monta-se uma tabela de contingência: $a$ é a
+frequência de $w$ dentro dos *spans* desse tipo, $b$ a frequência de $w$ no restante do corpus, e $c$
+e $d$ os totais de lemas de cada lado. Sob a hipótese nula — $w$ é igualmente provável dentro e fora
+do tipo —, as contagens esperadas seriam:
+
+$$
+E_a = c\,\frac{a+b}{c+d}, \qquad E_b = d\,\frac{a+b}{c+d}.
+$$
+
+O quanto o observado se afasta dessa expectativa é o que a estatística capta:
+
+$$
+G^2 = 2\left[\, a\,\ln\frac{a}{E_a} + b\,\ln\frac{b}{E_b} \,\right].
+$$
+
+$G^2$ segue, aproximadamente, uma $\chi^2$ com um grau de liberdade; retêm-se apenas os lemas com
+$G^2 \geq 3{,}84$ — o limiar de significância a $p < 0{,}05$ — e, dentre eles, só os de
+*sobre*-representação, isto é, com $a/c > (a+b)/(c+d)$. O que sobra, sobre a base do E2, é o
+vocabulário que *distingue* cada papel:
 
 | Tipo | Lemas mais distintivos |
 |---|---|
@@ -391,10 +413,11 @@ lemas que distinguem cada tipo:
 | FONTE | conforme, fonte, artigo, acordo, site, constituição, sbt, canal, imprensa, inep |
 | QUALIFICADOR | enganoso, potencialmente, provavelmente, claramente, apesar, acreditar, especulação, caso, importante, verdadeiro |
 
-A assinatura é semanticamente coerente: a alegação concentra os verbos da refutação (*falso, fake,
-mente*); a fonte, os marcadores de atribuição (*conforme, fonte, imprensa*); o qualificador, os
-advérbios da dúvida (*potencialmente, provavelmente, apesar*). A regularidade sugere que parte do
-sinal argumentativo é, de fato, lexical — o que explica por que a regra não chega a zero.
+A assinatura é semanticamente coerente — e a coerência é, ela própria, um resultado. A alegação
+concentra os verbos da refutação (*falso, fake, mente*); a fonte, os marcadores de atribuição
+(*conforme, fonte, imprensa*); o qualificador, os advérbios da dúvida (*potencialmente, provavelmente,
+apesar*). Que o sinal argumentativo se deixe, em parte, capturar por léxico explica por que a regra
+não chega a zero: há, em cada papel, palavras que o denunciam.
 
 ### 5.8 Lente entidade × papel
 
