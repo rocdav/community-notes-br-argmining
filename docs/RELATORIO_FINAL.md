@@ -140,17 +140,15 @@ Na prática, os *spans* de uma mesma fonte quase nunca competem entre si — no 
 
 ### 3.5 Medidas de avaliação
 
-Escolhemos as métricas para responder a perguntas diferentes sobre a mesma saída: listas de *spans* tipados. Cada item da lista carrega três informações — início, fim e tipo —, por exemplo `[120, 158) / EVIDENCIA`. Avaliar o sistema é verificar se esses itens coincidem com outra lista. No recorte com *gold*, a outra lista é a anotação humana; na comparação E1×E2, é a saída da outra estratégia — e por isso esse resultado deve ser lido como acordo, não como "acerto" absoluto.
+O que cada estratégia entrega é uma lista de *spans* tipados. Cada item traz três informações — onde o trecho começa, onde termina e de que tipo é —, gravadas como posições de caractere no texto da nota: `[120, 158) / EVIDENCIA` quer dizer "do caractere 120 ao 157, uma evidência". Avaliar o sistema é, no fundo, conferir se esses itens batem com os de outra lista. No recorte com *gold*, a outra lista é a anotação humana; na comparação E1×E2, é a saída da estratégia rival — e aí o número mede acordo, não "acerto". Nenhuma medida sozinha conta a história inteira, então usamos quatro, cada uma respondendo a uma pergunta distinta.
 
-A primeira pergunta é direta: dos *spans* que o sistema marcou, quantos correspondem a um *span* da referência? E dos *spans* da referência, quantos ele recuperou? Para isso usamos precisão, revocação e F1. Em uma nota, um verdadeiro positivo ($TP$) é um *span* do sistema que encontra par na referência; um falso positivo ($FP$) é um *span* marcado pelo sistema sem par; e um falso negativo ($FN$) é um *span* da referência que o sistema deixou de marcar. As fórmulas só resumem essa contagem:
+A mais óbvia é de correspondência item a item: dos *spans* que o sistema marcou, quantos têm par na referência? E dos *spans* da referência, quantos ele recuperou? É o que precisão, revocação e F1 resumem. Numa nota, um verdadeiro positivo ($TP$) é um *span* do sistema que encontra par; um falso positivo ($FP$) é um *span* que o sistema marcou sem que houvesse par; um falso negativo ($FN$) é um *span* da referência que ele deixou passar. As fórmulas apenas organizam essa contagem:
 
 $$
 P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R}.
 $$
 
-O ponto sensível é definir o que conta como "encontrar par". Usamos duas leituras. Na F1 estrita, o par só existe quando tipo, início e fim são idênticos. Se o humano marcou `[120, 158) / EVIDENCIA` e o sistema marcou `[120, 158) / EVIDENCIA`, é acerto; se marcou `[118, 158) / EVIDENCIA`, já não é. Na F1 relaxada, o tipo ainda precisa coincidir, mas aceitamos sobreposição de fronteira: `[118, 158) / EVIDENCIA` e `[120, 158) / EVIDENCIA` contam como o mesmo trecho argumentativo, numa granularidade mais tolerante.
-
-Formalmente, para um *span* de referência $r=[i_r, j_r)$ e um *span* do sistema $s=[i_s, j_s)$, ambos de tipo $t$, as duas leituras são:
+Tudo depende, então, de uma decisão: o que conta como "ter par"? Adotamos duas leituras. Na F1 estrita, só há par quando tipo, início e fim coincidem exatamente — `[120, 158) / EVIDENCIA` casa com `[120, 158) / EVIDENCIA`, mas não com `[118, 158) / EVIDENCIA`, que começa duas posições antes. Na F1 relaxada, o tipo ainda precisa bater, mas basta que os trechos se sobreponham: `[118, 158)` e `[120, 158)` passam a contar como o mesmo trecho. Formalmente, para um *span* de referência $r=[i_r, j_r)$ e um do sistema $s=[i_s, j_s)$, ambos de tipo $t$:
 
 $$
 \text{estrito:}\quad i_r = i_s \,\wedge\, j_r = j_s
@@ -158,19 +156,19 @@ $$
 \text{relaxado:}\quad [i_r, j_r) \cap [i_s, j_s) \neq \varnothing.
 $$
 
-A diferença entre F1 estrita e relaxada é, na prática, uma medida do erro de fronteira. Quando a relaxada sobe e a estrita fica baixa, o sistema provavelmente localizou a região argumentativa certa, mas cortou palavras a mais ou a menos. Esse foi um ponto central do experimento: E1 muitas vezes encontra o sinal lexical — sobretudo em FONTE —, mas erra o limite fino do *span*.
+A distância entre as duas é, na prática, o tamanho do erro de fronteira. Quando a relaxada sobe e a estrita não acompanha, o sistema achou a região certa, mas cortou palavras a mais ou a menos. Foi um padrão recorrente aqui: E1 encontra o sinal lexical — sobretudo em FONTE — e, mesmo assim, erra o limite fino do *span*.
 
-A segunda pergunta é sobre concordância global no texto. A F1 só olha para os *spans* marcados; não considera os trechos que ambos deixaram como "fora de span". Para isso usamos o *kappa* de Cohen em nível de caractere. Cada caractere da nota recebe um rótulo: CLAIM, EVIDENCIA, FONTE, QUALIFICADOR ou `O`. Em seguida, medimos quanto as duas rotulações concordam, descontando a concordância que seria esperada apenas pela distribuição dos rótulos:
+Essas três medidas têm um ponto cego: enxergam só os *spans* marcados e ignoram todo o texto que ambas as fontes deixaram de fora. Para olhar a nota inteira, usamos o *kappa* de Cohen em nível de caractere. Damos um rótulo a cada caractere — CLAIM, EVIDENCIA, FONTE, QUALIFICADOR ou `O` — e medimos quanto as duas rotulações concordam, descontando a concordância que cairia por acaso, só pela proporção de cada rótulo:
 
 $$
 \kappa = \frac{p_o - p_e}{1 - p_e}.
 $$
 
-Aqui, $p_o$ é a concordância observada entre as duas sequências de caracteres, e $p_e$ é a concordância esperada ao acaso a partir das proporções de cada rótulo. O valor é 1 no acordo perfeito, 0 no acordo esperado ao acaso, e pode ficar negativo quando a concordância é pior que esse patamar. Medimos em caractere porque as saídas originais de E1, E2 e humano são intervalos de caractere; assim, o *kappa* avalia diretamente a mesma unidade em que os *spans* foram produzidos.
+$p_o$ é a concordância de fato observada entre as duas sequências de caracteres; $p_e$, a esperada ao acaso. O *kappa* vale 1 no acordo perfeito, 0 quando o acordo não supera o acaso, e fica negativo quando é pior que isso. Medimos em caractere por um motivo simples: é a unidade em que E1, E2 e humano produzem seus *spans*, de modo que o *kappa* avalia exatamente o que foi anotado, sem intermediário.
 
-A terceira pergunta vem da recomendação de representar a tarefa em BIO: se transformarmos os *spans* em rótulos por *token*, como fica a avaliação de sequência? Para isso usamos seqeval. Depois da projeção descrita na seção anterior, um acerto exige mesmo tipo e mesmas fronteiras de *token* — ou seja, é a leitura estrita aplicada às entidades BIO. Reportamos a média *micro*, que agrega $TP$, $FP$ e $FN$ de todos os tipos, e também o resultado por tipo, porque CLAIM, EVIDENCIA e FONTE se comportam de modo muito diferente no corpus.
+Falta a leitura que a disciplina recomendou: e se passarmos os *spans* a rótulos por *token* e tratarmos tudo como rotulagem de sequência? Aí entra o seqeval. Depois da projeção BIO da seção anterior, ele exige, para um acerto, o mesmo tipo e as mesmas fronteiras de *token* — é a leitura estrita de novo, agora sobre entidades BIO. Reportamos a média *micro*, que junta $TP$, $FP$ e $FN$ de todos os tipos num número só, e também o resultado por tipo, porque CLAIM, EVIDENCIA e FONTE se comportam de maneiras bem diferentes no corpus.
 
-As quatro medidas são complementares. A F1 estrita responde se o sistema acertou exatamente os *spans*; a F1 relaxada mostra se ao menos encontrou a região certa; o *kappa* observa a concordância no texto inteiro; e o seqeval traduz o mesmo problema para a forma exigida por modelos de sequência.
+As quatro leituras não competem; encaixam-se. A estrita pergunta se o *span* saiu exato; a relaxada, se ao menos caiu na região certa; o *kappa* abre o foco para o texto todo; o seqeval reescreve o problema na forma que um modelo de sequência entenderia.
 
 ## 4. Estratégias
 
@@ -305,21 +303,21 @@ A diferença é de três ordens de grandeza por nota, e não é um detalhe de im
 
 ### 5.7 Assinatura léxica por tipo (Dunning)
 
-Contar palavra crua não ajuda. As mais frequentes em qualquer *span* seriam as mais frequentes da língua — artigos, preposições, o ruído de fundo do português. A pergunta certa não é *o que é frequente*, mas *o que é frequente demais, aqui, para ser acaso*. É isso que o *log-likelihood* de Dunning (1993) mede.
+Contar palavra crua não ajuda. As mais frequentes dentro de qualquer tipo de *span* seriam, no fim, as mais frequentes do português — artigos, preposições, o ruído de fundo da língua. A pergunta útil não é *o que aparece muito*, e sim *o que aparece muito mais aqui do que se esperaria por acaso*. É isso que o *log-likelihood* de Dunning (1993) mede.
 
-Para um lema $w$ e um tipo-alvo — digamos, FONTE —, montamos uma tabela de contingência: $a$ é a frequência de $w$ dentro dos *spans* desse tipo, $b$ a frequência de $w$ no resto do corpus, e $c$ e $d$ os totais de lemas de cada lado. Sob a hipótese nula — $w$ é igualmente provável dentro e fora do tipo —, as contagens esperadas seriam:
+O cálculo parte de quatro contagens, fixados um lema $w$ e um tipo-alvo — digamos, FONTE. Duas dizem respeito ao lema: $a$ é quantas vezes $w$ aparece dentro dos *spans* de FONTE, e $b$, quantas vezes aparece no resto do corpus. As outras duas são os tamanhos de cada lado: $c$, o total de lemas dentro de FONTE, e $d$, o total de lemas fora. Se $w$ se distribuísse de forma neutra — igualmente provável dentro e fora do tipo —, o número de ocorrências esperado de cada lado seria apenas proporcional ao tamanho desse lado:
 
 $$
 E_a = c\,\frac{a+b}{c+d}, \qquad E_b = d\,\frac{a+b}{c+d}.
 $$
 
-O quanto o observado se afasta dessa expectativa é o que a estatística capta:
+A estatística mede o quanto a contagem real se afasta dessa expectativa:
 
 $$
 G^2 = 2\left[\, a\,\ln\frac{a}{E_a} + b\,\ln\frac{b}{E_b} \,\right].
 $$
 
-$G^2$ segue, aproximadamente, uma $\chi^2$ com um grau de liberdade; ficamos apenas com os lemas de $G^2 \geq 3{,}84$ — o limiar de significância a $p < 0{,}05$ — e, entre eles, só os de *sobre*-representação, ou seja, com $a/c > (a+b)/(c+d)$. O que sobra, sobre a base do E2, é o vocabulário que *distingue* cada papel:
+Quanto maior o $G^2$, mais o lema destoa do que a distribuição neutra preveria — para mais ou para menos. Como $G^2$ segue, aproximadamente, uma $\chi^2$ com um grau de liberdade, ficamos só com os lemas de $G^2 \geq 3{,}84$, que é o ponto de corte dessa $\chi^2$ a $p < 0{,}05$. E, entre esses, guardamos apenas os de *sobre*-representação — aqueles em que $a/c > (a+b)/(c+d)$, isto é, em que o lema é proporcionalmente mais comum dentro do tipo do que no corpus inteiro. O que sobra, sobre a base do E2, é o vocabulário que *distingue* cada papel:
 
 | Tipo | Lemas mais distintivos |
 |---|---|
@@ -328,7 +326,7 @@ $G^2$ segue, aproximadamente, uma $\chi^2$ com um grau de liberdade; ficamos ape
 | FONTE | conforme, fonte, artigo, acordo, site, constituição, sbt, canal, imprensa, inep |
 | QUALIFICADOR | enganoso, potencialmente, provavelmente, claramente, apesar, acreditar, especulação, caso, importante, verdadeiro |
 
-A assinatura é semanticamente coerente — e essa coerência é, por si só, um resultado. A alegação concentra os verbos da refutação (*falso, fake, mente*); a fonte, os marcadores de atribuição (*conforme, fonte, imprensa*); o qualificador, os advérbios da dúvida (*potencialmente, provavelmente, apesar*). Que o sinal argumentativo se deixe capturar, em parte, por léxico explica por que a regra não chega a zero: em cada papel há palavras que o denunciam.
+A assinatura é semanticamente coerente — e essa coerência é, por si só, um resultado. A alegação concentra os verbos da refutação (*falso, fake, mente*); a fonte, os marcadores de atribuição (*conforme, fonte, imprensa*); o qualificador, os advérbios da dúvida (*potencialmente, provavelmente, apesar*). Que o sinal argumentativo se deixe capturar, ao menos em parte, pelo léxico é o que explica por que a regra simbólica não chega a zero: em cada papel há palavras que o denunciam.
 
 ### 5.8 Lente entidade × papel
 
