@@ -310,14 +310,15 @@ texto inteiro; e o seqeval traduz o mesmo problema para a forma exigida por mode
 
 ### 4.1 Visão geral do pipeline
 
-O fluxo encadeia: corpus → preparação → extração por E1 → extração por E2 → seleção das 60 →
-anotação humana → normalização BIO → avaliação (E1×E2 e contra o *gold*) → camadas interpretativas
-(Dunning, entidades, agência). A arquitetura completa está na Figura 1.
+O fluxo encadeia: corpus → `notebook_preparacao_v2.ipynb` (preparação, seleção das 60 e extrações
+E1/E2) → anotação humana → `notebook_conclusao.ipynb` (normalização BIO e avaliação E1×E2 e contra o
+*gold*) → camadas interpretativas (Dunning, entidades, agência). A arquitetura completa está na
+Figura 1.
 
 ![Arquitetura do pipeline](figuras_relatorio/fig_01_arquitetura.png)
 
-*Figura 1 — Arquitetura do pipeline experimental: corpus público, preparação, extração por E1 e E2,
-anotação humana, normalização BIO, avaliação e artefatos finais.*
+*Figura 1 — Arquitetura do pipeline experimental: o notebook de preparação produz as extrações E1 e
+E2; o notebook de conclusão realiza normalização BIO, avaliação, figuras e artefatos finais.*
 
 ### 4.2 Estratégia E1 — regras léxico-sintáticas
 
@@ -379,7 +380,8 @@ já dita, é o *gold* de um anotador só.
 ## 5. Resultados — avaliação quantitativa
 
 Os números a seguir foram reconciliados de forma reprodutível a partir das células determinísticas
-de `notebook_conclusao.ipynb` (script `_reconciliar_relatorio.py`, saídas em `outputs/`).
+de `notebook_conclusao.ipynb`, que consome os *spans* E1/E2 produzidos na preparação e executa a
+normalização BIO e as medidas de avaliação (script `_reconciliar_relatorio.py`, saídas em `outputs/`).
 
 ### 5.1 Acordo E1 × E2 nos três cortes
 
@@ -691,8 +693,8 @@ que este recorte apenas tangenciou.
 
 | Artefato | Uso |
 |---|---|
-| `notebooks/notebook_preparacao_v2.ipynb` | Preparação do corpus e extração E1. |
-| `notebooks/notebook_conclusao.ipynb` | Fonte canônica de resultados, BIO e avaliação. |
+| `notebooks/notebook_preparacao_v2.ipynb` | Preparação do corpus e extrações E1/E2. |
+| `notebooks/notebook_conclusao.ipynb` | Normalização BIO, medidas de avaliação e resultados. |
 | `_reconciliar_relatorio.py` · `outputs/` | Reprodução determinística das métricas e exportação dos CSVs. |
 | `figuras_relatorio/` | Figuras estáticas incorporadas a este relatório. |
 | `data/dataset_anotado_final_com_bio.csv` | Dataset completo (spans, métricas, BIO, sintaxe). |

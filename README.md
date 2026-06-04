@@ -43,8 +43,8 @@ São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii)
 ```
 .
 ├── notebooks/                 # pipeline reprodutível (Colab/Jupyter)
-│   ├── notebook_preparacao_v2.ipynb   # coleta, preparação e E1 (regras)
-│   └── notebook_conclusao.ipynb       # E2, avaliação e resultados (fonte canônica)
+│   ├── notebook_preparacao_v2.ipynb   # coleta, preparação, E1 (regras) e E2 (LLM)
+│   └── notebook_conclusao.ipynb       # BIO, avaliação e resultados (fonte canônica)
 ├── data/                      # dataset, gold e dicionário de dados (ver data/README.md)
 │   ├── dataset_anotado_final_com_bio.csv   # 1901 notas × 30 colunas (spans, métricas, BIO, sintaxe)
 │   ├── dataset_anotado_final.parquet       # input canônico (E1/E2/métricas, gold vazio)
@@ -70,10 +70,11 @@ pip install -r requirements.txt
 python -m spacy download pt_core_news_md
 ```
 
-1. `notebooks/notebook_preparacao_v2.ipynb` — prepara o corpus e roda **E1**.
-2. `notebooks/notebook_conclusao.ipynb` — roda **E2**, a avaliação e gera os gráficos.
-   É a **fonte canônica dos números** do relatório. Para o E2, configure a credencial do
-   provedor do LLM; para o *gold*, aponte o(s) JSON(s) de anotador. Detalhes em
+1. `notebooks/notebook_preparacao_v2.ipynb` — prepara o corpus e roda **E1** e **E2**.
+   Para o E2, configure a credencial do provedor do LLM.
+2. `notebooks/notebook_conclusao.ipynb` — faz a normalização BIO, calcula as medidas de avaliação e
+   gera os gráficos. É a **fonte canônica dos números** do relatório; para o *gold*, aponte o(s)
+   JSON(s) de anotador. Detalhes em
    [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md).
 
 > No ambiente local, leia Parquet com **`engine="fastparquet"`** ou DuckDB (as colunas de

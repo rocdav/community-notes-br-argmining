@@ -11,13 +11,13 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
                                    │
                                    ▼
    ┌──────────────────────  notebook_preparacao_v2.ipynb  ──────────────────────┐
-   │ limpeza · seleção das 60 (estratificada por status, sem meta) · E1 (regras) │
+   │ limpeza · seleção das 60 · E1 (regras) · E2 (LLM) · alinhamento de spans    │
    └───────────────────────────────────┬─────────────────────────────────────────┘
-                                        │  dataset com E1
+                                        │  dataset com E1/E2
                                         ▼
    ┌──────────────────────  notebook_conclusao.ipynb  ──────────────────────────┐
-   │ E2 (LLM) · gold humano (JSON) · normalização BIO · avaliação (E1×E2 e vs    │
-   │ gold) · análises complementares (Dunning, entidades, agência) · gráficos    │
+   │ gold humano (JSON) · normalização BIO · avaliação (E1×E2 e vs gold) ·       │
+   │ análises complementares (Dunning, entidades, agência) · gráficos            │
    └───────────────────────────────────┬─────────────────────────────────────────┘
                                         │
               ┌─────────────────────────┼─────────────────────────┐
@@ -38,6 +38,8 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
   (semente fixa) e validada por *assert* no notebook.
 - **Esquema de rótulos:** CLAIM, EVIDENCIA, FONTE, QUALIFICADOR — definições em
   [`guia_anotacao.md`](guia_anotacao.md).
+- **Extrações automáticas:** o mesmo notebook executa E1 e E2, deixando os *spans* automáticos
+  prontos para a etapa de conclusão.
 
 ### 2. Estratégia E1 — regras léxico-sintáticas
 
@@ -45,6 +47,7 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
 - Heurísticas por tipo + **regex de URL** (que garante a captura de FONTE em links).
 - Saída: lista de *spans* `{start, end, type}` por nota. **Determinística**, transparente e de
   custo desprezível (mediana ≈ 2 ms/nota).
+- Executada em `notebook_preparacao_v2.ipynb`.
 - Limitação estrutural: depende de padrões sentenciais → **fronteiras frágeis** para
   CLAIM/EVIDÊNCIA.
 
@@ -57,6 +60,8 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
 - URLs são garantidas por regex e **mescladas** ao resultado do LLM.
 - Custo: mediana ≈ 4,6 s/nota (p95 ≈ 10,8 s); algumas notas são **recusadas** pelo filtro de
   conteúdo do provedor (`e2_err`).
+- Executada em `notebook_preparacao_v2.ipynb`; `notebook_conclusao.ipynb` consome esses *spans*
+  para BIO e avaliação.
 
 ### 4. Gold humano
 
@@ -118,15 +123,16 @@ duplo-clique via `file://`, usando `<script>`/`<link>` clássicos). Cinco visõe
 - **Entidades GLiNER:** `hf_hub_download(repo_id="histlearn/notas-comunidade-ptbr",
   repo_type="dataset", revision="refs/convert/parquet", filename="entities/train/0000.parquet")`
   (~42 MB, cacheado). Filtre por `noteId` para o nosso recorte.
-- **Credenciais:** o E2 requer a chave do provedor do LLM (variável de ambiente); o *gold*
-  requer o caminho do JSON do anotador. Ambos são configuráveis no topo do `notebook_conclusao`.
+- **Credenciais:** o E2 requer a chave do provedor do LLM (variável de ambiente), configurada no
+  `notebook_preparacao_v2.ipynb`; o *gold* requer o caminho do JSON do anotador, configurável no
+  `notebook_conclusao.ipynb`.
 
 ## Mapa de artefatos
 
 | Artefato | Papel |
 |---|---|
-| `notebooks/notebook_preparacao_v2.ipynb` | preparação + E1 |
-| `notebooks/notebook_conclusao.ipynb` | **E2 + avaliação + resultados (canônico)** |
+| `notebooks/notebook_preparacao_v2.ipynb` | preparação + E1 + E2 |
+| `notebooks/notebook_conclusao.ipynb` | **BIO + avaliação + resultados (canônico)** |
 | `data/dataset_anotado_final_com_bio.csv` | dataset completo (spans, métricas, BIO, sintaxe) |
 | `data/dataset_anotado_final.parquet` | input canônico (E1/E2/métricas; gold a entrar pelo JSON) |
 | `data/gold/*.json` · `*.conll` | anotação humana (spans e BIO/CoNLL) |
