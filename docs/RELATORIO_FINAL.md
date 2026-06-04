@@ -142,27 +142,36 @@ momentos: na seleção do recorte humano, que as exclui, e na avaliação, em qu
 
 ### 3.4 Normalização BIO
 
-Anotar por *span* e avaliar por *token* não são a mesma operação, e a ponte entre elas é uma
-projeção — o ponto em que uma marcação contínua, feita sobre caracteres, é forçada à grade discreta
-dos *tokens*. Toda projeção desse tipo decide casos difíceis por regra; o honesto é dizer qual.
+As estratégias e o anotador humano produzem *spans*: intervalos contínuos no texto, definidos por
+posição inicial, posição final e tipo. Já a avaliação por seqeval espera outra forma de dado: uma
+sequência de rótulos, um para cada *token*. A normalização BIO é a passagem entre essas duas
+representações. Ela não muda a anotação; apenas projeta a mesma marcação, originalmente feita em
+caracteres, para a grade dos *tokens*.
 
-As três fontes — E1, E2 e humano — passaram por um *mesmo* tokenizador (`spacy_pt_blank_v1`). Não é
-detalhe de implementação: é a condição para que as três sequências BIO fiquem alinhadas *token* a
-*token* e, portanto, comparáveis diretamente pelo seqeval. Cada *token* carrega seus *offsets* de
-caractere (`bio_offsets_json`); um *token* é atribuído a um *span* quando os dois intervalos se
-sobrepõem. O primeiro *token* de um *span* recebe `B-TIPO`, os seguintes `I-TIPO`, e o que nenhum
-*span* cobre recebe `O`.
+Para que a comparação fosse justa, as três fontes — E1, E2 e humano — foram projetadas sobre a
+mesma tokenização (`spacy_pt_blank_v1`). Isso é central: se cada fonte fosse tokenizada de um jeito,
+as sequências BIO poderiam ter tamanhos ou fronteiras diferentes, e a comparação *token* a *token*
+deixaria de ser bem definida. Por isso, cada nota foi tokenizada uma vez; para cada *token*,
+registraram-se o texto e seus *offsets* de caractere (`bio_offsets_json`); em seguida, os *spans* de
+cada fonte foram comparados a esses intervalos.
 
-Resta o caso de fronteira — o *token* que cavalga a borda de um *span* ou que poderia caber em mais de
-um. A política de conflito o resolve de forma fixa e versionada
-(`token_max_overlap_then_longest_then_type_priority`, projeção 2.0.0): vence o *span* com maior
-sobreposição de caracteres com o *token*; no empate, o *span* mais longo; persistindo, uma prioridade
-de tipo. Na prática, os *spans* de uma mesma estratégia não se sobrepõem — zero ocorrências no E2 —,
-de modo que a regra governa sobretudo os *tokens* de borda, e o faz sem depender da ordem em que os
-*spans* aparecem.
+A regra básica é simples. Se um *token* não toca nenhum *span*, recebe `O`. Se toca um *span* de tipo
+`TIPO`, passa a pertencer a ele: o primeiro *token* coberto recebe `B-TIPO`, e os seguintes recebem
+`I-TIPO`. Assim, um trecho marcado como EVIDENCIA em caracteres vira uma sequência como
+`B-EVIDENCIA`, `I-EVIDENCIA`, `I-EVIDENCIA` até o fim do trecho.
 
-Como a projeção preserva os *offsets*, a leitura por *span* e a leitura por *token* descrevem o mesmo
-objeto em duas resoluções. Foi o que viabilizou o seqeval e atendeu à recomendação de adotar o BIO.
+O único ponto delicado é a fronteira. Um *token* pode atravessar a borda de um *span* ou, em tese,
+ficar compatível com mais de um *span*. Esses casos foram resolvidos por uma política fixa e
+versionada (`token_max_overlap_then_longest_then_type_priority`, projeção 2.0.0): primeiro vence o
+*span* que mais se sobrepõe ao *token* em número de caracteres; se houver empate, vence o *span*
+mais longo; se o empate persistir, aplica-se uma prioridade de tipo. A decisão, portanto, não
+depende da ordem em que os *spans* aparecem no arquivo.
+
+Na prática, os *spans* de uma mesma fonte quase nunca competem entre si — no E2, não houve
+sobreposição interna —, de modo que a política atua principalmente nos *tokens* de borda. Como os
+*offsets* originais são preservados, a leitura por *span* e a leitura BIO descrevem o mesmo objeto em
+duas resoluções: uma contínua, por caracteres; outra discreta, por *tokens*. Essa projeção viabilizou
+a avaliação por seqeval e atendeu à recomendação de representar a tarefa em BIO.
 
 ### 3.5 Medidas de avaliação
 
