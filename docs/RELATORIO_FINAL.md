@@ -467,28 +467,53 @@ sobre como as notas mobilizam suas figuras: umas conduzem a ação, outras a rec
 
 ## 6. Avaliação qualitativa
 
-As métricas dizem *quanto*; falta dizer *como*. A inspeção das notas, apoiada no raciocínio do E2 e
-no explorador interativo, esclarece o que os números resumem.
+A avaliação qualitativa foi refeita sobre casos identificáveis das 60 notas anotadas, não sobre
+exemplos hipotéticos. O objetivo aqui é escolher notas que expliquem *por que* as métricas assumem a
+forma observada: quando E2 ganha de E1, quando o ganho é só de fronteira, quando o erro é de papel
+argumentativo e quando a melhor anotação humana é não marcar nada.
 
-O caso típico de divergência é a nota de refutação com fonte explícita. Tome-se uma nota que corrige
-a atribuição de uma charge: afirma que ela *não* foi publicada por um jornal, aponta seu verdadeiro
-autor e remete a links. Diante dela, E1 faz o que sabe — marca as URLs como FONTE — e ignora o
-resto. O E2 lê a arquitetura: identifica a alegação contestada, o trecho que a desmente como
-EVIDENCIA, a atribuição como FONTE. É o retrato, em uma nota, da Tabela 5.3.
+O melhor caso positivo é a nota `1761891434389475646`, sobre a bandeira de Gadsden. A anotação
+humana separa três peças: CLAIM em "A bandeira conhecida como Gadsden não é um símbolo fascista",
+EVIDENCIA no trecho sobre a alegação de "cunho fascista" e FONTE em "Algumas fontes tratam o
+movimento bolsonarista dessa forma". O E2 recupera exatamente os mesmos três spans
+(`F1_estrita = 1,000`; `F1_relaxada = 1,000`). O E1, por outro lado, marca apenas URLs ou pedaços de
+URLs como FONTE (`F1_estrita = 0,000`; `F1_relaxada = 0,000`). Este caso dá materialidade à diferença
+principal do experimento: E1 reconhece sobretudo forma superficial; E2 reconhece a função das partes
+da nota.
 
-O raciocínio devolvido pelo modelo torna esse comportamento *interpretável* — e essa transparência,
-ela mesma, é um resultado. Lê-se por que o E2 decidiu como decidiu, o que é impensável numa regra
-(que não decide, executa) e valioso para a anotação humana, que pode usar a justificativa para
-desencravar dúvidas. Daí a cautela deliberada: o raciocínio entra como apoio, nunca como gabarito,
-sob pena de circularidade.
+A nota `2007791917765943580` é o caso mais útil para documentar a fronteira contrária: texto
+metadiscursivo, sem marcador inicial `NNN`, mas também sem span humano. A nota diz que o post é
+"zuera política" e "claramente satírico ou de brincadeira"; a anotação manual ficou vazia porque ali
+não há uma estrutura mínima de checagem a decompor em CLAIM, EVIDENCIA ou FONTE. Mesmo assim, E1
+marcou um trecho final como EVIDENCIA e E2 marcou "zuera política..." como CLAIM e "satírico ou de
+brincadeira" como EVIDENCIA. O erro, portanto, não é falta de capacidade extrativa; é excesso de
+vontade de extrair. Esse exemplo justifica tratar os zeros humanos como dado substantivo, e não como
+ausência acidental de anotação.
 
-Os modos de erro também têm rosto. O E2 *vê fonte demais* — a precisão baixa em FONTE contra o
-humano (0,132) corresponde a marcar como respaldo menções que o anotador deixaria de fora. E erra
-por excesso de zelo discursivo onde o humano foi parcimonioso. O E1 erra ao contrário: por defeito,
-recortando só o que tem forma. Já o QUALIFICADOR, que zera nas métricas, é menos um fracasso dos
-extratores e mais uma escassez do corpus — não há ressalva suficiente para aprender a reconhecê-la.
-Reconhecer essa diferença — entre o que o método não consegue e o que o dado não oferece — é parte
-do que a avaliação qualitativa acrescenta.
+O caso `1887258714580877671`, sobre matéria do Estadão e ativismo do STF, mostra por que a F1
+relaxada não substitui a estrita. Humano e E2 concordam nas três funções: FONTE no início da matéria,
+EVIDENCIA nos números sobre omissões inconstitucionais e CLAIM na "disposição da Corte de se envolver
+em questões políticas". A F1 relaxada de E2 é `1,000`, mas a estrita cai para `0,667` porque o E2
+inclui o gatilho retórico "A matéria evidencia com números" dentro do CLAIM, enquanto o humano começa
+o span diretamente em "disposição da Corte...". Aqui o erro é de borda, não de interpretação.
+
+Já a nota `2031096564928708748`, sobre uma jornalista que teria afirmado que "o contrato não existia",
+é um erro de papel argumentativo. O humano marcou três trechos como EVIDENCIA; o E2 transformou "o
+contrato não existia" em CLAIM e só preservou como EVIDENCIA o trecho sobre o banco sob investigação.
+Por isso a leitura relaxada melhora pouco (`F1_relaxada = 0,400`) e a estrita zera. A divergência não
+vem apenas de alguns caracteres a mais ou a menos: ela vem da pergunta sobre qual trecho é a
+alegação contestada e qual trecho funciona como suporte.
+
+Por fim, a nota `2035165855806259553` expõe o modo de falha do E1 em listas longas de links. A
+anotação humana ficou vazia; o E2 ainda extraiu um CLAIM mínimo ("o que foi dito no vídeo"); e o E1
+gerou 43 spans, quase todos FONTE fragmentada ou pedaços redundantes de URLs. Esse caso explica a
+precisão baixa de FONTE e mostra que a heurística de URL não apenas encontra fontes: em textos
+densos em links, ela também multiplica falsos positivos.
+
+O raciocínio devolvido pelo E2 entra nessa leitura como apoio interpretativo, não como gabarito. Ele
+ajuda a entender por que o modelo tratou um trecho como CLAIM ou EVIDENCIA, mas a decisão final
+continua ancorada na comparação entre spans humanos, E1 e E2. A inspeção qualitativa, assim, não
+substitui as métricas: ela localiza o tipo de erro que cada métrica resume.
 
 ## 7. Discussão
 
