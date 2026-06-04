@@ -145,12 +145,71 @@ atendeu à recomendação de adotar o formato BIO.
 
 ### 3.5 Medidas de avaliação
 
-Mediu-se o acordo por *span* com duas F1 — *estrita*, que exige coincidência exata de *offset* e
-tipo, e *relaxada*, que se contenta com sobreposição e tipo correto — e com o *kappa* de Cohen em
-nível de caractere, que corrige a concordância pelo acaso. A leitura por *token* usa seqeval
-(precisão, revocação e F1 por entidade BIO). A distância entre a F1 estrita e a relaxada não é
-ruído de medição: é, ela própria, um resultado, porque mede o quanto o desacordo se concentra na
-*fronteira* do *span*.
+Antes das fórmulas, convém fixar o que se compara. A unidade é o *span*: cada estratégia devolve um
+conjunto de segmentos tipados, e medir o acordo é comparar dois conjuntos. Quando há *gold*, um deles
+é a referência; quando se confrontam E1 e E2, não existe verdade designada — e, por sorte, a F1 entre
+dois conjuntos é simétrica, de modo que a comparação independe de qual lado se chama referência.
+
+A *precisão*, a *revocação* e a *F1* partem de uma contagem. Fixada uma noção de acerto — o que conta
+como par casado, definido logo adiante —, somam-se os verdadeiros positivos ($TP$, *spans* do sistema
+que casam com a referência), os falsos positivos ($FP$, *spans* do sistema sem par) e os falsos
+negativos ($FN$, *spans* da referência não recuperados):
+
+$$
+P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R} = \frac{2\,TP}{2\,TP + FP + FN}.
+$$
+
+A precisão pergunta quanto do que o sistema marcou estava certo; a revocação, quanto do que existia
+ele encontrou. A F1 é a média harmônica das duas — e, por ser harmônica, pune quem é bom de um lado só.
+
+Tudo depende, então, de quando dois *spans* casam. Sejam $r=[i_r, j_r)$ de tipo $t_r$ e
+$s=[i_s, j_s)$ de tipo $t_s$. Em ambos os regimes exige-se $t_r = t_s$; o que muda é a condição sobre
+as fronteiras:
+
+$$
+\text{estrito:}\quad i_r = i_s \,\wedge\, j_r = j_s
+\qquad\qquad
+\text{relaxado:}\quad [i_r, j_r) \cap [i_s, j_s) \neq \varnothing.
+$$
+
+O regime estrito só perdoa o acerto exato de início, fim e tipo; o relaxado se contenta com qualquer
+sobreposição, desde que o tipo coincida. A diferença entre as duas F1 não é detalhe técnico — é
+medida. F1 relaxada alta com F1 estrita baixa significa que o sistema *achou a região certa e errou a
+borda*; a distância entre elas aproxima, assim, o erro de fronteira.
+
+A F1 ignora aquilo que ambos deixaram *em branco* — todo o texto que nenhum dos dois marcou. O *kappa*
+de Cohen corrige isso e, de quebra, desconta o acaso. Rotula-se cada uma das $N$ posições de caractere
+do corpus com um rótulo de $\mathcal{L} = \{\text{CLAIM, EVIDENCIA, FONTE, QUALIFICADOR},\, O\}$ — em
+que $O$ é "fora de qualquer span" —, segundo cada estratégia. Com a concordância observada $p_o$
+(fração de caracteres com rótulo idêntico) e a concordância esperada ao acaso $p_e$, obtida das
+distribuições marginais $p_a(\ell)$ e $p_b(\ell)$ de cada rótulo:
+
+$$
+p_o = \frac{1}{N}\sum_{i=1}^{N} \mathbb{1}\!\left[\ell_a(i) = \ell_b(i)\right],
+\qquad
+p_e = \sum_{\ell \in \mathcal{L}} p_a(\ell)\, p_b(\ell),
+\qquad
+\kappa = \frac{p_o - p_e}{1 - p_e}.
+$$
+
+O valor $1$ é acordo perfeito; $0$, o que se esperaria de duas marcações independentes; negativo,
+acordo *pior* que o acaso — foi o que ocorreu com E1 contra o humano. Para leitura qualitativa,
+adota-se a escala usual (Landis e Koch, 1977): até $0{,}2$, ligeiro; $0{,}2$–$0{,}4$, razoável;
+$0{,}4$–$0{,}6$, moderado; $0{,}6$–$0{,}8$, substancial; acima, quase perfeito. Medir em caractere, e
+não em *token*, é deliberado: dispensa um acordo prévio sobre tokenização e capta a sobreposição na
+resolução mais fina possível.
+
+Projetados os *spans* para BIO, a leitura por *token* usa o seqeval. Cada *token* recebe `B-TIPO`,
+`I-TIPO` ou `O`, e uma *entidade* é uma sequência maximal `B-T I-T …`; um acerto exige, na referência,
+uma entidade de mesmo tipo *e mesmas fronteiras de token* — é o casamento estrito transposto para a
+grade dos *tokens*. As mesmas $P$, $R$ e $F_1$ se aplicam, agora sobre entidades BIO. Reporta-se a
+versão *micro* — que agrega $TP$, $FP$ e $FN$ de todos os tipos antes de calcular as taxas, e portanto
+pondera pela frequência — e a F1 *por tipo*, que mostra onde o acordo se concentra (na §5.5, em FONTE).
+
+As quatro medidas leem o mesmo fenômeno em escalas distintas. O par estrito/relaxado isola a
+fronteira; o *kappa* desconta o acaso e mede a sobreposição em caractere; o seqeval recoloca tudo na
+grade de *tokens*, onde os modelos de sequência de fato operam. Nenhuma basta sozinha — e é da leitura
+cruzada delas que sai o argumento do §5.
 
 ## 4. Estratégias
 
