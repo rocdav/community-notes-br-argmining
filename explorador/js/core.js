@@ -6,7 +6,7 @@ const T = ["CLAIM", "EVIDENCIA", "FONTE", "QUALIFICADOR"];
 const COR = { CLAIM: "#c0392b", EVIDENCIA: "#2f6b45", FONTE: "#1f5d75", QUALIFICADOR: "#8a6105" };
 
 /* estado da aplicação (view ativa, índice da nota, fonte de spans, filtros) */
-const st = { view: "conjunto", idx: 0, src: "E2", filtro: "", ent: "", entTipo: "", bidx: 0, bsrc: "E2", bfiltro: "" };
+const st = { view: "conjunto", idx: 0, noteId: "", src: "E2", filtro: "", ent: "", entTipo: "", bidx: 0, bsrc: "E2", bfiltro: "" };
 
 /* registro de views preenchido pelos módulos js/views/*.js */
 const VIEWS = {};

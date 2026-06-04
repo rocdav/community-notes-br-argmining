@@ -20,7 +20,8 @@ function viewNotas(){
   if(n.tweet) h += '<div class="tweet"><span class="lbl">tweet original</span>' + esc(n.tweet) + '</div>';
   const spans = n[st.src] || [];
   h += '<div class="nota-text">' + (spans.length ? renderSpans(n.text, spans) : esc(n.text)) + '</div>';
-  h += '<div class="meta-row"><span class="badge">consenso: ' + esc(n.consenso) + '</span>'
+  h += '<div class="meta-row"><span class="badge">noteId: ' + esc(n.id) + '</span>'
+     + '<span class="badge">consenso: ' + esc(n.consenso) + '</span>'
      + '<span class="badge">' + (spans.length) + ' spans (' + st.src + ')</span>'
      + (n.macro ? '<span class="badge">' + esc(n.macro) + '</span>' : '') + '</div>';
   h += legend();

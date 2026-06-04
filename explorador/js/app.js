@@ -6,6 +6,32 @@ function render(){
   (VIEWS[st.view] || VIEWS.notas)();
 }
 
+function parseHash(){
+  const raw = location.hash.replace(/^#/, "");
+  const [view, qs] = raw.split("?");
+  const params = new URLSearchParams(qs || "");
+  return {
+    view: view || "conjunto",
+    noteId: params.get("noteId") || params.get("note") || params.get("id"),
+    src: params.get("src")
+  };
+}
+
+function applyDeepLink(route){
+  if(route.noteId && typeof DATA !== "undefined" && DATA.notas){
+    const idx = DATA.notas.findIndex(n => String(n.id) === String(route.noteId));
+    if(idx >= 0){
+      st.filtro = "";
+      st.idx = idx;
+      st.noteId = String(route.noteId);
+    }
+  }
+  if(route.src){
+    const src = route.src.toUpperCase();
+    if(["E1", "E2", "HUMANO"].includes(src)) st.src = src;
+  }
+}
+
 /* ---- drawer (apenas mobile; no desktop o sidebar é fixo) ---- */
 const isMobile = () => window.matchMedia("(max-width:760px)").matches;
 function openDrawer(){
@@ -25,8 +51,12 @@ function boot(){
     if(isMobile()) closeDrawer();
   });
   window.addEventListener("hashchange", () => {
-    const v = location.hash.replace("#", "");
-    if(VIEWS[v]){ st.view = v; render(); }
+    const route = parseHash();
+    if(VIEWS[route.view]){
+      st.view = route.view;
+      applyDeepLink(route);
+      render();
+    }
   });
 
   // modal
@@ -46,8 +76,11 @@ function boot(){
   window.addEventListener("resize", () => { if(!isMobile()) closeDrawer(); });
 
   // view inicial a partir do hash
-  const init = location.hash.replace("#", "");
-  if(VIEWS[init]) st.view = init;
+  const init = parseHash();
+  if(VIEWS[init.view]){
+    st.view = init.view;
+    applyDeepLink(init);
+  }
   render();
 }
 
