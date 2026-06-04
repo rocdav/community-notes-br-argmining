@@ -175,26 +175,31 @@ a avaliação por seqeval e atendeu à recomendação de representar a tarefa em
 
 ### 3.5 Medidas de avaliação
 
-Antes das fórmulas, convém fixar o que se compara. A unidade é o *span*: cada estratégia devolve um
-conjunto de segmentos tipados, e medir o acordo é comparar dois conjuntos. Quando há *gold*, um deles
-é a referência; quando se confrontam E1 e E2, não existe verdade designada — e, por sorte, a F1 entre
-dois conjuntos é simétrica, de modo que a comparação independe de qual lado se chama referência.
+As métricas foram escolhidas para responder a perguntas diferentes sobre a mesma saída: listas de
+*spans* tipados. Cada item da lista tem três informações — início, fim e tipo —, por exemplo
+`[120, 158) / EVIDENCIA`. Avaliar o sistema é verificar se esses itens coincidem com outra lista. No
+recorte com *gold*, a outra lista é a anotação humana; na comparação E1×E2, ela é a saída da outra
+estratégia, e por isso o resultado deve ser lido como acordo, não como "acerto" absoluto.
 
-A *precisão*, a *revocação* e a *F1* partem de uma contagem. Fixada uma noção de acerto — o que conta
-como par casado, definido logo adiante —, somam-se os verdadeiros positivos ($TP$, *spans* do sistema
-que casam com a referência), os falsos positivos ($FP$, *spans* do sistema sem par) e os falsos
-negativos ($FN$, *spans* da referência não recuperados):
+A primeira pergunta é direta: dos *spans* que o sistema marcou, quantos correspondem a um *span* da
+referência? E dos *spans* da referência, quantos ele recuperou? Para isso usamos precisão,
+revocação e F1. Em uma nota, um verdadeiro positivo ($TP$) é um *span* do sistema que encontra par na
+referência; um falso positivo ($FP$) é um *span* marcado pelo sistema sem par; e um falso negativo
+($FN$) é um *span* da referência que o sistema deixou de marcar. As fórmulas só resumem essa contagem:
 
 $$
 P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R}.
 $$
 
-A precisão pergunta quanto do que o sistema marcou estava certo; a revocação, quanto do que existia
-ele encontrou. A F1 é a média harmônica das duas — e, por ser harmônica, pune quem é bom de um lado só.
+O ponto sensível é definir o que conta como "encontrar par". Neste experimento usamos duas leituras.
+Na F1 estrita, o par só existe quando tipo, início e fim são idênticos. Se o humano marcou
+`[120, 158) / EVIDENCIA` e o sistema marcou `[120, 158) / EVIDENCIA`, é acerto; se marcou
+`[118, 158) / EVIDENCIA`, já não é. Na F1 relaxada, o tipo ainda precisa coincidir, mas aceitamos
+sobreposição de fronteira: `[118, 158) / EVIDENCIA` e `[120, 158) / EVIDENCIA` contam como o mesmo
+trecho argumentativo em granularidade mais tolerante.
 
-Tudo depende, então, de quando dois *spans* casam. Sejam $r=[i_r, j_r)$ de tipo $t_r$ e
-$s=[i_s, j_s)$ de tipo $t_s$. Em ambos os regimes exige-se $t_r = t_s$; o que muda é a condição sobre
-as fronteiras:
+Formalmente, para um *span* de referência $r=[i_r, j_r)$ e um *span* do sistema $s=[i_s, j_s)$, ambos
+de tipo $t$, as duas leituras são:
 
 $$
 \text{estrito:}\quad i_r = i_s \,\wedge\, j_r = j_s
@@ -202,29 +207,37 @@ $$
 \text{relaxado:}\quad [i_r, j_r) \cap [i_s, j_s) \neq \varnothing.
 $$
 
-O regime estrito só perdoa o acerto exato de início, fim e tipo; o relaxado se contenta com qualquer
-sobreposição, desde que o tipo coincida. A diferença entre as duas F1 não é detalhe técnico — é
-medida. F1 relaxada alta com F1 estrita baixa significa que o sistema *achou a região certa e errou a
-borda*; a distância entre elas aproxima, assim, o erro de fronteira.
+A diferença entre F1 estrita e relaxada é uma medida do erro de fronteira. Quando a relaxada sobe e
+a estrita fica baixa, o sistema provavelmente localizou a região argumentativa correta, mas cortou
+palavras a mais ou a menos. Esse foi um ponto central do experimento: E1 muitas vezes encontra o
+sinal lexical — sobretudo em FONTE —, mas erra o limite fino do *span*.
 
-A F1 ignora o que ambos *não* marcaram; o *kappa* de Cohen corrige isso e desconta o acaso. Rotulando
-cada um dos $N$ caracteres com um rótulo de $\mathcal{L}=\{\text{CLAIM, EVIDENCIA, FONTE,
-QUALIFICADOR},\, O\}$, e tomando a concordância observada $p_o$ e a esperada ao acaso
-$p_e=\sum_{\ell}p_a(\ell)\,p_b(\ell)$ (das marginais de cada rótulo):
+A segunda pergunta é sobre concordância global no texto. A F1 só olha para os *spans* marcados; ela
+não considera os trechos que ambos deixaram como "fora de span". Para isso usamos o *kappa* de Cohen
+em nível de caractere. Cada caractere da nota recebe um rótulo: CLAIM, EVIDENCIA, FONTE,
+QUALIFICADOR ou `O`. Em seguida, medimos quanto as duas rotulações concordam, descontando a
+concordância que seria esperada apenas pela distribuição dos rótulos:
 
 $$
 \kappa = \frac{p_o - p_e}{1 - p_e}.
 $$
 
-Vale $1$ no acordo perfeito, $0$ no esperado ao acaso e negativo abaixo dele — foi o caso de E1 contra
-o humano —, e lê-se pela escala de Landis e Koch (1977). Medir em caractere, e não em *token*,
-dispensa um acordo prévio sobre tokenização.
+Aqui, $p_o$ é a concordância observada entre as duas sequências de caracteres, e $p_e$ é a
+concordância esperada ao acaso a partir das proporções de cada rótulo. O valor vale 1 no acordo
+perfeito, 0 no acordo esperado ao acaso e pode ficar negativo quando a concordância é pior que esse
+patamar. Medimos em caractere porque as saídas originais de E1, E2 e humano são intervalos de
+caractere; assim, o *kappa* avalia diretamente a mesma unidade em que os *spans* foram produzidos.
 
-A leitura por *token* (seqeval) aplica as mesmas $P$, $R$ e $F_1$ sobre as entidades BIO: um acerto
-exige mesmo tipo *e* mesmas fronteiras de *token* — o casamento estrito transposto para a grade dos
-*tokens*. Reporta-se a versão *micro* (que agrega $TP$, $FP$ e $FN$ de todos os tipos) e a F1 por
-tipo. As medidas não se substituem — o par estrito/relaxado isola a fronteira, o *kappa* desconta o
-acaso, o seqeval recoloca tudo onde os modelos de sequência operam.
+A terceira pergunta vem da recomendação de representar a tarefa em BIO: se transformarmos os *spans*
+em rótulos por *token*, como ficaria a avaliação de sequência? Para isso usamos seqeval. Depois da
+projeção descrita na seção anterior, um acerto exige mesmo tipo e mesmas fronteiras de *token*. Ou
+seja: é a leitura estrita, mas aplicada às entidades BIO. Reportamos a média *micro*, que agrega
+$TP$, $FP$ e $FN$ de todos os tipos, e também o resultado por tipo, porque o comportamento de CLAIM,
+EVIDENCIA e FONTE é muito diferente no corpus.
+
+Essas medidas são complementares. A F1 estrita responde se o sistema acertou exatamente os *spans*;
+a F1 relaxada mostra se ele ao menos encontrou a região certa; o *kappa* observa a concordância no
+texto inteiro; e o seqeval traduz o mesmo problema para a forma exigida por modelos de sequência.
 
 ## 4. Estratégias
 
