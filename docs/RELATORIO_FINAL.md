@@ -113,16 +113,83 @@ muitas vezes não está na nota, mas naquilo que a nota contesta.
 
 ### 3.2 Esquema de rótulos
 
-Quatro tipos organizam a anotação, definidos no `guia_anotacao.md` e resumidos abaixo. A alegação é
-aquilo que a nota refuta, qualifica ou contextualiza; a evidência, o que a sustenta; a fonte, a
-atribuição que lhe dá respaldo; o qualificador, a marca de modulação ou ressalva.
+Quatro tipos organizam a anotação. As definições abaixo transcrevem o `guia_anotacao.md`; no guia,
+o rótulo aparece como EVIDÊNCIA, mas a forma técnica usada nos artefatos é `EVIDENCIA`.
 
-| Rótulo | Definição operacional |
-|---|---|
-| CLAIM | A alegação que a nota refuta, qualifica ou contextualiza. |
-| EVIDENCIA | Fato, dado, contraexemplo ou justificativa que sustenta a checagem. |
-| FONTE | Atribuição: veículo, órgão, especialista, documento ou URL citado como respaldo. |
-| QUALIFICADOR | Marcador de modulação, ressalva, incerteza ou escopo. |
+**CLAIM — a alegação refutada.** O que é: o trecho da nota que expressa a afirmação que o tweet
+fazia, e que a nota agora corrige ou qualifica. Pode aparecer como negação direta, paráfrase ou
+citação. Pistas léxicas frequentes em PT-BR: "não é verdade que X"; "é falso que X"; "a
+foto/imagem/vídeo não mostra X"; "não há evidência de que X"; "X não aconteceu"; "X é antiga/de
+2013". Exemplo positivo:
+
+```text
+NOTA: "A foto não mostra um protesto em Brasília em 2024."
+                          [CLAIM]
+```
+
+Exemplo negativo:
+
+```text
+NOTA: "Segundo a AFP, a imagem é de 2013."
+       [FONTE]        [EVIDENCIA]
+```
+
+Nesse caso, não há CLAIM no texto: a alegação está implícita no tweet, mas a nota só apresenta a
+refutação.
+
+**EVIDENCIA — o fato que sustenta a checagem.** O que é: o conteúdo factual, descritivo ou numérico
+que a nota oferece como base para contrariar ou qualificar o tweet. Frequentemente segue a estrutura
+"X não é Y, é Z". Pistas léxicas: verbos factivos, como *mostra*, *indica*, *comprova*, *confirma*,
+*revela*, *evidencia*; valores numéricos, datas e percentuais; contraexemplos, como "na verdade" e
+"ao contrário". Exemplo positivo:
+
+```text
+NOTA: "O reajuste foi de 4,9%, e não 500% como afirma o tweet."
+       [EVIDENCIA]                          [CLAIM]
+```
+
+Exemplo negativo:
+
+```text
+NOTA: "Estudos mostram que a vacina é segura."
+       [FONTE — não é EVIDENCIA]
+```
+
+"Estudos", aqui, é uma atribuição genérica; o conteúdo da evidência ("a vacina é segura") não tem
+suporte concreto na nota.
+
+**FONTE — atribuição.** O que é: quem ou o que a nota cita como autoridade ou base da informação.
+Pode ser veículo de mídia, especialista, órgão público, documento ou URL. Pistas léxicas: "segundo
+X", "de acordo com X", "conforme X"; estruturas como "X afirma", "X informa", "X publicou" ou "X
+apurou"; URLs completas; nomes de veículos, órgãos e instituições, como G1, Folha, Lupa, AFP,
+Reuters, STF, TSE, Anvisa e Ministério da Saúde. Exemplos:
+
+```text
+"Segundo a Agência Lupa,..."     -> [FONTE: "Segundo a Agência Lupa"]
+"Fonte: https://lupa.uol.com.br" -> [FONTE: "https://lupa.uol.com.br"]
+"...conforme análise do G1."     -> [FONTE: "conforme análise do G1"]
+"...divulgou o Ministério..."    -> [FONTE: "o Ministério"]
+```
+
+Observação importante do guia: URLs são automaticamente pré-marcadas como FONTE pelo pipeline; se
+aparecem destacadas na tela do anotador, isso está correto e integra a anotação.
+
+**QUALIFICADOR — modulação ou ressalva.** O que é: advérbios, locuções e expressões que modulam o
+grau de certeza ou o escopo de uma alegação. Lista frequente: *aparentemente*, *provavelmente*,
+*possivelmente*, *supostamente*, *alegadamente*, *talvez*; *parcialmente*, *parcialmente verdadeiro*,
+*fora de contexto*; *ao que tudo indica*, *sem evidência clara*, *não há prova de*. Exemplos:
+
+```text
+"Aparentemente, o vídeo é falso."
+ [QUALIFICADOR]
+
+"A informação está parcialmente correta."
+                    [QUALIFICADOR]
+```
+
+Não marcar como QUALIFICADOR: adjetivos descritivos sem função modal, como "rapidamente" e
+"claramente" — este último só vira QUALIFICADOR em casos como "claramente uma sátira"; conectivos
+como "porém" e "entretanto", que são discursivos, não epistêmicos.
 
 Os *spans* são marcados apenas no texto da nota; o tweet permanece como contexto, fora do alvo de
 anotação.
@@ -247,6 +314,11 @@ O fluxo encadeia: corpus → preparação → extração por E1 → extração p
 anotação humana → normalização BIO → avaliação (E1×E2 e contra o *gold*) → camadas interpretativas
 (Dunning, entidades, agência). A arquitetura completa está na Figura 1.
 
+![Arquitetura do pipeline](figuras_relatorio/fig_01_arquitetura.png)
+
+*Figura 1 — Arquitetura do pipeline experimental: corpus público, preparação, extração por E1 e E2,
+anotação humana, normalização BIO, avaliação e artefatos finais.*
+
 ### 4.2 Estratégia E1 — regras léxico-sintáticas
 
 **Recursos em língua portuguesa.** E1 apoia-se no modelo `pt_core_news_md` do spaCy, treinado para o
@@ -323,6 +395,9 @@ Logo, a discordância não está no ruído — está exatamente onde há argumen
 
 ![Acordo E1 × E2 nos três cortes](figuras_relatorio/fig_03_acordo_cortes.png)
 
+*Figura 2 — Acordo entre E1 e E2 nos cortes A, B e C, medido por F1 estrita, F1 relaxada e
+κ em nível de caractere.*
+
 ### 5.2 Comparação contra o gold humano
 
 | Estratégia | F1 estrita | F1 relaxada | κ vs gold |
@@ -336,6 +411,8 @@ estrita não perdoa a borda. A relaxada melhora porque exige apenas sobreposiç�
 acompanha o humano tanto na presença quanto na extensão dos *spans*.
 
 ![Desempenho contra gold humano](figuras_relatorio/fig_04_desempenho_gold.png)
+
+*Figura 3 — Desempenho de E1 e E2 contra o gold humano nas métricas por span e por caractere.*
 
 ### 5.3 Cobertura por tipo
 
@@ -353,6 +430,8 @@ o tipo é raro demais para sustentar cobertura.
 
 ![Cobertura por tipo argumentativo](figuras_relatorio/fig_05_cobertura_tipo.png)
 
+*Figura 4 — Cobertura de E1 e E2 por tipo argumentativo no corpus completo.*
+
 ### 5.4 Anatomia argumentativa no corpus
 
 | Estratégia | CLAIM | EVIDENCIA | FONTE | QUALIFICADOR | Spans/nota (com span) |
@@ -362,10 +441,13 @@ o tipo é raro demais para sustentar cobertura.
 
 Os volumes confirmam o perfil. O que E1 produz é, antes de tudo, FONTE: 2 376 *spans*, mais do que
 todos os seus outros tipos somados. O E2 distribui — evidência, fonte e alegação em proporções
-próximas —, e é justamente essa distribuição que o avizinha do humano. A Figura 2 dá a forma do
+próximas —, e é justamente essa distribuição que o avizinha do humano. A Figura 5 dá a forma do
 contraste.
 
 ![Anatomia argumentativa no corpus](figuras_relatorio/fig_02_anatomia_spans.png)
+
+*Figura 5 — Distribuição dos spans por tipo em E1 e E2, incluindo a média de spans por nota com
+alguma marcação.*
 
 ### 5.5 Avaliação token-level (BIO/seqeval)
 
@@ -393,6 +475,9 @@ marca como respaldo o que o humano não marcaria. O QUALIFICADOR zera; é o limi
 
 ![Avaliação token-level BIO](figuras_relatorio/fig_06_seqeval_bio.png)
 
+*Figura 6 — Avaliação token-level BIO por seqeval, com micro-F1 e F1 por tipo nas comparações
+principais.*
+
 ### 5.6 Custo computacional
 
 | Estratégia | Latência mediana | p95 | Observação |
@@ -406,6 +491,8 @@ linguagem, é uma operação que se planeja — e que, em 7 notas, simplesmente 
 pelo filtro do provedor.
 
 ![Latência mediana por estratégia](figuras_relatorio/fig_operacional_latencia.png)
+
+*Figura 7 — Latência mediana e p95 das estratégias E1 e E2 por nota processada.*
 
 ### 5.7 Assinatura léxica por tipo (Dunning)
 
@@ -453,9 +540,11 @@ Cruzar as entidades extraídas (GLiNER) com o papel atribuído pelo E2 revela o 
 estrutural do trabalho: o *tipo* da entidade prevê o papel. Domínios de URL e veículos de mídia
 caem, com forte regularidade, em FONTE; atores políticos e partidos, em CLAIM e EVIDENCIA; órgãos
 públicos se espalham. A entidade, quando entra na nota, já entra fantasiada de um papel — e o papel
-é função do que ela é. A Figura 7 traz o mapa de calor.
+é função do que ela é. A Figura 8 traz o mapa de calor.
 
 ![Tipo de entidade × papel argumentativo](figuras_relatorio/fig_07_entidade_papel.png)
+
+*Figura 8 — Mapa de calor entre tipos de entidade GLiNER e papéis argumentativos atribuídos pelo E2.*
 
 ### 5.9 Agência sintática
 
@@ -616,16 +705,15 @@ que este recorte apenas tangenciou.
 | Figura | Conteúdo |
 |---|---|
 | Figura 1 | Arquitetura do pipeline. |
-| Figura 2 | Anatomia de *spans* E1 × E2. |
-| Figura 3 | Acordo E1 × E2 nos três cortes. |
-| Figura 4 | Desempenho contra o *gold* humano. |
-| Figura 5 | Cobertura por tipo. |
+| Figura 2 | Acordo E1 × E2 nos três cortes. |
+| Figura 3 | Desempenho contra o *gold* humano. |
+| Figura 4 | Cobertura por tipo. |
+| Figura 5 | Anatomia de *spans* E1 × E2. |
 | Figura 6 | Avaliação BIO *token-level*. |
-| Figura 7 | Tipo de entidade × papel argumentativo. |
+| Figura 7 | Latência por estratégia. |
+| Figura 8 | Tipo de entidade × papel argumentativo. |
 
 ## Apêndice C — Pendências para a versão de entrega
 
 1. Incorporar a segunda anotação independente e recalcular as métricas contra o consenso.
-2. Transcrever as definições integrais dos rótulos do `guia_anotacao.md` (§3.2).
-3. Normalizar as referências no padrão exigido e definir o formato final (Markdown, DOCX ou LaTeX).
-4. Inserir a Figura 1 (arquitetura) e revisar legendas.
+2. Normalizar as referências no padrão exigido e definir o formato final (Markdown, DOCX ou LaTeX).
