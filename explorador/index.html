@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explorador — Argumentação em Community Notes BR</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- barra superior + botão do drawer: só aparece em telas estreitas (CSS) -->
+<header id="topbar">
+  <button id="menu-btn" type="button" aria-label="abrir navegação" aria-controls="sidebar" aria-expanded="false">☰</button>
+  <span class="brand">Argumentação em Community Notes BR</span>
+</header>
+<div id="drawer-backdrop"></div>
+
+<aside id="sidebar">
+  <header>
+    <h1>Argumentação em<br>Community Notes BR</h1>
+    <p class="muted small">E1 (regras) × E2 (LLM) × humano<br><span class="tag">explorador interativo</span></p>
+  </header>
+  <h2>Visões</h2>
+  <ul class="nav-list" id="nav">
+    <li><a href="#conjunto" data-v="conjunto">Conjunto</a></li>
+    <li><a href="#notas" data-v="notas">Explorador de notas</a></li>
+    <li><a href="#bio" data-v="bio">BIO (tokens)</a></li>
+    <li><a href="#entidades" data-v="entidades">Navegador de entidades</a></li>
+    <li><a href="#painel" data-v="painel">Painel de achados</a></li>
+  </ul>
+  <div id="side-extra"></div>
+  <h2>Sobre</h2>
+  <p class="muted small">60 notas com gold humano; spans das duas estratégias automáticas.
+  Lente de entidade a partir do corpus <code>histlearn/notas-comunidade-ptbr</code>.</p>
+</aside>
+<main id="content"><article id="view"></article></main>
+<div id="modal" class="modal-bg" hidden><div class="modal" id="modal-body"></div></div>
+
+<!-- dados embutidos (snapshots) + módulos da aplicação (scripts clássicos: funcionam via file://) -->
+<script src="data.js"></script>
+<script src="data_conjunto.js"></script>
+<script src="data_entidades.js"></script>
+<script src="data_notas.js"></script>
+<script src="data_bio.js"></script>
+<script src="js/core.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/views/conjunto.js"></script>
+<script src="js/views/notas.js"></script>
+<script src="js/views/bio.js"></script>
+<script src="js/views/entidades.js"></script>
+<script src="js/views/painel.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

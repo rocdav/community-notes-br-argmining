@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anotação Argumentation Mining — CN BR</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- ===================== MODAL DE IDENTIFICAÇÃO ===================== -->
+<div id="modal-identificacao" class="modal-overlay">
+  <div class="modal-box onboarding">
+    <div class="onboarding-body">
+      <section class="onboarding-hero">
+        <p class="eyebrow">Community Notes BR</p>
+        <h1>Anotação de spans argumentativos</h1>
+        <p class="lead">Leia o tweet como contexto e marque apenas trechos da nota. O foco é produzir uma referência humana consistente para comparar E1 e E2.</p>
+      </section>
+
+      <form id="form-identificacao" class="onboarding-form">
+        <label class="name-entry">
+          Nome do anotador
+          <input type="text" id="input-nome" minlength="3" placeholder="ex.: Davi Rocha" required autocomplete="off">
+        </label>
+        <button type="submit" id="btn-comecar" class="primary" disabled>Começar anotação</button>
+        <div class="botoes-rodape">
+          <button type="button" id="btn-import-inicial" class="secondary">Importar JSON parcial</button>
+          <button type="button" id="btn-abrir-guia-inicial" class="secondary">Guia completo</button>
+          <button type="button" id="btn-scroll-exemplos" class="secondary">Ver exemplos</button>
+        </div>
+      </form>
+
+      <section class="onboarding-section">
+        <div class="section-heading">
+          <h2>Guia rápido</h2>
+          <p>Quatro rótulos, sempre aplicados a trechos da nota.</p>
+        </div>
+        <div class="guide-card-grid">
+          <article class="guide-card CLAIM">
+            <span class="type-dot"></span>
+            <h3>CLAIM</h3>
+            <p>A alegação que a nota refuta, qualifica ou contextualiza.</p>
+          </article>
+          <article class="guide-card EVIDENCIA">
+            <span class="type-dot"></span>
+            <h3>EVIDÊNCIA</h3>
+            <p>Fato, dado, contraexemplo ou justificativa usada na checagem.</p>
+          </article>
+          <article class="guide-card FONTE">
+            <span class="type-dot"></span>
+            <h3>FONTE</h3>
+            <p>Quem ou o que a nota cita como respaldo: veículo, órgão, documento, URL.</p>
+          </article>
+          <article class="guide-card QUALIFICADOR">
+            <span class="type-dot"></span>
+            <h3>QUALIFICADOR</h3>
+            <p>Marcador de incerteza, escopo ou ressalva: “provavelmente”, “fora de contexto”.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="onboarding-section" id="exemplos-iniciais">
+        <div class="section-heading">
+          <h2>Exemplos resolvidos</h2>
+          <p>Casos curtos para calibrar fronteiras antes de começar.</p>
+        </div>
+        <div class="example-card-grid">
+          <article class="example-card">
+            <h3>Correção numérica</h3>
+            <p class="example-text"><span class="mark EVIDENCIA">O reajuste aprovado foi de 4,9%</span>, e <span class="mark CLAIM">não 500% como afirma o tweet</span>.</p>
+            <p class="example-note">O número correto sustenta a checagem; o trecho com “não” recupera a alegação refutada.</p>
+          </article>
+          <article class="example-card">
+            <h3>Fonte e evidência</h3>
+            <p class="example-text"><span class="mark FONTE">Segundo a AFP</span>, <span class="mark EVIDENCIA">a imagem é de 2013</span>.</p>
+            <p class="example-note">Atribuição e conteúdo factual ficam em spans separados.</p>
+          </article>
+          <article class="example-card">
+            <h3>Meta-nota</h3>
+            <p class="example-text">NNN - claramente uma brincadeira.</p>
+            <p class="example-note">Se a nota só discute necessidade de nota, humor ou opinião, marque como completa sem spans e registre em obs.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app" hidden>
+  <header>
+    <span class="titulo">Anotação CN-BR</span>
+    <div class="anotador-info">
+      <span class="papel" id="header-papel">manual</span>
+      <span id="header-nome">—</span>
+      <button id="btn-trocar-anotador" data-tooltip="Trocar anotador" style="background:transparent;border:none;color:var(--c-muted);font-size:11px;cursor:pointer;">trocar</button>
+    </div>
+    <div class="progresso-strip" id="progresso-strip"></div>
+    <div class="auto-save" id="auto-save"><span id="auto-save-text">Carregando…</span></div>
+  </header>
+
+  <main class="grid">
+    <aside class="sidebar-left">
+      <h3>60 notas para anotação</h3>
+      <div id="lista-notas"></div>
+    </aside>
+
+    <section class="painel-central" id="painel-central"></section>
+
+    <aside class="sidebar-right">
+      <h3>Tipos de span</h3>
+      <div class="tipo-card CLAIM"        data-tooltip="Alegação que a nota refuta/qualifica"><span class="num">1</span><span class="tipo-name">CLAIM</span><div class="tipo-hint">alegação refutada</div></div>
+      <div class="tipo-card EVIDENCIA"    data-tooltip="Fato ou dado que sustenta a checagem"><span class="num">2</span><span class="tipo-name">EVIDÊNCIA</span><div class="tipo-hint">fato, dado, contraexemplo</div></div>
+      <div class="tipo-card FONTE"        data-tooltip="Atribuição (veículo, especialista, URL)"><span class="num">3</span><span class="tipo-name">FONTE</span><div class="tipo-hint">quem/o que a nota cita</div></div>
+      <div class="tipo-card QUALIFICADOR" data-tooltip="Marcador de modulação ou ressalva"><span class="num">4</span><span class="tipo-name">QUALIF</span><div class="tipo-hint">marcador epistêmico</div></div>
+      <div class="sugestoes-toggle">
+        <span>Sugestões E1/E2</span>
+        <button id="btn-toggle-sugestoes">Ver (Tab)</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <button id="btn-guia">📖 Guia <span style="color:var(--c-muted);font-size:11px;">(?)</span></button>
+    <button id="btn-exemplos" data-tooltip="Cards de regras + exemplos resolvidos">📋 Exemplos</button>
+    <button id="btn-export-json" class="primary" data-tooltip="Ctrl+S">💾 Exportar JSON</button>
+    <button id="btn-export-xlsx">📊 Exportar Excel</button>
+    <button id="btn-import">📂 Importar JSON parcial</button>
+    <button id="btn-export-bio" data-tooltip="Converte spans para BIO via HF Space">Exportar BIO</button>
+    <div class="spacer"></div>
+    <span class="indicador" id="auto-export-count">Auto-export a cada 5 completas</span>
+    <button id="btn-reset" data-tooltip="Apaga tudo (confirmação dupla)" style="color:var(--c-claim);">⚙ Reset</button>
+  </footer>
+</div>
+
+<!-- ===================== MODAL GUIA ===================== -->
+<div id="modal-guia" class="modal-overlay" hidden>
+  <div class="modal-box guia">
+    <button class="modal-close" data-close="modal-guia">×</button>
+    <div class="guia-html">
+      <h2>Visão geral</h2>
+      <p>Identifique e marque, no texto da nota, os trechos que cumprem um destes quatro papéis argumentativos:</p>
+      <table>
+        <tr><th style="width:30%;">Cor</th><th>Tipo</th><th>Função</th></tr>
+        <tr><td><span style="display:inline-block;width:14px;height:14px;background:var(--c-claim);border-radius:3px;vertical-align:middle;"></span> vermelho</td><td><strong>CLAIM</strong></td><td>a alegação que a nota refuta, qualifica ou contextualiza</td></tr>
+        <tr><td><span style="display:inline-block;width:14px;height:14px;background:var(--c-evid);border-radius:3px;vertical-align:middle;"></span> verde</td><td><strong>EVIDÊNCIA</strong></td><td>fato, dado, contraexemplo</td></tr>
+        <tr><td><span style="display:inline-block;width:14px;height:14px;background:var(--c-fonte);border-radius:3px;vertical-align:middle;"></span> azul</td><td><strong>FONTE</strong></td><td>atribuição (veículo, especialista, URL)</td></tr>
+        <tr><td><span style="display:inline-block;width:14px;height:14px;background:var(--c-qualif);border-radius:3px;vertical-align:middle;"></span> âmbar</td><td><strong>QUALIFICADOR</strong></td><td>modulação ("parcialmente", "supostamente")</td></tr>
+      </table>
+      <p>O tweet é <em>contexto</em>. Spans são marcados <strong>apenas na nota</strong>.</p>
+      <h2>Mecânica</h2>
+      <ul>
+        <li>Selecione texto com o mouse → clique no chip ou aperte <code>1</code>/<code>2</code>/<code>3</code>/<code>4</code>.</li>
+        <li>Clique num span existente → ícone <code>×</code> para remover.</li>
+        <li><code>Tab</code> mostra/esconde sugestões de E1 e E2 (linhas tracejadas, apenas referência).</li>
+        <li><code>←</code> <code>→</code> navega entre notas. <code>Ctrl+Z</code> desfaz. <code>Ctrl+S</code> exporta JSON.</li>
+      </ul>
+      <h2>Regras essenciais</h2>
+      <ul>
+        <li><strong>Marque na nota, não no tweet.</strong></li>
+        <li><strong>Trechos mais curtos</strong> quando em dúvida.</li>
+        <li><strong>Sem multi-label</strong>: cada span tem um único tipo. Use o campo <em>obs</em> para registrar ambiguidades.</li>
+        <li><strong>URLs já são pré-marcadas</strong> como FONTE automaticamente — você não precisa marcar.</li>
+        <li><strong>Em dúvida</strong>: faça a marcação mais defensável e siga; o desacordo entre anotadores é informativo.</li>
+      </ul>
+      <p style="color: var(--c-muted); font-size: 12px; margin-top: 20px;">Guia completo com 8 casos resolvidos: <code>guia_anotacao.md</code> no repositório do projeto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL EXEMPLOS ===================== -->
+<div id="modal-exemplos" class="modal-overlay" hidden>
+  <div class="modal-box exemplos">
+    <button class="modal-close" data-close="modal-exemplos">×</button>
+    <section class="modal-section">
+      <div class="section-heading">
+        <h2>Regras rápidas</h2>
+        <p>Quatro rótulos, sempre aplicados a trechos da nota.</p>
+      </div>
+      <div class="guide-card-grid">
+        <article class="guide-card CLAIM">
+          <span class="type-dot"></span>
+          <h3>CLAIM</h3>
+          <p>A alegação que a nota refuta, qualifica ou contextualiza.</p>
+        </article>
+        <article class="guide-card EVIDENCIA">
+          <span class="type-dot"></span>
+          <h3>EVIDÊNCIA</h3>
+          <p>Fato, dado, contraexemplo ou justificativa usada na checagem.</p>
+        </article>
+        <article class="guide-card FONTE">
+          <span class="type-dot"></span>
+          <h3>FONTE</h3>
+          <p>Quem ou o que a nota cita como respaldo: veículo, órgão, documento, URL.</p>
+        </article>
+        <article class="guide-card QUALIFICADOR">
+          <span class="type-dot"></span>
+          <h3>QUALIFICADOR</h3>
+          <p>Marcador de incerteza, escopo ou ressalva: “provavelmente”, “fora de contexto”.</p>
+        </article>
+      </div>
+    </section>
+    <section class="modal-section">
+      <div class="section-heading">
+        <h2>Exemplos resolvidos</h2>
+        <p>Casos curtos para calibrar fronteiras quando travar.</p>
+      </div>
+      <div class="example-card-grid">
+        <article class="example-card">
+          <h3>Correção numérica</h3>
+          <p class="example-text"><span class="mark EVIDENCIA">O reajuste aprovado foi de 4,9%</span>, e <span class="mark CLAIM">não 500% como afirma o tweet</span>.</p>
+          <p class="example-note">O número correto sustenta a checagem; o trecho com “não” recupera a alegação refutada.</p>
+        </article>
+        <article class="example-card">
+          <h3>Fonte e evidência</h3>
+          <p class="example-text"><span class="mark FONTE">Segundo a AFP</span>, <span class="mark EVIDENCIA">a imagem é de 2013</span>.</p>
+          <p class="example-note">Atribuição e conteúdo factual ficam em spans separados.</p>
+        </article>
+        <article class="example-card">
+          <h3>Meta-nota</h3>
+          <p class="example-text">NNN - claramente uma brincadeira.</p>
+          <p class="example-note">Se a nota só discute necessidade de nota, humor ou opinião, marque como completa sem spans e registre em obs.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- drop overlay -->
+<div class="drop-overlay" id="drop-overlay"><div class="msg">Solte o arquivo JSON para importar</div></div>
+
+<!-- toast -->
+<div class="toast" id="toast"></div>
+
+<!-- input file oculto -->
+<input type="file" id="file-import" accept=".json,application/json" hidden>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

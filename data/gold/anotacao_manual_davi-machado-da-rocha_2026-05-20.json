@@ -1,0 +1,1248 @@
+{
+  "schema_version": "1.0",
+  "dataset_version": "v1.0",
+  "guia_versao": "1.0",
+  "anotador": {
+    "nome": "Davi Machado da Rocha",
+    "papel": "manual"
+  },
+  "started_at": "2026-05-20T13:00:41.238Z",
+  "last_saved_at": "2026-05-20T23:31:21.167Z",
+  "total_notas": 60,
+  "completas": 60,
+  "em_progresso": 0,
+  "pendentes": 0,
+  "anotacoes": {
+    "1761891434389475646": {
+      "noteId": "1761891434389475646",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A bandeira conhecida como Gadsden não é um símbolo fascista",
+          "start": 0,
+          "end": 59,
+          "created_at": "2026-05-20T13:01:52.293Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a alegação do autor da postagem parece sugerir que o evento no qual a bandeira está inserida é de cunho fascista",
+          "start": 61,
+          "end": 173,
+          "created_at": "2026-05-20T13:02:07.000Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "Algumas fontes tratam o movimento bolsonarista dessa forma",
+          "start": 175,
+          "end": 233,
+          "created_at": "2026-05-20T13:02:23.428Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:01:52.293Z",
+      "completed_at": "2026-05-20T13:02:42.991Z"
+    },
+    "2007791917765943580": {
+      "noteId": "2007791917765943580",
+      "status": "completed",
+      "spans": [],
+      "obs": "a nota não faz nenhuma argumentação, apenas explica que é sátira",
+      "started_at": "2026-05-20T13:35:15.466Z",
+      "completed_at": "2026-05-20T13:35:30.909Z"
+    },
+    "2031096564928708748": {
+      "noteId": "2031096564928708748",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "e desde as confirmações públicas está mudando a narrativa",
+          "start": 70,
+          "end": 127,
+          "created_at": "2026-05-20T13:37:10.794Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o banco envolvido está sob investigação de pagamento para influenciadores criticarem a operação em andamento.",
+          "start": 158,
+          "end": 267,
+          "created_at": "2026-05-20T13:37:18.650Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Há menos de 2 meses a jornalista afirmava que o contrato não existia",
+          "start": 0,
+          "end": 68,
+          "created_at": "2026-05-20T13:41:54.418Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:37:04.992Z",
+      "completed_at": "2026-05-20T13:42:34.493Z"
+    },
+    "2022468950043316327": {
+      "noteId": "2022468950043316327",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A imagem foi alterada digitalmente",
+          "start": 0,
+          "end": 34,
+          "created_at": "2026-05-20T13:43:39.971Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "perfil oficial do mundo Gloob no Instagram",
+          "start": 78,
+          "end": 120,
+          "created_at": "2026-05-20T13:43:51.694Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:43:39.971Z",
+      "completed_at": "2026-05-20T13:44:20.745Z"
+    },
+    "1787884933765022194": {
+      "noteId": "1787884933765022194",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A Sefaz-RS, e a Sefaz-SC, em nota publicada",
+          "start": 21,
+          "end": 64,
+          "created_at": "2026-05-20T13:45:56.185Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "afirmaram que veículos com doações para os atingidos pelas enchentes não estão sendo parados nas estradas e que suspendeu a fiscalização para facilitar a chegada de ajuda",
+          "start": 66,
+          "end": 236,
+          "created_at": "2026-05-20T13:46:04.330Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:45:56.186Z",
+      "completed_at": "2026-05-20T13:46:33.656Z"
+    },
+    "1655712700171689984": {
+      "noteId": "1655712700171689984",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A assessoria de imprensa do SBT",
+          "start": 0,
+          "end": 31,
+          "created_at": "2026-05-20T13:47:41.158Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "o apresentador e empresário Silvio Santos teria falecido",
+          "start": 62,
+          "end": 118,
+          "created_at": "2026-05-20T13:49:10.406Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Silvio Santos está bem graças a Deus, curtindo os netos, filhas, genros e esposa. Fake news é crime, pessoal",
+          "start": 126,
+          "end": 234,
+          "created_at": "2026-05-20T13:49:33.134Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:47:41.158Z",
+      "completed_at": "2026-05-20T13:49:51.356Z"
+    },
+    "2035165855806259553": {
+      "noteId": "2035165855806259553",
+      "status": "completed",
+      "spans": [],
+      "obs": "estruturas não argumentativas ou somente informativas/meta",
+      "started_at": "2026-05-20T13:51:25.366Z",
+      "completed_at": "2026-05-20T13:51:41.664Z"
+    },
+    "1815075511498092968": {
+      "noteId": "1815075511498092968",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Lula acusa adversários de fascismo",
+          "start": 0,
+          "end": 34,
+          "created_at": "2026-05-20T13:52:55.233Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "ignora o contexto de ter um longo histórico de boas relações com ditadores, autocratas e extremistas",
+          "start": 40,
+          "end": 140,
+          "created_at": "2026-05-20T13:53:48.457Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "confessar admiração por Hitler e Komeini",
+          "start": 150,
+          "end": 190,
+          "created_at": "2026-05-20T13:53:53.313Z"
+        },
+        {
+          "type": "QUALIFICADOR",
+          "text": "Apenas se aproximando de",
+          "start": 192,
+          "end": 216,
+          "created_at": "2026-05-20T13:54:31.797Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "democracias de seu espectro político",
+          "start": 217,
+          "end": 253,
+          "created_at": "2026-05-20T13:54:36.121Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:52:55.233Z",
+      "completed_at": "2026-05-20T13:55:06.524Z"
+    },
+    "1999916358998360139": {
+      "noteId": "1999916358998360139",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Taylor Swift nunca tenha falado sobre Ana Benevides",
+          "start": 24,
+          "end": 75,
+          "created_at": "2026-05-20T13:55:28.429Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "No exato momento que foi confirmada a morte, Taylor se pronunciou",
+          "start": 80,
+          "end": 145,
+          "created_at": "2026-05-20T13:56:25.493Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A família de Benevides confirmou contato e o e-mail, além de ter encontrado Swift pessoalmente no show",
+          "start": 147,
+          "end": 249,
+          "created_at": "2026-05-20T13:56:32.669Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:55:28.429Z",
+      "completed_at": "2026-05-20T13:56:52.208Z"
+    },
+    "1919473187269878071": {
+      "noteId": "1919473187269878071",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Taylor teve culpa na morte de Ana Benevides",
+          "start": 56,
+          "end": 99,
+          "created_at": "2026-05-20T13:57:29.849Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A empresa Times For Fun foi a única responsável e indicada após o laudo",
+          "start": 104,
+          "end": 175,
+          "created_at": "2026-05-20T13:57:44.021Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Em novembro de 2023, mais de 151 idosos morreram por conta do calor extremo no Rio",
+          "start": 177,
+          "end": 259,
+          "created_at": "2026-05-20T13:57:53.621Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:57:29.849Z",
+      "completed_at": "2026-05-20T13:57:57.300Z"
+    },
+    "2023491294153052667": {
+      "noteId": "2023491294153052667",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Beyoncé tem histórico público de ser uma das artistas que mais fala sobre causas (ex. racismo)",
+          "start": 0,
+          "end": 94,
+          "created_at": "2026-05-20T13:59:32.509Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "A acusação de que foi paga para apoiar Kamala",
+          "start": 98,
+          "end": 143,
+          "created_at": "2026-05-20T13:59:39.653Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "foi criada por Donald Trump e foi desmentida por factos",
+          "start": 144,
+          "end": 199,
+          "created_at": "2026-05-20T13:59:50.049Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "indígenas e mexicanos",
+          "start": 252,
+          "end": 273,
+          "created_at": "2026-05-20T14:00:27.601Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "É mentira que Beyoncé glorificou o genocídio",
+          "start": 203,
+          "end": 247,
+          "created_at": "2026-05-20T14:00:35.476Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T13:59:32.509Z",
+      "completed_at": "2026-05-20T14:01:02.100Z"
+    },
+    "2027161946576011568": {
+      "noteId": "2027161946576011568",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "As Sagradas Escrituras",
+          "start": 9,
+          "end": 31,
+          "created_at": "2026-05-20T14:01:40.885Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Eva recebendo a ordem diretamente de Deus",
+          "start": 51,
+          "end": 92,
+          "created_at": "2026-05-20T14:02:05.585Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "até porque ela não havia sido criada quando Deus deu a ordem",
+          "start": 94,
+          "end": 154,
+          "created_at": "2026-05-20T14:02:12.953Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "isso não foi negado na postagem",
+          "start": 242,
+          "end": 273,
+          "created_at": "2026-05-20T14:02:50.077Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "tinha conhecimento do mandamento através de Adão",
+          "start": 191,
+          "end": 239,
+          "created_at": "2026-05-20T14:03:22.620Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T14:01:40.885Z",
+      "completed_at": "2026-05-20T14:03:31.175Z"
+    },
+    "1887258714580877671": {
+      "noteId": "1887258714580877671",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "Em matéria publicada no dia 04/02/24, o jornal Estadão",
+          "start": 2,
+          "end": 56,
+          "created_at": "2026-05-20T18:28:02.553Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "desde 2019 a Corte declarou mais omissões inconstitucionais (78) do que nos 28 anos anteriores (62)",
+          "start": 68,
+          "end": 167,
+          "created_at": "2026-05-20T18:28:20.325Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "disposição da Corte de se envolver em questões políticas",
+          "start": 206,
+          "end": 262,
+          "created_at": "2026-05-20T18:29:05.856Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:27:41.959Z",
+      "completed_at": "2026-05-20T18:29:38.028Z"
+    },
+    "2028530269850910822": {
+      "noteId": "2028530269850910822",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo mostra a explosão no porto de Beirute em 2020, causada por nitrato de amônio",
+          "start": 0,
+          "end": 84,
+          "created_at": "2026-05-20T18:30:05.037Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "um míssil iraniano em Haifa",
+          "start": 90,
+          "end": 117,
+          "created_at": "2026-05-20T18:30:10.025Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O porto de Haifa permanece operacional e sem danos confirmados",
+          "start": 119,
+          "end": 181,
+          "created_at": "2026-05-20T18:30:23.173Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:30:05.037Z",
+      "completed_at": "2026-05-20T18:30:42.596Z"
+    },
+    "1889128334228885958": {
+      "noteId": "1889128334228885958",
+      "status": "completed",
+      "spans": [],
+      "obs": "Caso de meta nota, sem a estrutura esperada",
+      "started_at": "2026-05-20T18:32:29.461Z",
+      "completed_at": "2026-05-20T18:32:41.727Z"
+    },
+    "1689843429797175692": {
+      "noteId": "1689843429797175692",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não é verdade que Pedro aparece sorrindo  nos acréscimos da derrota do Flamengo contra o Olimpia, pela Libertadores da América",
+          "start": 0,
+          "end": 126,
+          "created_at": "2026-05-20T18:34:17.245Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:34:17.245Z",
+      "completed_at": "2026-05-20T18:34:23.311Z"
+    },
+    "1708038777610940549": {
+      "noteId": "1708038777610940549",
+      "status": "completed",
+      "spans": [],
+      "obs": "texta se assemelha a meta nota, sem a estrutura esperada",
+      "started_at": "2026-05-20T18:35:35.855Z",
+      "completed_at": "2026-05-20T18:35:52.635Z"
+    },
+    "1761231589785194785": {
+      "noteId": "1761231589785194785",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "N° de mortos palestinos: 15.000  N° de mortos israelenses: 1.400    somente fatos",
+          "start": 153,
+          "end": 234,
+          "created_at": "2026-05-20T18:37:15.508Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:37:15.508Z",
+      "completed_at": "2026-05-20T18:37:59.187Z"
+    },
+    "1761863207252029822": {
+      "noteId": "1761863207252029822",
+      "status": "completed",
+      "spans": [],
+      "obs": "Meta nota, não possui a estrutura argumentativa esperada",
+      "started_at": "2026-05-20T18:38:33.181Z",
+      "completed_at": "2026-05-20T18:38:47.487Z"
+    },
+    "1882118498148642865": {
+      "noteId": "1882118498148642865",
+      "status": "completed",
+      "spans": [],
+      "obs": "Meta nota, não possui a estrutura esperada",
+      "started_at": "2026-05-20T18:39:14.699Z",
+      "completed_at": "2026-05-20T18:39:26.787Z"
+    },
+    "1878062635578458242": {
+      "noteId": "1878062635578458242",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "O vídeo é falso",
+          "start": 0,
+          "end": 15,
+          "created_at": "2026-05-20T18:39:53.688Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "foi gerado por inteligência artificial",
+          "start": 17,
+          "end": 55,
+          "created_at": "2026-05-20T18:39:58.791Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:39:53.688Z",
+      "completed_at": "2026-05-20T18:40:06.723Z"
+    },
+    "1760000020819103825": {
+      "noteId": "1760000020819103825",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "a charge não foi publicada no New York Times",
+          "start": 41,
+          "end": 85,
+          "created_at": "2026-05-20T18:40:59.168Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Ela é criação do israelense Johnathan Majburd e foi compartilhada em suas redes sociais",
+          "start": 87,
+          "end": 174,
+          "created_at": "2026-05-20T18:41:18.617Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:40:59.168Z",
+      "completed_at": "2026-05-20T18:42:01.139Z"
+    },
+    "2019861320049271125": {
+      "noteId": "2019861320049271125",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Vladimir Putin não veio ao Brasil",
+          "start": 32,
+          "end": 65,
+          "created_at": "2026-05-20T18:43:29.220Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "uma comitiva russa comandada pelo primeiro-ministro Mikhail Mishustin",
+          "start": 73,
+          "end": 142,
+          "created_at": "2026-05-20T18:43:42.008Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:43:29.220Z",
+      "completed_at": "2026-05-20T18:43:46.367Z"
+    },
+    "2025149321335673124": {
+      "noteId": "2025149321335673124",
+      "status": "completed",
+      "spans": [],
+      "obs": "Meta nota, sem a esrtutura esperada",
+      "started_at": "2026-05-20T18:44:31.219Z",
+      "completed_at": "2026-05-20T18:44:40.387Z"
+    },
+    "2023720510257856645": {
+      "noteId": "2023720510257856645",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo em questão é de 2023",
+          "start": 0,
+          "end": 28,
+          "created_at": "2026-05-20T18:46:34.132Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "não de 2026 como alega o advogado",
+          "start": 31,
+          "end": 64,
+          "created_at": "2026-05-20T18:46:40.268Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Flávio Dino não era ministro do STF e sim ministro da justiça, cargo que não impõe restrição político-partidária",
+          "start": 82,
+          "end": 194,
+          "created_at": "2026-05-20T18:46:58.800Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:45:37.024Z",
+      "completed_at": "2026-05-20T18:47:02.902Z"
+    },
+    "1877812049759416365": {
+      "noteId": "1877812049759416365",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não é necessário ser assinante do X para escrever ou votar em notas da comunidade",
+          "start": 0,
+          "end": 81,
+          "created_at": "2026-05-20T18:48:39.880Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Qualquer usuário com conta ativa e que atenda aos critérios básicos de participação pode contribuir com as notas",
+          "start": 83,
+          "end": 195,
+          "created_at": "2026-05-20T18:48:58.872Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:48:39.880Z",
+      "completed_at": "2026-05-20T18:49:04.687Z"
+    },
+    "1941004407832752217": {
+      "noteId": "1941004407832752217",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não é verdade que o Presidente Lula SANCIONOU a lei",
+          "start": 4,
+          "end": 55,
+          "created_at": "2026-05-20T18:50:10.816Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O presidente VETOU e o veto foi DERRUBADO pelo congresso",
+          "start": 57,
+          "end": 113,
+          "created_at": "2026-05-20T18:50:20.380Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:50:10.816Z",
+      "completed_at": "2026-05-20T18:50:43.955Z"
+    },
+    "1991189878722244743": {
+      "noteId": "1991189878722244743",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "a taxa de 20% sobre importações até US$50 foi criada pelo governo Lula em 2024, via Lei 14.902",
+          "start": 25,
+          "end": 119,
+          "created_at": "2026-05-20T18:52:11.448Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "a isenção anterior que vigorava na era Bolsonaro",
+          "start": 134,
+          "end": 182,
+          "created_at": "2026-05-20T18:52:24.328Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:52:01.720Z",
+      "completed_at": "2026-05-20T18:52:32.702Z"
+    },
+    "1876223898854797725": {
+      "noteId": "1876223898854797725",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "a Folha não disse que Fernanda Torres não ganharia o Globo de Ouro",
+          "start": 36,
+          "end": 102,
+          "created_at": "2026-05-20T18:53:23.199Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "reproduziu uma frase dela numa entrevista",
+          "start": 111,
+          "end": 152,
+          "created_at": "2026-05-20T18:53:42.184Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A chance de alguém falando português levar um prêmio desse tamanho é praticamente nula&quot;, disse a atriz",
+          "start": 163,
+          "end": 270,
+          "created_at": "2026-05-20T18:54:11.280Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:53:23.199Z",
+      "completed_at": "2026-05-20T18:54:18.682Z"
+    },
+    "1870680545136439331": {
+      "noteId": "1870680545136439331",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "as agências da Caixa Econômica Federal iniciam atendimento às 10h da manhã",
+          "start": 15,
+          "end": 89,
+          "created_at": "2026-05-20T18:55:55.815Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "O post e o vídeo induz um escândalo infundado com a prática do H. de Func. regular da Ag. da Caixa",
+          "start": 176,
+          "end": 274,
+          "created_at": "2026-05-20T18:56:15.268Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T18:55:55.815Z",
+      "completed_at": "2026-05-20T18:56:33.858Z"
+    },
+    "1842682272262324483": {
+      "noteId": "1842682272262324483",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "O laudo é falso",
+          "start": 0,
+          "end": 15,
+          "created_at": "2026-05-20T19:13:22.834Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a própria família do suposto médico já declarou que ele nunca atuou em SP, nem na clínica   e  que na data do laudo ele já nao trabalhava por saúde",
+          "start": 59,
+          "end": 206,
+          "created_at": "2026-05-20T19:13:51.855Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "assinatura ser falsa, de acordo com provas da própria família",
+          "start": 216,
+          "end": 277,
+          "created_at": "2026-05-20T19:14:22.606Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T19:13:22.834Z",
+      "completed_at": "2026-05-20T19:14:36.581Z"
+    },
+    "1889176478891315215": {
+      "noteId": "1889176478891315215",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "independência implica autonomia financeira e editorial",
+          "start": 101,
+          "end": 155,
+          "created_at": "2026-05-20T19:16:37.262Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "chamar de &quot;independente&quot; uma mídia financiada pelo governo dos EUA",
+          "start": 16,
+          "end": 92,
+          "created_at": "2026-05-20T19:16:48.811Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T19:16:24.179Z",
+      "completed_at": "2026-05-20T19:16:57.501Z"
+    },
+    "1823435417548374388": {
+      "noteId": "1823435417548374388",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "o menino proferiu a seguinte frase “LeBron, could you please take a picture with me?",
+          "start": 36,
+          "end": 120,
+          "created_at": "2026-05-20T19:17:54.582Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o pedido foi prontamente negado pelo jogador da NBA LeBron James, respondendo “Pare. Não faça isso",
+          "start": 123,
+          "end": 221,
+          "created_at": "2026-05-20T19:18:29.847Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T19:17:54.582Z",
+      "completed_at": "2026-05-20T19:18:40.449Z"
+    },
+    "1885048614927425622": {
+      "noteId": "1885048614927425622",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Copom ~ANTEVÊ~ um aumento de 1% nas próximas reuniões",
+          "start": 41,
+          "end": 94,
+          "created_at": "2026-05-20T21:42:06.165Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O Copom atual não é legalmente obrigado a seguir essa previsão",
+          "start": 99,
+          "end": 161,
+          "created_at": "2026-05-20T21:42:24.811Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:42:06.165Z",
+      "completed_at": "2026-05-20T21:42:40.842Z"
+    },
+    "1993124451064406360": {
+      "noteId": "1993124451064406360",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Flávio Dino é bacharel em Direito pela UFMA (1991), mestre pela UFPE (2001) e atuou como juiz federal por 12 anos, além de ser professor de Direito na UFMA desde 1993",
+          "start": 0,
+          "end": 166,
+          "created_at": "2026-05-20T21:44:36.303Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:43:36.711Z",
+      "completed_at": "2026-05-20T21:44:39.006Z"
+    },
+    "1936784166680502540": {
+      "noteId": "1936784166680502540",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Ebrahim Raisi, o homem que aparece no post, morreu em 19 de maio de 2024",
+          "start": 0,
+          "end": 72,
+          "created_at": "2026-05-20T21:45:45.683Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:45:45.683Z",
+      "completed_at": "2026-05-20T21:45:48.562Z"
+    },
+    "2031092784686387635": {
+      "noteId": "2031092784686387635",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "artigo 36 inciso III da LC 35/1979 (LOMAN), que proíbe magistrados de manifestarem, por qualquer meio, opinião sobre processos pendentes",
+          "start": 37,
+          "end": 173,
+          "created_at": "2026-05-20T21:48:22.292Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:48:22.292Z",
+      "completed_at": "2026-05-20T21:48:31.150Z"
+    },
+    "1879837365738385874": {
+      "noteId": "1879837365738385874",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "É falso que desacreditar e atacar medidas públicas seja crime",
+          "start": 0,
+          "end": 61,
+          "created_at": "2026-05-20T21:51:45.906Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "sendo amparado pelos artigos 5º e 220 da CF/88",
+          "start": 170,
+          "end": 216,
+          "created_at": "2026-05-20T21:52:03.399Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "pelo Art. 19 da Declaração Univ. dos Direitos Humanos",
+          "start": 219,
+          "end": 272,
+          "created_at": "2026-05-20T21:52:08.599Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:51:45.906Z",
+      "completed_at": "2026-05-20T21:52:14.722Z"
+    },
+    "1878095415351922716": {
+      "noteId": "1878095415351922716",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "perfil @ai_creatiions",
+          "start": 93,
+          "end": 114,
+          "created_at": "2026-05-20T21:52:58.226Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Este vídeo foi criado por inteligência artificial",
+          "start": 0,
+          "end": 49,
+          "created_at": "2026-05-20T21:54:06.819Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "originalmente publicado no Instagram",
+          "start": 52,
+          "end": 88,
+          "created_at": "2026-05-20T21:54:11.859Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T21:52:53.195Z",
+      "completed_at": "2026-05-20T21:54:16.861Z"
+    },
+    "2014522181053567129": {
+      "noteId": "2014522181053567129",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Art. 145 – Suspeição do juiz  Dispõe quando o juiz é considerado suspeito (...)  - amizade íntima ou inimizade com as partes ou advogados;  - interesse no julgamento da causa;  Art. 146 – Arguição de suspeição (...)  - no prazo de 15 dias, a contar do conhecimento do fato",
+          "start": 0,
+          "end": 272,
+          "created_at": "2026-05-20T22:58:09.756Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T22:58:09.756Z",
+      "completed_at": "2026-05-20T22:58:13.434Z"
+    },
+    "2035937261900960010": {
+      "noteId": "2035937261900960010",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O participante pipoca Pedro Henrique Espíndola era proibido contratualmente de se manifestar em outros paredões",
+          "start": 0,
+          "end": 111,
+          "created_at": "2026-05-20T23:01:11.592Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:01:11.592Z",
+      "completed_at": "2026-05-20T23:01:31.738Z"
+    },
+    "1884778548310823225": {
+      "noteId": "1884778548310823225",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A afirmação de que o artista &quot;incita violência sexual contra a vereadora Amanda&quot; é mentirosa",
+          "start": 0,
+          "end": 102,
+          "created_at": "2026-05-20T23:02:32.754Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A expressão &quot;toma jack&quot; refere-se à famosa bebida Jack Daniels, sendo &quot;toma jack&quot; uma gíria oriunda de comunidades do Rio de Janeiro",
+          "start": 104,
+          "end": 256,
+          "created_at": "2026-05-20T23:02:51.959Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:02:32.754Z",
+      "completed_at": "2026-05-20T23:02:57.345Z"
+    },
+    "1868118294474915987": {
+      "noteId": "1868118294474915987",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "o ex-presidente faz parte dessa trama golpista",
+          "start": 5,
+          "end": 51,
+          "created_at": "2026-05-20T23:03:31.680Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o inquérito não foi concluído por que tem novos indícios e novas provas, o que não impede dele ser preso",
+          "start": 117,
+          "end": 221,
+          "created_at": "2026-05-20T23:03:57.779Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:03:31.680Z",
+      "completed_at": "2026-05-20T23:04:01.450Z"
+    },
+    "1991162547119014319": {
+      "noteId": "1991162547119014319",
+      "status": "completed",
+      "spans": [],
+      "obs": "a nota não fala diretamente sobre a publicação",
+      "started_at": "2026-05-20T23:05:06.959Z",
+      "completed_at": "2026-05-20T23:05:08.973Z"
+    },
+    "1762663085980958948": {
+      "noteId": "1762663085980958948",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Lula afirmar que Israel é genocida, é FALSO",
+          "start": 78,
+          "end": 121,
+          "created_at": "2026-05-20T23:06:16.267Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Lula se “reuniu” com família de um brasileiro, 2 meses após o sequestro",
+          "start": 0,
+          "end": 71,
+          "created_at": "2026-05-20T23:06:22.103Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:06:16.267Z",
+      "completed_at": "2026-05-20T23:06:37.117Z"
+    },
+    "2036159146039595023": {
+      "noteId": "2036159146039595023",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "a legenda do texto deixa lacunas abertas na interpretação do caso",
+          "start": 209,
+          "end": 274,
+          "created_at": "2026-05-20T23:08:52.682Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A partir do minuto 4:36, a atriz afirma que Chappell Roan, como dito pela cantora em pronunciamento, não viu a criança e nem a sua mãe",
+          "start": 0,
+          "end": 134,
+          "created_at": "2026-05-20T23:10:00.370Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:08:26.004Z",
+      "completed_at": "2026-05-20T23:10:05.113Z"
+    },
+    "2032140619728965702": {
+      "noteId": "2032140619728965702",
+      "status": "completed",
+      "spans": [],
+      "obs": "nota não apresenta estrutura argumentativa",
+      "started_at": "2026-05-20T23:10:58.066Z",
+      "completed_at": "2026-05-20T23:11:07.070Z"
+    },
+    "1828997016388518228": {
+      "noteId": "1828997016388518228",
+      "status": "completed",
+      "spans": [],
+      "obs": "nota não possui estrutura argumentativa",
+      "started_at": "2026-05-20T23:12:23.929Z",
+      "completed_at": "2026-05-20T23:12:50.153Z"
+    },
+    "1798350866983891008": {
+      "noteId": "1798350866983891008",
+      "status": "completed",
+      "spans": [],
+      "obs": "Meta nota, não possui a estrutura argumetativa esperada",
+      "started_at": "2026-05-20T23:14:16.665Z",
+      "completed_at": "2026-05-20T23:14:31.701Z"
+    },
+    "2033327040481444237": {
+      "noteId": "2033327040481444237",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não há distorção de informações",
+          "start": 237,
+          "end": 268,
+          "created_at": "2026-05-20T23:17:25.714Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Houve agressão mútua",
+          "start": 86,
+          "end": 106,
+          "created_at": "2026-05-20T23:17:30.474Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:15:26.022Z",
+      "completed_at": "2026-05-20T23:17:33.657Z"
+    },
+    "2036235208928756034": {
+      "noteId": "2036235208928756034",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A informação está incorreta e tendenciosa",
+          "start": 0,
+          "end": 41,
+          "created_at": "2026-05-20T23:18:42.846Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Foram usadas metodologias diferentes de contagem.    - Governo de Seul: 40–48 mil (tempo real, só área da praça)  - Ministério do Interior: 62 mil (usuários domésticos)  - HYBE: 104 mil (inclui estrangeiros e pré-pagos)",
+          "start": 43,
+          "end": 262,
+          "created_at": "2026-05-20T23:19:22.414Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:18:42.846Z",
+      "completed_at": "2026-05-20T23:19:26.285Z"
+    },
+    "1884735731991519515": {
+      "noteId": "1884735731991519515",
+      "status": "completed",
+      "spans": [],
+      "obs": "A nota não possui a estrutura argumentativa modelada nesta atividade",
+      "started_at": "2026-05-20T23:20:30.378Z",
+      "completed_at": "2026-05-20T23:20:54.908Z"
+    },
+    "2035774913856840144": {
+      "noteId": "2035774913856840144",
+      "status": "completed",
+      "spans": [],
+      "obs": "meta nota, não possui a esrtutura argumentativa modelada nesta atividade",
+      "started_at": "2026-05-20T23:22:27.822Z",
+      "completed_at": "2026-05-20T23:22:44.884Z"
+    },
+    "1828475905272095265": {
+      "noteId": "1828475905272095265",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Hoje a extrema direita acordou espalhando vídeo falso com o hino do Brasil",
+          "start": 57,
+          "end": 131,
+          "created_at": "2026-05-20T23:24:25.422Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Aqui o vídeo original",
+          "start": 133,
+          "end": 154,
+          "created_at": "2026-05-20T23:24:49.393Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "desmascarar essa notícia falsa de que o hino foi cantado usando “filhes”",
+          "start": 237,
+          "end": 309,
+          "created_at": "2026-05-20T23:24:57.718Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:24:25.422Z",
+      "completed_at": "2026-05-20T23:25:09.540Z"
+    },
+    "1639935770680078337": {
+      "noteId": "1639935770680078337",
+      "status": "completed",
+      "spans": [],
+      "obs": "A nota não possui a esrtutura modelada nesta atividade",
+      "started_at": "2026-05-20T23:26:27.718Z",
+      "completed_at": "2026-05-20T23:26:39.560Z"
+    },
+    "1881461849201521031": {
+      "noteId": "1881461849201521031",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Essa é a saudação romana",
+          "start": 0,
+          "end": 24,
+          "created_at": "2026-05-20T23:27:22.558Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:27:22.558Z",
+      "completed_at": "2026-05-20T23:27:27.972Z"
+    },
+    "1916124309459808763": {
+      "noteId": "1916124309459808763",
+      "status": "completed",
+      "spans": [],
+      "obs": "a nota não possui a estrutura argumentativa modelada nesta atividade",
+      "started_at": "2026-05-20T23:28:05.041Z",
+      "completed_at": "2026-05-20T23:28:18.340Z"
+    },
+    "1856342402283225145": {
+      "noteId": "1856342402283225145",
+      "status": "completed",
+      "spans": [],
+      "obs": "meta nota, não possui a estrutura argumentativa modelada nesta atividade",
+      "started_at": "2026-05-20T23:29:05.529Z",
+      "completed_at": "2026-05-20T23:29:20.740Z"
+    },
+    "2034666298249023797": {
+      "noteId": "2034666298249023797",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Nem a postagem nem a reportagem insinuam recebimento de recursos públicos",
+          "start": 0,
+          "end": 73,
+          "created_at": "2026-05-20T23:30:07.357Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Achar melhor que recursos captados por uma religião sejam mais destinados à caridade não constitui intolerância religiosa",
+          "start": 162,
+          "end": 283,
+          "created_at": "2026-05-20T23:30:26.641Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:30:07.357Z",
+      "completed_at": "2026-05-20T23:30:33.556Z"
+    },
+    "2030386711545446739": {
+      "noteId": "2030386711545446739",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Cópia/tradução de post supostamente “cômico” em inglês",
+          "start": 0,
+          "end": 54,
+          "created_at": "2026-05-20T23:31:16.282Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-05-20T23:31:16.283Z",
+      "completed_at": "2026-05-20T23:31:21.160Z"
+    }
+  }
+}
