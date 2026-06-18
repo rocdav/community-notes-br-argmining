@@ -55,9 +55,17 @@ São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii)
 │   ├── ARQUITETURA.md         # documentação técnica do pipeline e dos artefatos
 │   ├── guia_anotacao.md       # guia de anotação (definição dos rótulos)
 │   └── Proposta_PLN.docx      # proposta original
-├── explorador/                # visualização estática interativa (5 visões, abre por duplo-clique)
+├── explorador/                # visualização estática interativa (5 visões)
+│   ├── index.html             # entrada local/offline do explorador
+│   ├── data*.js               # dados embutidos das visões
+│   ├── js/                    # lógica das visões
+│   └── README.md              # regeneração dos dados do explorador
 └── apps/
-    ├── anotador/              # interface de anotação argumentativa
+    ├── anotador/              # ambiente estático de anotação argumentativa
+    │   ├── index.html         # entrada local/offline do anotador
+    │   ├── data.js            # recorte de 60 notas para anotação
+    │   ├── app.js             # lógica de marcação/exportação
+    │   └── readme.md          # instruções de deploy e uso
     └── bio-converter/         # conversão de spans → BIO/CoNLL
 ```
 
@@ -84,8 +92,17 @@ python -m spacy download pt_core_news_md
 
 Abra **`explorador/index.html`** com duplo-clique — é estático e funciona offline (sem
 servidor). Cinco visões: *Conjunto* (panorama do corpus), *Explorador de notas*, *BIO
-(tokens)*, *Navegador de entidades* e *Painel de achados*. Para regenerar os dados embutidos,
-veja `explorador/README.md`.
+(tokens)*, *Navegador de entidades* e *Painel de achados*. As visões também estão disponíveis em
+[`explorador-argumentos.netlify.app`](https://explorador-argumentos.netlify.app/). Para regenerar
+os dados embutidos, veja `explorador/README.md`.
+
+### Anotador (ambiente de anotação)
+
+O ambiente de anotação humana também é estático. Ele pode ser aberto localmente em
+**`apps/anotador/index.html`** e está publicado em
+[`anotador-argumentos.netlify.app`](https://anotador-argumentos.netlify.app/). A interface usa o
+recorte de 60 notas em `apps/anotador/data.js` e exporta as marcações para posterior conversão em
+BIO/CoNLL.
 
 ## Dados
 
@@ -104,6 +121,11 @@ dependências (`sintaxe_json`). O **dicionário de colunas** está em
 
 ## Licença e uso
 
-Trabalho acadêmico. O texto das notas pertence ao Community Notes / X e ao conjunto
-`histlearn/notas-comunidade-ptbr`; respeite os termos da fonte. Código e documentação deste
-repositório são de uso acadêmico pelos autores. Defina a licença antes de publicar.
+Trabalho acadêmico desenvolvido para a disciplina de Processamento de Linguagem Natural
+(UFSCar, 2026/1). O código e a documentação produzidos pelos autores estão disponíveis sob a
+licença MIT; veja [`LICENSE`](LICENSE).
+
+Os textos das notas derivam do Community Notes / X e do conjunto público
+[`histlearn/notas-comunidade-ptbr`](https://huggingface.co/datasets/histlearn/notas-comunidade-ptbr);
+o uso deve respeitar os termos e licenças dessas fontes. Materiais, modelos, bibliotecas e dados
+de terceiros mantêm suas próprias licenças e são citados nos arquivos correspondentes.
