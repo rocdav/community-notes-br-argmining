@@ -85,8 +85,9 @@ python -m spacy download pt_core_news_md
    JSON(s) de anotador. Detalhes em
    [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md).
 
-> No ambiente local, leia Parquet com **`engine="fastparquet"`** ou DuckDB (as colunas de
-> *span* são `LIST<STRUCT>` aninhadas). Ver notas em `docs/ARQUITETURA.md`.
+> Leia o Parquet com **DuckDB** ou **`engine="pyarrow"`** — as colunas de *span* são
+> `LIST<STRUCT>` aninhadas, e o `fastparquet` as devolve vazias em silêncio. Ver notas em
+> `docs/ARQUITETURA.md`.
 
 ### Explorador (visualização)
 

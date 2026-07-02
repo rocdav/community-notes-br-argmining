@@ -115,8 +115,8 @@ duplo-clique via `file://`, usando `<script>`/`<link>` clássicos). Cinco visõe
 ## Notas de reprodutibilidade
 
 - **Parquet:** as colunas de *span* são `LIST<STRUCT{start,end,type}>`. Leia com
-  **`engine="fastparquet"`** ou **DuckDB**. Evite *round-trip* por leitores que não suportam
-  *struct* aninhado (podem devolver `None` silenciosamente nessas colunas).
+  **DuckDB** ou **`engine="pyarrow"`**. Evite o `fastparquet` e qualquer *round-trip* por
+  leitores sem suporte a *struct* aninhado: eles devolvem `None` silenciosamente nessas colunas.
 - **No CSV**, essas mesmas colunas (`e1_spans`, `e2_spans`) vêm como **repr de array NumPy**
   (sem vírgulas entre os dicts): parseie por regex `'type': 'X'` / `'start': N, 'end': N`, **não**
   por `json.loads`. Já `sintaxe_json`, `*_span_bio_json` e `e2_align_levels` são JSON/dict normais.
