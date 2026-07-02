@@ -85,6 +85,22 @@ function recordDecision(noteId, decision) {
 function peerNote(noteId) {
   return state.peer?.notes?.[noteId] || null;
 }
+function peerDiffers(note) {
+  const peer = peerNote(note.noteId);
+  if (!peer) return false;
+  const goldSigs = (state.notes[note.noteId]?.spans || []).map(spanSig);
+  const peerSigs = peer.spans.map(spanSig);
+  if (goldSigs.length !== peerSigs.length) return true;
+  const set = new Set(goldSigs);
+  return peerSigs.some(sig => !set.has(sig));
+}
+function describePayload(payload) {
+  const anns = payload.anotacoes || {};
+  const nNotas = Object.keys(anns).length;
+  const nSpans = Object.values(anns).reduce((acc, a) => acc + ((a && a.spans) || []).length, 0);
+  const nCompletas = Object.values(anns).filter(a => a && (a.status === "completed" || a.status === "reviewed")).length;
+  return `${payload.anotador?.nome || "(sem nome)"} · papel=${payload.anotador?.papel || "?"} · ${nNotas} notas, ${nSpans} spans, ${nCompletas} completas`;
+}
 
 function defaultNoteState(note) {
   return {
@@ -220,18 +236,22 @@ function renderSummary() {
   const divergent = NOTES.filter(n => (n.counts.human_union - n.counts.exact_agreement) > 0).length;
   const goldSpans = NOTES.reduce((acc, n) => acc + (state.notes[n.noteId]?.spans.length || 0), 0);
   byId("dataset-meta").textContent = `${DATA.stats.notes} notas; Davi ${DATA.stats.davi_spans} spans; Álvaro ${DATA.stats.alvaro_spans} spans; acordo exato ${DATA.stats.exact_agreement_spans}`;
-  byId("summary-strip").innerHTML = [
+  const metrics = [
     ["Revisadas", `${reviewed}/${NOTES.length}`],
     ["Divergentes", divergent],
     ["Gold spans", goldSpans],
     ["União humana", DATA.stats.human_union_spans],
-  ].map(([label, value]) => `<div class="metric"><strong>${value}</strong><span>${label}</span></div>`).join("");
+  ];
+  if (state.peer) metrics.push(["≠ Parecer", NOTES.filter(peerDiffers).length]);
+  byId("summary-strip").innerHTML = metrics
+    .map(([label, value]) => `<div class="metric"><strong>${value}</strong><span>${label}</span></div>`).join("");
 }
 
 function filteredNotes() {
   return NOTES.filter(note => {
     if (state.filter === "pending") return statusFor(note) !== "reviewed";
     if (state.filter === "divergent") return (note.counts.human_union - note.counts.exact_agreement) > 0;
+    if (state.filter === "peer-diff") return peerDiffers(note);
     return true;
   });
 }
@@ -248,7 +268,7 @@ function renderNoteList() {
         <span><strong>${note.order}</strong><br><span class="small">${note.consenso || "Outro"}</span></span>
         <span>
           <strong>${note.noteId}</strong><br>
-          <span class="small">${goldCount} gold · ${delta} diverg.</span>
+          <span class="small">${goldCount} gold · ${delta} diverg.${state.peer && peerDiffers(note) ? " · ≠P" : ""}</span>
         </span>
         <span class="flag">${st === "reviewed" ? "OK" : "ABERTO"}</span>
       </button>`;
@@ -328,6 +348,16 @@ function renderClusters(note) {
         </div>`;
     }).join("");
     const exact = cluster.exact_agreements.length ? `<span class="badge">acordo exato</span>` : "";
+    // Divergência "pura de fronteira": 1 span de cada anotador, mesmo tipo, sem acordo exato.
+    const pair = cluster.span_ids.map(id => candidateById(note, id)).filter(Boolean);
+    const canMerge = pair.length === 2 && cluster.types.length === 1
+      && cluster.sources.includes("davi") && cluster.sources.includes("alvaro")
+      && !cluster.exact_agreements.length;
+    const mergeButtons = canMerge ? `
+      <div class="cluster-actions">
+        <button class="btn" data-merge="inter" data-cluster="${cluster.id}">Usar interseção</button>
+        <button class="btn" data-merge="uniao" data-cluster="${cluster.id}">Usar união</button>
+      </div>` : "";
     return `
       <section class="cluster">
         <div class="cluster-head">
@@ -335,6 +365,7 @@ function renderClusters(note) {
           <div class="badges">${exact}<span class="badge">${cluster.sources.join(" + ")}</span></div>
         </div>
         ${rows}
+        ${mergeButtons}
       </section>`;
   }).join("");
   const peerCluster = peer && peer.spans.length ? `
@@ -640,24 +671,30 @@ function exportAuditCSV() {
 
 function importedSpansFor(payload, note, label) {
   const ann = (payload.anotacoes || {})[note.noteId];
-  return sortSpans((ann?.spans || []).map((span, idx) => ({
-    ...cleanSpan(span, note),
-    id: `peer-${note.noteId}-${span.start}-${span.end}-${span.type}-${idx}`,
-    source_key: "peer",
-    source_label: label,
-  })));
+  return sortSpans((ann?.spans || []).map((span, idx) => {
+    const cleaned = cleanSpan(span, note);
+    return {
+      ...cleaned,
+      id: `peer-${note.noteId}-${cleaned.start}-${cleaned.end}-${cleaned.type}-${idx}`,
+      source_key: "peer",
+      source_label: label,
+    };
+  }));
 }
 
 function importDraftPayload(payload) {
   const anns = payload.anotacoes || {};
   NOTES.forEach(note => {
     if (!anns[note.noteId]) return;
+    const localDecisions = state.notes[note.noteId].decisions || [];
+    const importedDecisions = payload.adjudicacao?.decisoes_por_nota?.[note.noteId] || [];
     state.notes[note.noteId] = {
       ...state.notes[note.noteId],
       status: anns[note.noteId].status === "completed" ? "reviewed" : "pending",
       spans: sortSpans((anns[note.noteId].spans || []).map(s => cleanSpan(s, note))),
       obs: anns[note.noteId].obs || "",
-      decisions: payload.adjudicacao?.decisoes_por_nota?.[note.noteId] || state.notes[note.noteId].decisions || [],
+      // Preserva as DUAS trilhas (cada decisão carrega timestamp/actor/round próprios).
+      decisions: [...localDecisions, ...importedDecisions],
       updated_at: nowISO(),
       reviewed_at: anns[note.noteId].completed_at || null,
     };
@@ -666,6 +703,8 @@ function importDraftPayload(payload) {
       source_role: payload.anotador?.papel || "",
       source_name: payload.anotador?.nome || "",
       imported_spans: state.notes[note.noteId].spans.length,
+      local_decisions_kept: localDecisions.length,
+      imported_decisions: importedDecisions.length,
     });
   });
 }
@@ -710,6 +749,16 @@ function importGold(file) {
       if (state.pendingImportMode === "peer") {
         importPeerPayload(payload);
       } else {
+        // Guarda contra importar o arquivo errado (ex.: anotação crua como rascunho).
+        const desc = describePayload(payload);
+        const ehAdjudicacao = payload.anotador?.papel === "consenso_adjudicado";
+        const aviso = ehAdjudicacao ? "" :
+          "\n\nATENÇÃO: este arquivo NÃO parece ser um export do adjudicador " +
+          `(papel = ${payload.anotador?.papel || "?"}). Importá-lo SUBSTITUI o gold local ` +
+          "pelas anotações dele. Se você queria apenas consultá-lo, use 'Carregar parecer'.";
+        if (!window.confirm(`Importar como RASCUNHO (substitui o gold local das notas presentes no arquivo)?\n\n${desc}${aviso}`)) {
+          return;
+        }
         importDraftPayload(payload);
       }
       saveState();
@@ -761,6 +810,24 @@ function setupEvents() {
     renderHighlightedText(currentNote());
   }));
   byId("clusters").addEventListener("click", e => {
+    const mbtn = e.target.closest("[data-merge]");
+    if (mbtn) {
+      const note = currentNote();
+      const cluster = note.clusters.find(c => c.id === mbtn.dataset.cluster);
+      if (!cluster) return;
+      const pair = cluster.span_ids.map(id => candidateById(note, id)).filter(Boolean);
+      if (pair.length !== 2) return;
+      const [a, b] = pair;
+      const inter = mbtn.dataset.merge === "inter";
+      const start = inter ? Math.max(a.start, b.start) : Math.min(a.start, b.start);
+      const end = inter ? Math.min(a.end, b.end) : Math.max(a.end, b.end);
+      if (start >= end) {
+        toast("Interseção vazia entre os dois spans.");
+        return;
+      }
+      addSpanToGold({ start, end, type: a.type }, inter ? "intersecao_davi_alvaro" : "uniao_davi_alvaro");
+      return;
+    }
     const btn = e.target.closest("[data-add-span]");
     if (!btn) return;
     const span = candidateById(currentNote(), btn.dataset.addSpan);

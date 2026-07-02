@@ -500,3 +500,15 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
     flex-direction: column;
   }
 }
+
+/* v3: acoes de merge por cluster (intersecao/uniao) */
+.cluster-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border, #d8d2c4);
+}
+.cluster-actions .btn {
+  font-size: 0.82rem;
+}

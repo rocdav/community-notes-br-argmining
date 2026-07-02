@@ -52,20 +52,52 @@ Quando não houver agenda conjunta:
    e exporta o JSON.
 2. O outro abre sua sessão, clica em `Carregar parecer` e importa esse JSON.
 3. O parecer importado aparece como camada separada e como fonte `Parecer`; ele
-   não sobrescreve o gold local.
-4. A revisão final deve usar `Rodada = revisao_cruzada` ou `fechamento`.
+   não sobrescreve o gold local. O filtro **≠ Parecer** lista apenas as notas em
+   que o parecer difere do gold local — é o roteiro da revisão cruzada.
+4. A revisão final deve usar `Rodada = revisao_cruzada` ou `fechamento`. Notas
+   que continuarem divergentes após a revisão cruzada devem ser resolvidas em
+   conversa direta (chamada curta) e fechadas com os dois nomes em
+   `Adjudicadores` e `Rodada = fechamento`.
 
 O export final registra `adjudicacao.importacao_assincrona` e preserva
 `adjudicacao.decisoes_por_nota`, incluindo substituições, mudanças de tipo,
 uso de fontes e toggles de camada. Assim é possível distinguir consenso conjunto,
 parecer individual e fechamento assíncrono.
 
+### Atalhos de resolução
+
+Em clusters com **um span de cada anotador, mesmo tipo e sem acordo exato**
+(divergência pura de fronteira), a interface oferece **Usar interseção** e
+**Usar união**. A decisão fica registrada como `intersecao_davi_alvaro` /
+`uniao_davi_alvaro` no `decision_source` do span.
+
+### Importação segura
+
+`Carregar rascunho` **substitui** o gold local pelas notas presentes no arquivo
+e por isso pede confirmação exibindo nome, papel e contagens do arquivo — com
+aviso destacado se o JSON não for um export do adjudicador
+(`papel != consenso_adjudicado`). As trilhas de decisão local e importada são
+**concatenadas** (cada decisão carrega timestamp, ator e rodada próprios), nunca
+descartadas. `Carregar parecer` nunca altera o gold.
+
 ## Independência em relação a E1/E2
 
 As camadas E1/E2 ficam bloqueadas até a nota ser marcada como revisada. Se forem
 consultadas depois disso, o evento entra na trilha de decisões como
 `toggle_layer`. A recomendação é adjudicar olhando apenas Davi/Álvaro/parecer
-humano; E1/E2 servem só para inspeção pós-decisão.
+humano; E1/E2 servem só para inspeção pós-decisão. **Edições feitas depois de
+uma consulta a E1/E2 ficam visíveis na trilha (toggle seguido de edição) e são
+examinadas na auditoria** — a nota volta ao estado pendente e precisa ser
+revisada de novo.
+
+## Propriedades do gold adjudicado
+
+- **Não-sobreposto por construção**: adicionar um span ao gold remove
+  automaticamente os que colidem com ele (a substituição é contada na trilha).
+  Essa restrição é coerente com a projeção BIO usada na avaliação.
+- Todo span carrega `decision_source` (`davi`, `alvaro`, `acordo_exato`,
+  `manual`, `intersecao_davi_alvaro`, `uniao_davi_alvaro`, `peer`, sufixo
+  `+tipo_editado`) e `adjudicated_at`.
 
 ## Regenerar dados
 
