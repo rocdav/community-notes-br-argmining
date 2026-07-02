@@ -4,11 +4,25 @@ __pycache__/
 .venv/
 venv/
 env/
-.ipynb_checkpoints/
+ENV/
+build/
+dist/
+*.egg-info/
 
-# Credenciais / ambiente
+# Notebooks e caches
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Credenciais e ambiente local
 .env
+.env.*
+!.env.example
 *.key
+*.pem
+*.token
+nmtk*.txt
 
 # Cache do Hugging Face (tabela de entidades é baixada sob demanda)
 .cache/
@@ -17,11 +31,17 @@ hf_cache/
 # Saídas temporárias
 *.log
 _shots/
+tmp/
+temp/
 
 # Sistema operacional
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Front-end / deploy local
+node_modules/
+.netlify/
 
 # Notas: o dataset CSV (~15 MB) é versionado. Se preferir, mova-o para Git LFS:
 #   git lfs track "data/*.csv" "data/*.parquet"
