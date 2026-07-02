@@ -1,0 +1,2056 @@
+{
+  "schema_version": "1.0",
+  "dataset_version": "v1.0",
+  "guia_versao": "1.0",
+  "anotador": {
+    "nome": "Alvaro Barros",
+    "papel": "manual"
+  },
+  "started_at": "2026-07-02T14:15:20.193Z",
+  "last_saved_at": "2026-07-02T15:10:19.711Z",
+  "total_notas": 60,
+  "completas": 60,
+  "em_progresso": 0,
+  "pendentes": 0,
+  "anotacoes": {
+    "1761891434389475646": {
+      "noteId": "1761891434389475646",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://www.ifch.unicamp.br/criticamarxista/arquivos_biblioteca/dossie2020_05_26_14_12_19.pdf    https://pt.wikipedia.org/wiki/Bandeira_de_Gadsden",
+          "start": 359,
+          "end": 505,
+          "created_at": "2026-07-02T14:15:56.355Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A bandeira conhecida como Gadsden não é um símbolo fascista",
+          "start": 0,
+          "end": 59,
+          "created_at": "2026-07-02T14:17:31.474Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "a alegação do autor da postagem parece sugerir que o evento no qual a bandeira está inserida é de cunho fascista",
+          "start": 61,
+          "end": 173,
+          "created_at": "2026-07-02T14:18:29.573Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://noticias.uol.com.br/eleicoes/2022/08/29/deus-patria-familia-lema-de-bolsonaro-tem-origem-fascista-entenda.htm",
+          "start": 238,
+          "end": 355,
+          "created_at": "2026-07-02T14:18:45.495Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:15:53.497Z",
+      "completed_at": "2026-07-02T14:18:51.607Z"
+    },
+    "2007791917765943580": {
+      "noteId": "2007791917765943580",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": "2026-07-02T14:21:16.179Z",
+      "completed_at": "2026-07-02T14:22:07.448Z"
+    },
+    "2031096564928708748": {
+      "noteId": "2031096564928708748",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Há menos de 2 meses a jornalista afirmava que o contrato não existia, e desde as confirmações públicas está mudando a narrativa",
+          "start": 0,
+          "end": 127,
+          "created_at": "2026-07-02T14:22:23.927Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/i/status/2005466195328377102    https://share.google/vWYxFHxNqduk6unJV",
+          "start": 271,
+          "end": 355,
+          "created_at": "2026-07-02T14:22:34.408Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o banco envolvido está sob investigação de pagamento para influenciadores criticarem a operação em andamento",
+          "start": 158,
+          "end": 266,
+          "created_at": "2026-07-02T14:23:04.859Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:22:23.927Z",
+      "completed_at": "2026-07-02T14:23:08.131Z"
+    },
+    "2022468950043316327": {
+      "noteId": "2022468950043316327",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A imagem foi alterada digitalmente",
+          "start": 0,
+          "end": 34,
+          "created_at": "2026-07-02T14:23:11.665Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A foto verdadeira pode ser encontrada no perfil oficial do mundo Gloob no Instagram",
+          "start": 37,
+          "end": 120,
+          "created_at": "2026-07-02T14:23:15.502Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/p/DUqX9gkjhWT/?igsh=MTc1aWl2Znk2bDMzeQ==",
+          "start": 125,
+          "end": 191,
+          "created_at": "2026-07-02T14:23:19.673Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:23:11.665Z",
+      "completed_at": "2026-07-02T14:23:23.255Z"
+    },
+    "1787884933765022194": {
+      "noteId": "1787884933765022194",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Informação FALSA",
+          "start": 0,
+          "end": 16,
+          "created_at": "2026-07-02T14:23:40.017Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "A Sefaz-RS",
+          "start": 21,
+          "end": 31,
+          "created_at": "2026-07-02T14:23:48.267Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "a Sefaz-SC",
+          "start": 35,
+          "end": 45,
+          "created_at": "2026-07-02T14:23:53.995Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "nota publicada",
+          "start": 50,
+          "end": 64,
+          "created_at": "2026-07-02T14:23:56.098Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "afirmaram que veículos com doações para os atingidos pelas enchentes não estão sendo parados nas estradas e que suspendeu a fiscalização para facilitar a chegada de ajuda",
+          "start": 66,
+          "end": 236,
+          "created_at": "2026-07-02T14:24:00.247Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/reel/C6lwPldOZz5/?utm_source=ig_embed&amp;ig_rid=dd2482f7-9d01-4784-85a1-6936980d0fce&amp;ig_mid=F6986190-5E84-47BE-B913-E35BBE8185DE",
+          "start": 241,
+          "end": 400,
+          "created_at": "2026-07-02T14:24:03.198Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aosfatos.org/noticias/falso-doacoes-vitimas-enchente-barradas/",
+          "start": 404,
+          "end": 478,
+          "created_at": "2026-07-02T14:24:06.590Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.sef.sc.gov.br/noticias/nota-de-esclarecimento-transporte-de-doacoes-para-o-rs",
+          "start": 482,
+          "end": 571,
+          "created_at": "2026-07-02T14:24:08.776Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:23:40.017Z",
+      "completed_at": "2026-07-02T14:24:10.310Z"
+    },
+    "1655712700171689984": {
+      "noteId": "1655712700171689984",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A assessoria de imprensa do SBT",
+          "start": 0,
+          "end": 31,
+          "created_at": "2026-07-02T14:24:24.182Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "voltou a negar rumores",
+          "start": 32,
+          "end": 54,
+          "created_at": "2026-07-02T14:24:32.095Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "o apresentador e empresário Silvio Santos teria falecido",
+          "start": 62,
+          "end": 118,
+          "created_at": "2026-07-02T14:24:36.628Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Silvio Santos está bem graças a Deus, curtindo os netos, filhas, genros e esposa",
+          "start": 126,
+          "end": 206,
+          "created_at": "2026-07-02T14:24:42.633Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://contigo.uol.com.br/noticias/famosos/sbt-se-pronuncia-sobre-possivel-morte-de-silvio-santos-em-comunicado-e-crime.phtml?utm_source=site&amp;utm_medium=txt&amp;utm_campaign=copypaste",
+          "start": 259,
+          "end": 447,
+          "created_at": "2026-07-02T14:24:47.355Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:24:24.182Z",
+      "completed_at": "2026-07-02T14:24:49.798Z"
+    },
+    "2035165855806259553": {
+      "noteId": "2035165855806259553",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "As threads",
+          "start": 0,
+          "end": 10,
+          "created_at": "2026-07-02T14:24:56.173Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "artigos",
+          "start": 12,
+          "end": 19,
+          "created_at": "2026-07-02T14:24:57.170Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "posts abaixo",
+          "start": 22,
+          "end": 34,
+          "created_at": "2026-07-02T14:24:58.804Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "REFUTAM o que foi dito no vídeo, QUESTIONAM A IDONEIDADE e PROBIDADE do Felca e mostram as CONTRADIÇÕES entre seus atos e palavras e a realidade",
+          "start": 35,
+          "end": 179,
+          "created_at": "2026-07-02T14:25:26.722Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/ayubio/status/2032892759946965027",
+          "start": 184,
+          "end": 231,
+          "created_at": "2026-07-02T14:25:28.953Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/ayubio/status/2033897573526696016",
+          "start": 233,
+          "end": 280,
+          "created_at": "2026-07-02T14:25:30.764Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/LEME12/status/2019072905435341087",
+          "start": 284,
+          "end": 331,
+          "created_at": "2026-07-02T14:25:32.640Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/LEME12/status/2034734512530153886",
+          "start": 333,
+          "end": 380,
+          "created_at": "2026-07-02T14:25:34.996Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/FSU_BR/status/2033540902287728718",
+          "start": 384,
+          "end": 431,
+          "created_at": "2026-07-02T14:25:37.589Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/FelipeTadewald/status/2033915000700461569",
+          "start": 435,
+          "end": 490,
+          "created_at": "2026-07-02T14:25:39.631Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/pierre_160754/status/2034282855208010147",
+          "start": 494,
+          "end": 548,
+          "created_at": "2026-07-02T14:25:42.408Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/5elemento/status/2026442347253256693",
+          "start": 552,
+          "end": 602,
+          "created_at": "2026-07-02T14:25:44.336Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034751268359405896",
+          "start": 606,
+          "end": 658,
+          "created_at": "2026-07-02T14:25:46.463Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034751562426233195",
+          "start": 660,
+          "end": 712,
+          "created_at": "2026-07-02T14:25:48.749Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034752389278757275",
+          "start": 714,
+          "end": 766,
+          "created_at": "2026-07-02T14:25:50.595Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034752839344591067",
+          "start": 770,
+          "end": 822,
+          "created_at": "2026-07-02T14:25:53.035Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/1957445752923234659",
+          "start": 824,
+          "end": 876,
+          "created_at": "2026-07-02T14:25:55.284Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034753172820963797",
+          "start": 880,
+          "end": 932,
+          "created_at": "2026-07-02T14:25:56.929Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/1957448472799400205",
+          "start": 934,
+          "end": 986,
+          "created_at": "2026-07-02T14:25:58.917Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034611981399810124",
+          "start": 990,
+          "end": 1042,
+          "created_at": "2026-07-02T14:26:00.585Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/thairizard/status/2034747811112059204",
+          "start": 1046,
+          "end": 1097,
+          "created_at": "2026-07-02T14:26:02.420Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/Rafuxvideos/status/2034724408217030798",
+          "start": 1101,
+          "end": 1153,
+          "created_at": "2026-07-02T14:26:04.254Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/schmittpaula/status/2034193028693307891",
+          "start": 1157,
+          "end": 1210,
+          "created_at": "2026-07-02T14:26:05.996Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/Byanu/status/2034633934454333589",
+          "start": 1214,
+          "end": 1260,
+          "created_at": "2026-07-02T14:26:07.797Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/david_agape_/status/1957929503419969948",
+          "start": 1264,
+          "end": 1317,
+          "created_at": "2026-07-02T14:26:09.497Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.ainvestigacao.com/p/adultizacao-judiario-e-governo-lula",
+          "start": 1319,
+          "end": 1386,
+          "created_at": "2026-07-02T14:26:12.496Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/giuargolo/status/2035062898502893738",
+          "start": 1390,
+          "end": 1440,
+          "created_at": "2026-07-02T14:26:13.803Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/pingandosangue/status/2034749129021145558",
+          "start": 1444,
+          "end": 1499,
+          "created_at": "2026-07-02T14:26:15.900Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:24:56.173Z",
+      "completed_at": "2026-07-02T14:26:20.979Z"
+    },
+    "1815075511498092968": {
+      "noteId": "1815075511498092968",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Lula acusa adversários de fascismo",
+          "start": 0,
+          "end": 34,
+          "created_at": "2026-07-02T14:27:11.596Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "mas ignora o contexto de ter um longo histórico de boas relações com ditadores, autocratas e extremistas, além de confessar admiração por Hitler e Komeini",
+          "start": 36,
+          "end": 190,
+          "created_at": "2026-07-02T14:27:25.558Z"
+        },
+        {
+          "type": "QUALIFICADOR",
+          "text": "Apenas se aproximando de",
+          "start": 192,
+          "end": 216,
+          "created_at": "2026-07-02T14:28:42.270Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "democracias de seu espectro político",
+          "start": 217,
+          "end": 253,
+          "created_at": "2026-07-02T14:28:44.247Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/fsp/1994/4/21/brasil/10.html",
+          "start": 257,
+          "end": 315,
+          "created_at": "2026-07-02T14:28:47.527Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://noticias.r7.com/internacional/grupo-terrorista-palestino-hamas-parabeniza-lula-por-vitoria-nas-eleicoes-01112022",
+          "start": 317,
+          "end": 437,
+          "created_at": "2026-07-02T14:29:09.872Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.metropoles.com/mundo/hamas-agradece-lula-por-comparacao",
+          "start": 439,
+          "end": 506,
+          "created_at": "2026-07-02T14:29:12.047Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://apnews.com/article/business-middle-east-israel-foreign-aid-gaza-strip-611b2b90c3a211f21185d59f4fae6a90",
+          "start": 508,
+          "end": 618,
+          "created_at": "2026-07-02T14:29:14.633Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.msn.com/en-ph/news/world/brazil-view-on-immunity-for-heads-of-state-could-favor-putin-at-g20-summit/ar-BB1kXCbF",
+          "start": 620,
+          "end": 743,
+          "created_at": "2026-07-02T14:29:18.210Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://oglobo.globo.com/mundo/em-ramallah-lula-diz-que-aceita-conversar-com-hamas-sugere-que-crise-entre-eua-israel-3038189",
+          "start": 745,
+          "end": 869,
+          "created_at": "2026-07-02T14:29:20.689Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/coluna/reinaldo/as-farc-saudam-a-eleicao-de-lula-e-dizem-ter-apoio-do-governo-do-brasil/",
+          "start": 871,
+          "end": 985,
+          "created_at": "2026-07-02T14:29:23.876Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.terra.com.br/noticias/mundo/oriente-medio/lula-sanciona-ajuda-de-r-25-milhoes-para-a-faixa-de-gaza,4eab78c65940b310VgnCLD200000bbcceb0aRCRD.html",
+          "start": 987,
+          "end": 1143,
+          "created_at": "2026-07-02T14:29:27.281Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.theguardian.com/world/2023/sep/11/lula-putin-g20-brazil-arrest",
+          "start": 1145,
+          "end": 1219,
+          "created_at": "2026-07-02T14:29:29.708Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.diplomaticourier.com/posts/lulas-dance-with-dictators",
+          "start": 1221,
+          "end": 1286,
+          "created_at": "2026-07-02T14:29:32.140Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aljazeera.com/news/2023/5/29/venezuelas-maduro-meets-lula-in-brazil-as-relations-improve",
+          "start": 1288,
+          "end": 1388,
+          "created_at": "2026-07-02T14:29:34.344Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/internacional/en/world/2023/05/lula-praises-meeting-with-dictator-nicolas-maduro.shtml",
+          "start": 1390,
+          "end": 1506,
+          "created_at": "2026-07-02T14:29:37.290Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aljazeera.com/news/2024/2/17/which-countries-are-still-funding-unrwa",
+          "start": 1508,
+          "end": 1588,
+          "created_at": "2026-07-02T14:29:38.946Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:26:51.941Z",
+      "completed_at": "2026-07-02T14:29:41.503Z"
+    },
+    "1999916358998360139": {
+      "noteId": "1999916358998360139",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "É falsa a afirmação",
+          "start": 0,
+          "end": 19,
+          "created_at": "2026-07-02T14:29:46.239Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Taylor Swift nunca tenha falado sobre Ana Benevides",
+          "start": 24,
+          "end": 75,
+          "created_at": "2026-07-02T14:29:49.190Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "No exato momento que foi confirmada a morte, Taylor se pronunciou",
+          "start": 80,
+          "end": 145,
+          "created_at": "2026-07-02T14:29:52.240Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A família de Benevides confirmou contato e o e-mail, além de ter encontrado Swift pessoalmente no show",
+          "start": 147,
+          "end": 249,
+          "created_at": "2026-07-02T14:29:56.405Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/sp/sao-paulo/noticia/2023/11/26/parentes-de-ana-benevides-fa-que-morreu-em-show-de-taylor-swif-no-rj-vao-a-ultima-apresentacao-em-sp.ghtml",
+          "start": 254,
+          "end": 413,
+          "created_at": "2026-07-02T14:29:59.643Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/coluna/o-som-e-a-furia/os-bastidores-do-encontro-de-taylor-com-a-familia-de-fa-morta-no-show/",
+          "start": 417,
+          "end": 536,
+          "created_at": "2026-07-02T14:30:01.884Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.latimes.com/entertainment-arts/story/2023-11-28/taylor-swift-meets-family-of-deceased-fan-ahead-of-final-brazil-show",
+          "start": 540,
+          "end": 668,
+          "created_at": "2026-07-02T14:30:04.878Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.washingtonpost.com/entertainment/2023/11/25/taylor-swift-brazil-eras-tour-death-investigation/",
+          "start": 672,
+          "end": 778,
+          "created_at": "2026-07-02T14:30:07.408Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/ms/mato-grosso-do-sul/noticia/2023/11/27/taylor-swift-encontra-familiares-de-fa-que-morreu-em-show-ela-",
+          "start": 782,
+          "end": 906,
+          "created_at": "2026-07-02T14:30:10.629Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/amp/s/g1.globo.com/google/amp/sp/sao-paulo/noticia/2023/11/26/parentes-de-ana-benevides-fa-que-morreu-em-show-de-taylor-swif-no-rj-vao-a-ultima-apresentacao-em-sp.ghtml",
+          "start": 910,
+          "end": 1101,
+          "created_at": "2026-07-02T14:30:14.922Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/amp/s/hugogloss.uol.com.br/famosos/familia-de-ana-clara-benevides-fala-pela-1a-vez-apos-encontro-com-taylor-swift-sinalizou-intencao-de-ajudar/amp/",
+          "start": 1105,
+          "end": 1275,
+          "created_at": "2026-07-02T14:30:19.905Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/entretenimento/taylor-swift-encontra-familia-de-ana-benevides-fa-que-morreu-em-show/",
+          "start": 1279,
+          "end": 1392,
+          "created_at": "2026-07-02T14:30:22.428Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:29:46.239Z",
+      "completed_at": "2026-07-02T14:30:24.328Z"
+    },
+    "1919473187269878071": {
+      "noteId": "1919473187269878071",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Taylor teve culpa na morte de Ana Benevides",
+          "start": 56,
+          "end": 99,
+          "created_at": "2026-07-02T14:30:40.191Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A empresa Times For Fun foi a única responsável e indicada após o laudo",
+          "start": 104,
+          "end": 175,
+          "created_at": "2026-07-02T14:31:17.178Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Em novembro de 2023, mais de 151 idosos morreram por conta do calor extremo no Rio",
+          "start": 177,
+          "end": 259,
+          "created_at": "2026-07-02T14:31:23.128Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://exame.com/esg/rio-40-graus-onda-de-calor-aumenta-em-50-risco-de-morte-de-idosos-com-doencas-cronicas/",
+          "start": 264,
+          "end": 373,
+          "created_at": "2026-07-02T14:31:26.958Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://agenciabrasil.ebc.com.br/radioagencia-nacional/meio-ambiente/audio/2025-02/pesquisa-mostra-como-calor-extremo-aumenta-mortalidade#:~:text=Em%2018%20de%20novembro%20de,a%20mortalidade%2C%20segundo%20a%20pesquisa",
+          "start": 377,
+          "end": 595,
+          "created_at": "2026-07-02T14:31:30.770Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/Onda_de_calor_no_Brasil_em_2023",
+          "start": 600,
+          "end": 663,
+          "created_at": "2026-07-02T14:31:32.441Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://portal.inmet.gov.br/noticias/ano-de-2023-é-o-mais-quente-da-história-do-brasil",
+          "start": 667,
+          "end": 753,
+          "created_at": "2026-07-02T14:31:34.552Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/Morte_de_Ana_Clara_Benevides",
+          "start": 757,
+          "end": 817,
+          "created_at": "2026-07-02T14:31:36.521Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/entretenimento/taylor-swift-encontra-familia-de-ana-benevides-fa-que-morreu-em-show/#:~:text=Taylor%20Swift%20encontra%20família%20de%20Ana%20Benevides%2C%20fã%20que%20morreu%20em%20show,-Familiares%20foram%20vistos&amp;text=A%20família%20de%20Ana%20Clara,clube%20",
+          "start": 821,
+          "end": 1114,
+          "created_at": "2026-07-02T14:31:41.881Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:30:40.191Z",
+      "completed_at": "2026-07-02T14:32:10.858Z"
+    },
+    "2023491294153052667": {
+      "noteId": "2023491294153052667",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Beyoncé tem histórico público de ser uma das artistas que mais fala sobre causas (ex. racismo).",
+          "start": 0,
+          "end": 95,
+          "created_at": "2026-07-02T14:32:18.321Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "foi criada por Donald Trump e foi desmentida por factos",
+          "start": 144,
+          "end": 199,
+          "created_at": "2026-07-02T14:32:35.964Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "É mentira que Beyoncé glorificou o genocídio dos indígenas e mexicanos",
+          "start": 203,
+          "end": 273,
+          "created_at": "2026-07-02T14:32:38.269Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "A acusação de que foi paga para apoiar Kamala",
+          "start": 98,
+          "end": 143,
+          "created_at": "2026-07-02T14:32:47.509Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/BEYHIVEDOJ/status/1937133446347817077?s=20",
+          "start": 277,
+          "end": 333,
+          "created_at": "2026-07-02T14:32:50.433Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.unicef.org/armenia/en/press-releases/beyonc%C3%A9-partners-unicef-bring-safe-water-children-remote-areas-burundi",
+          "start": 335,
+          "end": 459,
+          "created_at": "2026-07-02T14:32:59.397Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://cnnportugal.iol.pt/kamala-harris/estados-unidos/trump-quer-beyonce-em-tribunal-por-algo-que-nao-aconteceu/20250728/688724a1d34ef72ee448c963",
+          "start": 461,
+          "end": 608,
+          "created_at": "2026-07-02T14:33:01.314Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:32:18.321Z",
+      "completed_at": "2026-07-02T14:33:03.453Z"
+    },
+    "2027161946576011568": {
+      "noteId": "2027161946576011568",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "As Sagradas Escrituras",
+          "start": 9,
+          "end": 31,
+          "created_at": "2026-07-02T14:33:22.195Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "de fato não narram Eva recebendo a ordem diretamente de Deus",
+          "start": 32,
+          "end": 92,
+          "created_at": "2026-07-02T14:34:03.897Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "ela não tinha conhecimento do mandamento através de Adão",
+          "start": 183,
+          "end": 239,
+          "created_at": "2026-07-02T14:34:14.411Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "ela não havia sido criada quando Deus deu a ordem",
+          "start": 105,
+          "end": 154,
+          "created_at": "2026-07-02T14:34:21.889Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.vatican.va/archive/bible/nova_vulgata/documents/nova-vulgata_vt_genesis_lt.html",
+          "start": 278,
+          "end": 369,
+          "created_at": "2026-07-02T14:34:57.724Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:33:22.195Z",
+      "completed_at": "2026-07-02T14:35:18.013Z"
+    },
+    "1887258714580877671": {
+      "noteId": "1887258714580877671",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "Em matéria publicada no dia 04/02/24",
+          "start": 2,
+          "end": 38,
+          "created_at": "2026-07-02T14:35:22.171Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "o jornal Estadão apurou",
+          "start": 40,
+          "end": 63,
+          "created_at": "2026-07-02T14:35:29.375Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "desde 2019 a Corte declarou mais omissões inconstitucionais (78) do que nos 28 anos anteriores (62).",
+          "start": 68,
+          "end": 168,
+          "created_at": "2026-07-02T14:35:33.672Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "A matéria",
+          "start": 172,
+          "end": 181,
+          "created_at": "2026-07-02T14:36:02.547Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "evidencia com números a disposição da Corte de se envolver em questões políticas",
+          "start": 182,
+          "end": 262,
+          "created_at": "2026-07-02T14:36:06.748Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.estadao.com.br/opiniao/o-ativismo-do-stf-em-numeros",
+          "start": 268,
+          "end": 331,
+          "created_at": "2026-07-02T14:36:08.611Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/colunas/lygia-maria/2024/12/stf-faz-ativismo-judicial-contra-liberdade-de-expressao-online.shtml",
+          "start": 336,
+          "end": 462,
+          "created_at": "2026-07-02T14:36:13.619Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:35:22.171Z",
+      "completed_at": "2026-07-02T14:36:14.840Z"
+    },
+    "2028530269850910822": {
+      "noteId": "2028530269850910822",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo mostra a explosão no porto de Beirute em 2020, causada por nitrato de amônio",
+          "start": 0,
+          "end": 84,
+          "created_at": "2026-07-02T14:36:34.523Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "um míssil iraniano em Haifa",
+          "start": 90,
+          "end": 117,
+          "created_at": "2026-07-02T14:36:36.687Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O porto de Haifa permanece operacional e sem danos confirmados",
+          "start": 119,
+          "end": 181,
+          "created_at": "2026-07-02T14:36:39.599Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://en.wikipedia.org/wiki/2020_Beirut_explosion",
+          "start": 186,
+          "end": 237,
+          "created_at": "2026-07-02T14:36:41.698Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.ndtv.com/world-news/adani-group-confirms-israel-based-haifa-port-fully-secure-operational-11155795",
+          "start": 241,
+          "end": 351,
+          "created_at": "2026-07-02T14:36:43.928Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.youtube.com/watch?v=LNDhIGR-83w",
+          "start": 355,
+          "end": 398,
+          "created_at": "2026-07-02T14:36:48.417Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:36:29.944Z",
+      "completed_at": "2026-07-02T14:36:49.064Z"
+    },
+    "1889128334228885958": {
+      "noteId": "1889128334228885958",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A mídia independente ou os média independentes é/são o tipo de mídia/média que não está/estão sob o controle de grandes grupos de comunicação, e que não está vinculada a compromissos com anunciantes, grupos políticos ou instituições governamentais",
+          "start": 0,
+          "end": 247,
+          "created_at": "2026-07-02T14:37:05.146Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/M%C3%ADdia_independente",
+          "start": 267,
+          "end": 322,
+          "created_at": "2026-07-02T14:37:07.007Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:37:05.146Z",
+      "completed_at": "2026-07-02T14:37:07.943Z"
+    },
+    "1689843429797175692": {
+      "noteId": "1689843429797175692",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Não é verdade",
+          "start": 0,
+          "end": 13,
+          "created_at": "2026-07-02T14:37:46.175Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Pedro aparece sorrindo  nos acréscimos da derrota do Flamengo contra o Olimpia, pela Libertadores da América",
+          "start": 18,
+          "end": 126,
+          "created_at": "2026-07-02T14:37:49.818Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://ge.globo.com/futebol/times/flamengo/noticia/2023/08/10/checamos-e-falso-que-pedro-sorriu-nos-acrescimos-de-olimpia-x-flamengo.ghtml",
+          "start": 128,
+          "end": 267,
+          "created_at": "2026-07-02T14:37:53.519Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:37:43.547Z",
+      "completed_at": "2026-07-02T14:37:54.778Z"
+    },
+    "1708038777610940549": {
+      "noteId": "1708038777610940549",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://www.noticiasaominuto.com/pais/2408118/lei-do-tabaco-o-que-muda-onde-sera-proibido-fumar-e-comprar",
+          "start": 79,
+          "end": 184,
+          "created_at": "2026-07-02T14:38:07.207Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "notícia recente  sobre a Lei do tabaco em Portugal",
+          "start": 26,
+          "end": 76,
+          "created_at": "2026-07-02T14:38:31.167Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:38:07.207Z",
+      "completed_at": "2026-07-02T14:38:33.883Z"
+    },
+    "1761231589785194785": {
+      "noteId": "1761231589785194785",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "genocídio  1.  extermínio deliberado, parcial ou total, de uma comunidade, grupo étnico, racial ou religioso",
+          "start": 0,
+          "end": 108,
+          "created_at": "2026-07-02T14:38:40.681Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "2.  destruição de populações ou povos",
+          "start": 111,
+          "end": 148,
+          "created_at": "2026-07-02T14:38:43.237Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://folha.com/6vzn0731  https://www.intercept.com.br/2023/10/13/israel-estes-sao-os-maiores-massacres-contra-a-palestina/",
+          "start": 270,
+          "end": 395,
+          "created_at": "2026-07-02T14:38:51.484Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "N° de mortos palestinos: 15.000  N° de mortos israelenses: 1.400",
+          "start": 153,
+          "end": 217,
+          "created_at": "2026-07-02T14:38:59.415Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:38:40.681Z",
+      "completed_at": "2026-07-02T14:39:03.945Z"
+    },
+    "1761863207252029822": {
+      "noteId": "1761863207252029822",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://studentsforliberty.org/brazil/blog/a-historia-da-bandeira-de-gadsden/  https://mundoeducacao.uol.com.br/historiageral/fascismo.htm",
+          "start": 153,
+          "end": 291,
+          "created_at": "2026-07-02T14:39:17.226Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:39:17.226Z",
+      "completed_at": "2026-07-02T14:39:40.422Z"
+    },
+    "1882118498148642865": {
+      "noteId": "1882118498148642865",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": "2026-07-02T14:39:57.776Z",
+      "completed_at": "2026-07-02T14:40:19.827Z"
+    },
+    "1878062635578458242": {
+      "noteId": "1878062635578458242",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo é falso, foi gerado por inteligência artificial",
+          "start": 0,
+          "end": 55,
+          "created_at": "2026-07-02T14:40:55.373Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/jorge_espinhara/status/1878061893484462087",
+          "start": 58,
+          "end": 114,
+          "created_at": "2026-07-02T14:40:57.049Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:40:55.373Z",
+      "completed_at": "2026-07-02T14:40:57.639Z"
+    },
+    "1760000020819103825": {
+      "noteId": "1760000020819103825",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "QUALIFICADOR",
+          "text": "Diferentemente do que vem sido apontado",
+          "start": 0,
+          "end": 39,
+          "created_at": "2026-07-02T14:41:07.761Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a charge não foi publicada no New York Times",
+          "start": 41,
+          "end": 85,
+          "created_at": "2026-07-02T14:41:12.961Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Ela é criação do israelense Johnathan Majburd e foi compartilhada em suas redes sociais",
+          "start": 87,
+          "end": 174,
+          "created_at": "2026-07-02T14:41:16.395Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A referência ao NYT fica apenas por referência à manchete que ele referência na imagem",
+          "start": 176,
+          "end": 262,
+          "created_at": "2026-07-02T14:41:26.019Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/j.majburd?igsh=eTlxeTlxaGZxeDZi",
+          "start": 265,
+          "end": 322,
+          "created_at": "2026-07-02T14:41:29.045Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.nytimes.com/2024/02/18/world/middleeast/brazil-lula-israel-gaza-holocaust.html",
+          "start": 324,
+          "end": 414,
+          "created_at": "2026-07-02T14:41:30.743Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:41:07.761Z",
+      "completed_at": "2026-07-02T14:41:41.396Z"
+    },
+    "2019861320049271125": {
+      "noteId": "2019861320049271125",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Vladimir Putin não veio ao Brasil, e sim uma comitiva russa comandada pelo primeiro-ministro Mikhail Mishustin",
+          "start": 32,
+          "end": 142,
+          "created_at": "2026-07-02T14:41:50.356Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://platobr.com.br/por-que-uma-extensa-comitiva-do-governo-putin-desembarcou-em-brasilia",
+          "start": 147,
+          "end": 239,
+          "created_at": "2026-07-02T14:41:52.568Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/politica/em-declaracao-conjunta-brasil-e-russia-afirmam-ter-compromisso-com-a-paz",
+          "start": 243,
+          "end": 353,
+          "created_at": "2026-07-02T14:41:55.137Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:41:45.790Z",
+      "completed_at": "2026-07-02T14:42:16.898Z"
+    },
+    "2025149321335673124": {
+      "noteId": "2025149321335673124",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O post é uma cópia de uma postagem feita no Facebook, contendo até mesmo a foto da postagem original, com o claro intuito de gerar engajamento.",
+          "start": 0,
+          "end": 143,
+          "created_at": "2026-07-02T14:42:24.183Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/i/status/2025083951623139392",
+          "start": 147,
+          "end": 189,
+          "created_at": "2026-07-02T14:42:25.922Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:42:24.184Z",
+      "completed_at": "2026-07-02T14:42:26.627Z"
+    },
+    "2023720510257856645": {
+      "noteId": "2023720510257856645",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo em questão é de 2023 e não de 2026 como alega o advogado. No referido ano Flávio Dino não era ministro do STF e sim ministro da justiça, cargo que não impõe restrição político-partidária",
+          "start": 0,
+          "end": 194,
+          "created_at": "2026-07-02T14:42:37.009Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/e-TeRqVLbbU?si=aAatt7N7dq5ETb3b",
+          "start": 202,
+          "end": 250,
+          "created_at": "2026-07-02T14:42:38.287Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:42:30.925Z",
+      "completed_at": "2026-07-02T14:42:40.523Z"
+    },
+    "1877812049759416365": {
+      "noteId": "1877812049759416365",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Não é necessário ser assinante do X para escrever ou votar em notas da comunidade",
+          "start": 0,
+          "end": 81,
+          "created_at": "2026-07-02T14:42:46.751Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Qualquer usuário com conta ativa e que atenda aos critérios básicos de participação pode contribuir com as notas",
+          "start": 83,
+          "end": 195,
+          "created_at": "2026-07-02T14:42:51.619Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://communitynotes.x.com/guide/pt/contributing/signing-up",
+          "start": 272,
+          "end": 333,
+          "created_at": "2026-07-02T14:42:58.205Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Essa informação está disponível diretamente nas diretrizes da ferramenta",
+          "start": 197,
+          "end": 269,
+          "created_at": "2026-07-02T14:43:01.662Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:42:46.751Z",
+      "completed_at": "2026-07-02T14:43:04.817Z"
+    },
+    "1941004407832752217": {
+      "noteId": "1941004407832752217",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Não é verdade que o Presidente Lula SANCIONOU a lei",
+          "start": 4,
+          "end": 55,
+          "created_at": "2026-07-02T14:43:29.224Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O presidente VETOU e o veto foi DERRUBADO pelo congresso",
+          "start": 57,
+          "end": 113,
+          "created_at": "2026-07-02T14:43:33.864Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o Presidente PROMULGOU a lei, dentro do prazo previsto de 48h",
+          "start": 125,
+          "end": 186,
+          "created_at": "2026-07-02T14:43:37.839Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/politica/lula-veta-dispensa-de-reavaliacao-de-aposentadoria-para-incapacitados-permanentes/",
+          "start": 271,
+          "end": 391,
+          "created_at": "2026-07-02T14:43:49.708Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://oglobo.globo.com/economia/noticia/2025/06/23/inss-proposta-que-derruba-veto-do-governo-e-dispensa-revisao-de-pericia-medica-aguarda-promulgacao.ghtml",
+          "start": 395,
+          "end": 552,
+          "created_at": "2026-07-02T14:43:53.282Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://legis.senado.leg.br/sdleg-getter/documento?dm=9851178&amp;ts=1732798164326&amp;disposition=inline",
+          "start": 556,
+          "end": 661,
+          "created_at": "2026-07-02T14:43:54.780Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:43:29.224Z",
+      "completed_at": "2026-07-02T14:43:56.857Z"
+    },
+    "1991189878722244743": {
+      "noteId": "1991189878722244743",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "a taxa de 20% sobre importações até US$50 foi criada pelo governo Lula em 2024, via Lei 14.902, acabando com a isenção anterior que vigorava na era Bolsonaro",
+          "start": 25,
+          "end": 182,
+          "created_at": "2026-07-02T14:44:08.902Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www12.senado.leg.br/radio/1/noticia/2024/08/14/201ctaxa-das-blusinhas201d-agora-e-lei",
+          "start": 187,
+          "end": 280,
+          "created_at": "2026-07-02T14:44:11.631Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14902.htm",
+          "start": 282,
+          "end": 353,
+          "created_at": "2026-07-02T14:44:15.522Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/JanjaLula/status/1646149996478181376",
+          "start": 355,
+          "end": 405,
+          "created_at": "2026-07-02T14:44:17.511Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://valor.globo.com/politica/noticia/2024/05/29/entenda-o-retorno-da-taxacao-da-shein-acordado-por-lula-e-lira.ghtml",
+          "start": 407,
+          "end": 527,
+          "created_at": "2026-07-02T14:44:20.442Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/grok/status/1991162909704261714",
+          "start": 529,
+          "end": 574,
+          "created_at": "2026-07-02T14:44:24.365Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:44:01.046Z",
+      "completed_at": "2026-07-02T14:44:43.076Z"
+    },
+    "1876223898854797725": {
+      "noteId": "1876223898854797725",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "a Folha não disse que Fernanda Torres não ganharia o Globo de Ouro, apenas reproduziu uma frase dela numa entrevista.    &quot;A chance de alguém falando português levar um prêmio desse tamanho é praticamente nula&quot;, disse a atriz.",
+          "start": 36,
+          "end": 271,
+          "created_at": "2026-07-02T14:45:07.675Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://archive.is/P95i1#selection-3835.1-3835.87",
+          "start": 275,
+          "end": 324,
+          "created_at": "2026-07-02T14:45:11.819Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:44:53.734Z",
+      "completed_at": "2026-07-02T14:45:16.967Z"
+    },
+    "1870680545136439331": {
+      "noteId": "1870680545136439331",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Nacionalmente, as agências da Caixa Econômica Federal iniciam atendimento às 10h da manhã",
+          "start": 0,
+          "end": 89,
+          "created_at": "2026-07-02T14:45:31.753Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Confraternizações internas ocorrem antes desse horário, sem prejuízo ao atendimento",
+          "start": 91,
+          "end": 174,
+          "created_at": "2026-07-02T14:45:34.097Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O post e o vídeo induz um escândalo infundado com a prática do H. de Func. regular da Ag. da Caixa.",
+          "start": 176,
+          "end": 275,
+          "created_at": "2026-07-02T14:45:51.801Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.caixa.gov.br/atendimento/paginas/encontre-a-caixa.aspx",
+          "start": 279,
+          "end": 345,
+          "created_at": "2026-07-02T14:45:56.172Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:45:19.386Z",
+      "completed_at": "2026-07-02T14:46:06.997Z"
+    },
+    "1842682272262324483": {
+      "noteId": "1842682272262324483",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O laudo é falso e há vários indícios e provas",
+          "start": 0,
+          "end": 45,
+          "created_at": "2026-07-02T14:46:11.746Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a própria família do suposto médico já declarou que ele nunca atuou em SP, nem na clínica   e  que na data do laudo ele já nao trabalhava por saúde",
+          "start": 59,
+          "end": 206,
+          "created_at": "2026-07-02T14:46:19.804Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Além da assinatura ser falsa, de acordo com provas da própria família",
+          "start": 208,
+          "end": 277,
+          "created_at": "2026-07-02T14:46:22.531Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/sp/sao-paulo/eleicoes/2024/noticia/2024/10/05/filha-de-medico-diz-que-documento-usado-por-marcal-contra-boulos-e-falso-e-mostra-tatuagem-com-verdadeira-assinatura-do-pai.ghtml",
+          "start": 280,
+          "end": 476,
+          "created_at": "2026-07-02T14:46:27.010Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:46:11.746Z",
+      "completed_at": "2026-07-02T14:46:28.159Z"
+    },
+    "1889176478891315215": {
+      "noteId": "1889176478891315215",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Não faz sentido chamar de &quot;independente&quot; uma mídia financiada pelo governo dos EUA, pois a independência implica autonomia financeira e editorial",
+          "start": 0,
+          "end": 155,
+          "created_at": "2026-07-02T14:46:34.180Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O mais correto seria &quot;mídia pública&quot; ou &quot;estatal&quot;, já que há óbvio risco de influência governamental",
+          "start": 157,
+          "end": 277,
+          "created_at": "2026-07-02T14:46:41.099Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.wikipedia.org/wiki/M%C3%ADdia_independente",
+          "start": 283,
+          "end": 336,
+          "created_at": "2026-07-02T14:46:44.907Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:46:34.180Z",
+      "completed_at": "2026-07-02T14:46:46.684Z"
+    },
+    "1823435417548374388": {
+      "noteId": "1823435417548374388",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "o menino proferiu a seguinte frase “LeBron, could you please take a picture with me?”, o pedido foi prontamente negado pelo jogador da NBA LeBron James, respondendo “Pare. Não faça isso.”",
+          "start": 36,
+          "end": 223,
+          "created_at": "2026-07-02T14:46:58.998Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.bnews.com.br/amp/noticias/esporte/olimpiadas-paris-lebron-james-recusa-foto-com-crianca-apos-ouro-olimpico-veja-video.html",
+          "start": 227,
+          "end": 361,
+          "created_at": "2026-07-02T14:47:02.499Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:46:58.998Z",
+      "completed_at": "2026-07-02T14:47:08.155Z"
+    },
+    "1885048614927425622": {
+      "noteId": "1885048614927425622",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A ata mencionada pela deputada diz que o Copom ~ANTEVÊ~ um aumento de 1% nas próximas reuniões.    O Copom atual não é legalmente obrigado a seguir essa previsão.",
+          "start": 0,
+          "end": 162,
+          "created_at": "2026-07-02T14:47:15.568Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.bcb.gov.br/publicacoes/atascopom",
+          "start": 167,
+          "end": 211,
+          "created_at": "2026-07-02T14:47:18.043Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:47:15.568Z",
+      "completed_at": "2026-07-02T14:47:18.629Z"
+    },
+    "1993124451064406360": {
+      "noteId": "1993124451064406360",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Flávio Dino é bacharel em Direito pela UFMA (1991), mestre pela UFPE (2001) e atuou como juiz federal por 12 anos, além de ser professor de Direito na UFMA desde 1993",
+          "start": 0,
+          "end": 166,
+          "created_at": "2026-07-02T14:47:24.129Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.camara.leg.br/deputados/141436/biografia",
+          "start": 171,
+          "end": 223,
+          "created_at": "2026-07-02T14:47:25.855Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:47:24.129Z",
+      "completed_at": "2026-07-02T14:47:26.675Z"
+    },
+    "1936784166680502540": {
+      "noteId": "1936784166680502540",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Ebrahim Raisi, o homem que aparece no post, morreu em 19 de maio de 2024",
+          "start": 0,
+          "end": 72,
+          "created_at": "2026-07-02T14:47:38.339Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.band.com.br/noticias/como-fica-o-ira-apos-a-morte-do-presidente-raisi-16691013",
+          "start": 77,
+          "end": 167,
+          "created_at": "2026-07-02T14:47:40.857Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/mundo/eua-boicotam-homenagem-da-onu-ao-falecido-presidente-do-ira/",
+          "start": 169,
+          "end": 261,
+          "created_at": "2026-07-02T14:47:42.693Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:47:38.339Z",
+      "completed_at": "2026-07-02T14:47:46.692Z"
+    },
+    "2031092784686387635": {
+      "noteId": "2031092784686387635",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O ministro deveria atentar-se para o artigo 36 inciso III da LC 35/1979 (LOMAN), que proíbe magistrados de manifestarem, por qualquer meio, opinião sobre processos pendentes.",
+          "start": 0,
+          "end": 174,
+          "created_at": "2026-07-02T14:47:57.532Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.jusbrasil.com.br/topicos/11305829/artigo-36-lc-n-35-de-14-de-marco-de-1979",
+          "start": 225,
+          "end": 311,
+          "created_at": "2026-07-02T14:48:09.533Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:47:57.532Z",
+      "completed_at": "2026-07-02T14:48:16.491Z"
+    },
+    "1879837365738385874": {
+      "noteId": "1879837365738385874",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "desacreditar e atacar medidas públicas seja crime",
+          "start": 12,
+          "end": 61,
+          "created_at": "2026-07-02T14:48:22.595Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Enquanto democracia, a liberdade de duvidar e criticar ações do governo sempre foi um dos pilares do país, sendo amparado pelos artigos 5º e 220 da CF/88 e pelo Art. 19 da Declaração Univ. dos Direitos Humanos",
+          "start": 63,
+          "end": 272,
+          "created_at": "2026-07-02T14:48:36.110Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+          "start": 278,
+          "end": 345,
+          "created_at": "2026-07-02T14:48:39.703Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.gov.br/mdh/pt-br/assuntos/noticias/2018/novembro/artigo-19deg-todo-ser-humano-tem-direito-a-liberdade-de-expressao-e-opiniao-1",
+          "start": 349,
+          "end": 487,
+          "created_at": "2026-07-02T14:48:41.496Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:48:22.595Z",
+      "completed_at": "2026-07-02T14:48:42.364Z"
+    },
+    "1878095415351922716": {
+      "noteId": "1878095415351922716",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "instagram.com/p/DEoJC4HP6e5/",
+          "start": 119,
+          "end": 147,
+          "created_at": "2026-07-02T14:48:49.866Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Este vídeo foi criado por inteligência artificial",
+          "start": 0,
+          "end": 49,
+          "created_at": "2026-07-02T14:58:46.245Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "originalmente publicado no Instagram, no perfil @ai_creatiions",
+          "start": 52,
+          "end": 114,
+          "created_at": "2026-07-02T14:58:49.535Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:48:48.231Z",
+      "completed_at": "2026-07-02T14:58:52.054Z"
+    },
+    "2014522181053567129": {
+      "noteId": "2014522181053567129",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Art. 145 – Suspeição do juiz  Dispõe quando o juiz é considerado suspeito (...)  - amizade íntima ou inimizade com as partes ou advogados;  - interesse no julgamento da causa;  Art. 146 – Arguição de suspeição (...)  - no prazo de 15 dias, a contar do conhecimento do fato;",
+          "start": 0,
+          "end": 273,
+          "created_at": "2026-07-02T14:48:59.465Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+          "start": 277,
+          "end": 348,
+          "created_at": "2026-07-02T14:49:01.062Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:48:59.465Z",
+      "completed_at": "2026-07-02T14:49:02.827Z"
+    },
+    "2035937261900960010": {
+      "noteId": "2035937261900960010",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O participante pipoca Pedro Henrique Espíndola era proibido contratualmente de se manifestar em outros paredões",
+          "start": 0,
+          "end": 111,
+          "created_at": "2026-07-02T14:51:08.026Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "não sabemos se essa mesma restrição está presente nos contratos dos veteranos Ana Paula, Jonas e Alberto, que já se posicionaram em paredões alheios",
+          "start": 124,
+          "end": 272,
+          "created_at": "2026-07-02T14:51:31.530Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:51:08.026Z",
+      "completed_at": "2026-07-02T14:51:32.134Z"
+    },
+    "1884778548310823225": {
+      "noteId": "1884778548310823225",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A afirmação de que o artista &quot;incita violência sexual contra a vereadora Amanda&quot; é mentirosa.",
+          "start": 0,
+          "end": 103,
+          "created_at": "2026-07-02T14:51:54.794Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A expressão &quot;toma jack&quot; refere-se à famosa bebida Jack Daniels, sendo &quot;toma jack&quot; uma gíria oriunda de comunidades do Rio de Janeiro",
+          "start": 104,
+          "end": 256,
+          "created_at": "2026-07-02T14:52:01.207Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/zA1ZPmEtckU?si=HPZR0GRpzDKlXcA8",
+          "start": 275,
+          "end": 323,
+          "created_at": "2026-07-02T14:52:03.985Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/1aPLX9FofIk?si=6vjLgzm3xGOQz55N",
+          "start": 327,
+          "end": 375,
+          "created_at": "2026-07-02T14:52:06.174Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/reel/DFGdo3rRcBI/?igsh=aDMzdTh6ZzE0ZnJv",
+          "start": 379,
+          "end": 444,
+          "created_at": "2026-07-02T14:52:07.780Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:51:54.794Z",
+      "completed_at": "2026-07-02T14:52:09.101Z"
+    },
+    "1868118294474915987": {
+      "noteId": "1868118294474915987",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "o inquérito não foi concluído por que tem novos indícios e novas provas, o que não impede dele ser preso",
+          "start": 117,
+          "end": 221,
+          "created_at": "2026-07-02T14:52:27.561Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:52:16.895Z",
+      "completed_at": "2026-07-02T14:53:59.139Z"
+    },
+    "1991162547119014319": {
+      "noteId": "1991162547119014319",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T14:54:28.566Z"
+    },
+    "1762663085980958948": {
+      "noteId": "1762663085980958948",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Lula se “reuniu” com família de um brasileiro, 2 meses após o sequestro",
+          "start": 0,
+          "end": 71,
+          "created_at": "2026-07-02T14:54:36.164Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/url?q=https://g1.globo.com/google/amp/politica/noticia/2023/10/26/lula-faz-videoconferencia-com-familias-de-refens-e-desaparecidos-no-oriente-medio-diz-planalto.ghtml&amp;sa=U&amp;sqi=2&amp;ved=2ahUKEwj18Lzs-MyEAxX7VTABHX8vDVUQFnoECBQQAQ&amp;usg=AOvVaw3_mGRi0-6QHF12f1MpJk-w",
+          "start": 190,
+          "end": 487,
+          "created_at": "2026-07-02T14:54:58.585Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:54:36.164Z",
+      "completed_at": "2026-07-02T14:55:18.482Z"
+    },
+    "2036159146039595023": {
+      "noteId": "2036159146039595023",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A partir do minuto 4:36, a atriz afirma que Chappell Roan, como dito pela cantora em pronunciamento, não viu a criança e nem a sua mãe. O vídeo deve ser assistido por inteiro para verdadeira compreensão, pois a legenda do texto deixa lacunas abertas na interpretação do caso.",
+          "start": 0,
+          "end": 275,
+          "created_at": "2026-07-02T14:55:31.276Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/qgdopop/status/2035830530285953071?s=46",
+          "start": 277,
+          "end": 330,
+          "created_at": "2026-07-02T14:55:33.935Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T14:55:31.276Z",
+      "completed_at": "2026-07-02T14:55:34.452Z"
+    },
+    "2032140619728965702": {
+      "noteId": "2032140619728965702",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": "2026-07-02T14:56:08.299Z",
+      "completed_at": "2026-07-02T15:07:02.301Z"
+    },
+    "1828997016388518228": {
+      "noteId": "1828997016388518228",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T14:59:58.123Z"
+    },
+    "1798350866983891008": {
+      "noteId": "1798350866983891008",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:00:16.088Z"
+    },
+    "2033327040481444237": {
+      "noteId": "2033327040481444237",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A matéria",
+          "start": 0,
+          "end": 9,
+          "created_at": "2026-07-02T15:00:26.945Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Houve agressão mútua",
+          "start": 86,
+          "end": 106,
+          "created_at": "2026-07-02T15:00:43.094Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.poder360.com.br/poder-brasil/ben-mendes-e-gerente-de-loja-se-agridem-em-briga-em-mg/",
+          "start": 273,
+          "end": 369,
+          "created_at": "2026-07-02T15:00:47.478Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Não há distorção de informações",
+          "start": 237,
+          "end": 268,
+          "created_at": "2026-07-02T15:01:06.152Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a gerente agrediu Ben Mendes e o mesmo revidou com um tapa",
+          "start": 26,
+          "end": 84,
+          "created_at": "2026-07-02T15:01:35.821Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T15:00:26.945Z",
+      "completed_at": "2026-07-02T15:01:45.703Z"
+    },
+    "2036235208928756034": {
+      "noteId": "2036235208928756034",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Foram usadas metodologias diferentes de contagem.    - Governo de Seul: 40–48 mil (tempo real, só área da praça)  - Ministério do Interior: 62 mil (usuários domésticos)  - HYBE: 104 mil (inclui estrangeiros e pré-pagos)",
+          "start": 43,
+          "end": 262,
+          "created_at": "2026-07-02T15:02:11.921Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "Link da matéria:     https://n.news.naver.com/article/008/0005334007?sid=105",
+          "start": 266,
+          "end": 342,
+          "created_at": "2026-07-02T15:02:16.117Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T15:01:59.455Z",
+      "completed_at": "2026-07-02T15:02:24.484Z"
+    },
+    "1884735731991519515": {
+      "noteId": "1884735731991519515",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:02:47.304Z"
+    },
+    "2035774913856840144": {
+      "noteId": "2035774913856840144",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:03:53.482Z"
+    },
+    "1828475905272095265": {
+      "noteId": "1828475905272095265",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://x.com/vitorarouche/status/1828472732620574944",
+          "start": 0,
+          "end": 53,
+          "created_at": "2026-07-02T15:04:16.457Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "o hino foi cantado usando “filhes”",
+          "start": 275,
+          "end": 309,
+          "created_at": "2026-07-02T15:05:15.440Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "vídeo falso com o hino do Brasil. Aqui o vídeo original",
+          "start": 99,
+          "end": 154,
+          "created_at": "2026-07-02T15:05:23.955Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T15:04:16.457Z",
+      "completed_at": "2026-07-02T15:05:25.088Z"
+    },
+    "1639935770680078337": {
+      "noteId": "1639935770680078337",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:06:00.504Z"
+    },
+    "1881461849201521031": {
+      "noteId": "1881461849201521031",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Essa é a saudação romana",
+          "start": 0,
+          "end": 24,
+          "created_at": "2026-07-02T15:06:57.184Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://context.reverso.net/traducao/italiano-portugues/saluto+romano",
+          "start": 147,
+          "end": 216,
+          "created_at": "2026-07-02T15:07:11.515Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.wikipedia.org/wiki/Sauda%C3%A7%C3%A3o_romana#:~:text=A%20sauda%C3%A7%C3%A3o%20romana%20%C3%A9%20uma,palma%20da%20m%C3%A3o%20para%20baixo.",
+          "start": 220,
+          "end": 368,
+          "created_at": "2026-07-02T15:07:16.596Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T15:06:26.089Z",
+      "completed_at": "2026-07-02T15:07:39.809Z"
+    },
+    "1916124309459808763": {
+      "noteId": "1916124309459808763",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:08:15.362Z"
+    },
+    "1856342402283225145": {
+      "noteId": "1856342402283225145",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "completed_at": "2026-07-02T15:08:37.968Z"
+    },
+    "2034666298249023797": {
+      "noteId": "2034666298249023797",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": "2026-07-02T15:08:45.795Z",
+      "completed_at": "2026-07-02T15:10:08.207Z"
+    },
+    "2030386711545446739": {
+      "noteId": "2030386711545446739",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Cópia/tradução de post supostamente “cômico” em inglês",
+          "start": 0,
+          "end": 54,
+          "created_at": "2026-07-02T15:10:17.214Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/taftermath2020/status/2030311809304207379?s=46",
+          "start": 59,
+          "end": 119,
+          "created_at": "2026-07-02T15:10:19.091Z"
+        }
+      ],
+      "obs": "",
+      "started_at": "2026-07-02T15:10:17.214Z",
+      "completed_at": "2026-07-02T15:10:19.709Z"
+    }
+  }
+}
