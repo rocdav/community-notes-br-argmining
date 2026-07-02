@@ -27,7 +27,10 @@ duas estratégias, métricas de acordo, projeção BIO e análise sintática. Co
 | `f1_strict` | float | F1 **estrita** E1×E2 da nota (offset + tipo exatos). |
 | `f1_relaxed` | float | F1 **relaxada** E1×E2 (sobreposição + tipo). |
 | `kappa` | float | **κ** em nível de caractere, E1×E2, da nota. |
-| `e1_ms` | float | Latência da E1 na nota (ms). |
+| `e1_ms` | float | Latência da **aplicação das regras** da E1 na nota (ms; não inclui o parse). |
+| `e1_parse_ms` | float | Latência do parse spaCy da nota (ms; medido individualmente na re-derivação v2.1). |
+| `e1_total_ms` | float | Latência **fim-a-fim** da E1 na nota (parse + regras, ms). |
+| `e1_version` | str | Versão da extração E1 (`v2.1_relocated_entities`: FONTE re-localizada pela superfície). |
 | `e2_ms` | float | Latência da E2 na nota (ms). |
 | `model` | str | Modelo LLM da E2 (`qwen3.6-max-preview`). |
 | `anotacao_humana_anotador` | str | Identificador do anotador (preenchido só nas 60 do *gold*). |
