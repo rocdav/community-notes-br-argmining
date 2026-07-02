@@ -67,6 +67,11 @@ São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii)
     │   ├── data.js            # recorte de 60 notas para anotação
     │   ├── app.js             # lógica de marcação/exportação
     │   └── readme.md          # instruções de deploy e uso
+    ├── adjudicador/           # consenso humano entre duas anotações independentes
+    │   ├── index.html         # entrada local/offline do adjudicador
+    │   ├── data.js            # notas + spans Davi/Álvaro + clusters de divergência
+    │   ├── app.js             # lógica de revisão/exportação do gold adjudicado
+    │   └── build_data.py      # regenera data.js a partir dos JSONs humanos
     └── bio-converter/         # conversão de spans → BIO/CoNLL
 ```
 
@@ -108,6 +113,13 @@ O ambiente de anotação humana também é estático. Ele pode ser aberto localm
 [`anotador-argumentos.netlify.app`](https://anotador-argumentos.netlify.app/). A interface usa o
 recorte de 60 notas em `apps/anotador/data.js` e exporta as marcações para posterior conversão em
 BIO/CoNLL.
+
+### Adjudicador (consenso humano)
+
+Quando houver duas anotações independentes, abra **`apps/adjudicador/index.html`** para revisar as
+divergências nota a nota. O adjudicador exporta um JSON no mesmo contrato do anotador, com
+`papel = consenso_adjudicado`; no `notebook_conclusao.ipynb`, aponte `CONSENSUS_JSON_PATH` para esse
+arquivo para usá-lo como gold final.
 
 ## Dados
 

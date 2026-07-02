@@ -55,10 +55,15 @@ vazio (o *gold* é mesclado a partir do JSON do anotador no notebook). Leia com
 
 ## `gold/`
 
-- `anotacao_manual_davi-machado-da-rocha_2026-05-20.json` — anotação humana (1 anotador) das 60
-  notas: *spans* `{start, end, type}` por nota. **Gold provisório.**
-- `anotacao_manual_davi_2026-06-03_bio.conll` — a mesma anotação exportada em **CoNLL/BIO**
-  (token + rótulo), exemplo do formato de sequência.
+- `anotacao_manual_davi-machado-da-rocha_2026-05-20.json` — primeira anotação humana independente
+  das 60 notas: *spans* `{start, end, type}` por nota.
+- `anotacao_manual_alvaro-barros_2026-07-02.json` — segunda anotação humana independente das
+  mesmas 60 notas.
+- `*_bio.conll` — exportações derivadas em **CoNLL/BIO** (token + rótulo), exemplos do formato de
+  sequência.
+
+O *gold* final deve ser exportado pelo adjudicador em `apps/adjudicador/` e carregado no
+`notebook_conclusao.ipynb` via `CONSENSUS_JSON_PATH`.
 
 ## `qualitative_60_reasoning.jsonl`
 

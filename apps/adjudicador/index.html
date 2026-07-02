@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adjudicação CN-BR</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Adjudicação CN-BR</h1>
+      <p id="dataset-meta">Carregando dados...</p>
+    </div>
+    <div class="summary-strip" id="summary-strip"></div>
+    <div class="actions top-actions">
+      <button id="btn-import" class="btn">Importar</button>
+      <button id="btn-export-audit" class="btn">Auditoria CSV</button>
+      <button id="btn-export" class="btn primary">Exportar gold</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="filter-row">
+        <button class="filter active" data-filter="all">Todas</button>
+        <button class="filter" data-filter="pending">Pendentes</button>
+        <button class="filter" data-filter="divergent">Divergentes</button>
+      </div>
+      <div id="note-list" class="note-list"></div>
+    </aside>
+
+    <section class="workspace">
+      <div class="note-toolbar">
+        <div>
+          <span id="note-title" class="note-title"></span>
+          <span id="note-badges" class="badges"></span>
+        </div>
+        <div class="actions">
+          <button id="btn-prev" class="btn">Anterior</button>
+          <button id="btn-next-open" class="btn">Próxima pendente</button>
+          <button id="btn-next" class="btn">Próxima</button>
+        </div>
+      </div>
+
+      <article class="context-block">
+        <h2>Tweet</h2>
+        <p id="tweet-text"></p>
+      </article>
+
+      <article class="note-block">
+        <div class="note-block-head">
+          <h2>Nota</h2>
+          <div class="source-toggles">
+            <label><input type="checkbox" data-layer="davi" checked> Davi</label>
+            <label><input type="checkbox" data-layer="alvaro" checked> Álvaro</label>
+            <label><input type="checkbox" data-layer="e1"> E1</label>
+            <label><input type="checkbox" data-layer="e2"> E2</label>
+          </div>
+        </div>
+        <div id="note-text" class="note-text" aria-label="Texto da nota"></div>
+        <div class="selection-tools">
+          <span id="selection-readout">Selecione texto da nota para criar um span.</span>
+          <button class="type-btn CLAIM" data-type="CLAIM">CLAIM</button>
+          <button class="type-btn EVIDENCIA" data-type="EVIDENCIA">EVIDENCIA</button>
+          <button class="type-btn FONTE" data-type="FONTE">FONTE</button>
+          <button class="type-btn QUALIFICADOR" data-type="QUALIFICADOR">QUALIFICADOR</button>
+        </div>
+      </article>
+
+      <section class="panels">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Clusters de decisão</h2>
+            <div class="actions">
+              <button id="btn-use-exact" class="btn">Exatos</button>
+              <button id="btn-use-davi" class="btn">Davi</button>
+              <button id="btn-use-alvaro" class="btn">Álvaro</button>
+            </div>
+          </div>
+          <div id="clusters"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Gold da nota</h2>
+            <div class="actions">
+              <button id="btn-clear-note" class="btn danger">Limpar</button>
+              <button id="btn-review" class="btn primary">Marcar revisada</button>
+            </div>
+          </div>
+          <div id="validation" class="validation"></div>
+          <div id="gold-list" class="gold-list"></div>
+          <label class="obs-label">
+            Observação da adjudicação
+            <textarea id="note-obs" rows="4"></textarea>
+          </label>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="file-import" type="file" accept=".json,application/json" hidden>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
