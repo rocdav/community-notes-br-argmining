@@ -1,0 +1,6 @@
+# Dependências do anotador-llm (Estratégia 2 via Ollama local)
+pandas>=2.0
+pyarrow>=15.0          # leitura do dataset_anotado_final.parquet (LIST<STRUCT> gerado via DuckDB)
+fastparquet>=2024.2    # fallback caso pyarrow não esteja disponível
+ollama>=0.4            # cliente Python do Ollama (suporta format="json" e think=)
+tqdm>=4.65
