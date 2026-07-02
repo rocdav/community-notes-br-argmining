@@ -16,6 +16,7 @@
   --alvaro: #0b7f8c;
   --e1: #6a737d;
   --e2: #9a6700;
+  --peer: #8a4f2a;
 }
 
 * { box-sizing: border-box; }
@@ -84,7 +85,41 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
 .layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
-  min-height: calc(100vh - 73px);
+  min-height: calc(100vh - 125px);
+}
+
+.session-panel {
+  display: grid;
+  grid-template-columns: 140px minmax(240px, 1fr) minmax(220px, .8fr) 150px minmax(180px, .8fr);
+  gap: 10px;
+  align-items: end;
+  padding: 10px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+
+.session-panel label {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.session-panel input,
+.session-panel select {
+  display: block;
+  width: 100%;
+  min-height: 32px;
+  margin-top: 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: var(--ink);
+  background: #ffffff;
+}
+
+.peer-meta {
+  align-self: center;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .sidebar {
@@ -245,6 +280,7 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
 .gold-QUALIFICADOR { background: color-mix(in srgb, var(--qualificador) 30%, transparent); }
 .mark-davi { box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--davi) 60%, transparent); }
 .mark-alvaro { outline: 1px dashed var(--alvaro); outline-offset: 2px; }
+.mark-peer { box-shadow: inset 0 3px 0 color-mix(in srgb, var(--peer) 65%, transparent); }
 .mark-e1 { border-bottom: 2px dotted var(--e1); }
 .mark-e2 { border-top: 2px dotted var(--e2); }
 
@@ -334,6 +370,7 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
 
 .source-davi { color: var(--davi); border-color: color-mix(in srgb, var(--davi) 55%, var(--line)); }
 .source-alvaro { color: var(--alvaro); border-color: color-mix(in srgb, var(--alvaro) 55%, var(--line)); }
+.source-peer { color: var(--peer); border-color: color-mix(in srgb, var(--peer) 55%, var(--line)); }
 .source-e1 { color: var(--e1); }
 .source-e2 { color: var(--e2); }
 .type-CLAIM { color: var(--claim); }
@@ -433,6 +470,9 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
   .topbar {
     grid-template-columns: 1fr;
   }
+  .session-panel {
+    grid-template-columns: 1fr 1fr;
+  }
   .layout {
     grid-template-columns: 1fr;
   }
@@ -451,6 +491,7 @@ h3 { font-size: 13px; font-weight: 700; letter-spacing: 0; }
 @media (max-width: 700px) {
   .workspace { padding: 10px; }
   .summary-strip { grid-template-columns: repeat(2, 1fr); }
+  .session-panel { grid-template-columns: 1fr; }
   .candidate, .gold-row {
     grid-template-columns: 1fr;
   }

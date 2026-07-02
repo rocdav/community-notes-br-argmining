@@ -14,11 +14,40 @@
     </div>
     <div class="summary-strip" id="summary-strip"></div>
     <div class="actions top-actions">
-      <button id="btn-import" class="btn">Importar</button>
+      <button id="btn-import-draft" class="btn">Importar rascunho</button>
+      <button id="btn-import-peer" class="btn">Carregar parecer</button>
       <button id="btn-export-audit" class="btn">Auditoria CSV</button>
       <button id="btn-export" class="btn primary">Exportar gold</button>
     </div>
   </header>
+
+  <section class="session-panel">
+    <label>
+      Modo
+      <select id="session-mode">
+        <option value="conjunta">Conjunta</option>
+        <option value="assincrona">Assíncrona</option>
+      </select>
+    </label>
+    <label>
+      Adjudicadores
+      <input id="session-adjudicators" type="text" placeholder="Davi Machado da Rocha; Alvaro Barros">
+    </label>
+    <label>
+      Quem está operando
+      <input id="session-actor" type="text" placeholder="nome de quem está decidindo agora">
+    </label>
+    <label>
+      Rodada
+      <select id="session-round">
+        <option value="consenso">Consenso</option>
+        <option value="parecer_individual">Parecer individual</option>
+        <option value="revisao_cruzada">Revisão cruzada</option>
+        <option value="fechamento">Fechamento</option>
+      </select>
+    </label>
+    <span id="peer-meta" class="peer-meta">Nenhum parecer importado.</span>
+  </section>
 
   <main class="layout">
     <aside class="sidebar">
@@ -54,8 +83,9 @@
           <div class="source-toggles">
             <label><input type="checkbox" data-layer="davi" checked> Davi</label>
             <label><input type="checkbox" data-layer="alvaro" checked> Álvaro</label>
-            <label><input type="checkbox" data-layer="e1"> E1</label>
-            <label><input type="checkbox" data-layer="e2"> E2</label>
+            <label id="peer-layer-label"><input type="checkbox" data-layer="peer" disabled> Parecer</label>
+            <label><input type="checkbox" data-layer="e1" disabled> E1 pós-revisão</label>
+            <label><input type="checkbox" data-layer="e2" disabled> E2 pós-revisão</label>
           </div>
         </div>
         <div id="note-text" class="note-text" aria-label="Texto da nota"></div>
@@ -76,6 +106,7 @@
               <button id="btn-use-exact" class="btn">Exatos</button>
               <button id="btn-use-davi" class="btn">Davi</button>
               <button id="btn-use-alvaro" class="btn">Álvaro</button>
+              <button id="btn-use-peer" class="btn" disabled>Parecer</button>
             </div>
           </div>
           <div id="clusters"></div>

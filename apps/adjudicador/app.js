@@ -7,7 +7,10 @@ const SCHEMA_VERSION = "1.0";
 const state = {
   noteIdx: 0,
   filter: "all",
-  layers: { davi: true, alvaro: true, e1: false, e2: false },
+  layers: { davi: true, alvaro: true, peer: false, e1: false, e2: false },
+  session: null,
+  peer: null,
+  pendingImportMode: "draft",
   notes: {},
 };
 
@@ -44,6 +47,44 @@ function cleanSpan(span, note) {
 function sortSpans(spans) {
   return [...spans].sort((a, b) => a.start - b.start || a.end - b.end || a.type.localeCompare(b.type));
 }
+function defaultSession() {
+  return {
+    modo: "conjunta",
+    adjudicadores: ["Davi Machado da Rocha", "Alvaro Barros"],
+    adjudicador_atual: "",
+    rodada: "consenso",
+    data_inicio: nowISO(),
+    observacoes: "",
+  };
+}
+function normalizeSession(session) {
+  const fallback = defaultSession();
+  return {
+    modo: ["conjunta", "assincrona"].includes(session?.modo) ? session.modo : fallback.modo,
+    adjudicadores: Array.isArray(session?.adjudicadores) && session.adjudicadores.length
+      ? session.adjudicadores.map(String)
+      : fallback.adjudicadores,
+    adjudicador_atual: session?.adjudicador_atual || "",
+    rodada: session?.rodada || fallback.rodada,
+    data_inicio: session?.data_inicio || fallback.data_inicio,
+    observacoes: session?.observacoes || "",
+  };
+}
+function recordDecision(noteId, decision) {
+  const gold = state.notes[noteId];
+  if (!gold) return;
+  gold.decisions = gold.decisions || [];
+  gold.decisions.push({
+    at: nowISO(),
+    actor: state.session?.adjudicador_atual || "",
+    mode: state.session?.modo || "",
+    round: state.session?.rodada || "",
+    ...decision,
+  });
+}
+function peerNote(noteId) {
+  return state.peer?.notes?.[noteId] || null;
+}
 
 function defaultNoteState(note) {
   return {
@@ -58,10 +99,14 @@ function defaultNoteState(note) {
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
+  state.session = defaultSession();
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
       if (parsed && parsed.notes) {
+        state.session = normalizeSession(parsed.session);
+        state.peer = parsed.peer || null;
+        state.layers = { ...state.layers, ...(parsed.layers || {}) };
         NOTES.forEach(note => {
           const savedNote = parsed.notes[note.noteId];
           state.notes[note.noteId] = savedNote
@@ -89,6 +134,9 @@ function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     saved_at: nowISO(),
     noteIdx: state.noteIdx,
+    layers: state.layers,
+    session: state.session,
+    peer: state.peer,
     notes: state.notes,
   }));
 }
@@ -118,6 +166,53 @@ function statusFor(note) {
   if (gold.status === "reviewed" && warnings.length === 0) return "reviewed";
   if ((note.counts.human_union - note.counts.exact_agreement) > 0) return "divergent";
   return "pending";
+}
+
+function renderSessionControls() {
+  const session = state.session || defaultSession();
+  byId("session-mode").value = session.modo;
+  byId("session-adjudicators").value = session.adjudicadores.join("; ");
+  byId("session-actor").value = session.adjudicador_atual;
+  byId("session-round").value = session.rodada;
+  const peer = state.peer;
+  byId("peer-meta").textContent = peer
+    ? `Parecer carregado: ${peer.label} (${peer.imported_at.slice(0, 10)})`
+    : "Nenhum parecer importado.";
+}
+
+function readSessionControls() {
+  state.session = normalizeSession({
+    modo: byId("session-mode").value,
+    adjudicadores: byId("session-adjudicators").value
+      .split(";")
+      .map(x => x.trim())
+      .filter(Boolean),
+    adjudicador_atual: byId("session-actor").value.trim(),
+    rodada: byId("session-round").value,
+    data_inicio: state.session?.data_inicio || nowISO(),
+    observacoes: state.session?.observacoes || "",
+  });
+  saveState();
+}
+
+function syncLayerControls(note) {
+  const reviewed = statusFor(note) === "reviewed";
+  document.querySelectorAll("[data-layer]").forEach(input => {
+    const layer = input.dataset.layer;
+    if (layer === "peer") {
+      input.disabled = !state.peer;
+      if (!state.peer) state.layers.peer = false;
+    }
+    if (layer === "e1" || layer === "e2") {
+      input.disabled = !reviewed;
+      input.title = reviewed
+        ? "Camada automatica liberada apos revisao humana da nota."
+        : "Camada bloqueada ate a nota ser marcada como revisada.";
+      if (!reviewed) state.layers[layer] = false;
+    }
+    input.checked = !!state.layers[layer];
+  });
+  byId("btn-use-peer").disabled = !peerNote(note.noteId);
 }
 
 function renderSummary() {
@@ -166,6 +261,9 @@ function spanLayersFor(note) {
   (gold.spans || []).forEach(s => layers.push({ ...s, layer: "gold", label: `Gold ${s.type}` }));
   if (state.layers.davi) note.human.davi.spans.forEach(s => layers.push({ ...s, layer: "davi", label: `Davi ${s.type}` }));
   if (state.layers.alvaro) note.human.alvaro.spans.forEach(s => layers.push({ ...s, layer: "alvaro", label: `Álvaro ${s.type}` }));
+  if (state.layers.peer && peerNote(note.noteId)) {
+    peerNote(note.noteId).spans.forEach(s => layers.push({ ...s, layer: "peer", label: `${state.peer.label} ${s.type}` }));
+  }
   if (state.layers.e1) note.automatic.e1.forEach(s => layers.push({ ...s, layer: "e1", label: `E1 ${s.type}` }));
   if (state.layers.e2) note.automatic.e2.forEach(s => layers.push({ ...s, layer: "e2", label: `E2 ${s.type}` }));
   return layers;
@@ -186,7 +284,7 @@ function renderHighlightedText(note) {
     const titles = [];
     const gold = active.find(s => s.layer === "gold");
     if (gold) classes.push(`gold-${gold.type}`);
-    ["davi", "alvaro", "e1", "e2"].forEach(layer => {
+    ["davi", "alvaro", "peer", "e1", "e2"].forEach(layer => {
       if (active.some(s => s.layer === layer)) classes.push(`mark-${layer}`);
     });
     active.forEach(s => titles.push(s.label));
@@ -196,9 +294,11 @@ function renderHighlightedText(note) {
 }
 
 function allCandidateSpans(note) {
+  const peer = peerNote(note.noteId);
   return [
     ...note.human.davi.spans,
     ...note.human.alvaro.spans,
+    ...(peer ? peer.spans : []),
   ];
 }
 
@@ -212,11 +312,8 @@ function inGold(note, candidate) {
 
 function renderClusters(note) {
   const clusters = byId("clusters");
-  if (!note.clusters.length) {
-    clusters.innerHTML = `<div class="empty">Nenhum span humano nesta nota.</div>`;
-    return;
-  }
-  clusters.innerHTML = note.clusters.map(cluster => {
+  const peer = peerNote(note.noteId);
+  const humanClusters = note.clusters.map(cluster => {
     const rows = cluster.span_ids.map(id => candidateById(note, id)).filter(Boolean).map(span => {
       const added = inGold(note, span);
       return `
@@ -240,6 +337,29 @@ function renderClusters(note) {
         ${rows}
       </section>`;
   }).join("");
+  const peerCluster = peer && peer.spans.length ? `
+    <section class="cluster peer-cluster">
+      <div class="cluster-head">
+        <div><strong>Parecer importado</strong></div>
+        <div class="badges"><span class="badge">${escapeHTML(state.peer.label)}</span></div>
+      </div>
+      ${peer.spans.map(span => {
+        const added = inGold(note, span);
+        return `
+          <div class="candidate ${added ? "in-gold" : ""}">
+            <span class="source-pill source-peer">Parecer</span>
+            <span class="type-pill type-${span.type}">${span.type}</span>
+            <div>
+              <div class="candidate-text">${escapeHTML(span.text)}</div>
+              <div class="cluster-range">${span.start}-${span.end}</div>
+            </div>
+            <button class="btn ${added ? "" : "primary"}" data-add-span="${span.id}">${added ? "No gold" : "Usar"}</button>
+          </div>`;
+      }).join("")}
+    </section>` : "";
+  clusters.innerHTML = humanClusters || peerCluster
+    ? humanClusters + peerCluster
+    : `<div class="empty">Nenhum span humano nesta nota.</div>`;
 }
 
 function renderGold(note) {
@@ -271,6 +391,8 @@ function renderGold(note) {
 function renderCurrentNote() {
   const note = currentNote();
   const delta = note.counts.human_union - note.counts.exact_agreement;
+  renderSessionControls();
+  syncLayerControls(note);
   byId("note-title").textContent = `Nota ${note.order}`;
   byId("note-badges").innerHTML = [
     `noteId ${note.noteId}`,
@@ -311,7 +433,7 @@ function addSpanToGold(rawSpan, source) {
   gold.spans = sortSpans([...gold.spans, span]);
   gold.status = "pending";
   gold.updated_at = nowISO();
-  gold.decisions.push({ at: nowISO(), action: "add_span", source, start: span.start, end: span.end, type: span.type, replaced: removed });
+  recordDecision(note.noteId, { action: "add_span", source, start: span.start, end: span.end, type: span.type, replaced: removed });
   saveState();
   renderCurrentNote();
   toast(removed ? `Span adicionado; ${removed} conflito(s) substituído(s).` : "Span adicionado.");
@@ -320,11 +442,18 @@ function addSpanToGold(rawSpan, source) {
 function useSource(sourceKey) {
   const note = currentNote();
   const gold = state.notes[note.noteId];
-  const source = sourceKey === "davi" ? note.human.davi.spans : sourceKey === "alvaro" ? note.human.alvaro.spans : note.exact_agreement;
+  const peer = peerNote(note.noteId);
+  const source = sourceKey === "davi"
+    ? note.human.davi.spans
+    : sourceKey === "alvaro"
+      ? note.human.alvaro.spans
+      : sourceKey === "peer" && peer
+        ? peer.spans
+        : note.exact_agreement;
   gold.spans = sortSpans(source.map(s => cleanSpan({ ...s, decision_source: sourceKey === "exact" ? "acordo_exato" : sourceKey }, note)));
   gold.status = "pending";
   gold.updated_at = nowISO();
-  gold.decisions.push({ at: nowISO(), action: "use_source", source: sourceKey, spans: gold.spans.length });
+  recordDecision(note.noteId, { action: "use_source", source: sourceKey, spans: gold.spans.length });
   saveState();
   renderCurrentNote();
   toast(`Gold da nota substituído por ${sourceKey}.`);
@@ -372,7 +501,7 @@ function setReviewed() {
   gold.status = "reviewed";
   gold.reviewed_at = nowISO();
   gold.updated_at = nowISO();
-  gold.decisions.push({ at: nowISO(), action: "reviewed", spans: gold.spans.length });
+  recordDecision(note.noteId, { action: "reviewed", spans: gold.spans.length });
   saveState();
   renderCurrentNote();
   toast("Nota marcada como revisada.");
@@ -393,18 +522,46 @@ function nextPending() {
 }
 
 function montarPayload() {
+  readSessionControls();
   const completas = NOTES.filter(n => state.notes[n.noteId].status === "reviewed").length;
+  const session = normalizeSession(state.session);
+  const decisionsByNote = Object.fromEntries(NOTES.map(note => [note.noteId, state.notes[note.noteId].decisions || []]));
+  const summaryByNote = Object.fromEntries(NOTES.map(note => {
+    const gold = state.notes[note.noteId];
+    return [note.noteId, {
+      status: gold.status,
+      gold_spans: gold.spans.length,
+      davi_spans: note.counts.davi,
+      alvaro_spans: note.counts.alvaro,
+      exact_agreement: note.counts.exact_agreement,
+      human_union: note.counts.human_union,
+      peer_spans: peerNote(note.noteId)?.spans.length || 0,
+      reviewed_at: gold.reviewed_at,
+    }];
+  }));
   return {
     schema_version: SCHEMA_VERSION,
     dataset_version: DATA.dataset_version,
     guia_versao: DATA.guide_version,
-    anotador: { nome: "Consenso Davi + Alvaro", papel: "consenso_adjudicado" },
+    anotador: { nome: `Consenso ${session.adjudicadores.join(" + ")}`, papel: "consenso_adjudicado" },
     adjudicacao: {
       generated_by: "apps/adjudicador",
       exported_at: nowISO(),
       source_files: DATA.source_files,
       annotators: DATA.annotators,
       stats: DATA.stats,
+      sessao: {
+        ...session,
+        data_exportacao: nowISO(),
+      },
+      importacao_assincrona: state.peer ? {
+        label: state.peer.label,
+        imported_at: state.peer.imported_at,
+        source_anotador: state.peer.source_anotador,
+        source_adjudicacao: state.peer.source_adjudicacao,
+      } : null,
+      decisoes_por_nota: decisionsByNote,
+      resumo_por_nota: summaryByNote,
     },
     started_at: null,
     last_saved_at: nowISO(),
@@ -455,18 +612,24 @@ function exportGold() {
 }
 
 function exportAuditCSV() {
-  const header = ["ordem", "noteId", "status", "gold_spans", "davi_spans", "alvaro_spans", "exact_agreement", "human_union", "obs"];
+  readSessionControls();
+  const header = ["ordem", "noteId", "modo", "rodada", "ator", "peer_importado", "status", "gold_spans", "davi_spans", "alvaro_spans", "exact_agreement", "human_union", "decisoes", "obs"];
   const rows = NOTES.map(note => {
     const gold = state.notes[note.noteId];
     return [
       note.order,
       note.noteId,
+      state.session.modo,
+      state.session.rodada,
+      state.session.adjudicador_atual,
+      state.peer ? state.peer.label : "",
       gold.status,
       gold.spans.length,
       note.counts.davi,
       note.counts.alvaro,
       note.counts.exact_agreement,
       note.counts.human_union,
+      (gold.decisions || []).length,
       (gold.obs || "").replace(/\r?\n/g, " "),
     ];
   });
@@ -475,26 +638,83 @@ function exportAuditCSV() {
   toast("Auditoria exportada.");
 }
 
+function importedSpansFor(payload, note, label) {
+  const ann = (payload.anotacoes || {})[note.noteId];
+  return sortSpans((ann?.spans || []).map((span, idx) => ({
+    ...cleanSpan(span, note),
+    id: `peer-${note.noteId}-${span.start}-${span.end}-${span.type}-${idx}`,
+    source_key: "peer",
+    source_label: label,
+  })));
+}
+
+function importDraftPayload(payload) {
+  const anns = payload.anotacoes || {};
+  NOTES.forEach(note => {
+    if (!anns[note.noteId]) return;
+    state.notes[note.noteId] = {
+      ...state.notes[note.noteId],
+      status: anns[note.noteId].status === "completed" ? "reviewed" : "pending",
+      spans: sortSpans((anns[note.noteId].spans || []).map(s => cleanSpan(s, note))),
+      obs: anns[note.noteId].obs || "",
+      decisions: payload.adjudicacao?.decisoes_por_nota?.[note.noteId] || state.notes[note.noteId].decisions || [],
+      updated_at: nowISO(),
+      reviewed_at: anns[note.noteId].completed_at || null,
+    };
+    recordDecision(note.noteId, {
+      action: "import_draft",
+      source_role: payload.anotador?.papel || "",
+      source_name: payload.anotador?.nome || "",
+      imported_spans: state.notes[note.noteId].spans.length,
+    });
+  });
+}
+
+function importPeerPayload(payload) {
+  const label = payload.anotador?.nome || "Parecer importado";
+  const notes = {};
+  NOTES.forEach(note => {
+    const ann = (payload.anotacoes || {})[note.noteId];
+    if (!ann) return;
+    notes[note.noteId] = {
+      status: ann.status || "",
+      obs: ann.obs || "",
+      spans: importedSpansFor(payload, note, label),
+      decisions: payload.adjudicacao?.decisoes_por_nota?.[note.noteId] || [],
+    };
+    recordDecision(note.noteId, {
+      action: "load_peer_opinion",
+      source_name: label,
+      imported_spans: notes[note.noteId].spans.length,
+    });
+  });
+  state.peer = {
+    label,
+    imported_at: nowISO(),
+    source_anotador: payload.anotador || null,
+    source_adjudicacao: payload.adjudicacao ? {
+      sessao: payload.adjudicacao.sessao || null,
+      exported_at: payload.adjudicacao.exported_at || null,
+      generated_by: payload.adjudicacao.generated_by || null,
+    } : null,
+    notes,
+  };
+  state.layers.peer = true;
+}
+
 function importGold(file) {
   const reader = new FileReader();
   reader.onload = () => {
     try {
       const payload = JSON.parse(reader.result);
-      const anns = payload.anotacoes || {};
-      NOTES.forEach(note => {
-        if (!anns[note.noteId]) return;
-        state.notes[note.noteId] = {
-          ...state.notes[note.noteId],
-          status: anns[note.noteId].status === "completed" ? "reviewed" : "pending",
-          spans: sortSpans((anns[note.noteId].spans || []).map(s => cleanSpan(s, note))),
-          obs: anns[note.noteId].obs || "",
-          updated_at: nowISO(),
-          reviewed_at: anns[note.noteId].completed_at || null,
-        };
-      });
+      if (state.pendingImportMode === "peer") {
+        importPeerPayload(payload);
+      } else {
+        importDraftPayload(payload);
+      }
       saveState();
       renderCurrentNote();
-      toast("JSON importado.");
+      toast(state.pendingImportMode === "peer" ? "Parecer carregado." : "Rascunho importado.");
     } catch (err) {
       console.error(err);
       toast("Falha ao importar JSON.");
@@ -504,6 +724,13 @@ function importGold(file) {
 }
 
 function setupEvents() {
+  ["session-mode", "session-adjudicators", "session-actor", "session-round"].forEach(id => {
+    byId(id).addEventListener("change", () => {
+      readSessionControls();
+      renderCurrentNote();
+    });
+    byId(id).addEventListener("input", readSessionControls);
+  });
   byId("note-list").addEventListener("click", e => {
     const item = e.target.closest("[data-idx]");
     if (!item) return;
@@ -518,7 +745,19 @@ function setupEvents() {
     renderNoteList();
   }));
   document.querySelectorAll("[data-layer]").forEach(input => input.addEventListener("change", () => {
-    state.layers[input.dataset.layer] = input.checked;
+    const layer = input.dataset.layer;
+    const note = currentNote();
+    if ((layer === "e1" || layer === "e2") && statusFor(note) !== "reviewed") {
+      input.checked = false;
+      state.layers[layer] = false;
+      recordDecision(note.noteId, { action: "blocked_automatic_layer", layer });
+      saveState();
+      toast("E1/E2 só ficam disponíveis depois da revisão humana da nota.");
+      return;
+    }
+    state.layers[layer] = input.checked;
+    recordDecision(note.noteId, { action: "toggle_layer", layer, visible: input.checked });
+    saveState();
     renderHighlightedText(currentNote());
   }));
   byId("clusters").addEventListener("click", e => {
@@ -535,7 +774,7 @@ function setupEvents() {
     const removed = gold.spans.splice(idx, 1)[0];
     gold.status = "pending";
     gold.updated_at = nowISO();
-    gold.decisions.push({ at: nowISO(), action: "remove_span", start: removed.start, end: removed.end, type: removed.type });
+    recordDecision(currentNote().noteId, { action: "remove_span", start: removed.start, end: removed.end, type: removed.type });
     saveState();
     renderCurrentNote();
   });
@@ -548,7 +787,7 @@ function setupEvents() {
     gold.spans[idx].decision_source = `${gold.spans[idx].decision_source || "manual"}+tipo_editado`;
     gold.status = "pending";
     gold.updated_at = nowISO();
-    gold.decisions.push({ at: nowISO(), action: "change_type", idx, type: sel.value });
+    recordDecision(currentNote().noteId, { action: "change_type", idx, type: sel.value });
     saveState();
     renderCurrentNote();
   });
@@ -573,13 +812,14 @@ function setupEvents() {
   byId("btn-use-exact").addEventListener("click", () => useSource("exact"));
   byId("btn-use-davi").addEventListener("click", () => useSource("davi"));
   byId("btn-use-alvaro").addEventListener("click", () => useSource("alvaro"));
+  byId("btn-use-peer").addEventListener("click", () => useSource("peer"));
   byId("btn-clear-note").addEventListener("click", () => {
     if (!window.confirm("Limpar o gold desta nota?")) return;
     const gold = currentGold();
     gold.spans = [];
     gold.status = "pending";
     gold.updated_at = nowISO();
-    gold.decisions.push({ at: nowISO(), action: "clear_note" });
+    recordDecision(currentNote().noteId, { action: "clear_note" });
     saveState();
     renderCurrentNote();
   });
@@ -597,7 +837,14 @@ function setupEvents() {
   byId("btn-next-open").addEventListener("click", nextPending);
   byId("btn-export").addEventListener("click", exportGold);
   byId("btn-export-audit").addEventListener("click", exportAuditCSV);
-  byId("btn-import").addEventListener("click", () => byId("file-import").click());
+  byId("btn-import-draft").addEventListener("click", () => {
+    state.pendingImportMode = "draft";
+    byId("file-import").click();
+  });
+  byId("btn-import-peer").addEventListener("click", () => {
+    state.pendingImportMode = "peer";
+    byId("file-import").click();
+  });
   byId("file-import").addEventListener("change", e => {
     const file = e.target.files?.[0];
     if (file) importGold(file);
