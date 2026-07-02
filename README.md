@@ -44,7 +44,8 @@ São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii)
 .
 ├── notebooks/                 # pipeline reprodutível (Colab/Jupyter)
 │   ├── notebook_preparacao_v2.ipynb   # coleta, preparação, E1 (regras) e E2 (LLM)
-│   └── notebook_conclusao.ipynb       # BIO, avaliação e resultados (fonte canônica)
+│   ├── notebook_conclusao.ipynb       # BIO, avaliação e resultados (fonte canônica)
+│   └── notebook_destilacao.ipynb      # E3: destila o E2 em modelos de sequência (NB→HMM→CRF→BERTimbau)
 ├── data/                      # dataset, gold e dicionário de dados (ver data/README.md)
 │   ├── dataset_anotado_final_com_bio.csv   # 1901 notas × 30 colunas (spans, métricas, BIO, sintaxe)
 │   ├── dataset_anotado_final.parquet       # input canônico (E1/E2/métricas, gold vazio)
@@ -84,6 +85,9 @@ python -m spacy download pt_core_news_md
    gera os gráficos. É a **fonte canônica dos números** do relatório; para o *gold*, aponte o(s)
    JSON(s) de anotador. Detalhes em
    [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md).
+3. `notebooks/notebook_destilacao.ipynb` — estratégia **E3**: treina modelos de rotulagem de
+   sequência (Naive Bayes → HMM → reg. logística → CRF → BERTimbau) com supervisão *silver* do E2
+   e testa no *gold* humano. Requer GPU (Colab).
 
 > Leia o Parquet com **DuckDB** ou **`engine="pyarrow"`** — as colunas de *span* são
 > `LIST<STRUCT>` aninhadas, e o `fastparquet` as devolve vazias em silêncio. Ver notas em
