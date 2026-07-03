@@ -11,20 +11,28 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
                                    │
                                    ▼
    ┌──────────────────────  notebook_preparacao_v2.ipynb  ──────────────────────┐
-   │ limpeza · seleção das 60 · E1 (regras) · E2 (LLM) · alinhamento de spans    │
+   │ limpeza · seleção das 60 · E1 (regras, v2.1) · E2 (LLM via API) ·           │
+   │ alinhamento de spans · §19: rederivação do E1 preservando o E2              │
    └───────────────────────────────────┬─────────────────────────────────────────┘
-                                        │  dataset com E1/E2
+                                        │  dataset com E1/E2  (+ E2b de apps/anotador-llm)
                                         ▼
    ┌──────────────────────  notebook_conclusao.ipynb  ──────────────────────────┐
-   │ gold humano (JSON) · normalização BIO · avaliação (E1×E2 e vs gold) ·       │
+   │ κ inter-anotador (2 leituras) · gold adjudicado (apps/adjudicador) ·        │
+   │ normalização BIO (E1/E2/E2b/humano) · avaliação multi-gold em 2 leituras ·  │
    │ análises complementares (Dunning, entidades, agência) · gráficos            │
    └───────────────────────────────────┬─────────────────────────────────────────┘
                                         │
               ┌─────────────────────────┼─────────────────────────┐
               ▼                         ▼                         ▼
   dataset_anotado_final_com_bio.csv   figuras (matplotlib)     explorador/ (5 visões)
-   (1901 × 30: spans, métricas,                                  via _build_*.py
-    BIO, sintaxe UD)
+   (1901 × 36: spans E1/E2/E2b,                                  via _build_*.py e
+    gold, métricas, BIO, sintaxe UD)                             _refresh_data.py
+                                        │
+                                        ▼
+   ┌──────────────────────  notebook_destilacao.ipynb (E3)  ────────────────────┐
+   │ alunos NB/HMM/logística/CRF/BERTimbau treinados no silver do E2 (e E2b),    │
+   │ testados no gold adjudicado                                                 │
+   └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Estágios
@@ -44,12 +52,16 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
 ### 2. Estratégia E1 — regras léxico-sintáticas
 
 - Base **spaCy `pt_core_news_md`**: tokenização, lematização, POS e *dependency parsing*.
-- Heurísticas por tipo + **regex de URL** (que garante a captura de FONTE em links).
-- Saída: lista de *spans* `{start, end, type}` por nota. **Determinística**, transparente e de
-  custo desprezível (mediana ≈ 2 ms/nota).
-- Executada em `notebook_preparacao_v2.ipynb`.
+- Heurísticas por tipo + **regex de URL** + entidades pré-extraídas do dataset público
+  **re-localizadas pela superfície** (v2.1: os offsets `inicio/fim` da tabela upstream são
+  automáticos e ~91 % exigiam re-localização; a correção elevou a F1 estrita E1×E2 de 0,307
+  para 0,372 com a relaxada estável).
+- Saída: lista de *spans* `{start, end, type}` por nota. **Determinística** e transparente;
+  custo fim-a-fim mediano ≈ 10 ms/nota (1,9 ms de regras + 8 ms de parse; `e1_ms`,
+  `e1_parse_ms`, `e1_total_ms`).
+- Executada em `notebook_preparacao_v2.ipynb` (a §19 rederiva só o E1 preservando o E2).
 - Limitação estrutural: depende de padrões sentenciais → **fronteiras frágeis** para
-  CLAIM/EVIDÊNCIA.
+  CLAIM/EVIDÊNCIA (16 % dos spans têm fronteira sub-token, medida no round-trip BIO).
 
 ### 3. Estratégia E2 — LLM
 
@@ -63,28 +75,48 @@ e os resultados, ver o [`README.md`](../README.md) na raiz e o
 - Executada em `notebook_preparacao_v2.ipynb`; `notebook_conclusao.ipynb` consome esses *spans*
   para BIO e avaliação.
 
+### 3b. Estratégia E2b — o mesmo protocolo com LLM aberto local
+
+- Reimplementação fiel da E2 em `apps/anotador-llm/` (mesmo *prompt*, mesmo alinhamento em 4
+  níveis, mesma regra de URL), servida por **`Qwen3.6-35B-A3B`** (Apache 2.0) via **Ollama**.
+- Saída completa versionada em `apps/anotador-llm/output/e2_ollama_sweep.jsonl` (1901 notas,
+  zero recusas, 96,9 % de alinhamento exato); o `notebook_conclusao.ipynb` a carrega como
+  coluna `e2b_spans`.
+
 ### 4. Gold humano
 
-- 60 notas anotadas segundo o `guia_anotacao.md`; entrada em `data/gold/` (JSON do anotador).
-- **Provisório:** um único anotador nesta versão. O notebook está preparado para 2+ anotadores —
-  com dois JSONs, calcula **κ inter-anotador** e **consenso** (interseção) automaticamente.
+- 60 notas anotadas **de forma independente por dois anotadores** (`data/gold/*.json`),
+  seguidas de **adjudicação** em `apps/adjudicador/` (trilha de decisões por span, rodadas
+  nomeadas, camadas E1/E2 bloqueadas até a revisão da nota).
+- Gold final: `data/gold/anotacao_consenso_adjudicado_2026-07-02.json` (224 spans; rodada de
+  parecer individual — revisão cruzada prevista). O `notebook_conclusao.ipynb` calcula o
+  **κ inter-anotador sempre** (leituras *completa* e *sem FONTE-URL*), independentemente do
+  gold usado.
 
 ### 5. Normalização BIO
 
-- Os *spans* de E1, E2 e humano são projetados de forma **determinística** para rótulos
-  *token-level* `B-TIPO` / `I-TIPO` / `O`, preservando *offsets* de caractere e a tokenização da
-  árvore de dependências (`sintaxe_json`).
-- Permite avaliação **por sequência (seqeval)** e atende à recomendação metodológica da disciplina.
-- Colunas resultantes no CSV: `e1_span_bio_json`, `e2_span_bio_json`, `humano_span_bio_json`,
-  `bio_tokens_json`, `bio_offsets_json`. Exportação em CoNLL em `data/gold/*.conll`.
+- Os *spans* de E1, E2, E2b e humano são projetados de forma **determinística** para rótulos
+  *token-level* `B-TIPO` / `I-TIPO` / `O`, sobre a mesma tokenização fixa e versionada.
+- **Round-trip medido** (span → BIO → span): perda de 0,89 % (humano), 1,3–1,4 % (LLMs) e
+  16,05 % (E1, fronteiras sub-token das regex) — valida a camada BIO como representação de
+  avaliação.
+- Permite avaliação **por sequência** (implementação própria com *cross-check* idêntico à
+  biblioteca `seqeval`, modo estrito/IOB2) e atende à recomendação metodológica da disciplina.
+- Colunas no CSV: `e1/e2/e2b/humano_span_bio_json`, `bio_tokens_json`, `bio_offsets_json`.
+  Exportação em CoNLL em `data/gold/*.conll`.
 
 ### 6. Avaliação
 
 - **Por span:** F1 **estrita** (offset e tipo exatos) e **relaxada** (sobreposição + tipo).
-- **Por caractere:** **κ** corrigido pelo acaso.
-- **Por token/BIO:** **seqeval** (precisão/revocação/F1).
+- **Por caractere:** **κ** corrigido pelo acaso, em duas agregações (média por nota e *pooled*).
+- **Por token/BIO:** estilo seqeval, com *cross-check* da biblioteca.
+- **Duas leituras** em toda avaliação contra gold: *completa* (sistemas) e *sem FONTE-URL*
+  (conteúdo decidido) — a camada de URLs é injetada por regex nas estratégias **e** era
+  pré-marcada no app de anotação (infraestrutura compartilhada).
+- **Multi-gold:** além do consenso, cada anotador isolado serve de régua na análise de
+  sensibilidade da §4.5 do notebook.
 - **Três cortes** para o acordo E1×E2: **A** completo (n=1901), **B** sem meta (n=1497),
-  **C** ambas produziram spans (n=1331).
+  **C** ambas produziram spans (n=1329).
 
 ### 7. Análises complementares
 
@@ -109,7 +141,11 @@ duplo-clique via `file://`, usando `<script>`/`<link>` clássicos). Cinco visõe
   - `_build_entidades.py` → `data_entidades.js` + `data_notas.js` (navegador de entidades;
     **baixa 1× a tabela GLiNER do HF** e cacheia — só agregação em CPU, sem re-rodar GLiNER).
   - `_build_bio.py` → `data_bio.js` (rotulagem BIO das 60).
-  - `_build_explorador.py` + `_explorador_template.py` (legado): geram o `index.html`/`data.js`.
+  - `_refresh_data.py` → atualiza in-place em `data.js` os spans E1/HUMANO das 60 e os painéis
+    numéricos (`vs_gold`, `cortes`, `cobertura`) a partir do CSV canônico — é o caminho de
+    atualização após qualquer mudança de gold ou de estratégia.
+  - `_build_explorador.py` + `_explorador_template.py` (legado): geraram o `index.html`/`data.js`
+    originais.
 - Detalhes e ordem de carregamento em `explorador/README.md`.
 
 ## Notas de reprodutibilidade
@@ -123,19 +159,23 @@ duplo-clique via `file://`, usando `<script>`/`<link>` clássicos). Cinco visõe
 - **Entidades GLiNER:** `hf_hub_download(repo_id="histlearn/notas-comunidade-ptbr",
   repo_type="dataset", revision="refs/convert/parquet", filename="entities/train/0000.parquet")`
   (~42 MB, cacheado). Filtre por `noteId` para o nosso recorte.
-- **Credenciais:** o E2 requer a chave do provedor do LLM (variável de ambiente), configurada no
-  `notebook_preparacao_v2.ipynb`; o *gold* requer o caminho do JSON do anotador, configurável no
-  `notebook_conclusao.ipynb`.
+- **Credenciais:** só o E2 requer chave do provedor (variável de ambiente, no
+  `notebook_preparacao_v2.ipynb`). O E2b roda local via Ollama, sem chave. O *gold* e as
+  anotações são lidos direto do repositório (`data/gold/`) pelo `notebook_conclusao.ipynb`;
+  os notebooks fixam a revisão do dataset upstream nos downloads.
 
 ## Mapa de artefatos
 
 | Artefato | Papel |
 |---|---|
-| `notebooks/notebook_preparacao_v2.ipynb` | preparação + E1 + E2 |
-| `notebooks/notebook_conclusao.ipynb` | **BIO + avaliação + resultados (canônico)** |
-| `data/dataset_anotado_final_com_bio.csv` | dataset completo (spans, métricas, BIO, sintaxe) |
-| `data/dataset_anotado_final.parquet` | input canônico (E1/E2/métricas; gold a entrar pelo JSON) |
-| `data/gold/*.json` · `*.conll` | anotação humana (spans e BIO/CoNLL) |
+| `notebooks/notebook_preparacao_v2.ipynb` | preparação + E1 (v2.1) + E2 |
+| `notebooks/notebook_conclusao.ipynb` | **gold + BIO + avaliação + resultados (canônico)** |
+| `notebooks/notebook_destilacao.ipynb` | destilação (E3): alunos treinados no silver do E2/E2b |
+| `apps/anotador-llm/output/e2_ollama_sweep.jsonl` | saída completa da E2b (1901 notas) |
+| `data/dataset_anotado_final_com_bio.csv` | dataset completo, 1901 × 36 (spans E1/E2/E2b, gold, BIO, sintaxe) |
+| `data/dataset_anotado_final.parquet` | input canônico do notebook 2 (E1 v2.1/E2/métricas) |
+| `data/gold/*.json` · `*.conll` | anotações independentes + consenso adjudicado (spans e BIO/CoNLL) |
+| `apps/adjudicador/` | interface de adjudicação com trilha de decisões |
 | `data/qualitative_60_reasoning.jsonl` | raciocínio do E2 nas 60 |
 | `explorador/` | visualização interativa (figuras e inspeção) |
 | `apps/anotador/` | interface de anotação |

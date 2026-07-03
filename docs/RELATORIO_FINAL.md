@@ -7,44 +7,45 @@
 
 ## Resumo
 
-As *Community Notes* do X são textos curtos de checagem colaborativa, escritos por usuários e atrelados a uma publicação. O sistema da plataforma decide se uma nota é *útil* e merece aparecer, mas não diz nada sobre *como* ela argumenta. É essa lacuna que investigamos. Tomamos a estrutura interna da nota como objeto e tratamos a tarefa como *Mineração de Argumentação* (AM) em português brasileiro: localizar e classificar, no texto, os trechos que fazem uma *alegação* (CLAIM), apresentam uma *evidência* (EVIDENCIA), citam uma *fonte* (FONTE) ou *modulam* o que se afirma (QUALIFICADOR).
+As Community Notes do X são textos curtos de checagem colaborativa, escritos por usuários e atrelados a uma publicação. O sistema da plataforma decide se uma nota é útil e merece aparecer, mas não diz nada sobre como ela argumenta. Este trabalho investiga essa lacuna: tratamos a estrutura interna da nota como objeto de Mineração de Argumentação em português brasileiro, localizando e classificando os trechos que fazem uma alegação (CLAIM), apresentam uma evidência (EVIDENCIA), citam uma fonte (FONTE) ou modulam o que se afirma (QUALIFICADOR).
 
-Comparamos duas estratégias de extração. A primeira, E1, é simbólica: combina regras léxico-sintáticas com a análise do spaCy. A segunda, E2, usa o modelo de linguagem `qwen3.6-max-preview`. Sobre um corpus de 1 901 notas e 689 tweets, medimos uma contra a outra em três cortes, e ambas contra um *gold* humano de 60 notas.
+Comparamos três estratégias de extração sobre um corpus de 1.901 notas: uma simbólica, baseada em regras léxico-sintáticas (E1); uma baseada em um modelo de linguagem de grande porte acessado por interface remota (E2); e uma reexecução fiel da segunda com um modelo de pesos abertos rodando localmente (E2b). As três foram medidas entre si e contra um gold humano construído por duas anotações independentes seguidas de adjudicação, sobre um recorte de 60 notas. Uma quarta frente, de destilação (E3), treinou rotuladores de sequência clássicos e neurais usando as marcações do modelo de linguagem como supervisão fraca.
 
-O resultado é assimétrico. Contra o *gold*, E2 alcança F1 relaxada de 0,466 (estrita de 0,340) e κ de 0,428, enquanto E1 fica em 0,136 (0,017): o modelo de linguagem se aproxima da anotação humana justamente onde a regra falha — na delimitação exata do trecho e nos papéis que dependem pouco de palavras-gatilho. A regra, por sua vez, se sai bem onde o trabalho é barato e literal: cobre 72 % das FONTEs (contra 56,5 % do E2) a um custo três ordens de grandeza menor por nota. Por baixo das métricas há ainda um achado estrutural: o *tipo* da entidade mencionada antecipa o papel que ela cumpre no argumento. Uma URL costuma ser fonte; um ator político, alegação.
+Quatro resultados organizam o trabalho. Primeiro, a concordância entre os dois anotadores humanos sobe de 0,334 para 0,632 (kappa de Cohen em nível de caractere) quando se desconta a camada de fontes ancoradas em URL, que é injetada por expressão regular dos dois lados da régua — separar o que é infraestrutura do que é decisão tornou-se o eixo metodológico do relatório. Segundo, o desempenho contra o gold depende da leitura: na leitura completa o modelo local alcança F1 estrita de 0,501, e na leitura sem fontes de URL o modelo remoto lidera com 0,399 — e depende também de qual anotador define a referência, o que medimos de forma explícita. Terceiro, a correção de um defeito de ingestão de dados elevou a F1 estrita da estratégia de regras de 0,307 para 0,372 no acordo com o modelo de linguagem, sem alterar a F1 relaxada, confirmando que parte do erro de fronteira era artefato e não limite do método. Quarto, a destilação funcionou além do esperado: um campo aleatório condicional clássico atingiu F1 estrita de 0,599 por entidade, no nível da melhor referência baseada em modelo de linguagem, gastando 0,32 milissegundo por nota.
 
 ## 1. Introdução
 
 ### 1.1 Contexto e recorte conceitual
 
-O *Community Notes* funciona como uma checagem distribuída: qualquer usuário pode escrever uma nota que contextualiza, qualifica ou refuta uma publicação, e um grupo de avaliadores decide se ela será exibida. No nosso corpus, o estado mais comum de uma nota não é "útil" nem "não útil": é *precisa de mais avaliações* (NMR), que responde por quase quatro em cada cinco notas. Ou seja, na maior parte do tempo o sistema não decide — ele adia a decisão. O padrão não é exclusivo do nosso recorte: em português, estima-se que apenas 8 % das notas escritas cheguem a ser exibidas (Agência Lupa, 2023). Esse dado é importante porque desloca a pergunta do trabalho. Não queremos saber se a nota está certa, e sim descrever do que ela é feita.
+O Community Notes funciona como uma checagem distribuída: qualquer usuário pode escrever uma nota que contextualiza, qualifica ou refuta uma publicação, e um grupo de avaliadores decide se ela será exibida. No nosso corpus, o estado mais comum de uma nota é "precisa de mais avaliações" (na sigla da plataforma, NMR), que responde por 78,9 por cento das notas; os estados "considerada útil" (CRH) e "considerada não útil" (CRNH) somam menos de um quinto. Na maior parte do tempo, portanto, o sistema não decide — e é esse dado que desloca a pergunta do trabalho: não queremos saber se a nota está certa, e sim descrever do que ela é feita.
 
-Vale também nomear o objeto com precisão. "Checagem de fatos" é um rótulo cômodo, mas impreciso: o que a nota faz é verificar a *verossimilhança de um enunciado*, e verossimilhança não é verdade. A nota não prova nada; ela argumenta — alega, apresenta evidência, cita uma fonte, faz ressalvas. Tomar essa estrutura como objeto de PLN pressupõe que há regularidade ali, e que essa regularidade pode ser anotada, extraída e medida. Não julgamos o mérito factual ou político das alegações; ficamos no plano estrutural. É uma decisão de escopo, e ela deixa de fora, de propósito, duas coisas: a relação entre os componentes (qual evidência sustenta qual alegação) e a veracidade em si.
+Vale nomear o objeto com precisão. "Checagem de fatos" é um rótulo cômodo, mas o que a nota faz é discutir a verossimilhança de um enunciado: ela alega, apresenta evidência, cita uma fonte, faz ressalvas. Tomar essa estrutura como objeto de Processamento de Linguagem Natural pressupõe que existe regularidade ali, e que essa regularidade pode ser anotada, extraída e medida. Ficamos deliberadamente no plano estrutural: não julgamos o mérito factual das alegações, e deixamos de fora a relação entre os componentes (qual evidência sustenta qual alegação).
 
 ### 1.2 Do Seminário 1 a este relatório
 
-No Seminário 1, apresentamos a proposta no essencial: a tarefa de AM sobre as notas em português, o corpus de origem e as duas estratégias de extração — a simbólica (E1) e a do modelo de linguagem (E2), ambas já previstas desde o início. Esse núcleo se manteve. O que mudou foi o caminho, em quatro pontos.
+No Seminário 1 apresentamos o essencial da proposta: a tarefa de Mineração de Argumentação sobre notas em português, o corpus de origem e duas estratégias de extração, uma simbólica e uma baseada em modelo de linguagem. Esse núcleo se manteve. O caminho, porém, cresceu em cinco direções, e cada uma delas está documentada nas seções que seguem.
 
-O primeiro é metodológico e responde a recomendações da disciplina: normalizamos a anotação para o formato *BIO*, em nível de *token*, e acrescentamos uma avaliação semiautomática (seqeval) ao lado da comparação com o humano. O segundo é de proveniência, e talvez o mais importante: passamos a *guardar* no dataset a anotação linguística — POS e dependências — que o notebook anterior calculava e descartava. Preservá-la (no campo `sintaxe_json`) custou pouco e rendeu muito, porque é dela que vivem as análises posteriores. O terceiro são essas próprias análises — a assinatura léxica por Dunning, a lente que cruza tipo de entidade e papel, a agência sintática —, que não estavam na proposta inicial. O quarto é o explorador interativo que as materializa, também novo em relação à apresentação.
+A primeira direção respondeu a recomendações da disciplina: normalizamos a anotação para o formato BIO em nível de token e acrescentamos uma avaliação semiautomática de sequência ao lado da comparação com o humano. A segunda foi de proveniência: passamos a guardar no dataset a anotação linguística (classe gramatical, lema e relações de dependência) que antes era calculada e descartada, e é dela que vivem as análises interpretativas. A terceira foi a construção completa do gold humano: segunda anotação independente, medição da concordância entre anotadores e adjudicação com trilha auditável de decisões. A quarta foi a inclusão de uma terceira estratégia de extração, que reexecuta o protocolo do modelo de linguagem com um modelo de pesos abertos rodando localmente. A quinta foi transformar em experimento aquilo que a proposta listava como trabalho futuro: a destilação do modelo de linguagem em rotuladores de sequência baratos, apresentada como estratégia E3.
 
-O *gold*, por fim, continua provisório: foi anotado por uma única pessoa, e tratamos isso como um limite declarado, não como um detalhe.
+Duas correções de percurso merecem registro desde já, porque afetam números: a ingestão de fontes por entidades pré-extraídas continha um defeito de deslocamento de posições, corrigido e medido na seção 4.2; e descobrimos que a camada de fontes ancoradas em URL se comporta como infraestrutura compartilhada entre sistemas e anotadores, o que motivou o desenho de avaliação em duas leituras, descrito na seção 3.6.
 
 ### 1.3 Tarefa, perguntas e objetivo
 
-A tarefa que escolhemos é a segmentação e tipagem de *spans* argumentativos no texto da nota, nos quatro rótulos do esquema. O objetivo é duplo: comparar E1 e E2 entre si e contra a referência humana, e caracterizar o que distingue uma extração simbólica de uma neural neste gênero de texto. Quatro perguntas guiam a análise:
+A tarefa é a segmentação e tipagem de spans argumentativos no texto da nota, nos quatro rótulos do esquema. O objetivo é duplo: comparar as estratégias entre si e contra a referência humana, e caracterizar o que distingue uma extração simbólica de uma neural neste gênero de texto. Cinco perguntas guiam a análise:
 
-1. Em que medida E1 e E2 concordam na identificação dos *spans*?
-2. Qual das duas se aproxima mais da anotação humana, no recorte de 60 notas?
-3. Que tipos argumentativos a regra captura melhor, e quais o modelo de linguagem?
+1. Em que medida as estratégias automáticas concordam entre si na identificação dos spans?
+2. Qual estratégia se aproxima mais da anotação humana — e quanto essa resposta depende de qual humano define a referência?
+3. Que tipos argumentativos cada estratégia captura melhor?
 4. O tipo da entidade mencionada ajuda a prever o papel argumentativo que ela ocupa?
+5. É possível destilar o modelo de linguagem em um rotulador barato que recupere a estrutura argumentativa humana melhor que a heurística de regras?
 
 ## 2. Fundamentação e trabalhos relacionados
 
-A Mineração de Argumentação identifica componentes argumentativos e suas relações em um texto (Lawrence e Reed, 2020; Stab e Gurevych, 2017; Eger et al., 2017). Adotamos a formulação *baseada em spans* — segmentos contíguos rotulados por tipo —, com conversão posterior para *rotulagem sequencial BIO* (`B-TIPO`, `I-TIPO`, `O`), o formato usual para avaliar em nível de *token* e para treinar modelos de sequência (Lafferty et al., 2001).
+A Mineração de Argumentação identifica componentes argumentativos e suas relações em um texto (Lawrence e Reed, 2020; Stab e Gurevych, 2017; Eger et al., 2017). Adotamos a formulação baseada em spans — segmentos contíguos rotulados por tipo — com conversão posterior para rotulagem sequencial BIO, o formato usual para avaliar em nível de token e para treinar modelos de sequência (Lafferty et al., 2001).
 
-O gênero impõe condições próprias. A nota é curta, presa a um tweet, e cumpre função de checagem ou contextualização — é discurso de usuário, com a informalidade e o ruído que isso traz (Habernal e Gurevych, 2017). Por isso mantivemos a análise no plano estrutural-argumentativo, sem deslizar para a avaliação do conteúdo.
+O gênero impõe condições próprias. A nota é curta, presa a uma publicação, e cumpre função de checagem ou contextualização; é discurso de usuário, com a informalidade e o ruído que isso traz (Habernal e Gurevych, 2017). Por isso mantivemos a análise no plano estrutural, sem deslizar para a avaliação do conteúdo.
 
-Duas famílias de método podem dar conta da tarefa. De um lado, regras léxico-sintáticas apoiadas em análise morfossintática — o spaCy e o quadro de *Universal Dependencies* (Honnibal e Montani, 2017; Schneider et al., 2026): transparentes e baratas, mas limitadas ao padrão que se escreveu. De outro, modelos de linguagem operando por um protocolo de *snippet*-para-*offset*, na linha do que se propôs para NER via LLM (Wang et al., 2023): flexíveis diante da paráfrase, ao custo de latência e de um alinhamento que pode falhar. Três recursos complementam a leitura — não como métrica de desempenho, mas como instrumento de interpretação: o *log-likelihood* de Dunning (1993) para a assinatura léxica de cada papel; o GLiNER para a extração de entidades; e a análise por dependências para a agência sintática.
+Três famílias de método sustentam o experimento. As regras léxico-sintáticas apoiam-se em análise morfossintática — usamos o spaCy e o quadro de Dependências Universais (Honnibal e Montani, 2017; Schneider et al., 2026) — e são transparentes e baratas, mas limitadas ao padrão que se escreveu. Os modelos de linguagem operam por um protocolo que pede trechos literais e os realinha ao texto, na linha do que se propôs para reconhecimento de entidades (Wang et al., 2023); são flexíveis diante da paráfrase, ao custo de latência e de um alinhamento que pode falhar. A destilação de conhecimento (Hinton et al., 2015) fecha o arco: usa as saídas de um modelo caro como supervisão fraca para treinar modelos baratos, dos generativos clássicos ao BERTimbau (Souza et al., 2020). Três recursos complementam a leitura como instrumentos de interpretação, não de desempenho: a razão de verossimilhança de Dunning (1993) para a assinatura léxica de cada papel, as entidades nomeadas do corpus para a lente entidade e papel, e a análise de dependências para a agência sintática.
 
 ## 3. Dados e medidas de avaliação
 
@@ -52,19 +53,18 @@ Duas famílias de método podem dar conta da tarefa. De um lado, regras léxico-
 
 | Medida | Valor |
 |---|---:|
-| Notas no corpus do experimento | 1 901 |
-| Tweets únicos | 689 |
-| Notas por tweet (média; máx.) | 2,8; 19 |
-| Modelo de linguagem avaliado | `qwen3.6-max-preview` |
-| Notas no recorte com *gold* humano | 60 |
+| Notas no corpus do experimento | 1.901 |
+| Publicações (tweets) únicas | 689 |
+| Notas por publicação (média; máximo) | 2,8; 19 |
+| Notas no recorte com gold humano | 60 |
 
-O corpus deriva do conjunto publicado `histlearn/notas-comunidade-ptbr`. O campo `summary` é o texto que anotamos; o tweet associado entra como *contexto* — útil sobretudo para ancorar a CLAIM, que muitas vezes não está na nota, mas naquilo que a nota contesta.
+O corpus deriva do conjunto público `histlearn/notas-comunidade-ptbr`. O campo `summary` é o texto que anotamos; a publicação associada entra como contexto, útil sobretudo para ancorar a alegação, que muitas vezes não está na nota, mas naquilo que a nota contesta. O conjunto de origem evoluiu durante o projeto (a tabela de entidades foi pós-processada e ganhou camadas de auditoria de qualidade e de sintaxe automática); por isso os notebooks fixam a revisão exata usada nos downloads, e a seção 4.2 explica como a auditoria pública do próprio conjunto confirmou um defeito que havíamos encontrado de forma independente. A camada sintática nativa do conjunto foi gerada sobre uma versão do texto sem URLs; como as URLs são centrais para o papel de fonte, mantivemos nossa própria camada sintática, gerada com o spaCy sobre o texto integral.
 
 ### 3.2 Esquema de rótulos
 
-Quatro tipos organizam a anotação. As definições abaixo seguem o `guia_anotacao.md`; no guia, o rótulo aparece como EVIDÊNCIA, mas a forma técnica usada nos artefatos é `EVIDENCIA`.
+Quatro tipos organizam a anotação. As definições seguem o guia de anotação do projeto; no guia o rótulo aparece como EVIDÊNCIA, e nos artefatos a forma técnica é EVIDENCIA, sem acento.
 
-**CLAIM — a alegação refutada.** É o trecho da nota que expressa a afirmação que o tweet fazia e que a nota agora corrige ou qualifica. Pode aparecer como negação direta, paráfrase ou citação. Pistas léxicas frequentes em PT-BR: "não é verdade que X"; "é falso que X"; "a foto/imagem/vídeo não mostra X"; "não há evidência de que X"; "X não aconteceu"; "X é antiga/de 2013". Exemplo positivo:
+**CLAIM — a alegação refutada.** É o trecho da nota que expressa a afirmação que a publicação fazia e que a nota corrige ou qualifica. Pode aparecer como negação direta, paráfrase ou citação. Pistas frequentes em português: "não é verdade que", "é falso que", "a foto não mostra", "não há evidência de que". Exemplo positivo:
 
 ```text
 NOTA: "A foto não mostra um protesto em Brasília em 2024."
@@ -78,247 +78,221 @@ NOTA: "Segundo a AFP, a imagem é de 2013."
        [FONTE]        [EVIDENCIA]
 ```
 
-Nesse caso não há CLAIM no texto: a alegação está implícita no tweet, e a nota apresenta só a refutação.
+Neste segundo caso não há alegação no texto: ela está implícita na publicação, e a nota apresenta apenas a refutação.
 
-**EVIDENCIA — o fato que sustenta a checagem.** É o conteúdo factual, descritivo ou numérico que a nota oferece como base para contrariar ou qualificar o tweet. Costuma seguir a estrutura "X não é Y, é Z". Pistas léxicas: verbos factivos como *mostra*, *indica*, *comprova*, *confirma*, *revela*, *evidencia*; valores numéricos, datas e percentuais; contraexemplos como "na verdade" e "ao contrário". Exemplo positivo:
+**EVIDENCIA — o fato que sustenta a checagem.** É o conteúdo factual, descritivo ou numérico que a nota oferece para contrariar ou qualificar a publicação. Pistas: verbos como mostrar, indicar, comprovar, confirmar; valores numéricos, datas e percentuais; contraexemplos como "na verdade" e "ao contrário".
 
-```text
-NOTA: "O reajuste foi de 4,9%, e não 500% como afirma o tweet."
-       [EVIDENCIA]                          [CLAIM]
-```
+**FONTE — atribuição.** É quem ou o que a nota cita como autoridade ou base da informação: veículo de mídia, especialista, órgão público, documento ou endereço eletrônico. Pistas: "segundo", "de acordo com", "conforme"; construções como "afirma", "publicou", "apurou"; URLs completas; nomes de veículos e instituições. Uma observação operacional importante: as URLs eram pré-marcadas como fonte pelo aplicativo de anotação, e essa pré-marcação tem consequências metodológicas discutidas na seção 3.6.
 
-Exemplo negativo:
+**QUALIFICADOR — modulação ou ressalva.** São advérbios e locuções que modulam o grau de certeza ou o escopo de uma alegação: "aparentemente", "provavelmente", "supostamente", "parcialmente", "fora de contexto". Não marcamos adjetivos descritivos sem função modal nem conectivos puramente discursivos.
 
-```text
-NOTA: "Estudos mostram que a vacina é segura."
-       [FONTE — não é EVIDENCIA]
-```
-
-"Estudos", aqui, é uma atribuição genérica; o conteúdo da evidência ("a vacina é segura") não tem suporte concreto na nota.
-
-**FONTE — atribuição.** É quem ou o que a nota cita como autoridade ou base da informação. Pode ser veículo de mídia, especialista, órgão público, documento ou URL. Pistas léxicas: "segundo X", "de acordo com X", "conforme X"; estruturas como "X afirma", "X informa", "X publicou" ou "X apurou"; URLs completas; nomes de veículos, órgãos e instituições, como G1, Folha, Lupa, AFP, Reuters, STF, TSE, Anvisa e Ministério da Saúde. Exemplos:
-
-```text
-"Segundo a Agência Lupa,..."     -> [FONTE: "Segundo a Agência Lupa"]
-"Fonte: https://lupa.uol.com.br" -> [FONTE: "https://lupa.uol.com.br"]
-"...conforme análise do G1."     -> [FONTE: "conforme análise do G1"]
-"...divulgou o Ministério..."    -> [FONTE: "o Ministério"]
-```
-
-Uma observação do guia: as URLs são pré-marcadas como FONTE pelo pipeline; se aparecem destacadas na tela do anotador, isso está correto e integra a anotação.
-
-**QUALIFICADOR — modulação ou ressalva.** São advérbios, locuções e expressões que modulam o grau de certeza ou o escopo de uma alegação. Lista frequente: *aparentemente*, *provavelmente*, *possivelmente*, *supostamente*, *alegadamente*, *talvez*; *parcialmente*, *parcialmente verdadeiro*, *fora de contexto*; *ao que tudo indica*, *sem evidência clara*, *não há prova de*. Exemplos:
-
-```text
-"Aparentemente, o vídeo é falso."
- [QUALIFICADOR]
-
-"A informação está parcialmente correta."
-                    [QUALIFICADOR]
-```
-
-Não marcamos como QUALIFICADOR: adjetivos descritivos sem função modal, como "rapidamente" e "claramente" — este último só vira QUALIFICADOR em casos como "claramente uma sátira"; e conectivos como "porém" e "entretanto", que são discursivos, não epistêmicos.
-
-Os *spans* são marcados apenas no texto da nota; o tweet permanece como contexto, fora do alvo de anotação.
+Os spans são marcados apenas no texto da nota; a publicação permanece como contexto, fora do alvo de anotação.
 
 ### 3.3 Recorte com gold e meta-notas
 
-O *gold* foi construído sobre 60 notas estratificadas pelo status do Community Notes — 20 NMR, 20 CRH e 20 CRNH —, de propósito sem meta-notas. A estratificação tem uma razão: a distribuição real é desbalanceada (NMR 78,9 %, CRNH 12,5 %, CRH 7,0 %, Outro 1,6 %), e uma amostra proporcional seria, na prática, uma amostra só de NMR.
+O gold foi construído sobre 60 notas estratificadas pelo estado da nota na plataforma: vinte de cada um dos três estados principais. A estratificação tem uma razão simples: a distribuição real é desbalanceada, e uma amostra proporcional seria, na prática, uma amostra de um único estado.
 
-Nem toda nota argumenta. Há comentários sobre o próprio sistema, piadas, opiniões e notas curtas demais para ter estrutura. São 404 (21,3 %) dessas *meta-notas* no corpus, com motivos predominantes de prefixo *NNN*, "muito curta" e "não necessita nota". Distingui-las foi importante em dois momentos: na seleção do recorte humano, que as exclui, e na avaliação, em que um corte específico (B) as remove para isolar o material que de fato argumenta.
+Nem toda nota argumenta. Há comentários sobre o próprio sistema, piadas, opiniões e textos curtos demais para ter estrutura. São 404 dessas meta-notas no corpus, ou 21,3 por cento. Distingui-las importou em dois momentos: na seleção do recorte humano, que as exclui, e na avaliação, em que um corte específico as remove para isolar o material que de fato argumenta.
 
 ### 3.4 Normalização BIO
 
-As estratégias e o anotador humano produzem *spans*: intervalos contínuos no texto, definidos por início, fim e tipo. Já a avaliação por seqeval espera outra forma de dado: uma sequência de rótulos, um para cada *token*. A normalização BIO é a ponte entre essas duas representações. Ela não muda a anotação; apenas projeta a mesma marcação, feita originalmente em caracteres, para a grade dos *tokens*.
+As estratégias e os anotadores produzem spans: intervalos contínuos no texto, definidos por início, fim e tipo, em posições de caractere. A avaliação de sequência espera outra forma de dado: uma sequência de rótulos, um para cada token. A normalização BIO é a ponte entre as duas representações — ela não muda a anotação, apenas projeta a mesma marcação para a grade dos tokens.
 
-Para que a comparação fosse justa, projetamos as três fontes — E1, E2 e humano — sobre a mesma tokenização (`spacy_pt_blank_v1`). Esse ponto é central: se cada fonte fosse tokenizada de um jeito, as sequências BIO poderiam ter tamanhos ou fronteiras diferentes, e a comparação *token* a *token* deixaria de fazer sentido. Por isso tokenizamos cada nota uma única vez; para cada *token*, registramos o texto e seus *offsets* de caractere (`bio_offsets_json`); só então comparamos os *spans* de cada fonte a esses intervalos.
+Para que a comparação fosse justa, projetamos todas as fontes de anotação sobre a mesma tokenização, fixada e versionada. Se cada fonte fosse tokenizada de um jeito, as sequências poderiam ter tamanhos diferentes e a comparação token a token deixaria de fazer sentido. Tokenizamos cada nota uma única vez, registramos o texto e as posições de cada token, e só então comparamos os spans a esses intervalos. A regra básica: um token que não toca nenhum span recebe O; um token coberto por um span recebe B mais o tipo se é o primeiro do trecho, e I mais o tipo nos seguintes. Para os raros casos de fronteira ambígua existe uma política fixa e versionada: vence o span de maior sobreposição com o token; havendo empate, o mais longo; persistindo, uma prioridade fixa de tipo.
 
-A regra básica é simples. Se um *token* não toca nenhum *span*, recebe `O`. Se toca um *span* do tipo `TIPO`, passa a pertencer a ele: o primeiro *token* coberto recebe `B-TIPO`, e os seguintes recebem `I-TIPO`. Assim, um trecho marcado como EVIDENCIA em caracteres vira uma sequência `B-EVIDENCIA`, `I-EVIDENCIA`, `I-EVIDENCIA` até o fim.
-
-O único ponto delicado é a fronteira. Um *token* pode atravessar a borda de um *span* ou, em tese, ser compatível com mais de um. Resolvemos esses casos com uma política fixa e versionada (`token_max_overlap_then_longest_then_type_priority`, projeção 2.0.0): primeiro vence o *span* que mais se sobrepõe ao *token* em número de caracteres; havendo empate, vence o mais longo; se ainda persistir, aplica-se uma prioridade de tipo. A decisão não depende, portanto, da ordem em que os *spans* aparecem no arquivo.
-
-Na prática, os *spans* de uma mesma fonte quase nunca competem entre si — no E2, não houve nenhuma sobreposição interna —, de modo que a política age principalmente nos *tokens* de borda. Como preservamos os *offsets* originais, a leitura por *span* e a leitura BIO descrevem o mesmo objeto em duas resoluções: uma contínua, por caracteres; outra discreta, por *tokens*. Foi essa projeção que viabilizou a avaliação por seqeval e atendeu à recomendação de representar a tarefa em BIO.
+Toda projeção quantiza: uma fronteira que cai dentro de um token é arredondada para a borda do token. Medimos essa perda reconstruindo os spans a partir do BIO e comparando com os originais. Para a anotação humana, apenas 2 de 224 spans mudam (0,89 por cento, ambos na barra final de uma URL); para os modelos de linguagem, a perda fica entre 1,3 e 1,4 por cento. Para a estratégia de regras, porém, 16,05 por cento dos spans mudam de fronteira na projeção — as expressões regulares cortam trechos no meio de palavras, um achado que antecipa a discussão sobre fronteiras da seção 8. A perda baixa nas demais fontes valida usar a camada BIO como representação de avaliação.
 
 ### 3.5 Medidas de avaliação
 
-O que cada estratégia entrega é uma lista de *spans* tipados. Cada item traz três informações — onde o trecho começa, onde termina e de que tipo é —, gravadas como posições de caractere no texto da nota: `[120, 158) / EVIDENCIA` quer dizer "do caractere 120 ao 157, uma evidência". Avaliar o sistema é, no fundo, conferir se esses itens batem com os de outra lista. No recorte com *gold*, a outra lista é a anotação humana; na comparação E1×E2, é a saída da estratégia rival — e aí o número mede acordo, não "acerto". Nenhuma medida sozinha conta a história inteira, então usamos quatro, cada uma respondendo a uma pergunta distinta.
+O que cada estratégia entrega é uma lista de spans tipados, e avaliar é conferir se essa lista bate com a de uma referência. No recorte com gold, a referência é a anotação humana; na comparação entre estratégias, é a saída da outra estratégia — e nesse caso o número mede acordo, não acerto. Nenhuma medida sozinha conta a história inteira, e por isso usamos quatro, cada uma respondendo a uma pergunta distinta.
 
-A mais óbvia é de correspondência item a item: dos *spans* que o sistema marcou, quantos têm par na referência? E dos *spans* da referência, quantos ele recuperou? É o que precisão, revocação e F1 resumem. Numa nota, um verdadeiro positivo ($TP$) é um *span* do sistema que encontra par; um falso positivo ($FP$) é um *span* que o sistema marcou sem que houvesse par; um falso negativo ($FN$) é um *span* da referência que ele deixou passar. As fórmulas apenas organizam essa contagem:
+A primeira pergunta é de correspondência item a item: dos spans que o sistema marcou, quantos têm par na referência? E dos spans da referência, quantos ele recuperou? É o que precisão, revocação e F1 resumem. Em uma nota, um verdadeiro positivo é um span do sistema que encontra par; um falso positivo é um span marcado sem que houvesse par; um falso negativo é um span da referência que ficou sem correspondência:
 
 $$
 P = \frac{TP}{TP + FP}, \qquad R = \frac{TP}{TP + FN}, \qquad F_1 = \frac{2PR}{P+R}.
 $$
 
-Tudo depende, então, de uma decisão: o que conta como "ter par"? Adotamos duas leituras. Na F1 estrita, só há par quando tipo, início e fim coincidem exatamente — `[120, 158) / EVIDENCIA` casa com `[120, 158) / EVIDENCIA`, mas não com `[118, 158) / EVIDENCIA`, que começa duas posições antes. Na F1 relaxada, o tipo ainda precisa bater, mas basta que os trechos se sobreponham: `[118, 158)` e `[120, 158)` passam a contar como o mesmo trecho. Formalmente, para um *span* de referência $r=[i_r, j_r)$ e um do sistema $s=[i_s, j_s)$, ambos de tipo $t$:
+Tudo depende de definir o que conta como "ter par", e adotamos duas leituras. Na F1 estrita, o par exige tipo, início e fim idênticos. Na F1 relaxada, o tipo precisa coincidir e basta que os trechos se sobreponham de forma substantiva. A distância entre as duas é, na prática, o tamanho do erro de fronteira: quando a relaxada sobe e a estrita não acompanha, o sistema encontrou a região certa e errou o limite fino.
 
-$$
-\text{estrito:}\quad i_r = i_s \,\wedge\, j_r = j_s
-\qquad\qquad
-\text{relaxado:}\quad [i_r, j_r) \cap [i_s, j_s) \neq \varnothing.
-$$
-
-A distância entre as duas é, na prática, o tamanho do erro de fronteira. Quando a relaxada sobe e a estrita não acompanha, o sistema achou a região certa, mas cortou palavras a mais ou a menos. Foi um padrão recorrente aqui: E1 encontra o sinal lexical — sobretudo em FONTE — e, mesmo assim, erra o limite fino do *span*.
-
-Essas três medidas têm um ponto cego: enxergam só os *spans* marcados e ignoram todo o texto que ambas as fontes deixaram de fora. Para olhar a nota inteira, usamos o *kappa* de Cohen em nível de caractere. Damos um rótulo a cada caractere — CLAIM, EVIDENCIA, FONTE, QUALIFICADOR ou `O` — e medimos quanto as duas rotulações concordam, descontando a concordância que cairia por acaso, só pela proporção de cada rótulo:
+A segunda pergunta olha o texto inteiro, incluindo o que ambas as partes deixaram fora de span. Para isso usamos o kappa de Cohen em nível de caractere: cada caractere recebe um rótulo (um dos quatro tipos ou O), e medimos quanto as duas rotulações concordam, descontando a concordância esperada pelo acaso:
 
 $$
 \kappa = \frac{p_o - p_e}{1 - p_e}.
 $$
 
-$p_o$ é a concordância de fato observada entre as duas sequências de caracteres; $p_e$, a esperada ao acaso. O *kappa* vale 1 no acordo perfeito, 0 quando o acordo não supera o acaso, e fica negativo quando é pior que isso. Medimos em caractere por um motivo simples: é a unidade em que E1, E2 e humano produzem seus *spans*, de modo que o *kappa* avalia exatamente o que foi anotado, sem intermediário.
+O kappa vale um no acordo perfeito e zero quando o acordo não supera o acaso. Reportamos o kappa em duas agregações — a média dos valores por nota e o valor agregado sobre todos os caracteres do recorte —, porque notas curtas pesam mais na primeira e menos na segunda, e a diferença entre as duas é informativa.
 
-Falta a leitura que a disciplina recomendou: e se passarmos os *spans* a rótulos por *token* e tratarmos tudo como rotulagem de sequência? Aí entra o seqeval. Depois da projeção BIO da seção anterior, ele exige, para um acerto, o mesmo tipo e as mesmas fronteiras de *token* — é a leitura estrita de novo, agora sobre entidades BIO. Reportamos a média *micro*, que junta $TP$, $FP$ e $FN$ de todos os tipos num número só, e também o resultado por tipo, porque CLAIM, EVIDENCIA e FONTE se comportam de maneiras bem diferentes no corpus.
+A terceira pergunta vem da recomendação da disciplina de representar a tarefa em BIO: tratando tudo como rotulagem de sequência, um acerto exige o mesmo tipo e as mesmas fronteiras de token. Essa avaliação usa a implementação do projeto verificada, célula a célula, contra a biblioteca seqeval no modo estrito: as duas produzem valores idênticos nos quatro comparativos usados.
 
-As quatro leituras se complementam. A estrita pergunta se o *span* saiu exato; a relaxada, se ao menos caiu na região certa; o *kappa* abre o foco para o texto todo; o seqeval reescreve o problema na forma que um modelo de sequência entenderia.
+A quarta medida é operacional: latência por nota, medida de ponta a ponta para cada estratégia.
 
-## 4. Estratégias
+### 3.6 A infraestrutura compartilhada de FONTE-URL e as duas leituras
+
+Durante a análise do gold descobrimos um fato que reorganizou a avaliação. Das 123 fontes do gold adjudicado, 113 são endereços eletrônicos — e esses spans não resultam de decisão de ninguém. Do lado dos sistemas, a mesma expressão regular que detecta URLs injeta essas fontes nas três estratégias automáticas; do lado humano, o aplicativo de anotação as pré-marcava na tela. Quando a avaliação casa um span de URL do sistema com um span de URL do gold, ela está medindo uma expressão regular contra ela mesma.
+
+O episódio ficou visível por um acidente instrutivo: os arquivos exportados pelos dois anotadores trataram a pré-marcação de formas opostas — um preservou as 113 fontes de URL, o outro nenhuma. A concordância entre anotadores calculada sobre os arquivos brutos saía artificialmente baixa por causa dessa diferença de ferramenta, não de julgamento.
+
+A resposta metodológica foi decompor em vez de amputar. Não removemos o tipo fonte da avaliação, porque as fontes textuais ("segundo a Folha", "conforme o TSE") são decisões genuínas; e não removemos a injeção de URLs dos sistemas, porque ela é engenharia legítima e documentada. Em vez disso, toda avaliação contra o gold é reportada em duas leituras: a leitura completa, que compara sistemas como eles são, com a infraestrutura incluída; e a leitura sem FONTE-URL, que remove os spans de fonte ancorados em URL dos dois lados da régua e compara apenas o conteúdo decidido. As duas leituras respondem perguntas diferentes e, como as seções de resultados mostram, chegam a inverter rankings.
+
+## 4. Estratégias e anotação humana
 
 ### 4.1 Visão geral do pipeline
 
-O fluxo encadeia: corpus → `notebook_preparacao_v2.ipynb` (preparação, seleção das 60 notas e extrações E1/E2) → anotação humana → `notebook_conclusao.ipynb` (normalização BIO e avaliação E1×E2 e contra o *gold*) → camadas interpretativas (Dunning, entidades, agência). A arquitetura completa está na Figura 1.
+O fluxo encadeia três notebooks. O primeiro prepara o corpus e executa as extrações automáticas. O segundo constrói o gold humano, faz a normalização BIO e calcula todas as medidas de avaliação — é a fonte canônica dos números deste relatório. O terceiro realiza o experimento de destilação. Os artefatos intermediários (dataset, anotações, gold adjudicado, saídas do modelo local) são arquivos versionados no repositório do projeto, e os notebooks os leem diretamente de lá, o que torna cada número reproduzível a partir do estado público do repositório. A arquitetura completa está na Figura 1.
 
 ![Arquitetura do pipeline](figuras_relatorio/fig_01_arquitetura.png)
 
-*Figura 1 — Arquitetura do pipeline experimental: o notebook de preparação produz as extrações E1 e E2; o notebook de conclusão realiza normalização BIO, avaliação, figuras e artefatos finais.*
+*Figura 1 — Arquitetura do pipeline experimental, do corpus aos artefatos finais.*
 
 ### 4.2 Estratégia E1 — regras léxico-sintáticas
 
-**Recursos em língua portuguesa.** E1 se apoia no modelo `pt_core_news_md` do spaCy, treinado para o português, do qual usa tokenização, lematização, etiquetagem morfossintática (POS) e análise de dependências.
+A estratégia E1 se apoia no modelo `pt_core_news_md` do spaCy, treinado para o português, do qual usa tokenização, lematização, etiquetagem morfossintática e análise de dependências. Sobre essa representação aplicamos heurísticas por tipo — padrões léxico-sintáticos para alegação e evidência — e duas vias para fonte: uma expressão regular de URL e as entidades pré-extraídas do conjunto de origem (veículos de mídia, órgãos públicos, fontes citadas). A saída é uma lista de spans que segue para a mesma projeção BIO das demais estratégias. A estratégia é determinística e transparente: quando acerta ou erra, a razão está escrita no código.
 
-**Pré-processamento e representação.** Cada nota é tokenizada e analisada sintaticamente. Sobre essa representação aplicamos heurísticas por tipo — padrões léxico-sintáticos para CLAIM e EVIDENCIA — e uma *regex* de URL que garante a captura de FONTE. A saída é uma lista de *spans* `{início, fim, tipo}`, depois projetada para BIO. A estratégia é determinística e transparente: quando acerta, acerta por uma razão que está escrita no código; quando erra, erra pela mesma razão.
+Uma correção importante aconteceu nesta rota, e vale narrá-la porque ela mudou números e rendeu um método. A versão original usava diretamente as posições de início e fim registradas na tabela de entidades do conjunto de origem. Descobrimos que essas posições frequentemente não se referem ao texto que anotamos: nas 1.901 notas, apenas 9,2 por cento das entidades candidatas a fonte tinham posições que reproduziam exatamente a superfície esperada, e 90,8 por cento precisaram ser relocalizadas procurando o texto da entidade dentro da nota. A auditoria de qualidade publicada depois pelo próprio conjunto de origem confirmou o diagnóstico de forma independente, marcando cerca de metade das posições como fora do texto de referência. O efeito da correção foi medido preservando tudo o mais: no acordo entre E1 e E2 sobre o corpus inteiro, a F1 estrita subiu de 0,307 para 0,372, enquanto a F1 relaxada ficou praticamente parada (de 0,459 para 0,460). A leitura é direta: a estratégia sempre encontrou as regiões certas, e uma parte substancial do que parecia erro de fronteira era defeito de ingestão de dados.
 
-**O que isso implica.** Uma regra não lê o argumento; lê a marca do argumento. Ela encontra a URL porque a URL tem forma fixa, e perde a alegação parafraseada porque a paráfrase não tem forma fixa. Esse viés decorre da natureza do método e reaparece em cada métrica adiante.
+A latência também foi medida com mais honestidade nesta versão: a aplicação das regras custa 1,9 milissegundo por nota, e a análise sintática que a antecede custa outros 8 milissegundos, somando cerca de 10 milissegundos de ponta a ponta — o número que usamos nas comparações de custo (o processamento em lote amortiza parte da análise sintática).
 
-### 4.3 Estratégia E2 — modelo de linguagem
+### 4.3 Estratégia E2 — modelo de linguagem por interface remota
 
-**Recursos.** E2 usa o modelo `qwen3.6-max-preview` (Qwen Team, 2025), multilíngue, acessado por API. O prompt descreve o esquema de rótulos e pede os *spans* tipados. Além dos trechos, o modelo devolve um *raciocínio* — uma justificativa em linguagem natural, traduzida para o português nas 60 notas, que usamos na análise qualitativa, nunca como gabarito.
+A estratégia E2 usa o modelo `qwen3.6-max-preview` (Qwen Team, 2025), proprietário, acessado por interface de programação remota. A instrução descreve o esquema de rótulos com exemplos e pede trechos copiados literalmente do texto, nunca posições; um protocolo de alinhamento em quatro níveis de tolerância (exato, normalização de espaços, normalização de caracteres, busca aproximada) devolve cada trecho à sua posição no texto, registrando o nível usado. As URLs são garantidas pela mesma expressão regular das demais estratégias, porque um modelo de linguagem é desnecessário para uma subtarefa puramente formal. Além dos trechos, o modelo devolve uma justificativa em linguagem natural, que usamos apenas na análise qualitativa.
 
-**Pré-processamento e representação.** O modelo retorna *snippets* de texto, não posições. Um protocolo de *snippet*-para-*offset* os realinha à nota, com vários níveis de tolerância (exato, normalizado, *regex*), e registramos qual nível foi usado em cada caso. As URLs, de novo, são garantidas por *regex* e mescladas ao resultado, porque um modelo de linguagem é desnecessário — e pouco confiável — para uma subtarefa puramente formal como essa. A saída segue para a mesma projeção BIO.
+Dois custos operacionais desta rota aparecem nos resultados: a latência, em segundos por nota, e as recusas do provedor — sete notas foram bloqueadas por filtro de conteúdo da plataforma remota, um risco típico de depender de um serviço externo.
 
-**O que isso implica.** O modelo lê o discurso, não apenas sua superfície lexical. Reconhece a alegação que não traz palavra-gatilho e a evidência cuja fronteira é semântica, não sintática. Paga por isso em latência e numa dependência incômoda: o trecho precisa *voltar* ao texto, e nem sempre volta inteiro.
+### 4.4 Estratégia E2b — o mesmo protocolo com um modelo aberto local
 
-### 4.4 Anotação humana
+A estratégia E2b reexecuta a E2 trocando apenas o motor: em vez do modelo proprietário remoto, um modelo de pesos abertos da mesma família (`Qwen3.6-35B-A3B`, licença Apache 2.0), servido localmente. A instrução, os exemplos, o protocolo de alinhamento e a regra de URL são os mesmos — o desenho isola deliberadamente a variável "modelo", e a assimetria de porte é o ponto, não um vício: a pergunta é quanto da qualidade se preserva ao trocar um serviço proprietário por um modelo que qualquer pessoa pode baixar e executar.
 
-As 60 notas foram anotadas segundo o `guia_anotacao.md`. Nesta versão, o *gold* é obra de um único anotador — e isso tem uma consequência metodológica direta. Sem um segundo anotador independente, não há *kappa* inter-anotador nem consenso; o que chamamos de "humano", aqui, é uma voz, não um coro. Assumimos esse limite e o tratamos como etapa pendente, não como nota de rodapé.
+Três diferenças operacionais já apareceram na execução: nenhuma recusa de conteúdo nas 1.901 notas; alinhamento dos trechos ao texto ligeiramente melhor que o do modelo remoto (96,9 por cento de casamentos exatos); e reprodutibilidade plena, porque os pesos são públicos e a execução é local — os resultados da E2, em contraste, dependem de um serviço que pode mudar ou ser descontinuado.
 
-### 4.5 Dificuldades encontradas
+### 4.5 Anotação humana: duas anotações independentes
 
-Algumas dificuldades foram de método, outras de engenharia. Vale enumerá-las, porque elas desenham o contorno do que foi possível fazer.
+As 60 notas do recorte foram anotadas de forma independente por dois anotadores, seguindo o guia de anotação do projeto. A primeira anotação produziu 101 spans; a segunda, 217. A independência é verificável nos próprios arquivos: apenas 31 spans são idênticos entre as duas, e os perfis são visivelmente distintos — o segundo anotador marca muito mais fontes, o primeiro distribui mais entre alegação e evidência. Parte dessa diferença, como a seção 3.6 explica, veio da ferramenta e não do julgamento: um arquivo preservou as fontes de URL pré-marcadas e o outro não. A concordância entre os dois, medida nas duas leituras, está na seção 5.2 — e é ela que dimensiona a dificuldade real da tarefa.
 
-A primeira é a *fronteira*. Onde começa e onde termina uma evidência é uma decisão fluida, e foi a maior fonte de desacordo — tanto entre as duas estratégias quanto contra o humano. A segunda é o *alinhamento* do E2: nem todo *snippet* devolvido pelo modelo reencontra sua posição exata, e 488 notas não produziram nenhum *span* alinhável (meta-notas, retornos vazios, recusas). A terceira é operacional: o provedor do modelo *recusou* 7 notas por filtro de conteúdo — um custo silencioso de depender de uma API. A quarta foi de representação: as colunas de *span*, gravadas como estruturas aninhadas, exigiram leitura com ferramentas que as preservam (DuckDB, `pyarrow`), sob pena de voltarem vazias — leitores sem suporte a *struct* aninhado, como o `fastparquet`, devolvem essas colunas nulas sem qualquer aviso. A quinta é o *desbalanceamento*: NMR domina o corpus, e QUALIFICADOR é tão raro que quase some das métricas — o que limita o que podemos afirmar sobre esse tipo. A sexta, já mencionada, é o *gold* de um anotador só.
+### 4.6 Adjudicação e o gold final
+
+Para transformar duas anotações em uma referência única, construímos uma interface de adjudicação dedicada, versionada no repositório. Ela apresenta as duas anotações lado a lado sobre o texto, agrupa as divergências em torno dos trechos disputados, pré-aceita os acordos exatos e registra cada decisão com origem, autor, rodada e horário. O protocolo prevê rodadas nomeadas (parecer individual, revisão cruzada e fechamento) para o caso assíncrono; as camadas com as saídas das estratégias automáticas ficam bloqueadas até a nota ser revisada, para que o gold não seja contaminado pelo sistema que ele avalia, e qualquer consulta posterior fica registrada na trilha.
+
+O gold adjudicado tem 224 spans nas 60 notas (31 alegações, 68 evidências, 123 fontes e 2 qualificadores; 12 notas ficaram deliberadamente sem spans). A trilha de decisões mostra o adjudicador preferindo a leitura do outro anotador na maior parte dos casos — descontada a camada mecânica de URLs, as origens ficam equilibradas entre os dois anotadores e os acordos exatos. No momento da escrita, o gold reflete a rodada de parecer individual; a revisão cruzada pelo segundo anotador está prevista, e todos os artefatos derivados se atualizam por scripts versionados quando ela se concluir.
+
+### 4.7 Dificuldades encontradas
+
+Seis dificuldades desenharam o contorno do que foi possível fazer. A primeira é a fronteira dos spans: onde começa e termina uma evidência é uma decisão fluida, e foi a maior origem de desacordo tanto entre estratégias quanto entre humanos. A segunda é o alinhamento dos trechos devolvidos pelos modelos de linguagem, que nem sempre reencontram sua posição exata no texto. A terceira é operacional: o provedor remoto recusou sete notas por filtro de conteúdo, um custo silencioso que a execução local eliminou. A quarta foi de representação: as colunas de spans, gravadas como estruturas aninhadas, exigem leitores que as preservem (DuckDB ou pyarrow), sob pena de voltarem vazias sem aviso. A quinta é o desbalanceamento: o qualificador é raro a ponto de limitar qualquer afirmação sobre ele. A sexta foi a descoberta de que dados herdados também erram: as posições da tabela de entidades e a pré-marcação de URLs do aplicativo de anotação exigiram, respectivamente, correção medida e desenho de avaliação em duas leituras.
 
 ## 5. Resultados — avaliação quantitativa
 
-Os números a seguir foram reconciliados de forma reprodutível a partir das células determinísticas de `notebook_conclusao.ipynb`, que consome os *spans* E1/E2 produzidos na preparação e executa a normalização BIO e as medidas de avaliação (script `_reconciliar_relatorio.py`, saídas em `outputs/`).
+Os números desta seção saem do notebook de avaliação, executado de ponta a ponta sobre os artefatos versionados; as tabelas exportadas acompanham o repositório.
 
-### 5.1 Acordo E1 × E2 nos três cortes
+### 5.1 Acordo entre as estratégias E1 e E2 nos três cortes
 
-| Corte | n | F1 estrita | F1 relaxada | κ char-level |
+| Corte | Notas | F1 estrita | F1 relaxada | Kappa por caractere |
 |---|---:|---:|---:|---:|
-| A — completo | 1 901 | 0,307 | 0,459 | 0,366 |
-| B — sem meta | 1 497 | 0,272 | 0,446 | 0,338 |
-| C — ambas marcaram | 1 331 | 0,250 | 0,466 | 0,334 |
+| A — corpus completo | 1.901 | 0,372 | 0,460 | 0,375 |
+| B — sem meta-notas | 1.497 | 0,346 | 0,446 | 0,348 |
+| C — ambas produziram spans | 1.329 | 0,344 | 0,468 | 0,347 |
 
-O acordo cai de A para C na métrica estrita e no *kappa*. O sentido do movimento importa: quanto mais o corte se restringe a notas com material argumentativo de verdade, mais as duas estratégias divergem. A discordância, portanto, não está no ruído — está exatamente onde há argumento para delimitar.
+O acordo cai do corte completo para o corte em que ambas as estratégias de fato marcaram algo: quanto mais o recorte se concentra em notas com material argumentativo real, mais as duas divergem — a discordância está na delimitação do argumento, não no ruído. Estes números já refletem a correção da estratégia de regras descrita na seção 4.2.
 
-![Acordo E1 × E2 nos três cortes](figuras_relatorio/fig_03_acordo_cortes.png)
+![Acordo entre E1 e E2 nos três cortes](figuras_relatorio/fig_03_acordo_cortes.png)
 
-*Figura 2 — Acordo entre E1 e E2 nos cortes A, B e C, medido por F1 estrita, F1 relaxada e κ em nível de caractere.*
+*Figura 2 — Acordo entre as estratégias E1 e E2 nos cortes A, B e C.*
 
-### 5.2 Comparação contra o gold humano
+### 5.2 Acordo entre os anotadores humanos
 
-| Estratégia | F1 estrita | F1 relaxada | κ vs gold |
-|---|---:|---:|---:|
-| E1 | 0,017 | 0,136 | −0,003 |
-| E2 | 0,340 | 0,466 | 0,428 |
-
-A distância é grande, e mostra onde cada estratégia falha. A F1 estrita de E1 é quase nula, e seu *kappa* contra o humano beira o zero: as regras acertam o miolo do trecho, mas erram a borda, e a métrica estrita não perdoa a borda. A relaxada melhora porque exige apenas sobreposição. O E2, ao contrário, acompanha o humano tanto na presença quanto na extensão dos *spans*; seu κ de 0,428 corresponde a um acordo moderado na escala de Landis e Koch (1977).
-
-![Desempenho contra gold humano](figuras_relatorio/fig_04_desempenho_gold.png)
-
-*Figura 3 — Desempenho de E1 e E2 contra o gold humano nas métricas por span e por caractere.*
-
-### 5.3 Cobertura por tipo
-
-| Tipo | Cobertura E1 (%) | Cobertura E2 (%) |
+| Leitura | Kappa (média por nota) | Kappa (agregado) |
 |---|---:|---:|
-| CLAIM | 26,0 | 60,2 |
-| EVIDENCIA | 37,7 | 60,7 |
-| FONTE | 72,0 | 56,5 |
-| QUALIFICADOR | 0,6 | 4,1 |
+| Completa (com as fontes de URL) | 0,334 | 0,242 |
+| Sem FONTE-URL (conteúdo decidido) | 0,632 | 0,650 |
 
-Aqui aparece a divisão de trabalho entre as duas. A regra cobre 72 % das FONTEs — o território da URL e do veículo de imprensa, onde a forma do texto já entrega o papel — e desaba em CLAIM e EVIDENCIA, que dependem de discurso. O modelo é mais equilibrado entre os três tipos maiores. QUALIFICADOR quase não é coberto por nenhuma das duas, e a razão está no corpus: o tipo é raro demais para sustentar qualquer cobertura.
+Este é um dos resultados centrais do trabalho. Sobre os arquivos brutos, a concordância entre os dois anotadores parece apenas regular; removida a camada de URLs — que os dois arquivos trataram de formas opostas por diferença de ferramenta —, a concordância sobe para um patamar substancial na escala usual de interpretação (Landis e Koch, 1977). A tarefa é difícil nas fronteiras, mas os humanos concordam bem sobre o que é argumento e onde ele está; boa parte do desacordo aparente era artefato de protocolo. Esse resultado também calibra as expectativas sobre as máquinas: nenhuma estratégia automática deveria ser cobrada por superar a concordância que os próprios humanos alcançam entre si.
+
+### 5.3 Desempenho contra o gold adjudicado, em duas leituras
+
+| Estratégia | Leitura | F1 estrita | F1 relaxada | Kappa (média por nota) |
+|---|---|---:|---:|---:|
+| E1 (regras) | completa | 0,364 | 0,499 | 0,438 |
+| E1 (regras) | sem FONTE-URL | 0,128 | 0,316 | 0,317 |
+| E2 (modelo remoto) | completa | 0,364 | 0,456 | 0,365 |
+| E2 (modelo remoto) | sem FONTE-URL | 0,399 | 0,515 | 0,540 |
+| E2b (modelo local) | completa | 0,501 | 0,626 | 0,593 |
+| E2b (modelo local) | sem FONTE-URL | 0,329 | 0,481 | 0,541 |
+
+As duas leituras contam histórias complementares, e é a comparação entre elas que informa. Na leitura completa, vencem as estratégias que reproduzem bem a infraestrutura de URLs presente também no gold: o modelo local lidera com folga e as regras empatam com o modelo remoto. Na leitura sem FONTE-URL — a que compara modelos sobre o conteúdo decidido —, o quadro inverte: o modelo remoto assume a frente, o modelo local recua e as regras caem para um décimo e pouco de F1 estrita, confirmando que sua força está no que é literal. O modelo remoto é o único que melhora quando as URLs saem da conta, porque suas fontes de URL frequentemente erram a fronteira por um caractere. Em notas onde o gold não marca nada, a convenção adotada premia a abstenção; a métrica calculada apenas sobre as notas com gold não vazio acompanha o mesmo ordenamento e está nas tabelas exportadas.
+
+![Desempenho contra o gold adjudicado](figuras_relatorio/fig_04_desempenho_gold.png)
+
+*Figura 3 — F1 estrita contra o gold adjudicado, nas duas leituras.*
+
+### 5.4 Sensibilidade à régua humana
+
+| Estratégia | Gold do anotador 1 | Gold do anotador 2 | Gold adjudicado |
+|---|---:|---:|---:|
+| E1 (regras) | 0,033 | 0,395 | 0,364 |
+| E2 (modelo remoto) | 0,340 | 0,267 | 0,364 |
+| E2b (modelo local) | 0,231 | 0,485 | 0,501 |
+
+A tabela reporta a F1 estrita na leitura completa contra três referências: cada anotador isoladamente e o consenso. O ranking muda com a régua: contra o primeiro anotador, o modelo remoto lidera; contra o segundo e contra o consenso, o modelo local. Na leitura sem FONTE-URL o padrão se repete com valores menores e o modelo remoto à frente em todas as réguas (0,420, 0,251 e 0,399, respectivamente). A conclusão não é que uma régua esteja errada, e sim que estilos de anotação legítimos produzem referências diferentes — e que qualquer comparação entre sistemas que reporte um único gold, sem análise de sensibilidade, está escondendo essa variação.
+
+### 5.5 Cobertura por tipo
+
+| Tipo | E1 (regras) | E2 (modelo remoto) | E2b (modelo local) |
+|---|---:|---:|---:|
+| CLAIM | 26,0 % | 60,2 % | 61,3 % |
+| EVIDENCIA | 37,7 % | 60,7 % | 57,3 % |
+| FONTE | 71,8 % | 56,5 % | 69,4 % |
+| QUALIFICADOR | 0,6 % | 4,1 % | 4,4 % |
+
+A divisão de trabalho aparece com clareza. As regras cobrem quase três quartos das notas com fonte — o território da URL e do veículo de imprensa, onde a forma do texto entrega o papel — e afundam nos tipos que dependem de discurso. Os dois modelos de linguagem são mais equilibrados; o local marca mais fontes que o remoto, um traço de estilo que reaparece em toda a avaliação. O qualificador é raro demais no corpus para sustentar cobertura em qualquer estratégia.
 
 ![Cobertura por tipo argumentativo](figuras_relatorio/fig_05_cobertura_tipo.png)
 
-*Figura 4 — Cobertura de E1 e E2 por tipo argumentativo no corpus completo.*
+*Figura 4 — Cobertura por tipo argumentativo no corpus completo, pelas três estratégias.*
 
-### 5.4 Anatomia argumentativa no corpus
+### 5.6 Anatomia argumentativa no corpus
 
-| Estratégia | CLAIM | EVIDENCIA | FONTE | QUALIFICADOR | Spans/nota (com span) |
-|---|---:|---:|---:|---:|---:|
-| E1 | 563 | 925 | 2 376 | 11 | 2,47 |
-| E2 | 1 324 | 1 689 | 1 535 | 78 | 3,27 |
+| Estratégia | CLAIM | EVIDENCIA | FONTE | QUALIFICADOR | Total | Spans por nota |
+|---|---:|---:|---:|---:|---:|---:|
+| E1 (regras) | 563 | 925 | 2.290 | 11 | 3.789 | 2,42 |
+| E2 (modelo remoto) | 1.324 | 1.689 | 1.535 | 78 | 4.626 | 3,27 |
+| E2b (modelo local) | 1.366 | 1.546 | 2.032 | 92 | 5.036 | 3,44 |
 
-Os volumes confirmam esse perfil. O que E1 produz é, antes de tudo, FONTE: 2 376 *spans*, mais do que todos os seus outros tipos somados. O E2 distribui melhor — evidência, fonte e alegação em proporções próximas —, e é justamente essa distribuição que o aproxima do humano. A Figura 5 dá a forma do contraste.
+Os volumes confirmam os perfis: a produção das regras é dominada por fontes; o modelo remoto distribui entre os três tipos maiores; o modelo local combina a distribuição do remoto com um apetite por fontes próximo ao das regras — e é exatamente essa combinação que o favorece contra o gold adjudicado, rico em fontes.
 
 ![Anatomia argumentativa no corpus](figuras_relatorio/fig_02_anatomia_spans.png)
 
-*Figura 5 — Distribuição dos spans por tipo em E1 e E2, incluindo a média de spans por nota com alguma marcação.*
+*Figura 5 — Distribuição dos spans por tipo em cada estratégia.*
 
-### 5.5 Avaliação token-level (BIO/seqeval)
+### 5.7 Leitura por token (BIO)
 
-A leitura por *token* repete, com outra lente, o que as métricas por *span* já apontavam, e ainda dá detalhe por tipo.
+Na avaliação de sequência sobre o recorte com gold — acerto exige tipo e fronteiras de token idênticos —, a estratégia de regras alcança F1 de 0,417, o modelo remoto 0,358 e o modelo local 0,597. Os valores são coerentes com a leitura completa por span (esta avaliação também inclui a camada de URLs), com uma inversão informativa: em nível de token as regras superam o modelo remoto, porque a projeção BIO arredonda para a borda do token justamente os erros de um caractere que penalizavam as fontes de URL na leitura por caractere. A implementação foi verificada contra a biblioteca seqeval, com valores idênticos.
 
-| Comparação | Escopo | P | R | F1 |
-|---|---|---:|---:|---:|
-| E1 × E2 | micro | 0,181 | 0,253 | 0,211 |
-| E1 × E2 | FONTE | 0,522 | 0,404 | 0,456 |
-| E1 × E2 | CLAIM | 0,015 | 0,045 | 0,023 |
-| E1 × E2 | EVIDENCIA | 0,009 | 0,018 | 0,012 |
-| E1 vs humano | micro | 0,011 | 0,020 | 0,014 |
-| E2 vs humano | micro | 0,293 | 0,485 | 0,366 |
-| E2 vs humano | CLAIM | 0,321 | 0,447 | 0,374 |
-| E2 vs humano | EVIDENCIA | 0,375 | 0,491 | 0,425 |
-| E2 vs humano | FONTE | 0,132 | 0,714 | 0,222 |
-| E2 vs humano | QUALIFICADOR | 0,000 | 0,000 | 0,000 |
+![Leitura por token contra o gold adjudicado](figuras_relatorio/fig_06_seqeval_bio.png)
 
-Três coisas se destacam. No acordo E1×E2, FONTE é o único tipo com F1 expressiva (0,456) — coerente com seu caráter lexical. Contra o humano, E1 quase não recupera nada em nível de *token* (0,014), enquanto o E2 chega a 0,366, com força em CLAIM e EVIDENCIA. E há uma assimetria reveladora no FONTE do E2 contra o humano: revocação altíssima (0,714) e precisão baixa (0,132) — o modelo *vê fonte demais*, marca como respaldo o que o humano não marcaria. O QUALIFICADOR zera; é o limite que o corpus impõe.
+*Figura 6 — F1 estrita por entidade BIO contra o gold adjudicado.*
 
-![Avaliação token-level BIO](figuras_relatorio/fig_06_seqeval_bio.png)
+### 5.8 Custo computacional
 
-*Figura 6 — Avaliação token-level BIO por seqeval, com micro-F1 e F1 por tipo nas comparações principais.*
+| Estratégia | Latência mediana por nota | Observação |
+|---|---:|---|
+| E1, só as regras | 1,9 ms | sem contar a análise sintática |
+| E1, de ponta a ponta | 10,3 ms | análise sintática mais regras |
+| E2 (modelo remoto) | 4,6 s | serviço externo; 7 notas recusadas |
+| E2b (modelo local) | 9,4 s | hardware doméstico do grupo |
 
-### 5.6 Custo computacional
+Na medição honesta, de ponta a ponta, as regras custam cerca de 450 vezes menos que o modelo remoto — duas a três ordens de grandeza, e não as três completas que a medição anterior (sem a análise sintática) sugeria. A latência do modelo local não é diretamente comparável à do remoto, porque depende do hardware onde roda; o que ela compra não é velocidade, e sim soberania: nenhuma recusa, nenhuma dependência de serviço, reprodutibilidade completa.
 
-| Estratégia | Latência mediana | p95 | Observação |
-|---|---:|---:|---|
-| E1 | 1,9 ms | 8,9 ms | Regras locais; custo desprezível. |
-| E2 | 4,6 s | 10,8 s | API remota; máx. 26,7 s. |
+![Latência por estratégia](figuras_relatorio/fig_operacional_latencia.png)
 
-A diferença, de três ordens de grandeza por nota, define quando cada estratégia é viável. Processar o corpus inteiro por regra é instantâneo; por modelo de linguagem, é uma operação que se planeja — e que, em 7 notas, simplesmente não aconteceu, barrada pelo filtro do provedor.
+*Figura 7 — Latência mediana por nota, em escala logarítmica.*
 
-![Latência mediana por estratégia](figuras_relatorio/fig_operacional_latencia.png)
+### 5.9 Assinatura léxica por tipo
 
-*Figura 7 — Latência mediana e p95 das estratégias E1 e E2 por nota processada.*
-
-### 5.7 Assinatura léxica por tipo (Dunning)
-
-Contar palavra crua não ajuda. As mais frequentes dentro de qualquer tipo de *span* seriam, no fim, as mais frequentes do português — artigos, preposições, o ruído de fundo da língua. A pergunta útil não é *o que aparece muito*, e sim *o que aparece muito mais aqui do que se esperaria por acaso*. É isso que o *log-likelihood* de Dunning (1993) mede.
-
-O cálculo parte de quatro contagens, fixados um lema $w$ e um tipo-alvo — digamos, FONTE. Duas dizem respeito ao lema: $a$ é quantas vezes $w$ aparece dentro dos *spans* de FONTE, e $b$, quantas vezes aparece no resto do corpus. As outras duas são os tamanhos de cada lado: $c$, o total de lemas dentro de FONTE, e $d$, o total de lemas fora. Se $w$ se distribuísse de forma neutra — igualmente provável dentro e fora do tipo —, o número de ocorrências esperado de cada lado seria apenas proporcional ao tamanho desse lado:
+Contar palavras cruas não ajuda: as mais frequentes em qualquer tipo de span seriam as mais frequentes da língua. A pergunta útil é o que aparece muito mais dentro de um tipo do que se esperaria pelo acaso, e é isso que a razão de verossimilhança de Dunning mede. Para um lema e um tipo-alvo, comparam-se as ocorrências do lema dentro e fora dos spans daquele tipo com o que uma distribuição neutra preveria:
 
 $$
-E_a = c\,\frac{a+b}{c+d}, \qquad E_b = d\,\frac{a+b}{c+d}.
+E_a = c\,\frac{a+b}{c+d}, \qquad E_b = d\,\frac{a+b}{c+d}, \qquad G^2 = 2\left[\, a\,\ln\frac{a}{E_a} + b\,\ln\frac{b}{E_b} \,\right].
 $$
 
-A estatística mede o quanto a contagem real se afasta dessa expectativa:
-
-$$
-G^2 = 2\left[\, a\,\ln\frac{a}{E_a} + b\,\ln\frac{b}{E_b} \,\right].
-$$
-
-Quanto maior o $G^2$, mais o lema destoa do que a distribuição neutra preveria — para mais ou para menos. Como $G^2$ segue, aproximadamente, uma $\chi^2$ com um grau de liberdade, ficamos só com os lemas de $G^2 \geq 3{,}84$, que é o ponto de corte dessa $\chi^2$ a $p < 0{,}05$. E, entre esses, guardamos apenas os de *sobre*-representação — aqueles em que $a/c > (a+b)/(c+d)$, isto é, em que o lema é proporcionalmente mais comum dentro do tipo do que no corpus inteiro. O que sobra, sobre a base do E2, é o vocabulário que *distingue* cada papel:
+Mantivemos os lemas com estatística acima do limiar usual de significância e sobre-representados no tipo. O vocabulário que distingue cada papel, calculado sobre a saída do modelo remoto:
 
 | Tipo | Lemas mais distintivos |
 |---|---|
@@ -327,70 +301,110 @@ Quanto maior o $G^2$, mais o lema destoa do que a distribuição neutra preveria
 | FONTE | conforme, fonte, artigo, acordo, site, constituição, sbt, canal, imprensa, inep |
 | QUALIFICADOR | enganoso, potencialmente, provavelmente, claramente, apesar, acreditar, especulação, caso, importante, verdadeiro |
 
-A assinatura é semanticamente coerente — e essa coerência é, por si só, um resultado. A alegação concentra os verbos da refutação (*falso, fake, mente*); a fonte, os marcadores de atribuição (*conforme, fonte, imprensa*); o qualificador, os advérbios da dúvida (*potencialmente, provavelmente, apesar*). Que o sinal argumentativo se deixe capturar, ao menos em parte, pelo léxico é o que explica por que a regra simbólica não chega a zero: em cada papel há palavras que o denunciam.
+A coerência semântica dessa assinatura é um resultado em si: a alegação concentra o vocabulário da refutação, a fonte concentra os marcadores de atribuição, o qualificador concentra os advérbios de dúvida. Que o sinal argumentativo se deixe capturar em parte pelo léxico explica por que a estratégia simbólica não fica em zero: em cada papel existem palavras que o denunciam.
 
-### 5.8 Lente entidade × papel
+### 5.10 Tipo de entidade e papel argumentativo
 
-Cruzar as entidades extraídas (GLiNER) com o papel atribuído pelo E2 revela o achado mais estrutural do trabalho: o *tipo* da entidade prevê o papel. Domínios de URL e veículos de mídia caem, com forte regularidade, em FONTE; atores políticos e partidos, em CLAIM e EVIDENCIA; órgãos públicos se espalham entre os papéis. Quando uma entidade entra na nota, ela já entra com um papel provável, e esse papel é função do que ela é. A Figura 8 traz o mapa de calor.
+Cruzar as entidades nomeadas do corpus com o papel atribuído pelo modelo remoto revela um achado estrutural: o tipo da entidade antecipa o papel. Domínios de internet e veículos de mídia caem com forte regularidade em fonte; atores políticos e partidos, em alegação e evidência; órgãos públicos se espalham. Quando uma entidade entra na nota, ela já entra com um papel provável, e esse papel é função do que ela é. A Figura 8 traz o mapa de calor.
 
-![Tipo de entidade × papel argumentativo](figuras_relatorio/fig_07_entidade_papel.png)
+![Tipo de entidade e papel argumentativo](figuras_relatorio/fig_07_entidade_papel.png)
 
-*Figura 8 — Mapa de calor entre tipos de entidade GLiNER e papéis argumentativos atribuídos pelo E2.*
+*Figura 8 — Relação entre tipos de entidade e papéis argumentativos atribuídos pelo modelo remoto.*
 
-### 5.9 Agência sintática
+### 5.11 Agência sintática
 
-A análise por dependências separa as entidades que *agem* (sujeito) das que *sofrem a ação* (objeto ou oblíquo). A tabela resume o padrão para quatro entidades frequentes do corpus:
+A análise de dependências separa as entidades que agem, como sujeito, das que sofrem a ação, como objeto ou oblíquo:
 
-| Entidade | Sujeito | Objeto | Outra menção |
+| Entidade | Como sujeito | Como objeto | Outras menções |
 |---|---:|---:|---:|
 | Lula | 45 | 17 | 53 |
 | STF | 21 | 5 | 38 |
 | Brasil | 18 | 56 | 41 |
 | Pix | 0 | 16 | 11 |
 
-O contraste é claro: *Lula* e o *STF* aparecem sobretudo conduzindo a ação; *Brasil* e *Pix*, recebendo-a. Trata-se de uma leitura descritiva, não de uma métrica de desempenho: diz menos sobre o extrator e mais sobre como as notas mobilizam suas figuras.
+Trata-se de uma leitura descritiva do corpus, não de uma métrica de desempenho: algumas figuras conduzem a ação nas notas, outras a recebem.
 
-## 6. Avaliação qualitativa
+## 6. Destilação: a estratégia E3
 
-Refizemos a avaliação qualitativa sobre casos identificáveis das 60 notas anotadas, e não sobre exemplos hipotéticos. A ideia é escolher notas que expliquem *por que* as métricas assumem a forma que assumem: quando E2 ganha de E1, quando o ganho é só de fronteira, quando o erro é de papel argumentativo e quando a melhor anotação humana é não marcar nada.
+A quinta pergunta do trabalho — é possível destilar o modelo de linguagem em um rotulador barato? — ganhou um experimento próprio, no terceiro notebook. O desenho segue a lógica clássica de destilação de conhecimento: como só existem 60 notas com gold humano, os modelos aprendizes treinam sobre as marcações do modelo remoto nas 1.437 notas não meta que ficam fora do gold (supervisão fraca, que chamamos de prata), e o gold humano fica bloqueado para o teste final. A escolha de hiperparâmetros nunca consultou o gold: usou uma divisão de desenvolvimento interna à supervisão prata, com a busca documentada em apêndice do notebook.
 
-O melhor caso positivo é a [nota `1761891434389475646`](https://explorador-argumentos.netlify.app/#notas?noteId=1761891434389475646), sobre a bandeira de Gadsden. A anotação humana separa três peças: CLAIM em "A bandeira conhecida como Gadsden não é um símbolo fascista", EVIDENCIA no trecho sobre a alegação de "cunho fascista" e FONTE em "Algumas fontes tratam o movimento bolsonarista dessa forma". O E2 recupera exatamente os mesmos três spans (`F1_estrita = 1,000`; `F1_relaxada = 1,000`). O E1, por outro lado, marca apenas URLs ou pedaços de URLs como FONTE (`F1_estrita = 0,000`; `F1_relaxada = 0,000`). O caso dá materialidade à diferença principal do experimento: E1 reconhece sobretudo a forma superficial; E2 reconhece a função das partes da nota.
+O percurso de modelos cobre os dois eixos clássicos da rotulagem de sequência — generativo contra discriminativo, decisão local contra decisão de sequência: Naive Bayes, modelo oculto de Markov, regressão logística e campo aleatório condicional, seguidos do BERTimbau. Sobre as mesmas emissões congeladas do BERTimbau, três decodificadores (escolha independente por token, Viterbi com restrições de boa formação do BIO, e um campo aleatório condicional que aprende as transições) isolam o efeito da estrutura de sequência. Uma ablação final troca o professor: o melhor arranjo neural treinado com a supervisão prata do modelo local, em vez do remoto.
 
-A [nota `2007791917765943580`](https://explorador-argumentos.netlify.app/#notas?noteId=2007791917765943580) é o caso mais útil para documentar a fronteira contrária: texto metadiscursivo, sem marcador inicial `NNN`, mas também sem span humano. A nota diz que o post é "zuera política" e "claramente satírico ou de brincadeira"; a anotação manual ficou vazia porque ali não há uma estrutura mínima de checagem a decompor em CLAIM, EVIDENCIA ou FONTE. Mesmo assim, E1 marcou um trecho final como EVIDENCIA e E2 marcou "zuera política..." como CLAIM e "satírico ou de brincadeira" como EVIDENCIA. O erro, portanto, não vem de incapacidade extrativa, e sim da tendência das duas estratégias a extrair estrutura onde não há. Esse exemplo justifica tratar os zeros humanos como dado substantivo, e não como ausência acidental de anotação.
+| Modelo | F1 estrita por entidade | Latência por nota |
+|---|---:|---:|
+| Referência: E2b (modelo local, sem treino) | 0,597 | segundos |
+| Referência: E1 (regras, sem treino) | 0,417 | 10 ms |
+| Referência: E2 (modelo remoto e professor, sem treino) | 0,358 | segundos |
+| Naive Bayes | 0,084 | 0,09 ms |
+| Modelo oculto de Markov | 0,215 | 0,43 ms |
+| Regressão logística | 0,494 | 2,2 ms |
+| Campo aleatório condicional | **0,599** | 0,32 ms |
+| BERTimbau (decisão por token) | 0,377 | 17,7 ms |
+| BERTimbau com Viterbi restrito | 0,386 | 18,5 ms |
+| BERTimbau com transições aprendidas | 0,390 | 18,7 ms |
+| BERTimbau com transições aprendidas, professor E2b | 0,505 | 18,7 ms |
 
-O caso da [nota `1887258714580877671`](https://explorador-argumentos.netlify.app/#notas?noteId=1887258714580877671), sobre matéria do Estadão e ativismo do STF, mostra por que a F1 relaxada não substitui a estrita. Humano e E2 concordam nas três funções: FONTE no início da matéria, EVIDENCIA nos números sobre omissões inconstitucionais e CLAIM na "disposição da Corte de se envolver em questões políticas". A F1 relaxada de E2 é `1,000`, mas a estrita cai para `0,667` porque o E2 inclui o gatilho retórico "A matéria evidencia com números" dentro do CLAIM, enquanto o humano começa o span diretamente em "disposição da Corte...". Aqui o erro é de borda, não de interpretação.
+![Destilação: alunos contra o gold adjudicado](figuras_relatorio/fig_08_destilacao.png)
 
-Já a [nota `2031096564928708748`](https://explorador-argumentos.netlify.app/#notas?noteId=2031096564928708748), sobre uma jornalista que teria afirmado que "o contrato não existia", é um erro de papel argumentativo. O humano marcou três trechos como EVIDENCIA; o E2 transformou "o contrato não existia" em CLAIM e só preservou como EVIDENCIA o trecho sobre o banco sob investigação. Por isso a leitura relaxada melhora pouco (`F1_relaxada = 0,400`) e a estrita zera. A divergência não vem apenas de alguns caracteres a mais ou a menos: vem da pergunta sobre qual trecho é a alegação contestada e qual funciona como suporte.
+*Figura 9 — Os modelos aprendizes contra o gold adjudicado, com as referências como linhas de base.*
 
-Por fim, a [nota `2035165855806259553`](https://explorador-argumentos.netlify.app/#notas?noteId=2035165855806259553) expõe o modo de falha do E1 em listas longas de links. A anotação humana ficou vazia; o E2 ainda extraiu um CLAIM mínimo ("o que foi dito no vídeo"); e o E1 gerou 43 spans, quase todos FONTE fragmentada ou pedaços redundantes de URLs. Esse caso explica a precisão baixa de FONTE e mostra que a heurística de URL não apenas encontra fontes: em textos densos em links, ela também multiplica falsos positivos.
+Quatro conclusões saem desta tabela, todas apoiadas em intervalos de confiança calculados por reamostragem pareada das 60 notas de teste.
 
-O raciocínio devolvido pelo E2 entra nessa leitura como apoio interpretativo, não como gabarito. Ele ajuda a entender por que o modelo tratou um trecho como CLAIM ou EVIDENCIA, mas a decisão final continua ancorada na comparação entre spans humanos, E1 e E2. A inspeção qualitativa, assim, não substitui as métricas: ela localiza o tipo de erro que cada métrica resume.
+Primeira: a estrutura de sequência importa nos modelos clássicos. O salto do Naive Bayes para o modelo de Markov e o da regressão logística para o campo aleatório condicional são ambos consistentes na reamostragem (mais 0,133 e mais 0,109, com intervalos que não cruzam zero).
 
-## 7. Discussão
+Segunda: a destilação cumpre a promessa de custo com sobra. O melhor aprendiz — o campo aleatório condicional clássico — opera no nível da melhor referência baseada em modelo de linguagem (0,599 contra 0,597) gastando um terço de milissegundo por nota, cerca de quatro ordens de grandeza menos que os professores. Ele supera inclusive o próprio professor (0,599 contra 0,358), o que indica que o treinamento regulariza o ruído da supervisão prata em vez de reproduzi-lo.
 
-Lidos em conjunto, os resultados se organizam em poucas teses. O modelo de linguagem se aproxima do humano porque a tarefa, no fundo, é discursiva — e discurso é o que ele modela. A regra fica para trás na fronteira porque a fronteira é semântica, e a regra só enxerga forma. Ainda assim, a regra não é descartável: rende em FONTE e em custo, o que aponta para um arranjo *complementar* — regra para o que é literal e barato, modelo para o que é discursivo e caro.
+Terceira: o professor importa. Trocar a supervisão prata do modelo remoto pela do modelo local elevou o aprendiz neural de 0,390 para 0,505 (intervalo de mais 0,031 a mais 0,203, sem cruzar zero) — o aprendiz herda qualidade e estilo do professor, e o estilo do modelo local casa melhor com o gold adjudicado.
 
-Há ainda um aspecto que as métricas não capturam. A predominância de FONTE na saída das regras revela um modo de ver: a regra trata a URL como traço *estrutural* da argumentação, não como acessório, e encontra a citação com mais facilidade do que a alegação porque a citação tem forma fixa e endereço. E o achado de que o tipo da entidade antecipa o papel sugere que, neste gênero, o argumento é em boa medida *posicional*: a peça chega ao texto já com sua função, e descrever a estrutura é, em parte, descrever quem ocupa qual lugar.
+Quarta, e metodologicamente a mais importante: a régua humana molda até conclusões arquiteturais. Na execução anterior, com gold de um único anotador, os decodificadores estruturados sobre o BERTimbau ganhavam do decisor por token com intervalos que não cruzavam zero; contra o gold adjudicado, esses mesmos intervalos passaram a cruzar zero, e a vantagem do campo aleatório condicional clássico sobre o BERTimbau tornou-se ampla (0,218 de diferença). A explicação provável é dupla: o gold adjudicado é denso em fontes de URL, e o BERTimbau trunca as notas em 256 subpalavras — as URLs explodem em dezenas de subpalavras e empurram trechos para além do limite, onde tudo recebe O. Registramos como hipótese verificável, e como mais um episódio do mesmo tema: essas comparações estão na leitura completa, e a decomposição por infraestrutura, feita no notebook de avaliação, é o passo natural também aqui.
 
-Quanto às camadas interpretativas — Dunning, entidades, agência —, elas não competem com a F1. Fazem outra coisa: mostram que, sob o desacordo das métricas, há regularidade, e que essa regularidade é legível. Uma única F1 jamais revelaria que *Brasil* sofre a ação enquanto *Lula* a conduz.
+## 7. Avaliação qualitativa
 
-## 8. Limitações
+Os casos a seguir vêm das 60 notas anotadas e foram escolhidos porque explicam por que as métricas assumem a forma que assumem. Todos podem ser inspecionados no explorador interativo do projeto. Com a mudança do gold — de um anotador único para o consenso adjudicado —, alguns casos mudaram de papel na narrativa, e essa mudança é, em si, instrutiva.
 
-O *gold* tem um único anotador, então o que medimos contra o "humano" é uma posição, não um consenso; o *kappa* inter-anotador continua pendente. A fronteira do *span* é instável e penaliza com dureza a métrica estrita — o que recomenda ler a estrita e a relaxada juntas, nunca isoladas. Avaliamos um único modelo de linguagem, num único idioma, sobre um corpus de gênero e período específicos: generalizar exige cautela. O QUALIFICADOR é raro a ponto de tornar frágil qualquer afirmação sobre ele. Nenhuma dessas limitações invalida o quadro; todas circunscrevem o que ele pode afirmar.
+O primeiro caso é a nota sobre a bandeira de Gadsden. Contra o gold de um único anotador, o modelo remoto reproduzia os três spans com exatidão perfeita; contra o consenso, que incorporou uma fonte de URL e ajustes de fronteira, a mesma saída vale F1 estrita de 0,571 — nada mudou na máquina, tudo mudou na régua. É o exemplo mais limpo de que a avaliação neste gênero é uma medição entre duas leituras legítimas, não uma nota de prova contra um gabarito absoluto.
 
-## 9. Considerações finais
+O segundo caso é uma nota metadiscursiva que apenas comenta que a publicação é humor político, e cuja anotação humana ficou deliberadamente vazia. A estratégia de regras marcou um trecho como evidência e o modelo remoto marcou dois spans — ambos erraram por excesso, extraindo estrutura onde não há. O modelo local foi o único que se absteve, acertando integralmente. O caso justifica a convenção de tratar o gold vazio como decisão substantiva: saber não marcar também é competência.
 
-### 9.1 Síntese
+O terceiro caso, uma nota sobre reportagem do Estadão a respeito do Supremo Tribunal Federal, ilustra a fronteira como fenômeno. O consenso marca seis spans, quatro deles fontes; as regras acham as regiões (F1 relaxada de 0,667) e erram os limites finos (F1 estrita de 0,167); o modelo remoto acerta menos regiões, porém com limites um pouco melhores. Nenhuma estratégia domina: o erro de cada uma tem natureza diferente.
 
-Comparamos uma extração simbólica e uma neural da estrutura argumentativa em notas de comunidade em português, e respondemos às quatro perguntas. E1 e E2 concordam apenas de forma moderada, e o acordo *diminui* onde há mais argumento (P1). O modelo de linguagem se aproxima mais do humano, com folga (P2). A regra vence em FONTE; o modelo, nos tipos discursivos (P3). E o tipo da entidade, de fato, prevê o papel argumentativo (P4). O saldo não é a vitória de um paradigma sobre o outro, mas a divisão de trabalho entre eles — e um corpus que, examinado de perto, argumenta com regularidade suficiente para ser descrito.
+O quarto caso é um erro de papel argumentativo: numa nota sobre uma declaração atribuída a uma jornalista, o modelo remoto rotulou como alegação o que o consenso trata como evidência. A leitura relaxada não salva esse tipo de erro (0,400), porque a divergência não é de caracteres, e sim de interpretação sobre qual trecho é a alegação contestada e qual funciona como suporte.
 
-### 9.2 Aprendizados do grupo
+O quinto caso é o mais eloquente sobre a infraestrutura. Uma nota composta quase inteiramente por uma lista de links tem, no consenso, 25 spans — 24 deles fontes de URL. A estratégia de regras faz F1 estrita de 0,941 e o modelo local, 0,960; o modelo remoto, que devolveu um único span, fica em zero. Na execução anterior este mesmo caso ilustrava o modo de falha das regras, que fragmentavam as URLs em dezenas de pedaços; com a ingestão corrigida e uma régua que incorpora as URLs, ele virou o caso de maior sucesso delas. Nenhum dos três sistemas ficou mais inteligente entre uma execução e outra — o que mudou foi a régua e a qualidade dos dados, e é exatamente por isso que a leitura sem FONTE-URL existe.
 
-Ficam alguns aprendizados, para além do resultado em si. O primeiro é que, neste gênero, o problema difícil é a *fronteira* — não a presença do *span* —, e que escolher entre F1 estrita e relaxada já é uma decisão teórica sobre o que conta como acerto. Aprendemos também que comparar regra e modelo de linguagem serve menos para ranqueá-los do que para mapear vieses complementares: cada paradigma falha de um jeito característico. Vimos, na prática, que boa parte do custo de um *pipeline* com LLM está fora da inferência: no *alinhamento* do que o modelo devolve e na dependência de uma API que pode recusar. Outro aprendizado foi tratar a anotação como infraestrutura: sem BIO e sem *offsets* preservados não há avaliação por *token*, e sem um segundo anotador não há consenso a medir. E talvez o mais durável: uma camada interpretativa barata — entidades, agência, assinatura léxica — às vezes diz mais sobre o corpus do que um décimo a mais de F1.
+A justificativa em linguagem natural devolvida pelo modelo remoto entra nessa análise como apoio interpretativo, nunca como gabarito. A inspeção qualitativa não substitui as métricas: ela localiza o tipo de erro que cada métrica resume.
 
-### 9.3 Trabalhos futuros
+## 8. Discussão
 
-O passo imediato é fechar a segunda anotação independente, calcular o *kappa* inter-anotador e recompor o *gold* por consenso, recalculando as métricas contra ele. Em seguida, treinar e avaliar modelos de sequência sobre o BIO que já temos disponível — CRF (Lafferty et al., 2001) e BERTimbau (Souza et al., 2020) —, que substituiriam a heurística do E1 por um aprendizado de fronteira. Vale ainda comparar outros modelos de linguagem — inclusive os específicos para o português — e estender a análise às dimensões temática e longitudinal do corpus, que este recorte apenas tangenciou.
+Lidos em conjunto, os resultados se organizam em quatro teses.
+
+A primeira é a divisão de trabalho entre paradigmas, agora com três participantes. As regras dominam o que é literal e barato: fontes com forma fixa, custo de milissegundos. O modelo remoto domina o que é discursivo na leitura que remove a infraestrutura: alegações e evidências que dependem de interpretação. O modelo local ocupa uma posição intermediária valiosa — qualidade próxima do remoto no discurso, apetite por fontes próximo das regras, e as vantagens operacionais de rodar em casa. A escolha entre eles não é uma disputa com vencedor único; é uma alocação de recursos por tipo de conteúdo e por restrição operacional.
+
+A segunda tese é que fronteira é o problema difícil — e que ela é difícil para humanos também. A concordância entre anotadores de 0,632 no conteúdo decidido, com fronteiras fluidas mesmo assim, o salto da estratégia de regras quando um defeito de posições foi corrigido, os 16 por cento de spans de regras que a projeção BIO precisa arredondar, e os erros de um caractere do modelo remoto nas URLs contam a mesma história em quatro escalas: neste gênero, delimitar é mais difícil que localizar, e medidas estritas e relaxadas precisam ser lidas juntas.
+
+A terceira tese é metodológica: réguas moldam resultados, e réguas têm camadas. A análise de sensibilidade mostrou o ranking mudando conforme o anotador de referência; a decomposição por infraestrutura mostrou o ranking mudando conforme a leitura; e a destilação mostrou até conclusões arquiteturais mudando quando o gold mudou. Nada disso invalida a avaliação — invalida avaliações que reportam um número único sem dizer qual régua, qual leitura e qual camada de infraestrutura estão embutidas nele.
+
+A quarta tese é a da destilação como resposta prática. Se um campo aleatório condicional treinado com supervisão fraca entrega o nível da melhor referência a um custo quatro ordens de grandeza menor, o papel dos modelos de linguagem neste tipo de tarefa pode ser o de anotadores de treinamento, não o de executores em produção — com o detalhe, demonstrado na ablação de professor, de que a escolha do anotador-professor deixa marcas mensuráveis no aluno.
+
+Sob as métricas, os instrumentos interpretativos mostram que a estrutura argumentativa deste corpus é legível: cada papel tem assinatura léxica própria, o tipo da entidade antecipa seu papel, e as figuras públicas se dividem entre as que agem e as que recebem a ação nas notas.
+
+## 9. Limitações
+
+O gold adjudicado reflete, no momento da escrita, a rodada de parecer individual da adjudicação; a revisão cruzada pelo segundo anotador está prevista, e os artefatos se atualizam por script quando ela ocorrer. O recorte com gold tem 60 notas, o que limita o poder estatístico de todas as comparações contra o humano — os intervalos por reamostragem estão reportados, e vários cruzam zero. Os modelos neurais da destilação foram treinados com uma única semente, de modo que a variação de treinamento não está medida. A leitura completa é dominada pela infraestrutura de URLs, e a decomposição em nível de token ainda não foi feita para o experimento de destilação. O qualificador é raro demais para conclusões. Avaliamos dois modelos de linguagem de uma mesma família, em um idioma, sobre um corpus de um período. Nenhuma dessas limitações invalida o quadro geral; todas circunscrevem o que ele pode afirmar.
+
+## 10. Considerações finais
+
+### 10.1 Síntese
+
+As cinco perguntas do trabalho receberam respostas mensuradas. As estratégias automáticas concordam entre si de forma apenas moderada, e o acordo diminui exatamente onde há mais argumento para delimitar. A proximidade com o humano depende da régua e da leitura: o modelo local vence na leitura completa contra o gold adjudicado, o modelo remoto vence no conteúdo decidido, e a análise de sensibilidade mostra que réguas humanas diferentes premiariam sistemas diferentes. Os tipos se dividem: fontes para as regras e para o modelo local, alegações e evidências para os modelos de linguagem. O tipo da entidade prevê o papel argumentativo. E a destilação é possível com folga: um modelo clássico de sequência, treinado com supervisão fraca, alcança o nível da melhor referência gastando um terço de milissegundo por nota.
+
+### 10.2 Aprendizados do grupo
+
+O primeiro aprendizado é que a régua é parte do experimento: escolher métrica, anotador de referência e o que conta como infraestrutura são decisões teóricas com efeito mensurável, e o desenho em duas leituras nasceu de um acidente de protocolo que teria passado despercebido sem a comparação entre anotadores. O segundo é que dados herdados exigem auditoria: as posições da tabela de entidades pareciam utilizáveis e estavam sistematicamente deslocadas, e a correção mudou números de forma material. O terceiro é que anotação é infraestrutura: sem tokenização fixa, projeção versionada e trilha de adjudicação, nenhum dos números finais seria defensável. O quarto é que o custo de um pipeline com modelo de linguagem está menos na inferência e mais no entorno — alinhamento de trechos, recusas de provedor, dependência de serviço —, e que a alternativa local elimina parte desse entorno. O quinto é que camadas interpretativas baratas, como a assinatura léxica e a lente de entidades, às vezes dizem mais sobre o corpus do que um incremento de F1.
+
+### 10.3 Trabalhos futuros
+
+O passo imediato é concluir a revisão cruzada da adjudicação e propagar o fechamento pelos artefatos, o que os scripts do repositório fazem de forma automática. Em seguida: estender a decomposição por infraestrutura ao nível de token, para que o experimento de destilação também tenha as duas leituras; repetir os modelos neurais com múltiplas sementes; investigar a hipótese do truncamento de subpalavras no BERTimbau, que pode ser testada aumentando o limite de comprimento; e ampliar a coleta de fontes textuais e qualificadores, os tipos hoje sem suporte estatístico. No plano dos dados, a camada de sintaxe automática publicada pelo conjunto de origem permite uma validação cruzada da nossa camada sintática. No plano das estratégias, vale comparar modelos de linguagem de outras famílias, incluindo os treinados especificamente para o português.
 
 ## Referências
 
@@ -398,6 +412,7 @@ O passo imediato é fechar a segunda anotação independente, calcular o *kappa*
 - Dunning, T. *Accurate methods for the statistics of surprise and coincidence*. Computational Linguistics, v. 19, n. 1, p. 61–74, 1993.
 - Eger, S.; Daxenberger, J.; Gurevych, I. *Neural end-to-end learning for computational argumentation mining*. In: Proceedings of ACL, p. 11–22, 2017.
 - Habernal, I.; Gurevych, I. *Argumentation mining in user-generated web discourse*. Computational Linguistics, v. 43, n. 1, p. 125–179, 2017.
+- Hinton, G.; Vinyals, O.; Dean, J. *Distilling the knowledge in a neural network*. arXiv:1503.02531, 2015.
 - Honnibal, M.; Montani, I. *spaCy 2: natural language understanding with Bloom embeddings, convolutional neural networks and incremental parsing*. Software, 2017.
 - Lafferty, J.; McCallum, A.; Pereira, F. *Conditional random fields: probabilistic models for segmenting and labeling sequence data*. In: Proceedings of ICML, p. 282–289, 2001.
 - Landis, J. R.; Koch, G. G. *The measurement of observer agreement for categorical data*. Biometrics, v. 33, n. 1, p. 159–174, 1977.
@@ -413,29 +428,27 @@ O passo imediato é fechar a segunda anotação independente, calcular o *kappa*
 
 | Artefato | Uso |
 |---|---|
-| `notebooks/notebook_preparacao_v2.ipynb` | Preparação do corpus e extrações E1/E2. |
-| `notebooks/notebook_conclusao.ipynb` | Normalização BIO, medidas de avaliação e resultados. |
-| `_reconciliar_relatorio.py` · `outputs/` | Reprodução determinística das métricas e exportação dos CSVs. |
-| `figuras_relatorio/` | Figuras estáticas incorporadas a este relatório. |
-| `data/dataset_anotado_final_com_bio.csv` | Dataset completo (spans, métricas, BIO, sintaxe). |
-| `data/gold/` | Anotação humana provisória (JSON e CoNLL/BIO). |
-| `data/qualitative_60_reasoning.jsonl` | Raciocínio do E2 nas 60 notas. |
-| `explorador/` | Visualização interativa (5 visões) para figuras e inspeção qualitativa. |
+| `notebooks/notebook_preparacao_v2.ipynb` | Preparação do corpus, extrações E1 e E2, correção e rederivação da E1. |
+| `notebooks/notebook_conclusao.ipynb` | Gold humano, normalização BIO e todas as medidas de avaliação — fonte canônica dos números. |
+| `notebooks/notebook_destilacao.ipynb` | Experimento de destilação (estratégia E3), com auditoria de hiperparâmetros em apêndice. |
+| `data/dataset_anotado_final_com_bio.csv` | Dataset completo (spans das três estratégias, gold, BIO, sintaxe, métricas e latências). |
+| `data/gold/` | Anotações independentes, gold adjudicado e exportações em CoNLL/BIO. |
+| `apps/anotador/` | Aplicativo de anotação humana (publicado em anotador-argumentos.netlify.app). |
+| `apps/adjudicador/` | Interface de adjudicação com trilha de decisões auditável. |
+| `apps/anotador-llm/` | Reexecução da estratégia E2 com o modelo aberto local, e sua saída completa. |
+| `explorador/` | Visualização interativa (publicada em explorador-argumentos.netlify.app). |
+| `docs/outputs/` | Tabelas de métricas exportadas pela execução canônica. |
 
 ## Apêndice B — Figuras
 
 | Figura | Conteúdo |
 |---|---|
 | Figura 1 | Arquitetura do pipeline. |
-| Figura 2 | Acordo E1 × E2 nos três cortes. |
-| Figura 3 | Desempenho contra o *gold* humano. |
-| Figura 4 | Cobertura por tipo. |
-| Figura 5 | Anatomia de *spans* E1 × E2. |
-| Figura 6 | Avaliação BIO *token-level*. |
+| Figura 2 | Acordo entre E1 e E2 nos três cortes. |
+| Figura 3 | Desempenho contra o gold adjudicado, em duas leituras. |
+| Figura 4 | Cobertura por tipo argumentativo. |
+| Figura 5 | Anatomia dos spans por estratégia. |
+| Figura 6 | Leitura por token contra o gold adjudicado. |
 | Figura 7 | Latência por estratégia. |
-| Figura 8 | Tipo de entidade × papel argumentativo. |
-
-## Apêndice C — Pendências para a versão de entrega
-
-1. Incorporar a segunda anotação independente e recalcular as métricas contra o consenso.
-2. Definir o formato final (Markdown, DOCX ou LaTeX) e, se a disciplina exigir ABNT estrito, converter as referências.
+| Figura 8 | Tipo de entidade e papel argumentativo. |
+| Figura 9 | Destilação: aprendizes contra o gold adjudicado. |

@@ -1,9 +1,11 @@
 # Mineração de Argumentação em Community Notes BR
 
-Comparação de duas estratégias automáticas de **extração de estrutura argumentativa** em notas
-da comunidade (*Community Notes*) do X (Twitter) em **português brasileiro** — uma baseada em
-**regras léxico-sintáticas** (spaCy) e outra baseada em **LLM** (`qwen3.6-max-preview`) —
-avaliadas entre si e contra **anotação humana**.
+Comparação de três estratégias automáticas de **extração de estrutura argumentativa** em notas
+da comunidade (*Community Notes*) do X (Twitter) em **português brasileiro** — regras
+léxico-sintáticas (**E1**), LLM proprietário via API (**E2**, `qwen3.6-max-preview`) e o mesmo
+protocolo com um **LLM aberto local** (**E2b**, `Qwen3.6-35B-A3B`) — avaliadas entre si e contra
+um **gold humano adjudicado** (duas anotações independentes + consenso), mais um experimento de
+**destilação** (**E3**) que treina rotuladores de sequência baratos com a supervisão do LLM.
 
 > Projeto da disciplina **Processamento de Linguagem Natural** (UFSCar, 2026/1) ·
 > Profa. Dra. Helena Caseli · Grupo: Álvaro Barros de Carvalho, Davi Machado da Rocha.
@@ -19,24 +21,39 @@ Cada nota é segmentada em *spans* argumentativos de quatro tipos:
 | 🔵 **FONTE** | atribuição: veículo, órgão, documento ou URL citado como respaldo |
 | 🟡 **QUALIFICADOR** | modulação: ressalva, incerteza ou escopo |
 
-Duas estratégias produzem esses *spans*:
+Três estratégias produzem esses *spans*:
 
-- **E1 (regras)** — spaCy `pt_core_news_md` (POS, lema, dependências) + heurísticas + regex de URL. Determinística e baratíssima.
-- **E2 (LLM)** — `qwen3.6-max-preview` com *prompt* para *spans* tipados e alinhamento *snippet*→*offset*.
+- **E1 (regras)** — spaCy `pt_core_news_md` (POS, lema, dependências) + heurísticas + regex de URL. Determinística; ~10 ms/nota fim-a-fim.
+- **E2 (LLM via API)** — `qwen3.6-max-preview` (proprietário) com *prompt* para *spans* tipados e alinhamento *snippet*→*offset*.
+- **E2b (LLM aberto local)** — o mesmo protocolo servido por `Qwen3.6-35B-A3B` (Apache 2.0) via Ollama: zero recusas de provedor e reprodutibilidade plena.
 
-São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii) contra um
-**gold humano** num recorte de 60 notas.
+São comparadas (i) **entre si** sobre o corpus inteiro, em três cortes, e (ii) contra um **gold
+humano adjudicado** (duas anotações independentes + consenso com trilha de decisões) num recorte
+de 60 notas — sempre em **duas leituras**: *completa* (sistemas) e *sem FONTE-URL* (a camada de
+URLs é injetada por regex dos dois lados da régua; sem ela mede-se só o conteúdo decidido). A
+estratégia **E3** (destilação) treina Naive Bayes → HMM → reg. logística → CRF → BERTimbau com a
+supervisão *silver* do LLM.
 
 ## Principais achados
 
 > Valores da execução atual do experimento; a consolidação final é feita em
 > [`notebooks/notebook_conclusao.ipynb`](notebooks/notebook_conclusao.ipynb).
 
-- **O LLM se aproxima do humano; as regras, não.** E2 vs *gold*: F1 relaxada ≈ 0,47 / estrita ≈ 0,34; E1: ≈ 0,14 / ≈ 0,02 — as regras erram sobretudo as **fronteiras** dos *spans*.
-- **As regras compensam onde são fortes e baratas:** cobertura de **FONTE** de 72 % (vs 56,5 % do LLM) e custo **~10³× menor** (≈ 1,9 ms vs ≈ 4,6 s por nota).
-- **Divisão de trabalho por tipo:** E1 enxerga sobretudo FONTE (URLs/veículos); E2 distribui entre CLAIM/EVIDÊNCIA/FONTE, mais próximo do humano.
-- **O tipo da entidade prevê o papel argumentativo** (lente GLiNER): URL/mídia → FONTE; ator político/partido → CLAIM/EVIDÊNCIA.
-- O acordo E1×E2 **cai** quando o corte se concentra em notas argumentativas reais — a divergência é sobre **delimitação**, não ruído.
+- **Os humanos concordam mais do que parecia.** O κ inter-anotador sobe de 0,334 para **0,632**
+  quando se desconta a camada de FONTE-URL (infraestrutura, não decisão) — separar as duas
+  leituras virou o eixo metodológico do trabalho.
+- **A régua muda o pódio.** Contra o gold adjudicado, o LLM local lidera na leitura completa
+  (F1 estrita 0,501) e o LLM da API lidera no conteúdo decidido (0,399); contra cada anotador
+  isolado o ranking muda de novo — por isso reportamos três réguas e duas leituras.
+- **Parte do "erro de fronteira" era artefato de dados.** Corrigida a ingestão de entidades
+  (90,8 % dos offsets precisavam de re-localização), a F1 estrita do acordo E1×E2 subiu de
+  0,307 para 0,372 com a relaxada estável.
+- **A destilação funciona com sobra:** um CRF clássico treinado no *silver* do LLM atinge
+  F1 estrita de **0,599** por entidade BIO — nível da melhor referência LLM — a 0,32 ms/nota;
+  e o professor importa (aluno do E2b: 0,505 vs 0,390 do aluno do E2).
+- **O tipo da entidade prevê o papel argumentativo** (lente GLiNER): URL/mídia → FONTE; ator
+  político/partido → CLAIM/EVIDÊNCIA. E o acordo E1×E2 **cai** nos cortes mais argumentativos —
+  a divergência é sobre **delimitação**, não ruído.
 
 ## Estrutura do repositório
 
@@ -131,10 +148,13 @@ dependências (`sintaxe_json`). O **dicionário de colunas** está em
 
 ## Limitações
 
-- **Gold provisório (1 anotador).** O κ inter-anotador e o consenso dependem de uma segunda
-  anotação independente, prevista.
-- **Fronteiras de *span*** são o ponto fraco (penalizam a F1 estrita, sobretudo do E1).
-- Escopo: **um** LLM, **um** idioma (PT-BR), corpus de um período.
+- **Gold adjudicado em rodada de parecer individual** — a revisão cruzada pelo segundo anotador
+  está prevista; quando ocorrer, os artefatos se atualizam por script (`explorador/_refresh_data.py`
+  e re-execução dos notebooks).
+- **Fronteiras de *span*** seguem o ponto difícil — para máquinas e para humanos (κ 0,632 no
+  conteúdo decidido, com fronteiras fluidas).
+- Escopo: dois LLMs de **uma mesma família**, **um** idioma (PT-BR), corpus de um período;
+  modelos neurais da destilação com uma única semente.
 
 ## Licença e uso
 
