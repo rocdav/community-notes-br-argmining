@@ -10,7 +10,7 @@ Uso:  python _build_bio.py
 import os, json
 import pandas as pd
 
-CSV = os.path.join("..", "dataset_anotado_final_com_bio.csv")
+CSV = os.path.join("..", "data", "dataset_anotado_final_com_bio.csv")
 OUT = "data_bio.js"
 
 

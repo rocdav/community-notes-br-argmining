@@ -2,12 +2,13 @@
  * cobertura por tipo e assinatura léxica (Dunning) por tipo. */
 
 function viewPainel(){
-  const g = Object.fromEntries(DATA.vs_gold.map(r => [r.estrategia, r]));
-  let h = '<h2 class="view-title">Painel de achados <span class="scope">E1 × E2 × gold</span></h2>';
-  h += '<p class="lede">Síntese do experimento: o LLM aproxima-se do humano, as regras compensam em cobertura de FONTE e custo, e cada tipo tem assinatura léxica própria.</p>';
+  const NOMES = { E1: 'E1 (regras)', E2: 'E2 (LLM API)', E2b: 'E2b (LLM aberto local)' };
+  let h = '<h2 class="view-title">Painel de achados <span class="scope">E1 × E2 × E2b × gold</span></h2>';
+  h += '<p class="lede">Síntese do experimento contra o gold adjudicado (leitura completa, nível de sistema; a decomposição sem FONTE-URL está no notebook 2 e no relatório).</p>';
   h += '<div class="headline">';
-  h += '<div class="stat"><div class="k">E2 (LLM) vs gold humano</div><div class="v">F1 ' + g.E2.F1_relaxada + '</div><div class="s">estrita ' + g.E2.F1_estrita + ' — alinha-se ao humano</div></div>';
-  h += '<div class="stat"><div class="k">E1 (regras) vs gold humano</div><div class="v">F1 ' + g.E1.F1_relaxada + '</div><div class="s">estrita ' + g.E1.F1_estrita + ' — fronteiras fracas</div></div>';
+  for(const r of DATA.vs_gold){
+    h += '<div class="stat"><div class="k">' + (NOMES[r.estrategia] || r.estrategia) + ' vs gold</div><div class="v">F1 ' + r.F1_relaxada + '</div><div class="s">estrita ' + r.F1_estrita + ' · leitura completa</div></div>';
+  }
   h += '</div>';
   // cortes
   h += '<div class="card"><h3 style="margin:.1rem 0 .4rem">Acordo E1×E2 nos 3 cortes</h3><div class="table-scroll"><table class="simple"><thead><tr><th>corte</th><th>n</th><th>F1 estrita</th><th>F1 relaxada</th><th>κ char</th></tr></thead><tbody>';
@@ -18,6 +19,7 @@ function viewPainel(){
   for(const c of DATA.cobertura){
     h += '<div class="bar-row"><span class="nm">' + c.tipo + '</span>' + bar(c.E1, 100, "#b94f42") + '<span class="small muted">E1 ' + c.E1 + '%</span></div>';
     h += '<div class="bar-row"><span class="nm"></span>' + bar(c.E2, 100, COR[c.tipo]) + '<span class="small muted">E2 ' + c.E2 + '%</span></div>';
+    if(c.E2b !== undefined) h += '<div class="bar-row"><span class="nm"></span>' + bar(c.E2b, 100, "#7a6a8a") + '<span class="small muted">E2b ' + c.E2b + '%</span></div>';
   }
   h += '</div></div>';
   // dunning

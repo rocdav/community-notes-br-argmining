@@ -9,7 +9,7 @@ Padrão do CSV: ../dataset_anotado_final_com_bio.csv
 import sys, os, re, json, collections
 import pandas as pd
 
-CSV = sys.argv[1] if len(sys.argv) > 1 else os.path.join("..", "dataset_anotado_final_com_bio.csv")
+CSV = sys.argv[1] if len(sys.argv) > 1 else os.path.join("..", "data", "dataset_anotado_final_com_bio.csv")
 OUT = "data_conjunto.js"
 TIPOS = ["CLAIM", "EVIDENCIA", "FONTE", "QUALIFICADOR"]
 RX_TIPO = re.compile(r"'type':\s*'([A-Z]+)'")   # spans vêm como repr (sem vírgulas); regex é robusto
@@ -82,12 +82,15 @@ def main():
     }
 
     # --- custo / latência ---
+    # custo E1: fim-a-fim (parse+regras) quando a coluna existe (v2.1); senao so regras
+    e1_col = "e1_total_ms" if "e1_total_ms" in df.columns and df["e1_total_ms"].notna().any() else "e1_ms"
     custo = {
-        "e1_ms_media": round(float(df["e1_ms"].mean()), 1),
+        "e1_ms_media": round(float(df[e1_col].mean()), 1),
+        "e1_medida": "fim-a-fim (parse+regras)" if e1_col == "e1_total_ms" else "so regras",
         "e2_ms_media": round(float(df["e2_ms"].mean()), 0),
         "e2_ms_mediana": round(float(df["e2_ms"].median()), 0),
         "e2_ms_max": round(float(df["e2_ms"].max()), 0),
-        "razao": round(float(df["e2_ms"].mean() / df["e1_ms"].mean()), 0),
+        "razao": round(float(df["e2_ms"].mean() / df[e1_col].mean()), 0),
     }
 
     # --- acordo E1×E2 (médias por nota) ---

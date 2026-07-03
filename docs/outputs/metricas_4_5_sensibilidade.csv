@@ -1,0 +1,19 @@
+gold,estrategia,leitura,F1_estrita
+davi,E1,completa,0.033
+davi,E1,sem FONTE-URL,0.15
+davi,E2,completa,0.34
+davi,E2,sem FONTE-URL,0.42
+davi,E2b,completa,0.231
+davi,E2b,sem FONTE-URL,0.338
+alvaro,E1,completa,0.395
+alvaro,E1,sem FONTE-URL,0.153
+alvaro,E2,completa,0.267
+alvaro,E2,sem FONTE-URL,0.251
+alvaro,E2b,completa,0.485
+alvaro,E2b,sem FONTE-URL,0.292
+consenso,E1,completa,0.364
+consenso,E1,sem FONTE-URL,0.128
+consenso,E2,completa,0.364
+consenso,E2,sem FONTE-URL,0.399
+consenso,E2b,completa,0.501
+consenso,E2b,sem FONTE-URL,0.329

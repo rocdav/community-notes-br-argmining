@@ -32,7 +32,7 @@ function viewConjunto(){
   h += _kpi(_br(G.n_notas), 'notas analisadas', '1 modelo · ' + esc(G.modelo));
   h += _kpi(_br(G.n_tweets), 'tweets cobertos', _f1(G.notas_por_tweet_media) + ' notas/tweet · até ' + G.notas_por_tweet_max);
   h += _kpi(G.n_gold, 'com gold humano', 'subconjunto de avaliação');
-  h += _kpi('~' + _f1(C.custo.e2_ms_media / 1000) + ' s', 'por nota no E2 (LLM)', 'E1 (regras) ~' + _f1(C.custo.e1_ms_media) + ' ms · ' + _br(C.custo.razao) + '× mais lento');
+  h += _kpi('~' + _f1(C.custo.e2_ms_media / 1000) + ' s', 'por nota no E2 (LLM)', 'E1 fim-a-fim ~' + _f1(C.custo.e1_ms_media) + ' ms · ' + _br(C.custo.razao) + '× mais lento');
   h += _kpi('F1 ' + _f2(C.acordo.f1_relaxed), 'acordo E1×E2 (relaxada)', 'estrita ' + _f2(C.acordo.f1_strict) + ' · κ ' + _f2(C.acordo.kappa));
   h += _kpi(_f1(C.meta.pct) + '%', 'são meta-notas', C.meta.n + ' de ' + _br(G.n_notas));
   h += '</div>';

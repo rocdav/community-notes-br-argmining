@@ -2,7 +2,7 @@
 
 ## `dataset_anotado_final_com_bio.csv`
 
-**1901 linhas (notas) × 30 colunas.** Cada linha é uma nota da comunidade com os *spans* das
+**1901 linhas (notas) × 36 colunas.** Cada linha é uma nota da comunidade com os *spans* das
 duas estratégias, métricas de acordo, projeção BIO e análise sintática. Codificação **UTF-8**.
 
 > ⚠️ As colunas `e1_spans`, `e2_spans` e `anotacao_humana_spans` vêm como **repr de array
@@ -33,13 +33,16 @@ duas estratégias, métricas de acordo, projeção BIO e análise sintática. Co
 | `e1_version` | str | Versão da extração E1 (`v2.1_relocated_entities`: FONTE re-localizada pela superfície). |
 | `e2_ms` | float | Latência da E2 na nota (ms). |
 | `model` | str | Modelo LLM da E2 (`qwen3.6-max-preview`). |
-| `anotacao_humana_anotador` | str | Identificador do anotador (preenchido só nas 60 do *gold*). |
+| `e2b_spans` | str(repr) | *Spans* da **E2b** (mesma estratégia E2 com modelo aberto local, `qwen3.6:35b` via Ollama). |
+| `e2b_ms` | float | Latência da E2b na nota (ms; hardware local do grupo — não comparável diretamente). |
+| `anotacao_humana_anotador` | str | `consenso_adjudicado` nas 60 do *gold*; nulo nas demais. |
 | `anotacao_humana_status` | str | `selecionada_para_anotacao` (as 60) ou `nao_anotada`. |
-| `anotacao_humana_spans` | str(repr) | *Spans* do *gold* humano (nulo fora das 60). |
+| `anotacao_humana_spans` | str(repr) | *Spans* do *gold* **adjudicado** (consenso Davi + Álvaro; nulo fora das 60). |
 | `bio_tokens_json` | json | Tokens da nota (inclui tokens de espaço). |
 | `bio_offsets_json` | json | `[start, end]` de cada token, alinhado aos tokens. |
 | `e1_span_bio_json` | json | Rótulos BIO da E1 por token (`B-TIPO`/`I-TIPO`/`O`). |
 | `e2_span_bio_json` | json | Rótulos BIO da E2 por token. |
+| `e2b_span_bio_json` | json | Rótulos BIO da E2b por token. |
 | `humano_span_bio_json` | json | Rótulos BIO do *gold* por token (nulo fora das 60). |
 | `bio_tokenizer` | str | Tokenizador usado na projeção BIO. |
 | `bio_projection_version` | str | Versão do procedimento de projeção span→BIO. |
@@ -51,7 +54,9 @@ duas estratégias, métricas de acordo, projeção BIO e análise sintática. Co
 Input **canônico** do experimento (gerado com DuckDB, preserva `LIST<STRUCT>`): `e1_spans`,
 `e2_spans`, métricas, `e2_align_levels` e o *flag* das 60 corretas; `anotacao_humana_spans` entra
 vazio (o *gold* é mesclado a partir do JSON do anotador no notebook). Leia com
-`engine="fastparquet"` ou DuckDB.
+**DuckDB** ou **`engine="pyarrow"`** — o `fastparquet` devolve as colunas aninhadas
+nulas em silêncio. Desde a v2.1, traz também `e1_parse_ms`/`e1_total_ms`/`e1_version`
+(E1 com ingestão de FONTE re-localizada).
 
 ## `gold/`
 
@@ -59,11 +64,14 @@ vazio (o *gold* é mesclado a partir do JSON do anotador no notebook). Leia com
   das 60 notas: *spans* `{start, end, type}` por nota.
 - `anotacao_manual_alvaro-barros_2026-07-02.json` — segunda anotação humana independente das
   mesmas 60 notas.
-- `*_bio.conll` — exportações derivadas em **CoNLL/BIO** (token + rótulo), exemplos do formato de
-  sequência.
+- `anotacao_consenso_adjudicado_2026-07-02.json` — **gold final**: consenso adjudicado
+  (`apps/adjudicador`), com sessão, `decision_source` por *span* e trilha de decisões por nota.
+- `*_bio.conll` — exportações derivadas em **CoNLL/BIO** (token + offsets + rótulo), na grade de
+  tokens canônica do dataset.
 
-O *gold* final deve ser exportado pelo adjudicador em `apps/adjudicador/` e carregado no
-`notebook_conclusao.ipynb` via `CONSENSUS_JSON_PATH`.
+O `notebook_conclusao.ipynb` lê os três JSONs direto do repositório: os dois anotadores para o
+**κ inter-anotador** (sempre calculado) e o consenso adjudicado como gold final
+(`CONSENSUS_JSON_RELPATH`).
 
 ## `qualitative_60_reasoning.jsonl`
 
