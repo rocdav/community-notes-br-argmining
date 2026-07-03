@@ -1,0 +1,5899 @@
+{
+  "schema_version": "1.0",
+  "dataset_version": "v1.0",
+  "guia_versao": "1.0",
+  "anotador": {
+    "nome": "Consenso Davi Machado da Rocha + Alvaro Barros",
+    "papel": "consenso_adjudicado"
+  },
+  "adjudicacao": {
+    "generated_by": "apps/adjudicador",
+    "exported_at": "2026-07-02T23:05:50.221Z",
+    "source_files": {
+      "notes": "apps/anotador/data.js",
+      "davi": "data/gold/anotacao_manual_davi-machado-da-rocha_2026-05-20.json",
+      "alvaro": "data/gold/anotacao_manual_alvaro-barros_2026-07-02.json"
+    },
+    "annotators": {
+      "davi": {
+        "nome": "Davi Machado da Rocha",
+        "papel": "manual"
+      },
+      "alvaro": {
+        "nome": "Alvaro Barros",
+        "papel": "manual"
+      }
+    },
+    "stats": {
+      "notes": 60,
+      "davi_spans": 101,
+      "alvaro_spans": 217,
+      "exact_agreement_spans": 31,
+      "human_union_spans": 287,
+      "notes_without_divergence": 11,
+      "notes_with_divergence": 49
+    },
+    "sessao": {
+      "modo": "conjunta",
+      "adjudicadores": [
+        "Davi Machado da Rocha",
+        "Alvaro Barros"
+      ],
+      "adjudicador_atual": "Davi",
+      "rodada": "parecer_individual",
+      "data_inicio": "2026-07-02T22:35:33.681Z",
+      "observacoes": "",
+      "data_exportacao": "2026-07-02T23:05:50.221Z"
+    },
+    "importacao_assincrona": null,
+    "decisoes_por_nota": {
+      "1761891434389475646": [
+        {
+          "at": "2026-07-02T22:37:07.918Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 59,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:37:12.828Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 61,
+          "end": 173,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:37:14.572Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 238,
+          "end": 355,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:37:15.636Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 359,
+          "end": 505,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:37:20.860Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "2007791917765943580": [
+        {
+          "at": "2026-07-02T22:37:35.208Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "2031096564928708748": [
+        {
+          "at": "2026-07-02T22:38:00.040Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 127,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:38:07.012Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 158,
+          "end": 266,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:38:11.316Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 271,
+          "end": 355,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:38:16.900Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "2022468950043316327": [
+        {
+          "at": "2026-07-02T22:38:44.712Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 37,
+          "end": 120,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:38:46.184Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 125,
+          "end": 191,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:39:07.204Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1787884933765022194": [
+        {
+          "at": "2026-07-02T22:39:33.020Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 21,
+          "end": 31,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:39:33.996Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 35,
+          "end": 45,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:39:48.416Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 241,
+          "end": 400,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:39:49.264Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 404,
+          "end": 478,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:39:50.088Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 482,
+          "end": 571,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:40:18.744Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 50,
+          "end": 64,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:40:22.784Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 7
+        }
+      ],
+      "1655712700171689984": [
+        {
+          "at": "2026-07-02T22:40:44.000Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 126,
+          "end": 206,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:40:46.168Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 259,
+          "end": 447,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:40:51.940Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "2035165855806259553": [
+        {
+          "at": "2026-07-02T22:41:24.904Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 35,
+          "end": 179,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:26.692Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 184,
+          "end": 231,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:27.588Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 233,
+          "end": 280,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:28.821Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 284,
+          "end": 331,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:29.756Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 333,
+          "end": 380,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:30.772Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 384,
+          "end": 431,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:31.861Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 435,
+          "end": 490,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:32.508Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 494,
+          "end": 548,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:33.628Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 552,
+          "end": 602,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:34.717Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 606,
+          "end": 658,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:35.492Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 660,
+          "end": 712,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:36.508Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 714,
+          "end": 766,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:37.460Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 770,
+          "end": 822,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:38.460Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 824,
+          "end": 876,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:39.684Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 880,
+          "end": 932,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:40.460Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 934,
+          "end": 986,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:41.532Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 990,
+          "end": 1042,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:42.269Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1046,
+          "end": 1097,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:43.460Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1101,
+          "end": 1153,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:46.140Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1157,
+          "end": 1210,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:47.060Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1214,
+          "end": 1260,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:48.316Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1264,
+          "end": 1317,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:49.068Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1319,
+          "end": 1386,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:50.260Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1390,
+          "end": 1440,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:51.332Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1444,
+          "end": 1499,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:41:59.436Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 25
+        }
+      ],
+      "1815075511498092968": [
+        {
+          "at": "2026-07-02T22:42:11.232Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 36,
+          "end": 190,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:16.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 257,
+          "end": 315,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:17.316Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 317,
+          "end": 437,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:18.044Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 439,
+          "end": 506,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:19.228Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 508,
+          "end": 618,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:20.076Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 620,
+          "end": 743,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:21.108Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 745,
+          "end": 869,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:21.884Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 871,
+          "end": 985,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:23.028Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 987,
+          "end": 1143,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:24.468Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1145,
+          "end": 1219,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:25.396Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1221,
+          "end": 1286,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:26.620Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1288,
+          "end": 1388,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:27.356Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1390,
+          "end": 1506,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:28.708Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1508,
+          "end": 1588,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:38.909Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 17
+        }
+      ],
+      "1999916358998360139": [
+        {
+          "at": "2026-07-02T22:42:55.992Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 254,
+          "end": 413,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:56.920Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 417,
+          "end": 536,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:57.873Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 540,
+          "end": 668,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:59.040Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 672,
+          "end": 778,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:42:59.728Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 782,
+          "end": 906,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:00.816Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 910,
+          "end": 1101,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:01.696Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1105,
+          "end": 1275,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:03.008Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 1279,
+          "end": 1392,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:06.256Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 11
+        }
+      ],
+      "1919473187269878071": [
+        {
+          "at": "2026-07-02T22:43:12.304Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 264,
+          "end": 373,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:12.936Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 377,
+          "end": 595,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:13.936Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 600,
+          "end": 663,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:15.200Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 667,
+          "end": 753,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:15.992Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 757,
+          "end": 817,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:17.192Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 821,
+          "end": 1114,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:43:21.928Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 9
+        }
+      ],
+      "2023491294153052667": [
+        {
+          "at": "2026-07-02T22:43:45.904Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 95,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:44:07.112Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 203,
+          "end": 273,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:44:09.272Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 277,
+          "end": 333,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:44:09.960Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 335,
+          "end": 459,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:44:11.048Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 461,
+          "end": 608,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:44:23.368Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 7
+        }
+      ],
+      "2027161946576011568": [
+        {
+          "at": "2026-07-02T22:45:55.832Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 32,
+          "end": 92,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:46:09.144Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 183,
+          "end": 239,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:46:32.764Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 242,
+          "end": 273,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:46:34.556Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 278,
+          "end": 369,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:46:38.968Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 5
+        }
+      ],
+      "1887258714580877671": [
+        {
+          "at": "2026-07-02T22:47:01.548Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 2,
+          "end": 56,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:07.324Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 68,
+          "end": 168,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:23.796Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 172,
+          "end": 181,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:24.508Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 182,
+          "end": 262,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:27.124Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 268,
+          "end": 331,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:27.884Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 336,
+          "end": 462,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:33.060Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 6
+        }
+      ],
+      "2028530269850910822": [
+        {
+          "at": "2026-07-02T22:47:44.756Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 186,
+          "end": 237,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:45.728Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 241,
+          "end": 351,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:46.764Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 355,
+          "end": 398,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:47:49.876Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 6
+        }
+      ],
+      "1889128334228885958": [
+        {
+          "at": "2026-07-02T22:48:40.900Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 267,
+          "end": 322,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:48:59.116Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 1
+        }
+      ],
+      "1689843429797175692": [
+        {
+          "at": "2026-07-02T22:49:21.432Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 13,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:49:22.304Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 18,
+          "end": 126,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:49:23.192Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 128,
+          "end": 267,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:49:25.688Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1708038777610940549": [
+        {
+          "at": "2026-07-02T22:49:43.316Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 26,
+          "end": 76,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:49:44.124Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 79,
+          "end": 184,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:49:46.108Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "1761231589785194785": [
+        {
+          "at": "2026-07-02T22:50:04.656Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 153,
+          "end": 217,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:50:16.228Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 108,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:50:16.972Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 111,
+          "end": 148,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:50:18.012Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 270,
+          "end": 395,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:50:21.772Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1761863207252029822": [
+        {
+          "at": "2026-07-02T22:50:36.344Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 153,
+          "end": 291,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:50:41.416Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 1
+        }
+      ],
+      "1882118498148642865": [
+        {
+          "at": "2026-07-02T22:50:53.788Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1878062635578458242": [
+        {
+          "at": "2026-07-02T22:51:06.264Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 15,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:07.121Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 17,
+          "end": 55,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:09.344Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 58,
+          "end": 114,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:13.992Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1760000020819103825": [
+        {
+          "at": "2026-07-02T22:51:27.340Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 39,
+          "type": "QUALIFICADOR",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:28.756Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 41,
+          "end": 85,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:48.520Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 176,
+          "end": 262,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:49.592Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 265,
+          "end": 322,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:50.152Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 324,
+          "end": 414,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:51:54.672Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 6
+        }
+      ],
+      "2019861320049271125": [
+        {
+          "at": "2026-07-02T22:52:20.732Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 32,
+          "end": 65,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:22.372Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 73,
+          "end": 142,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:24.224Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 147,
+          "end": 239,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:25.008Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 243,
+          "end": 353,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:29.080Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "2025149321335673124": [
+        {
+          "at": "2026-07-02T22:52:39.097Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 143,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:39.904Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 147,
+          "end": 189,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:52:41.022Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "2023720510257856645": [
+        {
+          "at": "2026-07-02T22:53:31.840Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 28,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:32.912Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 31,
+          "end": 64,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:33.832Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 202,
+          "end": 250,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:36.265Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1877812049759416365": [
+        {
+          "at": "2026-07-02T22:53:48.408Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 81,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:54.364Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 197,
+          "end": 269,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:55.060Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 272,
+          "end": 333,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:53:57.628Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1941004407832752217": [
+        {
+          "at": "2026-07-02T22:54:22.225Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 125,
+          "end": 186,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:22.864Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 271,
+          "end": 391,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:24.096Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 395,
+          "end": 552,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:24.941Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 556,
+          "end": 661,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:34.456Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 4,
+          "end": 55,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:39.628Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 6
+        }
+      ],
+      "1991189878722244743": [
+        {
+          "at": "2026-07-02T22:54:49.456Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 25,
+          "end": 119,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:50.368Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 134,
+          "end": 182,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:52.168Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 187,
+          "end": 280,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:52.952Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 282,
+          "end": 353,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:54.568Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 355,
+          "end": 405,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:55.288Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 407,
+          "end": 527,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:54:56.360Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 529,
+          "end": 574,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:00.040Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 7
+        }
+      ],
+      "1876223898854797725": [
+        {
+          "at": "2026-07-02T22:55:21.620Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 36,
+          "end": 102,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:22.556Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 111,
+          "end": 152,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:23.100Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 163,
+          "end": 270,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:25.100Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 275,
+          "end": 324,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:27.436Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1870680545136439331": [
+        {
+          "at": "2026-07-02T22:55:49.884Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 89,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:55.164Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 91,
+          "end": 174,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:56.636Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 176,
+          "end": 274,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:55:58.076Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 279,
+          "end": 345,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:56:01.236Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1842682272262324483": [
+        {
+          "at": "2026-07-02T22:56:14.612Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 15,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:56:18.492Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 208,
+          "end": 277,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:56:20.320Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 280,
+          "end": 476,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:56:24.120Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1889176478891315215": [
+        {
+          "at": "2026-07-02T22:57:10.796Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 16,
+          "end": 92,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:11.580Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 101,
+          "end": 155,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:13.364Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 157,
+          "end": 277,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:16.988Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 283,
+          "end": 336,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:20.172Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1823435417548374388": [
+        {
+          "at": "2026-07-02T22:57:30.680Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 36,
+          "end": 120,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:31.648Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 123,
+          "end": 221,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:32.896Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 227,
+          "end": 361,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:35.440Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1885048614927425622": [
+        {
+          "at": "2026-07-02T22:57:54.060Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 41,
+          "end": 94,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:54.660Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 99,
+          "end": 161,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:55.356Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 167,
+          "end": 211,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:57:58.572Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1993124451064406360": [
+        {
+          "at": "2026-07-02T22:58:06.268Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 171,
+          "end": 223,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:07.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "1936784166680502540": [
+        {
+          "at": "2026-07-02T22:58:14.892Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 77,
+          "end": 167,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:15.540Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 169,
+          "end": 261,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:19.164Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "2031092784686387635": [
+        {
+          "at": "2026-07-02T22:58:30.132Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 37,
+          "end": 173,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:31.636Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 225,
+          "end": 311,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:35.780Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "1879837365738385874": [
+        {
+          "at": "2026-07-02T22:58:46.428Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 61,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:55.744Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 63,
+          "end": 272,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:57.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 278,
+          "end": 345,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:58:58.532Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 349,
+          "end": 487,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:00.900Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 4
+        }
+      ],
+      "1878095415351922716": [
+        {
+          "at": "2026-07-02T22:59:16.736Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 49,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:21.368Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 52,
+          "end": 114,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:23.120Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 119,
+          "end": 147,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:24.992Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "2014522181053567129": [
+        {
+          "at": "2026-07-02T22:59:36.188Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 273,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:37.700Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 277,
+          "end": 348,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:40.276Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "2035937261900960010": [
+        {
+          "at": "2026-07-02T22:59:48.141Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 124,
+          "end": 272,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T22:59:49.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "1884778548310823225": [
+        {
+          "at": "2026-07-02T23:00:00.284Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 102,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:00:02.692Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 275,
+          "end": 323,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:00:03.292Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 327,
+          "end": 375,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:00:04.308Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 379,
+          "end": 444,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:00:07.304Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 5
+        }
+      ],
+      "1868118294474915987": [
+        {
+          "at": "2026-07-02T23:00:17.321Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 5,
+          "end": 51,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:00:43.876Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "1991162547119014319": [
+        {
+          "at": "2026-07-02T23:00:49.744Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1762663085980958948": [
+        {
+          "at": "2026-07-02T23:01:05.672Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 190,
+          "end": 487,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:01:06.632Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 78,
+          "end": 121,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:01:09.584Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "2036159146039595023": [
+        {
+          "at": "2026-07-02T23:01:35.136Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 134,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:01:36.096Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 209,
+          "end": 274,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:01:37.544Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 277,
+          "end": 330,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:01:39.632Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "2032140619728965702": [
+        {
+          "at": "2026-07-02T23:01:45.272Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1828997016388518228": [
+        {
+          "at": "2026-07-02T23:01:54.872Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1798350866983891008": [
+        {
+          "at": "2026-07-02T23:01:58.736Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "2033327040481444237": [
+        {
+          "at": "2026-07-02T23:02:09.892Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 9,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:14.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 26,
+          "end": 84,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:17.700Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 237,
+          "end": 268,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:18.709Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 273,
+          "end": 369,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:22.604Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 5
+        }
+      ],
+      "2036235208928756034": [
+        {
+          "at": "2026-07-02T23:02:29.572Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 41,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:31.348Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 266,
+          "end": 342,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:02:33.284Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1884735731991519515": [
+        {
+          "at": "2026-07-02T23:02:37.148Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "2035774913856840144": [
+        {
+          "at": "2026-07-02T23:02:40.188Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1828475905272095265": [
+        {
+          "at": "2026-07-02T23:02:54.000Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 53,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:03:28.592Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 275,
+          "end": 309,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:03:31.764Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 99,
+          "end": 154,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:03:37.441Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1639935770680078337": [
+        {
+          "at": "2026-07-02T23:03:42.728Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1881461849201521031": [
+        {
+          "at": "2026-07-02T23:04:27.004Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 24,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:04:27.692Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 147,
+          "end": 216,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:04:28.596Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 220,
+          "end": 368,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:04:30.756Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 3
+        }
+      ],
+      "1916124309459808763": [
+        {
+          "at": "2026-07-02T23:04:33.940Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "1856342402283225145": [
+        {
+          "at": "2026-07-02T23:04:44.645Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 0
+        }
+      ],
+      "2034666298249023797": [
+        {
+          "at": "2026-07-02T23:04:54.044Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 0,
+          "end": 73,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:04:57.000Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "davi",
+          "start": 162,
+          "end": 283,
+          "type": "CLAIM",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:04:59.788Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ],
+      "2030386711545446739": [
+        {
+          "at": "2026-07-02T23:05:14.864Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 0,
+          "end": 54,
+          "type": "EVIDENCIA",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:05:16.136Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "add_span",
+          "source": "alvaro",
+          "start": 59,
+          "end": 119,
+          "type": "FONTE",
+          "replaced": 0
+        },
+        {
+          "at": "2026-07-02T23:05:17.624Z",
+          "actor": "",
+          "mode": "conjunta",
+          "round": "consenso",
+          "action": "reviewed",
+          "spans": 2
+        }
+      ]
+    },
+    "resumo_por_nota": {
+      "1761891434389475646": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 3,
+        "alvaro_spans": 4,
+        "exact_agreement": 0,
+        "human_union": 7,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:37:20.860Z"
+      },
+      "2007791917765943580": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:37:35.208Z"
+      },
+      "2031096564928708748": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 3,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:38:16.900Z"
+      },
+      "2022468950043316327": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 3,
+        "exact_agreement": 1,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:39:07.204Z"
+      },
+      "1787884933765022194": {
+        "status": "reviewed",
+        "gold_spans": 7,
+        "davi_spans": 2,
+        "alvaro_spans": 8,
+        "exact_agreement": 1,
+        "human_union": 9,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:40:22.784Z"
+      },
+      "1655712700171689984": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 3,
+        "alvaro_spans": 5,
+        "exact_agreement": 2,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:40:51.940Z"
+      },
+      "2035165855806259553": {
+        "status": "reviewed",
+        "gold_spans": 25,
+        "davi_spans": 0,
+        "alvaro_spans": 28,
+        "exact_agreement": 0,
+        "human_union": 28,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:41:59.436Z"
+      },
+      "1815075511498092968": {
+        "status": "reviewed",
+        "gold_spans": 17,
+        "davi_spans": 5,
+        "alvaro_spans": 17,
+        "exact_agreement": 3,
+        "human_union": 19,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:42:38.909Z"
+      },
+      "1999916358998360139": {
+        "status": "reviewed",
+        "gold_spans": 11,
+        "davi_spans": 3,
+        "alvaro_spans": 12,
+        "exact_agreement": 3,
+        "human_union": 12,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:43:06.256Z"
+      },
+      "1919473187269878071": {
+        "status": "reviewed",
+        "gold_spans": 9,
+        "davi_spans": 3,
+        "alvaro_spans": 9,
+        "exact_agreement": 3,
+        "human_union": 9,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:43:21.928Z"
+      },
+      "2023491294153052667": {
+        "status": "reviewed",
+        "gold_spans": 7,
+        "davi_spans": 5,
+        "alvaro_spans": 7,
+        "exact_agreement": 2,
+        "human_union": 10,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:44:23.368Z"
+      },
+      "2027161946576011568": {
+        "status": "reviewed",
+        "gold_spans": 5,
+        "davi_spans": 5,
+        "alvaro_spans": 5,
+        "exact_agreement": 1,
+        "human_union": 9,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:46:38.968Z"
+      },
+      "1887258714580877671": {
+        "status": "reviewed",
+        "gold_spans": 6,
+        "davi_spans": 3,
+        "alvaro_spans": 7,
+        "exact_agreement": 0,
+        "human_union": 10,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:47:33.060Z"
+      },
+      "2028530269850910822": {
+        "status": "reviewed",
+        "gold_spans": 6,
+        "davi_spans": 3,
+        "alvaro_spans": 6,
+        "exact_agreement": 3,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:47:49.876Z"
+      },
+      "1889128334228885958": {
+        "status": "reviewed",
+        "gold_spans": 1,
+        "davi_spans": 0,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:48:59.116Z"
+      },
+      "1689843429797175692": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 1,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:49:25.688Z"
+      },
+      "1708038777610940549": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 0,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:49:46.108Z"
+      },
+      "1761231589785194785": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 1,
+        "alvaro_spans": 4,
+        "exact_agreement": 0,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:50:21.772Z"
+      },
+      "1761863207252029822": {
+        "status": "reviewed",
+        "gold_spans": 1,
+        "davi_spans": 0,
+        "alvaro_spans": 1,
+        "exact_agreement": 0,
+        "human_union": 1,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:50:41.416Z"
+      },
+      "1882118498148642865": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:50:53.788Z"
+      },
+      "1878062635578458242": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:51:13.992Z"
+      },
+      "1760000020819103825": {
+        "status": "reviewed",
+        "gold_spans": 6,
+        "davi_spans": 2,
+        "alvaro_spans": 6,
+        "exact_agreement": 1,
+        "human_union": 7,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:51:54.672Z"
+      },
+      "2019861320049271125": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 2,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:52:29.080Z"
+      },
+      "2025149321335673124": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 0,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:52:41.022Z"
+      },
+      "2023720510257856645": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 3,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:53:36.264Z"
+      },
+      "1877812049759416365": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 2,
+        "alvaro_spans": 4,
+        "exact_agreement": 1,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:53:57.628Z"
+      },
+      "1941004407832752217": {
+        "status": "reviewed",
+        "gold_spans": 6,
+        "davi_spans": 2,
+        "alvaro_spans": 6,
+        "exact_agreement": 1,
+        "human_union": 7,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:54:39.628Z"
+      },
+      "1991189878722244743": {
+        "status": "reviewed",
+        "gold_spans": 7,
+        "davi_spans": 2,
+        "alvaro_spans": 6,
+        "exact_agreement": 0,
+        "human_union": 8,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:55:00.040Z"
+      },
+      "1876223898854797725": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 3,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:55:27.436Z"
+      },
+      "1870680545136439331": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 2,
+        "alvaro_spans": 4,
+        "exact_agreement": 0,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:56:01.236Z"
+      },
+      "1842682272262324483": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 3,
+        "alvaro_spans": 4,
+        "exact_agreement": 1,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:56:24.120Z"
+      },
+      "1889176478891315215": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 2,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 5,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:57:20.172Z"
+      },
+      "1823435417548374388": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:57:35.440Z"
+      },
+      "1885048614927425622": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:57:58.572Z"
+      },
+      "1993124451064406360": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 1,
+        "alvaro_spans": 2,
+        "exact_agreement": 1,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:58:07.604Z"
+      },
+      "1936784166680502540": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 1,
+        "alvaro_spans": 3,
+        "exact_agreement": 1,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:58:19.164Z"
+      },
+      "2031092784686387635": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 1,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:58:35.780Z"
+      },
+      "1879837365738385874": {
+        "status": "reviewed",
+        "gold_spans": 4,
+        "davi_spans": 3,
+        "alvaro_spans": 4,
+        "exact_agreement": 0,
+        "human_union": 7,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:59:00.900Z"
+      },
+      "1878095415351922716": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 3,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:59:24.992Z"
+      },
+      "2014522181053567129": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 1,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:59:40.276Z"
+      },
+      "2035937261900960010": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 1,
+        "alvaro_spans": 2,
+        "exact_agreement": 1,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T22:59:49.604Z"
+      },
+      "1884778548310823225": {
+        "status": "reviewed",
+        "gold_spans": 5,
+        "davi_spans": 2,
+        "alvaro_spans": 5,
+        "exact_agreement": 1,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:00:07.304Z"
+      },
+      "1868118294474915987": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 2,
+        "alvaro_spans": 1,
+        "exact_agreement": 1,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:00:43.876Z"
+      },
+      "1991162547119014319": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:00:49.744Z"
+      },
+      "1762663085980958948": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 1,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:01:09.584Z"
+      },
+      "2036159146039595023": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:01:39.632Z"
+      },
+      "2032140619728965702": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:01:45.272Z"
+      },
+      "1828997016388518228": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:01:54.872Z"
+      },
+      "1798350866983891008": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:01:58.736Z"
+      },
+      "2033327040481444237": {
+        "status": "reviewed",
+        "gold_spans": 5,
+        "davi_spans": 2,
+        "alvaro_spans": 5,
+        "exact_agreement": 1,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:02:22.604Z"
+      },
+      "2036235208928756034": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 2,
+        "alvaro_spans": 2,
+        "exact_agreement": 1,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:02:33.284Z"
+      },
+      "1884735731991519515": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:02:37.148Z"
+      },
+      "2035774913856840144": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:02:40.188Z"
+      },
+      "1828475905272095265": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 3,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 6,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:03:37.441Z"
+      },
+      "1639935770680078337": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:03:42.728Z"
+      },
+      "1881461849201521031": {
+        "status": "reviewed",
+        "gold_spans": 3,
+        "davi_spans": 1,
+        "alvaro_spans": 3,
+        "exact_agreement": 0,
+        "human_union": 4,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:04:30.756Z"
+      },
+      "1916124309459808763": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:04:33.940Z"
+      },
+      "1856342402283225145": {
+        "status": "reviewed",
+        "gold_spans": 0,
+        "davi_spans": 0,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 0,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:04:44.645Z"
+      },
+      "2034666298249023797": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 2,
+        "alvaro_spans": 0,
+        "exact_agreement": 0,
+        "human_union": 2,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:04:59.788Z"
+      },
+      "2030386711545446739": {
+        "status": "reviewed",
+        "gold_spans": 2,
+        "davi_spans": 1,
+        "alvaro_spans": 2,
+        "exact_agreement": 0,
+        "human_union": 3,
+        "peer_spans": 0,
+        "reviewed_at": "2026-07-02T23:05:17.624Z"
+      }
+    }
+  },
+  "started_at": null,
+  "last_saved_at": "2026-07-02T23:05:50.221Z",
+  "total_notas": 60,
+  "completas": 60,
+  "em_progresso": 0,
+  "pendentes": 0,
+  "anotacoes": {
+    "1761891434389475646": {
+      "noteId": "1761891434389475646",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A bandeira conhecida como Gadsden não é um símbolo fascista",
+          "start": 0,
+          "end": 59,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:37:07.917Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a alegação do autor da postagem parece sugerir que o evento no qual a bandeira está inserida é de cunho fascista",
+          "start": 61,
+          "end": 173,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:37:12.828Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://noticias.uol.com.br/eleicoes/2022/08/29/deus-patria-familia-lema-de-bolsonaro-tem-origem-fascista-entenda.htm",
+          "start": 238,
+          "end": 355,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:37:14.572Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.ifch.unicamp.br/criticamarxista/arquivos_biblioteca/dossie2020_05_26_14_12_19.pdf    https://pt.wikipedia.org/wiki/Bandeira_de_Gadsden",
+          "start": 359,
+          "end": 505,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:37:15.636Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:37:20.860Z"
+    },
+    "2007791917765943580": {
+      "noteId": "2007791917765943580",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:37:35.208Z"
+    },
+    "2031096564928708748": {
+      "noteId": "2031096564928708748",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Há menos de 2 meses a jornalista afirmava que o contrato não existia, e desde as confirmações públicas está mudando a narrativa",
+          "start": 0,
+          "end": 127,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:38:00.040Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o banco envolvido está sob investigação de pagamento para influenciadores criticarem a operação em andamento",
+          "start": 158,
+          "end": 266,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:38:07.012Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/i/status/2005466195328377102    https://share.google/vWYxFHxNqduk6unJV",
+          "start": 271,
+          "end": 355,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:38:11.316Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:38:16.900Z"
+    },
+    "2022468950043316327": {
+      "noteId": "2022468950043316327",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A imagem foi alterada digitalmente",
+          "start": 0,
+          "end": 34,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A foto verdadeira pode ser encontrada no perfil oficial do mundo Gloob no Instagram",
+          "start": 37,
+          "end": 120,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:38:44.712Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/p/DUqX9gkjhWT/?igsh=MTc1aWl2Znk2bDMzeQ==",
+          "start": 125,
+          "end": 191,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:38:46.184Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:39:07.204Z"
+    },
+    "1787884933765022194": {
+      "noteId": "1787884933765022194",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A Sefaz-RS",
+          "start": 21,
+          "end": 31,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:39:33.020Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "a Sefaz-SC",
+          "start": 35,
+          "end": 45,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:39:33.996Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "nota publicada",
+          "start": 50,
+          "end": 64,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:40:18.744Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "afirmaram que veículos com doações para os atingidos pelas enchentes não estão sendo parados nas estradas e que suspendeu a fiscalização para facilitar a chegada de ajuda",
+          "start": 66,
+          "end": 236,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/reel/C6lwPldOZz5/?utm_source=ig_embed&amp;ig_rid=dd2482f7-9d01-4784-85a1-6936980d0fce&amp;ig_mid=F6986190-5E84-47BE-B913-E35BBE8185DE",
+          "start": 241,
+          "end": 400,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:39:48.416Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aosfatos.org/noticias/falso-doacoes-vitimas-enchente-barradas/",
+          "start": 404,
+          "end": 478,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:39:49.264Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.sef.sc.gov.br/noticias/nota-de-esclarecimento-transporte-de-doacoes-para-o-rs",
+          "start": 482,
+          "end": 571,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:39:50.088Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:40:22.784Z"
+    },
+    "1655712700171689984": {
+      "noteId": "1655712700171689984",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A assessoria de imprensa do SBT",
+          "start": 0,
+          "end": 31,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "o apresentador e empresário Silvio Santos teria falecido",
+          "start": 62,
+          "end": 118,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Silvio Santos está bem graças a Deus, curtindo os netos, filhas, genros e esposa",
+          "start": 126,
+          "end": 206,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:40:44.000Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://contigo.uol.com.br/noticias/famosos/sbt-se-pronuncia-sobre-possivel-morte-de-silvio-santos-em-comunicado-e-crime.phtml?utm_source=site&amp;utm_medium=txt&amp;utm_campaign=copypaste",
+          "start": 259,
+          "end": 447,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:40:46.168Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:40:51.940Z"
+    },
+    "2035165855806259553": {
+      "noteId": "2035165855806259553",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "REFUTAM o que foi dito no vídeo, QUESTIONAM A IDONEIDADE e PROBIDADE do Felca e mostram as CONTRADIÇÕES entre seus atos e palavras e a realidade",
+          "start": 35,
+          "end": 179,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:24.904Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/ayubio/status/2032892759946965027",
+          "start": 184,
+          "end": 231,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:26.692Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/ayubio/status/2033897573526696016",
+          "start": 233,
+          "end": 280,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:27.588Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/LEME12/status/2019072905435341087",
+          "start": 284,
+          "end": 331,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:28.821Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/LEME12/status/2034734512530153886",
+          "start": 333,
+          "end": 380,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:29.756Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/FSU_BR/status/2033540902287728718",
+          "start": 384,
+          "end": 431,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:30.772Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/FelipeTadewald/status/2033915000700461569",
+          "start": 435,
+          "end": 490,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:31.861Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/pierre_160754/status/2034282855208010147",
+          "start": 494,
+          "end": 548,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:32.508Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/5elemento/status/2026442347253256693",
+          "start": 552,
+          "end": 602,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:33.628Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034751268359405896",
+          "start": 606,
+          "end": 658,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:34.717Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034751562426233195",
+          "start": 660,
+          "end": 712,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:35.492Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034752389278757275",
+          "start": 714,
+          "end": 766,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:36.508Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034752839344591067",
+          "start": 770,
+          "end": 822,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:37.460Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/1957445752923234659",
+          "start": 824,
+          "end": 876,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:38.460Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034753172820963797",
+          "start": 880,
+          "end": 932,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:39.684Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/1957448472799400205",
+          "start": 934,
+          "end": 986,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:40.460Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/PatriaVisao/status/2034611981399810124",
+          "start": 990,
+          "end": 1042,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:41.532Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/thairizard/status/2034747811112059204",
+          "start": 1046,
+          "end": 1097,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:42.269Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/Rafuxvideos/status/2034724408217030798",
+          "start": 1101,
+          "end": 1153,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:43.460Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/schmittpaula/status/2034193028693307891",
+          "start": 1157,
+          "end": 1210,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:46.140Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/Byanu/status/2034633934454333589",
+          "start": 1214,
+          "end": 1260,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:47.060Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/david_agape_/status/1957929503419969948",
+          "start": 1264,
+          "end": 1317,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:48.316Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.ainvestigacao.com/p/adultizacao-judiario-e-governo-lula",
+          "start": 1319,
+          "end": 1386,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:49.068Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/giuargolo/status/2035062898502893738",
+          "start": 1390,
+          "end": 1440,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:50.260Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/pingandosangue/status/2034749129021145558",
+          "start": 1444,
+          "end": 1499,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:41:51.332Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:41:59.436Z"
+    },
+    "1815075511498092968": {
+      "noteId": "1815075511498092968",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Lula acusa adversários de fascismo",
+          "start": 0,
+          "end": 34,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "mas ignora o contexto de ter um longo histórico de boas relações com ditadores, autocratas e extremistas, além de confessar admiração por Hitler e Komeini",
+          "start": 36,
+          "end": 190,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:11.232Z"
+        },
+        {
+          "type": "QUALIFICADOR",
+          "text": "Apenas se aproximando de",
+          "start": 192,
+          "end": 216,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "democracias de seu espectro político",
+          "start": 217,
+          "end": 253,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/fsp/1994/4/21/brasil/10.html",
+          "start": 257,
+          "end": 315,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:16.604Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://noticias.r7.com/internacional/grupo-terrorista-palestino-hamas-parabeniza-lula-por-vitoria-nas-eleicoes-01112022",
+          "start": 317,
+          "end": 437,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:17.316Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.metropoles.com/mundo/hamas-agradece-lula-por-comparacao",
+          "start": 439,
+          "end": 506,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:18.044Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://apnews.com/article/business-middle-east-israel-foreign-aid-gaza-strip-611b2b90c3a211f21185d59f4fae6a90",
+          "start": 508,
+          "end": 618,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:19.228Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.msn.com/en-ph/news/world/brazil-view-on-immunity-for-heads-of-state-could-favor-putin-at-g20-summit/ar-BB1kXCbF",
+          "start": 620,
+          "end": 743,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:20.076Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://oglobo.globo.com/mundo/em-ramallah-lula-diz-que-aceita-conversar-com-hamas-sugere-que-crise-entre-eua-israel-3038189",
+          "start": 745,
+          "end": 869,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:21.108Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/coluna/reinaldo/as-farc-saudam-a-eleicao-de-lula-e-dizem-ter-apoio-do-governo-do-brasil/",
+          "start": 871,
+          "end": 985,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:21.884Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.terra.com.br/noticias/mundo/oriente-medio/lula-sanciona-ajuda-de-r-25-milhoes-para-a-faixa-de-gaza,4eab78c65940b310VgnCLD200000bbcceb0aRCRD.html",
+          "start": 987,
+          "end": 1143,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:23.028Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.theguardian.com/world/2023/sep/11/lula-putin-g20-brazil-arrest",
+          "start": 1145,
+          "end": 1219,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:24.468Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.diplomaticourier.com/posts/lulas-dance-with-dictators",
+          "start": 1221,
+          "end": 1286,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:25.396Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aljazeera.com/news/2023/5/29/venezuelas-maduro-meets-lula-in-brazil-as-relations-improve",
+          "start": 1288,
+          "end": 1388,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:26.620Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/internacional/en/world/2023/05/lula-praises-meeting-with-dictator-nicolas-maduro.shtml",
+          "start": 1390,
+          "end": 1506,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:27.356Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.aljazeera.com/news/2024/2/17/which-countries-are-still-funding-unrwa",
+          "start": 1508,
+          "end": 1588,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:28.708Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:42:38.909Z"
+    },
+    "1999916358998360139": {
+      "noteId": "1999916358998360139",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Taylor Swift nunca tenha falado sobre Ana Benevides",
+          "start": 24,
+          "end": 75,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "No exato momento que foi confirmada a morte, Taylor se pronunciou",
+          "start": 80,
+          "end": 145,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A família de Benevides confirmou contato e o e-mail, além de ter encontrado Swift pessoalmente no show",
+          "start": 147,
+          "end": 249,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/sp/sao-paulo/noticia/2023/11/26/parentes-de-ana-benevides-fa-que-morreu-em-show-de-taylor-swif-no-rj-vao-a-ultima-apresentacao-em-sp.ghtml",
+          "start": 254,
+          "end": 413,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:55.992Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/coluna/o-som-e-a-furia/os-bastidores-do-encontro-de-taylor-com-a-familia-de-fa-morta-no-show/",
+          "start": 417,
+          "end": 536,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:56.920Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.latimes.com/entertainment-arts/story/2023-11-28/taylor-swift-meets-family-of-deceased-fan-ahead-of-final-brazil-show",
+          "start": 540,
+          "end": 668,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:57.873Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.washingtonpost.com/entertainment/2023/11/25/taylor-swift-brazil-eras-tour-death-investigation/",
+          "start": 672,
+          "end": 778,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:59.040Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/ms/mato-grosso-do-sul/noticia/2023/11/27/taylor-swift-encontra-familiares-de-fa-que-morreu-em-show-ela-",
+          "start": 782,
+          "end": 906,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:42:59.728Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/amp/s/g1.globo.com/google/amp/sp/sao-paulo/noticia/2023/11/26/parentes-de-ana-benevides-fa-que-morreu-em-show-de-taylor-swif-no-rj-vao-a-ultima-apresentacao-em-sp.ghtml",
+          "start": 910,
+          "end": 1101,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:00.816Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/amp/s/hugogloss.uol.com.br/famosos/familia-de-ana-clara-benevides-fala-pela-1a-vez-apos-encontro-com-taylor-swift-sinalizou-intencao-de-ajudar/amp/",
+          "start": 1105,
+          "end": 1275,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:01.696Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/entretenimento/taylor-swift-encontra-familia-de-ana-benevides-fa-que-morreu-em-show/",
+          "start": 1279,
+          "end": 1392,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:03.008Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:43:06.256Z"
+    },
+    "1919473187269878071": {
+      "noteId": "1919473187269878071",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Taylor teve culpa na morte de Ana Benevides",
+          "start": 56,
+          "end": 99,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A empresa Times For Fun foi a única responsável e indicada após o laudo",
+          "start": 104,
+          "end": 175,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Em novembro de 2023, mais de 151 idosos morreram por conta do calor extremo no Rio",
+          "start": 177,
+          "end": 259,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://exame.com/esg/rio-40-graus-onda-de-calor-aumenta-em-50-risco-de-morte-de-idosos-com-doencas-cronicas/",
+          "start": 264,
+          "end": 373,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:12.304Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://agenciabrasil.ebc.com.br/radioagencia-nacional/meio-ambiente/audio/2025-02/pesquisa-mostra-como-calor-extremo-aumenta-mortalidade#:~:text=Em%2018%20de%20novembro%20de,a%20mortalidade%2C%20segundo%20a%20pesquisa",
+          "start": 377,
+          "end": 595,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:12.936Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/Onda_de_calor_no_Brasil_em_2023",
+          "start": 600,
+          "end": 663,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:13.936Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://portal.inmet.gov.br/noticias/ano-de-2023-é-o-mais-quente-da-história-do-brasil",
+          "start": 667,
+          "end": 753,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:15.200Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/Morte_de_Ana_Clara_Benevides",
+          "start": 757,
+          "end": 817,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:15.992Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/entretenimento/taylor-swift-encontra-familia-de-ana-benevides-fa-que-morreu-em-show/#:~:text=Taylor%20Swift%20encontra%20família%20de%20Ana%20Benevides%2C%20fã%20que%20morreu%20em%20show,-Familiares%20foram%20vistos&amp;text=A%20família%20de%20Ana%20Clara,clube%20",
+          "start": 821,
+          "end": 1114,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:17.192Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:43:21.928Z"
+    },
+    "2023491294153052667": {
+      "noteId": "2023491294153052667",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Beyoncé tem histórico público de ser uma das artistas que mais fala sobre causas (ex. racismo).",
+          "start": 0,
+          "end": 95,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:43:45.904Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "A acusação de que foi paga para apoiar Kamala",
+          "start": 98,
+          "end": 143,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "foi criada por Donald Trump e foi desmentida por factos",
+          "start": 144,
+          "end": 199,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "É mentira que Beyoncé glorificou o genocídio dos indígenas e mexicanos",
+          "start": 203,
+          "end": 273,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:44:07.112Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/BEYHIVEDOJ/status/1937133446347817077?s=20",
+          "start": 277,
+          "end": 333,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:44:09.272Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.unicef.org/armenia/en/press-releases/beyonc%C3%A9-partners-unicef-bring-safe-water-children-remote-areas-burundi",
+          "start": 335,
+          "end": 459,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:44:09.960Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://cnnportugal.iol.pt/kamala-harris/estados-unidos/trump-quer-beyonce-em-tribunal-por-algo-que-nao-aconteceu/20250728/688724a1d34ef72ee448c963",
+          "start": 461,
+          "end": 608,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:44:11.048Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:44:23.368Z"
+    },
+    "2027161946576011568": {
+      "noteId": "2027161946576011568",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "As Sagradas Escrituras",
+          "start": 9,
+          "end": 31,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "de fato não narram Eva recebendo a ordem diretamente de Deus",
+          "start": 32,
+          "end": 92,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:45:55.832Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "ela não tinha conhecimento do mandamento através de Adão",
+          "start": 183,
+          "end": 239,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:46:09.144Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "isso não foi negado na postagem",
+          "start": 242,
+          "end": 273,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:46:32.764Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.vatican.va/archive/bible/nova_vulgata/documents/nova-vulgata_vt_genesis_lt.html",
+          "start": 278,
+          "end": 369,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:46:34.556Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:46:38.968Z"
+    },
+    "1887258714580877671": {
+      "noteId": "1887258714580877671",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "Em matéria publicada no dia 04/02/24, o jornal Estadão",
+          "start": 2,
+          "end": 56,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:47:01.548Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "desde 2019 a Corte declarou mais omissões inconstitucionais (78) do que nos 28 anos anteriores (62).",
+          "start": 68,
+          "end": 168,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:07.324Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "A matéria",
+          "start": 172,
+          "end": 181,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:23.796Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "evidencia com números a disposição da Corte de se envolver em questões políticas",
+          "start": 182,
+          "end": 262,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:24.508Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.estadao.com.br/opiniao/o-ativismo-do-stf-em-numeros",
+          "start": 268,
+          "end": 331,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:27.124Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www1.folha.uol.com.br/colunas/lygia-maria/2024/12/stf-faz-ativismo-judicial-contra-liberdade-de-expressao-online.shtml",
+          "start": 336,
+          "end": 462,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:27.884Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:47:33.060Z"
+    },
+    "2028530269850910822": {
+      "noteId": "2028530269850910822",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo mostra a explosão no porto de Beirute em 2020, causada por nitrato de amônio",
+          "start": 0,
+          "end": 84,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "um míssil iraniano em Haifa",
+          "start": 90,
+          "end": 117,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O porto de Haifa permanece operacional e sem danos confirmados",
+          "start": 119,
+          "end": 181,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://en.wikipedia.org/wiki/2020_Beirut_explosion",
+          "start": 186,
+          "end": 237,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:44.756Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.ndtv.com/world-news/adani-group-confirms-israel-based-haifa-port-fully-secure-operational-11155795",
+          "start": 241,
+          "end": 351,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:45.728Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.youtube.com/watch?v=LNDhIGR-83w",
+          "start": 355,
+          "end": 398,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:47:46.764Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:47:49.876Z"
+    },
+    "1889128334228885958": {
+      "noteId": "1889128334228885958",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://pt.m.wikipedia.org/wiki/M%C3%ADdia_independente",
+          "start": 267,
+          "end": 322,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:48:40.900Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:48:59.116Z"
+    },
+    "1689843429797175692": {
+      "noteId": "1689843429797175692",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Não é verdade",
+          "start": 0,
+          "end": 13,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:49:21.432Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Pedro aparece sorrindo  nos acréscimos da derrota do Flamengo contra o Olimpia, pela Libertadores da América",
+          "start": 18,
+          "end": 126,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:49:22.304Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://ge.globo.com/futebol/times/flamengo/noticia/2023/08/10/checamos-e-falso-que-pedro-sorriu-nos-acrescimos-de-olimpia-x-flamengo.ghtml",
+          "start": 128,
+          "end": 267,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:49:23.192Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:49:25.688Z"
+    },
+    "1708038777610940549": {
+      "noteId": "1708038777610940549",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "notícia recente  sobre a Lei do tabaco em Portugal",
+          "start": 26,
+          "end": 76,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:49:43.316Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.noticiasaominuto.com/pais/2408118/lei-do-tabaco-o-que-muda-onde-sera-proibido-fumar-e-comprar",
+          "start": 79,
+          "end": 184,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:49:44.124Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:49:46.108Z"
+    },
+    "1761231589785194785": {
+      "noteId": "1761231589785194785",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "genocídio  1.  extermínio deliberado, parcial ou total, de uma comunidade, grupo étnico, racial ou religioso",
+          "start": 0,
+          "end": 108,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:50:16.228Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "2.  destruição de populações ou povos",
+          "start": 111,
+          "end": 148,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:50:16.972Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "N° de mortos palestinos: 15.000  N° de mortos israelenses: 1.400",
+          "start": 153,
+          "end": 217,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:50:04.656Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://folha.com/6vzn0731  https://www.intercept.com.br/2023/10/13/israel-estes-sao-os-maiores-massacres-contra-a-palestina/",
+          "start": 270,
+          "end": 395,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:50:18.012Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:50:21.772Z"
+    },
+    "1761863207252029822": {
+      "noteId": "1761863207252029822",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://studentsforliberty.org/brazil/blog/a-historia-da-bandeira-de-gadsden/  https://mundoeducacao.uol.com.br/historiageral/fascismo.htm",
+          "start": 153,
+          "end": 291,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:50:36.344Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:50:41.416Z"
+    },
+    "1882118498148642865": {
+      "noteId": "1882118498148642865",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:50:53.788Z"
+    },
+    "1878062635578458242": {
+      "noteId": "1878062635578458242",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "O vídeo é falso",
+          "start": 0,
+          "end": 15,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:51:06.264Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "foi gerado por inteligência artificial",
+          "start": 17,
+          "end": 55,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:51:07.121Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/jorge_espinhara/status/1878061893484462087",
+          "start": 58,
+          "end": 114,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:51:09.344Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:51:13.992Z"
+    },
+    "1760000020819103825": {
+      "noteId": "1760000020819103825",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "QUALIFICADOR",
+          "text": "Diferentemente do que vem sido apontado",
+          "start": 0,
+          "end": 39,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:51:27.340Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "a charge não foi publicada no New York Times",
+          "start": 41,
+          "end": 85,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:51:28.756Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Ela é criação do israelense Johnathan Majburd e foi compartilhada em suas redes sociais",
+          "start": 87,
+          "end": 174,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A referência ao NYT fica apenas por referência à manchete que ele referência na imagem",
+          "start": 176,
+          "end": 262,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:51:48.520Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/j.majburd?igsh=eTlxeTlxaGZxeDZi",
+          "start": 265,
+          "end": 322,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:51:49.592Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.nytimes.com/2024/02/18/world/middleeast/brazil-lula-israel-gaza-holocaust.html",
+          "start": 324,
+          "end": 414,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:51:50.152Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:51:54.672Z"
+    },
+    "2019861320049271125": {
+      "noteId": "2019861320049271125",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Vladimir Putin não veio ao Brasil",
+          "start": 32,
+          "end": 65,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:52:20.732Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "uma comitiva russa comandada pelo primeiro-ministro Mikhail Mishustin",
+          "start": 73,
+          "end": 142,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:52:22.372Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://platobr.com.br/por-que-uma-extensa-comitiva-do-governo-putin-desembarcou-em-brasilia",
+          "start": 147,
+          "end": 239,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:52:24.224Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/politica/em-declaracao-conjunta-brasil-e-russia-afirmam-ter-compromisso-com-a-paz",
+          "start": 243,
+          "end": 353,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:52:25.008Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:52:29.080Z"
+    },
+    "2025149321335673124": {
+      "noteId": "2025149321335673124",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O post é uma cópia de uma postagem feita no Facebook, contendo até mesmo a foto da postagem original, com o claro intuito de gerar engajamento.",
+          "start": 0,
+          "end": 143,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:52:39.097Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/i/status/2025083951623139392",
+          "start": 147,
+          "end": 189,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:52:39.904Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:52:41.022Z"
+    },
+    "2023720510257856645": {
+      "noteId": "2023720510257856645",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O vídeo em questão é de 2023",
+          "start": 0,
+          "end": 28,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:53:31.840Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "não de 2026 como alega o advogado",
+          "start": 31,
+          "end": 64,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:53:32.912Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/e-TeRqVLbbU?si=aAatt7N7dq5ETb3b",
+          "start": 202,
+          "end": 250,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:53:33.832Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:53:36.264Z"
+    },
+    "1877812049759416365": {
+      "noteId": "1877812049759416365",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não é necessário ser assinante do X para escrever ou votar em notas da comunidade",
+          "start": 0,
+          "end": 81,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:53:48.408Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Qualquer usuário com conta ativa e que atenda aos critérios básicos de participação pode contribuir com as notas",
+          "start": 83,
+          "end": 195,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Essa informação está disponível diretamente nas diretrizes da ferramenta",
+          "start": 197,
+          "end": 269,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:53:54.364Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://communitynotes.x.com/guide/pt/contributing/signing-up",
+          "start": 272,
+          "end": 333,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:53:55.060Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:53:57.628Z"
+    },
+    "1941004407832752217": {
+      "noteId": "1941004407832752217",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Não é verdade que o Presidente Lula SANCIONOU a lei",
+          "start": 4,
+          "end": 55,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:54:34.456Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O presidente VETOU e o veto foi DERRUBADO pelo congresso",
+          "start": 57,
+          "end": 113,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.683Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o Presidente PROMULGOU a lei, dentro do prazo previsto de 48h",
+          "start": 125,
+          "end": 186,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:22.224Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.cnnbrasil.com.br/politica/lula-veta-dispensa-de-reavaliacao-de-aposentadoria-para-incapacitados-permanentes/",
+          "start": 271,
+          "end": 391,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:22.864Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://oglobo.globo.com/economia/noticia/2025/06/23/inss-proposta-que-derruba-veto-do-governo-e-dispensa-revisao-de-pericia-medica-aguarda-promulgacao.ghtml",
+          "start": 395,
+          "end": 552,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:24.096Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://legis.senado.leg.br/sdleg-getter/documento?dm=9851178&amp;ts=1732798164326&amp;disposition=inline",
+          "start": 556,
+          "end": 661,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:24.941Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:54:39.628Z"
+    },
+    "1991189878722244743": {
+      "noteId": "1991189878722244743",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "a taxa de 20% sobre importações até US$50 foi criada pelo governo Lula em 2024, via Lei 14.902",
+          "start": 25,
+          "end": 119,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:54:49.456Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "a isenção anterior que vigorava na era Bolsonaro",
+          "start": 134,
+          "end": 182,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:54:50.368Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www12.senado.leg.br/radio/1/noticia/2024/08/14/201ctaxa-das-blusinhas201d-agora-e-lei",
+          "start": 187,
+          "end": 280,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:52.168Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l14902.htm",
+          "start": 282,
+          "end": 353,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:52.952Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/JanjaLula/status/1646149996478181376",
+          "start": 355,
+          "end": 405,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:54.568Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://valor.globo.com/politica/noticia/2024/05/29/entenda-o-retorno-da-taxacao-da-shein-acordado-por-lula-e-lira.ghtml",
+          "start": 407,
+          "end": 527,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:55.288Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/grok/status/1991162909704261714",
+          "start": 529,
+          "end": 574,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:54:56.360Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:55:00.040Z"
+    },
+    "1876223898854797725": {
+      "noteId": "1876223898854797725",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "a Folha não disse que Fernanda Torres não ganharia o Globo de Ouro",
+          "start": 36,
+          "end": 102,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:55:21.620Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "reproduziu uma frase dela numa entrevista",
+          "start": 111,
+          "end": 152,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:55:22.556Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A chance de alguém falando português levar um prêmio desse tamanho é praticamente nula&quot;, disse a atriz",
+          "start": 163,
+          "end": 270,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:55:23.100Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://archive.is/P95i1#selection-3835.1-3835.87",
+          "start": 275,
+          "end": 324,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:55:25.100Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:55:27.436Z"
+    },
+    "1870680545136439331": {
+      "noteId": "1870680545136439331",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Nacionalmente, as agências da Caixa Econômica Federal iniciam atendimento às 10h da manhã",
+          "start": 0,
+          "end": 89,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:55:49.884Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Confraternizações internas ocorrem antes desse horário, sem prejuízo ao atendimento",
+          "start": 91,
+          "end": 174,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:55:55.164Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "O post e o vídeo induz um escândalo infundado com a prática do H. de Func. regular da Ag. da Caixa",
+          "start": 176,
+          "end": 274,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:55:56.636Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.caixa.gov.br/atendimento/paginas/encontre-a-caixa.aspx",
+          "start": 279,
+          "end": 345,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:55:58.076Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:56:01.236Z"
+    },
+    "1842682272262324483": {
+      "noteId": "1842682272262324483",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "O laudo é falso",
+          "start": 0,
+          "end": 15,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:56:14.612Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a própria família do suposto médico já declarou que ele nunca atuou em SP, nem na clínica   e  que na data do laudo ele já nao trabalhava por saúde",
+          "start": 59,
+          "end": 206,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Além da assinatura ser falsa, de acordo com provas da própria família",
+          "start": 208,
+          "end": 277,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:56:18.492Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://g1.globo.com/sp/sao-paulo/eleicoes/2024/noticia/2024/10/05/filha-de-medico-diz-que-documento-usado-por-marcal-contra-boulos-e-falso-e-mostra-tatuagem-com-verdadeira-assinatura-do-pai.ghtml",
+          "start": 280,
+          "end": 476,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:56:20.320Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:56:24.120Z"
+    },
+    "1889176478891315215": {
+      "noteId": "1889176478891315215",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "chamar de &quot;independente&quot; uma mídia financiada pelo governo dos EUA",
+          "start": 16,
+          "end": 92,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:10.796Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "independência implica autonomia financeira e editorial",
+          "start": 101,
+          "end": 155,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:11.580Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O mais correto seria &quot;mídia pública&quot; ou &quot;estatal&quot;, já que há óbvio risco de influência governamental",
+          "start": 157,
+          "end": 277,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:57:13.364Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.wikipedia.org/wiki/M%C3%ADdia_independente",
+          "start": 283,
+          "end": 336,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:57:16.988Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:57:20.172Z"
+    },
+    "1823435417548374388": {
+      "noteId": "1823435417548374388",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "o menino proferiu a seguinte frase “LeBron, could you please take a picture with me?",
+          "start": 36,
+          "end": 120,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:30.680Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o pedido foi prontamente negado pelo jogador da NBA LeBron James, respondendo “Pare. Não faça isso",
+          "start": 123,
+          "end": 221,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:31.648Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.bnews.com.br/amp/noticias/esporte/olimpiadas-paris-lebron-james-recusa-foto-com-crianca-apos-ouro-olimpico-veja-video.html",
+          "start": 227,
+          "end": 361,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:57:32.896Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:57:35.440Z"
+    },
+    "1885048614927425622": {
+      "noteId": "1885048614927425622",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "Copom ~ANTEVÊ~ um aumento de 1% nas próximas reuniões",
+          "start": 41,
+          "end": 94,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:54.060Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "O Copom atual não é legalmente obrigado a seguir essa previsão",
+          "start": 99,
+          "end": 161,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:57:54.660Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.bcb.gov.br/publicacoes/atascopom",
+          "start": 167,
+          "end": 211,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:57:55.356Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:57:58.572Z"
+    },
+    "1993124451064406360": {
+      "noteId": "1993124451064406360",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Flávio Dino é bacharel em Direito pela UFMA (1991), mestre pela UFPE (2001) e atuou como juiz federal por 12 anos, além de ser professor de Direito na UFMA desde 1993",
+          "start": 0,
+          "end": 166,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.camara.leg.br/deputados/141436/biografia",
+          "start": 171,
+          "end": 223,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:06.268Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:58:07.604Z"
+    },
+    "1936784166680502540": {
+      "noteId": "1936784166680502540",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Ebrahim Raisi, o homem que aparece no post, morreu em 19 de maio de 2024",
+          "start": 0,
+          "end": 72,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.band.com.br/noticias/como-fica-o-ira-apos-a-morte-do-presidente-raisi-16691013",
+          "start": 77,
+          "end": 167,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:14.892Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://veja.abril.com.br/mundo/eua-boicotam-homenagem-da-onu-ao-falecido-presidente-do-ira/",
+          "start": 169,
+          "end": 261,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:15.540Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:58:19.164Z"
+    },
+    "2031092784686387635": {
+      "noteId": "2031092784686387635",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "artigo 36 inciso III da LC 35/1979 (LOMAN), que proíbe magistrados de manifestarem, por qualquer meio, opinião sobre processos pendentes",
+          "start": 37,
+          "end": 173,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:58:30.132Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.jusbrasil.com.br/topicos/11305829/artigo-36-lc-n-35-de-14-de-marco-de-1979",
+          "start": 225,
+          "end": 311,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:31.636Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:58:35.780Z"
+    },
+    "1879837365738385874": {
+      "noteId": "1879837365738385874",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "É falso que desacreditar e atacar medidas públicas seja crime",
+          "start": 0,
+          "end": 61,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T22:58:46.428Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Enquanto democracia, a liberdade de duvidar e criticar ações do governo sempre foi um dos pilares do país, sendo amparado pelos artigos 5º e 220 da CF/88 e pelo Art. 19 da Declaração Univ. dos Direitos Humanos",
+          "start": 63,
+          "end": 272,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:55.744Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+          "start": 278,
+          "end": 345,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:57.604Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.gov.br/mdh/pt-br/assuntos/noticias/2018/novembro/artigo-19deg-todo-ser-humano-tem-direito-a-liberdade-de-expressao-e-opiniao-1",
+          "start": 349,
+          "end": 487,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:58:58.532Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:59:00.900Z"
+    },
+    "1878095415351922716": {
+      "noteId": "1878095415351922716",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Este vídeo foi criado por inteligência artificial",
+          "start": 0,
+          "end": 49,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:16.736Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "originalmente publicado no Instagram, no perfil @ai_creatiions",
+          "start": 52,
+          "end": 114,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:21.368Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "instagram.com/p/DEoJC4HP6e5/",
+          "start": 119,
+          "end": 147,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:23.120Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:59:24.992Z"
+    },
+    "2014522181053567129": {
+      "noteId": "2014522181053567129",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Art. 145 – Suspeição do juiz  Dispõe quando o juiz é considerado suspeito (...)  - amizade íntima ou inimizade com as partes ou advogados;  - interesse no julgamento da causa;  Art. 146 – Arguição de suspeição (...)  - no prazo de 15 dias, a contar do conhecimento do fato;",
+          "start": 0,
+          "end": 273,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:36.188Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm",
+          "start": 277,
+          "end": 348,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:37.700Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:59:40.276Z"
+    },
+    "2035937261900960010": {
+      "noteId": "2035937261900960010",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "O participante pipoca Pedro Henrique Espíndola era proibido contratualmente de se manifestar em outros paredões",
+          "start": 0,
+          "end": 111,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "não sabemos se essa mesma restrição está presente nos contratos dos veteranos Ana Paula, Jonas e Alberto, que já se posicionaram em paredões alheios",
+          "start": 124,
+          "end": 272,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T22:59:48.141Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T22:59:49.604Z"
+    },
+    "1884778548310823225": {
+      "noteId": "1884778548310823225",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A afirmação de que o artista &quot;incita violência sexual contra a vereadora Amanda&quot; é mentirosa",
+          "start": 0,
+          "end": 102,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:00:00.284Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "A expressão &quot;toma jack&quot; refere-se à famosa bebida Jack Daniels, sendo &quot;toma jack&quot; uma gíria oriunda de comunidades do Rio de Janeiro",
+          "start": 104,
+          "end": 256,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/zA1ZPmEtckU?si=HPZR0GRpzDKlXcA8",
+          "start": 275,
+          "end": 323,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:00:02.692Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://youtu.be/1aPLX9FofIk?si=6vjLgzm3xGOQz55N",
+          "start": 327,
+          "end": 375,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:00:03.292Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.instagram.com/reel/DFGdo3rRcBI/?igsh=aDMzdTh6ZzE0ZnJv",
+          "start": 379,
+          "end": 444,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:00:04.308Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:00:07.304Z"
+    },
+    "1868118294474915987": {
+      "noteId": "1868118294474915987",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "o ex-presidente faz parte dessa trama golpista",
+          "start": 5,
+          "end": 51,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:00:17.321Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "o inquérito não foi concluído por que tem novos indícios e novas provas, o que não impede dele ser preso",
+          "start": 117,
+          "end": 221,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:00:43.876Z"
+    },
+    "1991162547119014319": {
+      "noteId": "1991162547119014319",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:00:49.744Z"
+    },
+    "1762663085980958948": {
+      "noteId": "1762663085980958948",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Lula se “reuniu” com família de um brasileiro, 2 meses após o sequestro",
+          "start": 0,
+          "end": 71,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Lula afirmar que Israel é genocida, é FALSO",
+          "start": 78,
+          "end": 121,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:01:06.632Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.google.com/url?q=https://g1.globo.com/google/amp/politica/noticia/2023/10/26/lula-faz-videoconferencia-com-familias-de-refens-e-desaparecidos-no-oriente-medio-diz-planalto.ghtml&amp;sa=U&amp;sqi=2&amp;ved=2ahUKEwj18Lzs-MyEAxX7VTABHX8vDVUQFnoECBQQAQ&amp;usg=AOvVaw3_mGRi0-6QHF12f1MpJk-w",
+          "start": 190,
+          "end": 487,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:01:05.672Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:01:09.584Z"
+    },
+    "2036159146039595023": {
+      "noteId": "2036159146039595023",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "A partir do minuto 4:36, a atriz afirma que Chappell Roan, como dito pela cantora em pronunciamento, não viu a criança e nem a sua mãe",
+          "start": 0,
+          "end": 134,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:01:35.136Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "a legenda do texto deixa lacunas abertas na interpretação do caso",
+          "start": 209,
+          "end": 274,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:01:36.096Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/qgdopop/status/2035830530285953071?s=46",
+          "start": 277,
+          "end": 330,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:01:37.544Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:01:39.632Z"
+    },
+    "2032140619728965702": {
+      "noteId": "2032140619728965702",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:01:45.272Z"
+    },
+    "1828997016388518228": {
+      "noteId": "1828997016388518228",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:01:54.872Z"
+    },
+    "1798350866983891008": {
+      "noteId": "1798350866983891008",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:01:58.736Z"
+    },
+    "2033327040481444237": {
+      "noteId": "2033327040481444237",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "A matéria",
+          "start": 0,
+          "end": 9,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:02:09.892Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "a gerente agrediu Ben Mendes e o mesmo revidou com um tapa",
+          "start": 26,
+          "end": 84,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:02:14.604Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Houve agressão mútua",
+          "start": 86,
+          "end": 106,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Não há distorção de informações",
+          "start": 237,
+          "end": 268,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:02:17.700Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://www.poder360.com.br/poder-brasil/ben-mendes-e-gerente-de-loja-se-agridem-em-briga-em-mg/",
+          "start": 273,
+          "end": 369,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:02:18.709Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:02:22.604Z"
+    },
+    "2036235208928756034": {
+      "noteId": "2036235208928756034",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "CLAIM",
+          "text": "A informação está incorreta e tendenciosa",
+          "start": 0,
+          "end": 41,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:02:29.572Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "Foram usadas metodologias diferentes de contagem.    - Governo de Seul: 40–48 mil (tempo real, só área da praça)  - Ministério do Interior: 62 mil (usuários domésticos)  - HYBE: 104 mil (inclui estrangeiros e pré-pagos)",
+          "start": 43,
+          "end": 262,
+          "decision_source": "acordo_exato",
+          "adjudicated_at": "2026-07-02T22:35:33.684Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "Link da matéria:     https://n.news.naver.com/article/008/0005334007?sid=105",
+          "start": 266,
+          "end": 342,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:02:31.348Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:02:33.284Z"
+    },
+    "1884735731991519515": {
+      "noteId": "1884735731991519515",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:02:37.148Z"
+    },
+    "2035774913856840144": {
+      "noteId": "2035774913856840144",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:02:40.188Z"
+    },
+    "1828475905272095265": {
+      "noteId": "1828475905272095265",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "FONTE",
+          "text": "https://x.com/vitorarouche/status/1828472732620574944",
+          "start": 0,
+          "end": 53,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:02:54.000Z"
+        },
+        {
+          "type": "EVIDENCIA",
+          "text": "vídeo falso com o hino do Brasil. Aqui o vídeo original",
+          "start": 99,
+          "end": 154,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:03:31.764Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "o hino foi cantado usando “filhes”",
+          "start": 275,
+          "end": 309,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:03:28.592Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:03:37.441Z"
+    },
+    "1639935770680078337": {
+      "noteId": "1639935770680078337",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:03:42.728Z"
+    },
+    "1881461849201521031": {
+      "noteId": "1881461849201521031",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Essa é a saudação romana",
+          "start": 0,
+          "end": 24,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:04:27.004Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://context.reverso.net/traducao/italiano-portugues/saluto+romano",
+          "start": 147,
+          "end": 216,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:04:27.692Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://pt.wikipedia.org/wiki/Sauda%C3%A7%C3%A3o_romana#:~:text=A%20sauda%C3%A7%C3%A3o%20romana%20%C3%A9%20uma,palma%20da%20m%C3%A3o%20para%20baixo.",
+          "start": 220,
+          "end": 368,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:04:28.596Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:04:30.756Z"
+    },
+    "1916124309459808763": {
+      "noteId": "1916124309459808763",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:04:33.940Z"
+    },
+    "1856342402283225145": {
+      "noteId": "1856342402283225145",
+      "status": "completed",
+      "spans": [],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:04:44.645Z"
+    },
+    "2034666298249023797": {
+      "noteId": "2034666298249023797",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Nem a postagem nem a reportagem insinuam recebimento de recursos públicos",
+          "start": 0,
+          "end": 73,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:04:54.044Z"
+        },
+        {
+          "type": "CLAIM",
+          "text": "Achar melhor que recursos captados por uma religião sejam mais destinados à caridade não constitui intolerância religiosa",
+          "start": 162,
+          "end": 283,
+          "decision_source": "davi",
+          "adjudicated_at": "2026-07-02T23:04:57.000Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:04:59.788Z"
+    },
+    "2030386711545446739": {
+      "noteId": "2030386711545446739",
+      "status": "completed",
+      "spans": [
+        {
+          "type": "EVIDENCIA",
+          "text": "Cópia/tradução de post supostamente “cômico” em inglês",
+          "start": 0,
+          "end": 54,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:05:14.864Z"
+        },
+        {
+          "type": "FONTE",
+          "text": "https://x.com/taftermath2020/status/2030311809304207379?s=46",
+          "start": 59,
+          "end": 119,
+          "decision_source": "alvaro",
+          "adjudicated_at": "2026-07-02T23:05:16.136Z"
+        }
+      ],
+      "obs": "",
+      "started_at": null,
+      "completed_at": "2026-07-02T23:05:17.624Z"
+    }
+  }
+}
