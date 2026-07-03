@@ -45,3 +45,7 @@ node_modules/
 
 # Notas: o dataset CSV (~15 MB) é versionado. Se preferir, mova-o para Git LFS:
 #   git lfs track "data/*.csv" "data/*.parquet"
+
+# Diretorios de trabalho de execucoes locais dos notebooks
+notebooks/data/
+notebooks/outputs/
