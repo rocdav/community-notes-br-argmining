@@ -25,6 +25,25 @@ function renderBio(text, off, tags){
   return h;
 }
 
+/* cartão "Destilação (E3)": a escada de alunos (crf_e3_ladder.json), CRF em destaque */
+function _e3Card(){
+  const L = BIO.ladder || [];
+  if(!L.length) return '';
+  const f = x => (x == null ? '—' : Number(x).toFixed(3).replace('.', ','));
+  const ms = x => (x == null ? '—' : Number(x).toFixed(2).replace('.', ',') + ' ms');
+  let h = '<div class="card"><h3 style="margin:.1rem 0 .4rem">Destilação (E3) — a escada de alunos</h3>'
+    + '<p class="small muted">rotuladores treinados no <i>silver</i> do E2 (supervisão fraca) e avaliados no gold, F1 estrita por entidade. O <b>CRF clássico</b> alcança o nível do melhor professor (E2b) gastando frações de milissegundo por nota.</p>'
+    + '<div class="table-scroll"><table class="simple"><thead><tr><th>modelo</th><th>F1 estrita</th><th>F1 relaxada</th><th>ms/nota</th></tr></thead><tbody>';
+  for(const r of L){
+    const nome = r.modelo || r.nome || '';
+    const best = /^CRF$/i.test(nome);
+    h += '<tr' + (best ? ' style="font-weight:700;color:var(--brand)"' : '') + '><td>' + esc(nome) + (best ? ' ★' : '') + '</td>'
+      + '<td>' + f(r.f1_estrita) + '</td><td>' + f(r.f1_relaxada) + '</td><td>' + ms(r.ms_por_nota) + '</td></tr>';
+  }
+  h += '</tbody></table></div><p class="small muted" style="margin:.5rem 0 0">O aluno campeão é o <b>CRF</b> (★): treinado no silver do E2, supera o próprio professor e iguala o E2b a ~0,3 ms/nota. Alterne para <b>CRF</b> acima para ver suas fronteiras token a token.</p></div>';
+  return h;
+}
+
 function viewBio(){
   const ns = _bioList();
   if(st.bidx >= ns.length) st.bidx = 0;
@@ -34,10 +53,11 @@ function viewBio(){
   let h = '<h2 class="view-title">BIO (tokens) <span class="scope">gold adjudicado · 60 notas</span></h2>';
   h += '<p class="lede">A mesma anotação vista como <b>rotulagem de sequência</b>: cada token recebe '
      + 'um rótulo <b>B-</b> (início de span), <b>I-</b> (continuação) ou <b>O</b> (fora) — o formato '
-     + 'recomendado para treino/avaliação token-level. Alterne as estratégias para comparar as fronteiras.</p>';
+     + 'recomendado para treino/avaliação token-level. Alterne as estratégias — inclusive o rotulador '
+     + '<b>CRF</b> destilado (E3), o melhor aluno — para comparar as fronteiras.</p>';
   h += '<div class="card">';
   h += '<div class="controls">';
-  h += '<div class="seg" id="seg-bsrc">' + ["E2", "E2b", "E1", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.bsrc === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
+  h += '<div class="seg" id="seg-bsrc">' + ["E2", "E2b", "E1", "CRF", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.bsrc === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
   h += '<div class="pager"><span class="small muted">nota ' + (st.bidx + 1) + '/' + ns.length + '</span>'
      + '<button id="bprev">‹</button><button id="bnext">›</button></div></div>';
   const tags = nf[st.bsrc] || [];
@@ -46,10 +66,12 @@ function viewBio(){
   h += '<div class="meta-row"><span class="badge">consenso: ' + esc(nf.c) + '</span>'
      + '<span class="badge">' + nf.off.length + ' tokens</span>'
      + '<span class="badge">' + nB + ' spans (' + st.bsrc + ')</span>'
+     + (st.bsrc === "CRF" ? '<span class="badge">E3 · destilado (silver E2)</span>' : '')
      + (nf.m ? '<span class="badge">' + esc(nf.m) + '</span>' : '') + '</div>';
   h += legend();
   h += '<p class="small muted" style="margin:.5rem 0 0">A barra à esquerda marca o <b>B-</b> (início do span); os tokens seguintes da mesma cor são <b>I-</b> (continuação).</p>';
   h += '</div>';
+  h += _e3Card();
   $("#view").innerHTML = h;
   $("#seg-bsrc").querySelectorAll("button").forEach(b => b.onclick = () => { st.bsrc = b.dataset.s; viewBio(); });
   $("#bprev").onclick = () => { st.bidx = (st.bidx - 1 + ns.length) % ns.length; viewBio(); };
