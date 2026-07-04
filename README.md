@@ -59,37 +59,73 @@ supervisão *silver* do LLM.
 
 ```
 .
-├── notebooks/                 # pipeline reprodutível (Colab/Jupyter)
-│   ├── notebook_preparacao_v2.ipynb   # coleta, preparação, E1 (regras) e E2 (LLM)
-│   ├── notebook_conclusao.ipynb       # BIO, avaliação e resultados (fonte canônica)
-│   └── notebook_destilacao.ipynb      # E3: destila o E2 em modelos de sequência (NB→HMM→CRF→BERTimbau)
-├── data/                      # dataset, gold e dicionário de dados (ver data/README.md)
-│   ├── dataset_anotado_final_com_bio.csv   # 1901 notas × 30 colunas (spans, métricas, BIO, sintaxe)
-│   ├── dataset_anotado_final.parquet       # input canônico (E1/E2/métricas, gold vazio)
-│   ├── qualitative_60_reasoning.jsonl      # raciocínio do E2 (PT) nas 60 notas
-│   └── gold/                                # anotação humana (JSON + BIO/CoNLL)
-├── docs/
-│   ├── RELATORIO_FINAL.md     # relatório do trabalho
-│   ├── ARQUITETURA.md         # documentação técnica do pipeline e dos artefatos
-│   ├── guia_anotacao.md       # guia de anotação (definição dos rótulos)
-│   └── Proposta_PLN.docx      # proposta original
-├── explorador/                # visualização estática interativa (5 visões)
-│   ├── index.html             # entrada local/offline do explorador
-│   ├── data*.js               # dados embutidos das visões
-│   ├── js/                    # lógica das visões
-│   └── README.md              # regeneração dos dados do explorador
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── notebooks/                       # pipeline reprodutível (Colab/Jupyter)
+│   ├── notebook_preparacao_v2.ipynb # coleta, preparação, E1 (regras) e E2 (LLM)
+│   ├── notebook_conclusao.ipynb     # BIO, avaliação e resultados (fonte canônica)
+│   └── notebook_destilacao.ipynb    # E3: destilação em modelos de sequência
+├── data/                            # dataset, gold e dicionário de dados
+│   ├── README.md                    # dicionário de colunas e notas de uso
+│   ├── dataset_anotado_final.parquet
+│   ├── dataset_anotado_final_com_bio.csv
+│   ├── qualitative_60_reasoning.jsonl
+│   └── gold/                        # anotações humanas e consenso adjudicado
+│       ├── anotacao_manual_*.json
+│       ├── anotacao_manual_*_bio.conll
+│       └── anotacao_consenso_adjudicado_2026-07-02.*
+├── docs/                            # relatório, arquitetura e artefatos derivados
+│   ├── RELATORIO_FINAL.md
+│   ├── RELATORIO_FINAL.docx
+│   ├── ARQUITETURA.md
+│   ├── guia_anotacao.md
+│   ├── Proposta_PLN.docx
+│   ├── _reconciliar_relatorio.py
+│   ├── figuras_relatorio/           # figuras finais do relatório
+│   └── outputs/                     # métricas e tabelas exportadas pelos notebooks
+├── explorador/                      # visualização estática interativa (5 visões)
+│   ├── index.html
+│   ├── data*.js                     # dados embutidos das visões
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── core.js
+│   │   ├── charts.js
+│   │   ├── modal.js
+│   │   └── views/                   # conjunto, notas, BIO, entidades e painel
+│   ├── styles.css
+│   ├── _build_*.py                  # scripts de geração das visões
+│   ├── _explorador_template.py
+│   ├── _refresh_data.py
+│   └── README.md
 └── apps/
-    ├── anotador/              # ambiente estático de anotação argumentativa
-    │   ├── index.html         # entrada local/offline do anotador
-    │   ├── data.js            # recorte de 60 notas para anotação
-    │   ├── app.js             # lógica de marcação/exportação
-    │   └── readme.md          # instruções de deploy e uso
-    ├── adjudicador/           # consenso humano entre duas anotações independentes
-    │   ├── index.html         # entrada local/offline do adjudicador
-    │   ├── data.js            # notas + spans Davi/Álvaro + clusters de divergência
-    │   ├── app.js             # lógica de revisão/exportação do gold adjudicado
-    │   └── build_data.py      # regenera data.js a partir dos JSONs humanos
-    └── bio-converter/         # conversão de spans → BIO/CoNLL
+    ├── anotador/                    # interface estática de anotação humana
+    │   ├── index.html
+    │   ├── data.js
+    │   ├── app.js
+    │   ├── styles.css
+    │   └── readme.md
+    ├── adjudicador/                 # consenso humano entre duas anotações independentes
+    │   ├── index.html
+    │   ├── data.js
+    │   ├── app.js
+    │   ├── styles.css
+    │   ├── build_data.py
+    │   └── README.md
+    ├── anotador-llm/                # E2b: anotação automática local via Ollama
+    │   ├── anotador_llm.py
+    │   ├── alignment.py
+    │   ├── prompts.py
+    │   ├── requirements.txt
+    │   ├── output/
+    │   │   └── e2_ollama_sweep.jsonl
+    │   └── README.md
+    └── bio-converter/               # conversão de spans → BIO/CoNLL
+        ├── app.py
+        ├── converter.py
+        ├── Dockerfile
+        ├── requirements.txt
+        └── README.md
 ```
 
 ## Como reproduzir
