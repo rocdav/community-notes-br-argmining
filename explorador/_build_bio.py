@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """_build_bio.py — visão BIO (rotulagem de sequência) nível de token.
 
-Para as 60 notas com gold humano (que têm E1, E2 e Humano), extrai do CSV a
-tokenização BIO já pronta (offsets + tags B-/I-/O das três estratégias) e escreve
-data_bio.js (const BIO). Só pandas, sem rede.
+Para as 60 notas com gold humano (que têm E1, E2, E2b e Humano), extrai do CSV a
+tokenização BIO já pronta (offsets + tags B-/I-/O das três estratégias + gold) e
+escreve data_bio.js (const BIO). Só pandas, sem rede.
 
 Uso:  python _build_bio.py
 """
@@ -15,9 +15,12 @@ OUT = "data_bio.js"
 
 
 def main():
-    df = pd.read_csv(CSV, usecols=["noteId", "text", "anotacao_humana_status", "consenso",
-                                   "macrotheme_label", "bio_offsets_json",
-                                   "e1_span_bio_json", "e2_span_bio_json", "humano_span_bio_json"])
+    cols = ["noteId", "text", "anotacao_humana_status", "consenso", "macrotheme_label",
+            "bio_offsets_json", "e1_span_bio_json", "e2_span_bio_json", "humano_span_bio_json"]
+    has_e2b = "e2b_span_bio_json" in pd.read_csv(CSV, nrows=0).columns
+    if has_e2b:
+        cols.append("e2b_span_bio_json")
+    df = pd.read_csv(CSV, usecols=cols)
     gold = df[df["anotacao_humana_status"] == "selecionada_para_anotacao"].copy()
     byId, ordem, desalinhados = {}, [], 0
     for _, r in gold.sort_values(["consenso", "noteId"]).iterrows():
@@ -32,8 +35,17 @@ def main():
         if not (len(E1) == len(E2) == len(HU) == n):
             desalinhados += 1
             continue
+        # E2b projeta na MESMA grade de tokens; abstenção/ausência vira tudo-O (não descarta a nota)
+        E2b = ["O"] * n
+        if has_e2b:
+            try:
+                cand = json.loads(r["e2b_span_bio_json"])
+                if len(cand) == n:
+                    E2b = cand
+            except Exception:
+                pass
         byId[nid] = {
-            "text": r["text"], "off": off, "E1": E1, "E2": E2, "HUMANO": HU,
+            "text": r["text"], "off": off, "E1": E1, "E2": E2, "E2b": E2b, "HUMANO": HU,
             "c": r["consenso"], "m": None if pd.isna(r["macrotheme_label"]) else str(r["macrotheme_label"]),
         }
         ordem.append(nid)

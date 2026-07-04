@@ -31,13 +31,13 @@ function viewBio(){
   const id = ns[st.bidx] || BIO.ordem[0];
   const nf = BIO.byId[id];
   const cons = [...new Set(BIO.ordem.map(x => BIO.byId[x].c))].sort();
-  let h = '<h2 class="view-title">BIO (tokens) <span class="scope">gold humano · 60 notas</span></h2>';
+  let h = '<h2 class="view-title">BIO (tokens) <span class="scope">gold adjudicado · 60 notas</span></h2>';
   h += '<p class="lede">A mesma anotação vista como <b>rotulagem de sequência</b>: cada token recebe '
      + 'um rótulo <b>B-</b> (início de span), <b>I-</b> (continuação) ou <b>O</b> (fora) — o formato '
      + 'recomendado para treino/avaliação token-level. Alterne as estratégias para comparar as fronteiras.</p>';
   h += '<div class="card">';
   h += '<div class="controls">';
-  h += '<div class="seg" id="seg-bsrc">' + ["E2", "E1", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.bsrc === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
+  h += '<div class="seg" id="seg-bsrc">' + ["E2", "E2b", "E1", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.bsrc === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
   h += '<div class="pager"><span class="small muted">nota ' + (st.bidx + 1) + '/' + ns.length + '</span>'
      + '<button id="bprev">‹</button><button id="bnext">›</button></div></div>';
   const tags = nf[st.bsrc] || [];
