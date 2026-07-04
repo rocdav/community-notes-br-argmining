@@ -42,6 +42,8 @@ desktop.ini
 # Front-end / deploy local
 node_modules/
 .netlify/
+*.zip
+deploy.zip
 
 # Notas: o dataset CSV (~15 MB) é versionado. Se preferir, mova-o para Git LFS:
 #   git lfs track "data/*.csv" "data/*.parquet"
