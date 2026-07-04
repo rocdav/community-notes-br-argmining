@@ -24,15 +24,19 @@ function viewConjunto(){
   const C = CONJUNTO, G = C.geral;
   let h = '<h2 class="view-title">Conjunto <span class="scope">corpus · ' + _br(G.n_notas) + ' notas</span></h2>';
   h += '<p class="lede">Visão geral do corpus do experimento — todas as ' + _br(G.n_notas) + ' notas geradas '
-     + '(regras <b>E1</b> × LLM <b>E2</b>), das quais ' + G.n_gold + ' têm anotação humana para comparação. '
-     + 'As demais visões aprofundam recortes (gold humano, entidades).</p>';
+     + 'pelas três estratégias (regras <b>E1</b> × LLM remoto <b>E2</b> × LLM aberto local <b>E2b</b>), das quais '
+     + G.n_gold + ' têm gold humano adjudicado para comparação. As demais visões aprofundam recortes '
+     + '(gold humano, entidades).</p>';
 
   // KPIs
   h += '<div class="kpis">';
   h += _kpi(_br(G.n_notas), 'notas analisadas', '1 modelo · ' + esc(G.modelo));
   h += _kpi(_br(G.n_tweets), 'tweets cobertos', _f1(G.notas_por_tweet_media) + ' notas/tweet · até ' + G.notas_por_tweet_max);
-  h += _kpi(G.n_gold, 'com gold humano', 'subconjunto de avaliação');
-  h += _kpi('~' + _f1(C.custo.e2_ms_media / 1000) + ' s', 'por nota no E2 (LLM)', 'E1 fim-a-fim ~' + _f1(C.custo.e1_ms_media) + ' ms · ' + _br(C.custo.razao) + '× mais lento');
+  h += _kpi(G.n_gold, 'com gold humano', 'adjudicado (2 anotadores + consenso)');
+  const custoSub = 'E1 fim-a-fim ~' + _f1(C.custo.e1_ms_media) + ' ms'
+    + (C.custo.e2b_ms_mediana ? ' · E2b local ~' + _f1(C.custo.e2b_ms_mediana / 1000) + ' s' : '')
+    + ' · ' + _br(C.custo.razao) + '× (E2÷E1)';
+  h += _kpi('~' + _f1(C.custo.e2_ms_mediana / 1000) + ' s', 'por nota no E2 (LLM remoto)', custoSub);
   h += _kpi('F1 ' + _f2(C.acordo.f1_relaxed), 'acordo E1×E2 (relaxada)', 'estrita ' + _f2(C.acordo.f1_strict) + ' · κ ' + _f2(C.acordo.kappa));
   h += _kpi(_f1(C.meta.pct) + '%', 'são meta-notas', C.meta.n + ' de ' + _br(G.n_notas));
   h += '</div>';
@@ -46,20 +50,21 @@ function viewConjunto(){
      + donut(segsC, { center: { top: _br(G.n_notas), bot: 'notas' }, aria: 'distribuição de consenso' })
      + '</div>';
 
-  // anatomia argumentativa E1 × E2
-  const maxA = Math.max(...T.flatMap(t => [C.anatomia.E1.tipos[t], C.anatomia.E2.tipos[t]]));
-  h += '<div class="card"><h3>Anatomia argumentativa — Regras (E1) × LLM (E2)</h3>'
-     + '<p class="small muted">total de trechos marcados por tipo, no corpus inteiro. As <b>regras</b> enxergam sobretudo FONTE (URLs/veículos); o <b>LLM</b> distribui entre CLAIM, EVIDÊNCIA e FONTE.</p>'
+  // anatomia argumentativa E1 × E2 × E2b
+  const _estr = ['E1', 'E2', 'E2b'].filter(k => C.anatomia[k]);
+  const _estrCor = { E1: '#8f7a5b', E2b: '#7a6a8a' };   // E2 usa a cor do tipo; E1 marrom, E2b roxo
+  const maxA = Math.max(...T.flatMap(t => _estr.map(k => C.anatomia[k].tipos[t])));
+  h += '<div class="card"><h3>Anatomia argumentativa — Regras (E1) × LLM remoto (E2) × LLM local (E2b)</h3>'
+     + '<p class="small muted">total de trechos marcados por tipo, no corpus inteiro. As <b>regras</b> enxergam sobretudo FONTE (URLs/veículos); os <b>LLMs</b> distribuem entre CLAIM, EVIDÊNCIA e FONTE — o <b>local</b> combina a distribuição do remoto com um apetite por FONTE próximo ao das regras.</p>'
      + '<div class="anat">';
   for(const t of T){
     h += '<div class="anat-row"><span class="anat-lbl" style="color:' + COR[t] + '">' + t + '</span>'
        + '<div class="anat-bars">'
-       + _anatBar('E1', C.anatomia.E1.tipos[t], maxA, '#8f7a5b')
-       + _anatBar('E2', C.anatomia.E2.tipos[t], maxA, COR[t])
+       + _estr.map(k => _anatBar(k, C.anatomia[k].tipos[t], maxA, _estrCor[k] || COR[t])).join('')
        + '</div></div>';
   }
-  h += '</div><p class="small muted" style="margin-top:.5rem">E1 marca ' + _f2(C.anatomia.E1.por_nota)
-     + ' trechos por nota; E2, ' + _f2(C.anatomia.E2.por_nota) + '.</p></div>';
+  h += '</div><p class="small muted" style="margin-top:.5rem">Trechos por nota — '
+     + _estr.map(k => k + ' ' + _f2(C.anatomia[k].por_nota)).join(' · ') + '.</p></div>';
 
   // temas do corpus
   const temas = C.temas.slice(0, 14).map(x => ({ label: x.tema, value: x.n, color: 'var(--brand)' }));

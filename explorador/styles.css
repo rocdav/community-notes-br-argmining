@@ -79,6 +79,8 @@ h2.view-title{font-size:1.7rem;color:var(--brand-dark);margin:.2rem 0 .2rem;font
 .sp-EVIDENCIA{background:#2f6b451f;border-color:var(--t-EVIDENCIA)}
 .sp-FONTE{background:#1f5d751f;border-color:var(--t-FONTE)}
 .sp-QUALIFICADOR{background:#8a61051f;border-color:var(--t-QUALIFICADOR)}
+/* FONTE ancorada em URL: infraestrutura (injetada por regex; removida na leitura sem FONTE-URL) */
+.sp-url{border-bottom-style:dashed;opacity:.72;background-image:repeating-linear-gradient(135deg,transparent,transparent 3px,#1f5d7526 3px,#1f5d7526 4px)}
 .meta-row{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:14px;display:flex;gap:14px;flex-wrap:wrap}
 .badge{background:#efe6cf;border:1px solid var(--rule);border-radius:99px;padding:.08rem .55rem}
 

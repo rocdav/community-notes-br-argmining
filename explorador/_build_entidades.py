@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
 """_build_entidades.py — Navegador de entidades em escala de corpus.
 
-Junta a tabela de entidades GLiNER do dataset publicado histlearn/notas-comunidade-ptbr
+Junta a tabela de entidades do dataset publicado histlearn/notas-comunidade-ptbr
 (config `entities`, baixada 1× do HF e cacheada localmente) com as nossas 1901 notas,
-por `noteId`. Para cada entidade calcula, no nosso recorte:
-  - tipo (GLiNER) e nº de notas / ocorrências;
-  - papel argumentativo: cruzando a posição da entidade com os spans do E2 (nosso dado);
-  - agência: papel sintático (deprel da cabeça da entidade) em sujeito × objeto × outro;
-  - nuvem léxica distintiva por classe (Dunning LL) das notas onde aparece.
+por `noteId`. A FILTRAGEM segue os sinais que o próprio dataset já publica — não mais
+uma lista de ruído/nomes à mão:
+  - `fonte_extracao`: separa as entidades nomeadas por modelo (`gliner`) das camadas
+    formais por regex (`regex_url`, `regex_data`, `regex_valor`, `regex_lei_norma`…).
+    Só as GLiNER viram PERFIL navegável; as regex seguem na LENTE por tipo (URLs, datas,
+    valores, leis) — é a substituição, dirigida por dado, do antigo `SEM_PERFIL` fixo.
+  - `score`: confiança da extração GLiNER (piso 0,40 no dataset); aplicamos um piso um
+    pouco mais alto para o navegador, no lugar da antiga lista `RUIDO` de canônicos.
+  - `papel_no_texto`: classificação nativa do dataset (`mencao` × `fonte_ou_evidencia`),
+    exposta por entidade ao lado do papel argumentativo fino que cruzamos do E2.
+A auditoria de offsets do dataset (`quality_audit/entity_offset_audit.parquet`) marca
+~51 % dos offsets como fora do texto; por isso a posição da entidade é sempre
+RELOCALIZADA por superfície no `noteId`, nunca pelos offsets brutos.
+
+Para cada entidade calcula, no nosso recorte: tipo, nº de notas/ocorrências, confiança
+média, papel argumentativo (cruzando com os spans do E2), agência (deprel da cabeça),
+e nuvem léxica distintiva por classe (Dunning LL).
 Escreve:
   - data_entidades.js  (const ENT = {...})   — lente por tipo + perfis de entidade
   - data_notas.js       (const NOTAS = {...})  — texto + spans E2 do corpus p/ drill-down
@@ -18,17 +30,20 @@ import os, re, json, math, collections
 import pandas as pd
 from huggingface_hub import hf_hub_download
 
-CSV = os.path.join("..", "dataset_anotado_final_com_bio.csv")
+CSV = os.path.join("..", "data", "dataset_anotado_final_com_bio.csv")
 OUT_ENT = "data_entidades.js"
 OUT_NOTAS = "data_notas.js"
 TIPOS = ["CLAIM", "EVIDENCIA", "FONTE", "QUALIFICADOR"]
 RX_SPAN = re.compile(r"'start':\s*(\d+),\s*'end':\s*(\d+),\s*'type':\s*'([A-Z]+)'")
 
-# tipos que NÃO viram perfil navegável (URLs e regex de data/valor/lei) — seguem na lente
-SEM_PERFIL = {"URL_DOMINIO", "DATA", "ESTATISTICA", "VALOR_MONETARIO", "LEI_NORMA"}
-# canônicos genéricos/ruído a descartar dos perfis
-RUIDO = {"nnn", "bbb", "nn", "autor", "autora", "pessoa", "pessoas", "jornalista", "usuário", "usuario",
-         "user", "conta", "perfil", "gente", "ninguém", "ninguem", "alguém", "alguem", "fulano", "midia", "mídia"}
+# filtragem dirigida pelo dataset (não mais por listas à mão):
+SCORE_MIN = 0.50           # piso de confiança GLiNER p/ o navegador (o dataset já corta em 0,40)
+FONTE_PERFIL = "gliner"    # só entidades nomeadas por modelo viram perfil; regex_* ficam na lente
+# rede residual: canônicos genéricos que o GLiNER às vezes emite como menção de pessoa,
+# e os placeholders do prefixo NNN das meta-notas (nn/nnn/bbb), que escapam do gate de score
+RUIDO = {"autor", "autora", "pessoa", "pessoas", "usuário", "usuario", "user", "conta", "perfil",
+         "gente", "ninguém", "ninguem", "alguém", "alguem", "fulano", "jornalista", "midia", "mídia",
+         "nn", "nnn", "nnnn", "bb", "bbb", "bbbb"}
 AGENTE = {"nsubj", "nsubj:outer", "csubj"}
 OBJETO = {"obj", "iobj", "obl", "obl:arg", "obl:agent", "nsubj:pass"}
 
@@ -91,37 +106,40 @@ def main():
     CORP_TOT = {p: sum(CORP[p].values()) for p in CORP}
     ours = set(TEXT)
 
-    # ---- tabela de entidades do HF, filtrada ao nosso recorte ----
+    # ---- tabela de entidades do HF, com os sinais de filtragem do dataset ----
     pq = hf_hub_download(repo_id="histlearn/notas-comunidade-ptbr", repo_type="dataset",
                          revision="refs/convert/parquet", filename="entities/train/0000.parquet")
     ent = pd.read_parquet(pq, engine="fastparquet",
-                          columns=["noteId", "texto_entidade", "texto_canonico", "tipo_entidade"])
+                          columns=["noteId", "texto_entidade", "texto_canonico", "tipo_entidade",
+                                   "score", "fonte_extracao", "papel_no_texto"])
     ent["noteId"] = ent["noteId"].astype(str)
-    sub = ent[ent["noteId"].isin(ours)]
+    sub = ent[ent["noteId"].isin(ours)].copy()
+    n_bruto = len(sub)
+    sub = sub[sub["score"].fillna(0) >= SCORE_MIN]          # gate de confiança do dataset
+    n_score = n_bruto - len(sub)
 
     # ---- agrega por entidade canônica ----
     AG = collections.defaultdict(lambda: {
-        "tipo": collections.Counter(), "notes": set(), "freq": 0,
-        "papel": collections.Counter(), "agency": collections.Counter(), "ex": []})
+        "tipo": collections.Counter(), "notes": set(), "freq": 0, "score_sum": 0.0,
+        "papel": collections.Counter(), "agency": collections.Counter(),
+        "papel_ds": collections.Counter(), "ex": []})
     LENTE = collections.defaultdict(lambda: {"papel": collections.Counter(),
                                              "total": 0, "ents": set()})
-    toks_by_i = {}
     for _, r in sub.iterrows():
         nid = r["noteId"]
         if nid not in TEXT:
             continue
         surf = str(r["texto_entidade"]); canon = str(r["texto_canonico"]); tipo = str(r["tipo_entidade"])
-        rec = AG[canon]
-        rec["tipo"][tipo] += 1; rec["notes"].add(nid); rec["freq"] += 1
-        L = LENTE[tipo]; L["total"] += 1; L["ents"].add(canon)
+        fonte = str(r["fonte_extracao"]); papel_ds = str(r["papel_no_texto"])
+        # papel argumentativo: cruza a posição (relocalizada por superfície) com os spans do E2
         loc = TEXT[nid].lower().find(surf.lower())
         role = "O"
+        head_dep = None
         if loc >= 0:
             a0, a1 = loc, loc + len(surf)
             for s, e, t in E2[nid]:
                 if s < a1 and e > a0:
                     role = t; break
-            # agência: cabeça sintática da entidade
             toks = SX[nid]
             idxs = [tk["i"] for tk in toks if tk["start"] < a1 and tk["end"] > a0]
             if idxs:
@@ -130,23 +148,37 @@ def main():
                 if head is None:
                     head = next((tk for tk in toks if tk["i"] == idxs[0]), None)
                 if head:
-                    dep = head["deprel"]
-                    rec["agency"]["sujeito" if dep in AGENTE else "objeto" if dep in OBJETO else "outro"] += 1
+                    head_dep = head["deprel"]
+        # LENTE (por tipo): TODAS as entidades — gliner e regex (URLs/datas/valores)
+        L = LENTE[tipo]; L["total"] += 1; L["ents"].add(canon); L["papel"][role] += 1
+        # PERFIL navegável: só GLiNER
+        if fonte != FONTE_PERFIL:
+            continue
+        rec = AG[canon]
+        rec["tipo"][tipo] += 1; rec["notes"].add(nid); rec["freq"] += 1
+        rec["score_sum"] += float(r["score"]) if pd.notna(r["score"]) else 0.0
+        rec["papel"][role] += 1
+        rec["papel_ds"]["fonte" if papel_ds == "fonte_ou_evidencia" else "mencao"] += 1
+        if loc >= 0:
+            if head_dep is not None:
+                rec["agency"]["sujeito" if head_dep in AGENTE else "objeto" if head_dep in OBJETO else "outro"] += 1
             if len(rec["ex"]) < 6:
                 rec["ex"].append({"n": nid, "s": surf})
-        rec["papel"][role] += 1
-        L["papel"][role] += 1
 
     # ---- monta perfis e lente ----
     entidades = {}
     por_tipo = collections.defaultdict(list)
     refs = set()
+    n_ruido = 0
+    n_poucas = 0
     for canon, rec in AG.items():
         tipo = rec["tipo"].most_common(1)[0][0]
-        if tipo in SEM_PERFIL or canon.lower() in RUIDO:
+        if canon.lower() in RUIDO:
+            n_ruido += 1
             continue
         nnotas = len(rec["notes"])
         if nnotas < 3:
+            n_poucas += 1
             continue
         name = display_name(canon)
         if name in entidades:                      # colisão de exibição: fica com o de mais notas
@@ -184,7 +216,9 @@ def main():
             refs.add(o["n"])
         entidades[name] = {
             "tipo": tipo, "n_notas": nnotas, "freq": int(rec["freq"]),
+            "score_medio": round(rec["score_sum"] / max(1, rec["freq"]), 2),
             "papel": papel, "fora": int(rec["papel"]["O"]),
+            "papel_ds": {"fonte": int(rec["papel_ds"]["fonte"]), "mencao": int(rec["papel_ds"]["mencao"])},
             "agency": {k: int(rec["agency"][k]) for k in ("sujeito", "objeto", "outro")},
             "clouds": clouds, "clouds_kind": kind, "ex": ex,
         }
@@ -205,10 +239,13 @@ def main():
     ENT = {
         "lente": lente,
         "tipos_ordem": [r["tipo"] for r in lente],
-        "tipos_perfil": [r["tipo"] for r in lente if r["tipo"] not in SEM_PERFIL and por_tipo.get(r["tipo"])],
+        "tipos_perfil": [r["tipo"] for r in lente if por_tipo.get(r["tipo"])],
         "por_tipo": {k: v for k, v in por_tipo.items()},
         "entidades": entidades,
         "n_entidades": len(entidades),
+        "filtro": {"score_min": SCORE_MIN, "fonte_perfil": FONTE_PERFIL,
+                   "descartadas_score": int(n_score), "descartadas_ruido": int(n_ruido),
+                   "descartadas_poucas_notas": int(n_poucas)},
     }
 
     # ---- store de notas p/ drill-down (só as referenciadas pelas ocorrências) ----
@@ -222,14 +259,16 @@ def main():
         f.write("const NOTAS = " + json.dumps(NOTAS, ensure_ascii=False) + ";\n")
     with open(OUT_ENT, "w", encoding="utf-8") as f:
         f.write("// Navegador de entidades — lente por tipo + perfis. Gerado por _build_entidades.py.\n")
+        f.write("// Filtragem dirigida pelo dataset: fonte_extracao=='gliner' p/ perfil, score>=%.2f, papel_no_texto exposto.\n" % SCORE_MIN)
         f.write("const ENT = " + json.dumps(ENT, ensure_ascii=False) + ";\n")
 
+    print("entidades bruto (nosso recorte):", n_bruto, "| descartadas por score<%.2f:" % SCORE_MIN, n_score)
     print("entidades navegáveis:", len(entidades), "| tipos com perfil:", len(ENT["tipos_perfil"]),
-          "| notas no store:", len(NOTAS))
-    print("data_entidades.js:", os.path.getsize(OUT_ENT) // 1024, "KB | data_notas.js:", os.path.getsize(OUT_NOTAS) // 1024, "KB")
+          "| descartadas ruído:", n_ruido, "| <3 notas:", n_poucas, "| notas no store:", len(NOTAS))
     print("tipos_perfil:", ENT["tipos_perfil"])
     print("amostra:", {k: {"tipo": entidades[k]["tipo"], "n": entidades[k]["n_notas"],
-                           "ag": entidades[k]["agency"]} for k in list(entidades)[:6]})
+                           "score": entidades[k]["score_medio"], "papel_ds": entidades[k]["papel_ds"]}
+                       for k in list(entidades)[:6]})
 
 
 if __name__ == "__main__":

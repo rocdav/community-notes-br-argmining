@@ -10,16 +10,16 @@ function viewNotas(){
   if(st.idx >= ns.length) st.idx = 0;
   const n = ns[st.idx] || DATA.notas[0];
   const cons = [...new Set(DATA.notas.map(x => x.consenso))].sort();
-  let h = '<h2 class="view-title">Explorador de notas <span class="scope">gold humano · 60 notas</span></h2>';
-  h += '<p class="lede">Cada nota com seus spans argumentativos. Alterne entre as estratégias e o gold humano para ver onde concordam e divergem.</p>';
+  let h = '<h2 class="view-title">Explorador de notas <span class="scope">gold adjudicado · 60 notas</span></h2>';
+  h += '<p class="lede">Cada nota com seus spans argumentativos. Alterne entre as três estratégias (E1 regras · E2 LLM remoto · E2b LLM local) e o gold humano adjudicado para ver onde concordam e divergem. Trechos <b>FONTE-URL</b> aparecem hachurados: são infraestrutura, removida na leitura <i>sem FONTE-URL</i> do Painel.</p>';
   h += '<div class="card">';
   h += '<div class="controls">';
-  h += '<div class="seg" id="seg-src">' + ["E2", "E1", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.src === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
+  h += '<div class="seg" id="seg-src">' + ["E2", "E2b", "E1", "HUMANO"].map(s => '<button data-s="' + s + '" class="' + (st.src === s ? 'on' : '') + '">' + (s === "HUMANO" ? "Humano" : s) + '</button>').join('') + '</div>';
   h += '<div class="pager"><span class="small muted">nota ' + (st.idx + 1) + '/' + ns.length + '</span>'
      + '<button id="prev">‹</button><button id="next">›</button></div></div>';
   if(n.tweet) h += '<div class="tweet"><span class="lbl">tweet original</span>' + esc(n.tweet) + '</div>';
   const spans = n[st.src] || [];
-  h += '<div class="nota-text">' + (spans.length ? renderSpans(n.text, spans) : esc(n.text)) + '</div>';
+  h += '<div class="nota-text">' + (spans.length ? renderSpans(n.text, spans, { markUrlFonte: true }) : esc(n.text)) + '</div>';
   h += '<div class="meta-row"><span class="badge">noteId: ' + esc(n.id) + '</span>'
      + '<span class="badge">consenso: ' + esc(n.consenso) + '</span>'
      + '<span class="badge">' + (spans.length) + ' spans (' + st.src + ')</span>'

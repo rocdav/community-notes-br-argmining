@@ -83,29 +83,77 @@ src = open(DATA_JS, encoding="utf-8").read()
 prefixo = src[: src.index("=") + 1]
 data = json.loads(src[src.index("=") + 1 :].rstrip().rstrip(";"))
 
-# --- notas (60): spans E1 (v2.1) e HUMANO (gold vigente) ---
+# --- notas (60): spans E1 (v2.1), E2b (LLM local) e HUMANO (gold vigente) ---
 e1_por_id = dict(zip(df["noteId"], df["_e1"]))
+e2b_por_id = dict(zip(df["noteId"], df["_e2b"]))
 trocadas = 0
 for nota in data["notas"]:
     nid = str(nota["id"])
     if nid in e1_por_id:
         nota["E1"] = compact(e1_por_id[nid])
+    if nid in e2b_por_id:
+        nota["E2b"] = compact(e2b_por_id[nid])
     if nid in gold_por_id:
         nota["HUMANO"] = compact(gold_por_id[nid])
         trocadas += 1
-print(f"notas atualizadas: {len(data['notas'])} (gold trocado em {trocadas})")
+print(f"notas atualizadas: {len(data['notas'])} (gold trocado em {trocadas}; E2b por nota adicionado)")
 
-# --- vs_gold (leitura completa; sistemas) ---
-estrategias = [("E1", "_e1"), ("E2", "_e2")] + ([("E2b", "_e2b")] if anotadas["_e2b"].map(len).sum() else [])
-vs_gold = []
-for nome, col in estrategias:
-    fs = [f1_strict(g, p) for g, p in zip(anotadas["_gold"], anotadas[col])]
-    fr = [f1_relaxed(g, p) for g, p in zip(anotadas["_gold"], anotadas[col])]
-    vs_gold.append({"estrategia": nome,
-                    "F1_estrita": round(sum(fs) / len(fs), 3),
-                    "F1_relaxada": round(sum(fr) / len(fr), 3)})
-data["vs_gold"] = vs_gold
-print("vs_gold:", vs_gold)
+# --- vs_gold em DUAS LEITURAS (completa × sem FONTE-URL) + sensibilidade à régua ---
+# Fonte canônica: as tabelas §5.3/§5.4 exportadas pela execução do notebook 2 (docs/outputs),
+# para os números do explorador baterem exatamente com o relatório. Fallback recomputa a
+# leitura completa a partir dos spans (sem κ nem decomposição) se as CSVs não existirem.
+OUT = os.path.join("..", "docs", "outputs")
+ORD = ["E1", "E2", "E2b"]
+
+
+def _read_vs_gold():
+    p = os.path.join(OUT, "metricas_4_5_vs_gold.csv")
+    if not os.path.exists(p):
+        return None
+    m = pd.read_csv(p)
+    leituras = {}
+    for leitura, g in m.groupby("leitura", sort=False):
+        by = {r["estrategia"]: r for _, r in g.iterrows()}
+        leituras[str(leitura)] = [{"estrategia": e,
+                                   "F1_estrita": round(float(by[e]["F1_estrita"]), 3),
+                                   "F1_relaxada": round(float(by[e]["F1_relaxada"]), 3),
+                                   "kappa": round(float(by[e]["kappa_medio"]), 3)}
+                                  for e in ORD if e in by]
+    return leituras
+
+
+def _read_sensibilidade():
+    p = os.path.join(OUT, "metricas_4_5_sensibilidade.csv")
+    if not os.path.exists(p):
+        return None
+    m = pd.read_csv(p)
+    out = {"golds": [["davi", "Anotador 1"], ["alvaro", "Anotador 2"], ["consenso", "Adjudicado"]]}
+    for leitura, g in m.groupby("leitura", sort=False):
+        tab = {}
+        for _, r in g.iterrows():
+            tab.setdefault(str(r["estrategia"]), {})[str(r["gold"])] = round(float(r["F1_estrita"]), 3)
+        out[str(leitura)] = {e: tab[e] for e in ORD if e in tab}
+    return out
+
+
+leituras = _read_vs_gold()
+if leituras:
+    data["vs_gold_leituras"] = leituras
+    data["vs_gold"] = leituras.get("completa", next(iter(leituras.values())))   # compat
+    print("vs_gold_leituras:", {k: [(x["estrategia"], x["F1_estrita"]) for x in v] for k, v in leituras.items()})
+else:
+    estrategias = [("E1", "_e1"), ("E2", "_e2")] + ([("E2b", "_e2b")] if anotadas["_e2b"].map(len).sum() else [])
+    data["vs_gold"] = [{"estrategia": nome,
+                        "F1_estrita": round(sum(f1_strict(g, p) for g, p in zip(anotadas["_gold"], anotadas[col])) / len(anotadas), 3),
+                        "F1_relaxada": round(sum(f1_relaxed(g, p) for g, p in zip(anotadas["_gold"], anotadas[col])) / len(anotadas), 3)}
+                       for nome, col in estrategias]
+    data.pop("vs_gold_leituras", None)
+    print("vs_gold (recomputado, sem CSV canônica):", data["vs_gold"])
+
+sens = _read_sensibilidade()
+if sens:
+    data["sensibilidade"] = sens
+    print("sensibilidade:", {k: v for k, v in sens.items() if k != "golds"})
 
 # --- cortes A/B/C (métricas por nota já vêm no CSV: E1×E2) ---
 n1 = df["_e1"].map(len)

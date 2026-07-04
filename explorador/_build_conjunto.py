@@ -64,14 +64,13 @@ def main():
                 notas += 1
             c.update(ts)
         return {t: int(c.get(t, 0)) for t in TIPOS}, notas
-    e1_tipos, e1_notas = tally("e1_spans")
-    e2_tipos, e2_notas = tally("e2_spans")
-    anatomia = {
-        "E1": {"tipos": e1_tipos, "notas_com": e1_notas,
-               "por_nota": round(sum(len(span_types(v)) for v in nonmeta["e1_spans"]) / len(nonmeta), 2)},
-        "E2": {"tipos": e2_tipos, "notas_com": e2_notas,
-               "por_nota": round(sum(len(span_types(v)) for v in nonmeta["e2_spans"]) / len(nonmeta), 2)},
-    }
+    def anat(col):
+        tipos, notas = tally(col)
+        return {"tipos": tipos, "notas_com": notas,
+                "por_nota": round(sum(len(span_types(v)) for v in nonmeta[col]) / len(nonmeta), 2)}
+    anatomia = {"E1": anat("e1_spans"), "E2": anat("e2_spans")}
+    if "e2b_spans" in df.columns and df["e2b_spans"].notna().any():
+        anatomia["E2b"] = anat("e2b_spans")
 
     # --- meta-notas ---
     mr = df[df["is_meta"]]["meta_reason"].value_counts(dropna=True)
@@ -92,6 +91,11 @@ def main():
         "e2_ms_max": round(float(df["e2_ms"].max()), 0),
         "razao": round(float(df["e2_ms"].mean() / df[e1_col].mean()), 0),
     }
+    # E2b: LLM de pesos abertos rodando localmente (latência não comparável à do remoto — depende do hardware)
+    if "e2b_ms" in df.columns and df["e2b_ms"].notna().any():
+        custo["e2b_ms_media"] = round(float(df["e2b_ms"].mean()), 0)
+        custo["e2b_ms_mediana"] = round(float(df["e2b_ms"].median()), 0)
+        custo["e2b_modelo"] = "Qwen3.6-35B-A3B (local)"
 
     # --- acordo E1×E2 (médias por nota) ---
     acordo = {

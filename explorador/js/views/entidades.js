@@ -60,8 +60,14 @@ function _entList(tipo){
 function _entProfile(name){
   const p = ENT.entidades[name];
   const maxp = Math.max(1, ...T.map(t => p.papel[t]));
+  const pds = p.papel_ds || { fonte: 0, mencao: 0 }; const pdtot = pds.fonte + pds.mencao;
+  const dsRole = !pdtot ? '' : (pds.fonte > pds.mencao
+      ? 'o dataset a classifica como <b>fonte/evidência</b> (' + pds.fonte + '/' + pdtot + ')'
+      : 'o dataset a trata como <b>menção</b>' + (pds.fonte ? ' (fonte em ' + pds.fonte + '/' + pdtot + ')' : ''));
   let h = '<div class="card"><h3>' + esc(name) + ' <span class="scope">' + _tipoLabel(p.tipo) + '</span></h3>'
-    + '<p class="small muted" style="margin:.1rem 0 .6rem">aparece em ' + p.n_notas + ' notas · ' + p.freq + ' ocorrências.</p>';
+    + '<p class="small muted" style="margin:.1rem 0 .6rem">aparece em ' + p.n_notas + ' notas · ' + p.freq + ' ocorrências'
+    + (p.score_medio != null ? ' · confiança GLiNER ' + String(p.score_medio).replace('.', ',') : '')
+    + (dsRole ? ' · ' + dsRole : '') + '.</p>';
   // papel argumentativo
   h += '<h4 class="eh">Papel argumentativo (E2)</h4><div class="bars">';
   for(const t of T) h += '<div class="bar-row"><span class="nm" style="color:' + COR[t] + '">' + t + '</span>' + bar(p.papel[t], maxp, COR[t]) + '<span class="small muted">' + p.papel[t] + '</span></div>';
@@ -114,7 +120,7 @@ function viewEntidades(){
     h += _crumbs() + _entList(st.entTipo);
   } else {
     st.entTipo = ''; st.ent = '';
-    h += '<p class="lede">' + ENT.n_entidades + ' entidades do corpus (extração GLiNER), agrupadas por tipo. O tipo prevê o papel argumentativo; cada entidade tem ainda sua <b>agência</b> (age × sofre) e assinatura léxica.</p>' + _lenteTable();
+    h += '<p class="lede">' + ENT.n_entidades + ' entidades nomeadas do corpus (extração <b>GLiNER</b>, filtradas pelos sinais do próprio dataset — confiança e tipo de extração), agrupadas por tipo. A <b>lente</b> abaixo inclui também as camadas formais por regex (URLs, datas, valores). O tipo prevê o papel argumentativo; cada entidade traz ainda sua <b>agência</b> (age × sofre) e assinatura léxica.</p>' + _lenteTable();
   }
   $("#view").innerHTML = h;
 
