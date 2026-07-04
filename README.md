@@ -134,9 +134,10 @@ BIO/CoNLL.
 ### Adjudicador (consenso humano)
 
 Quando houver duas anotações independentes, abra **`apps/adjudicador/index.html`** para revisar as
-divergências nota a nota. O adjudicador exporta um JSON no mesmo contrato do anotador, com
-`papel = consenso_adjudicado`; no `notebook_conclusao.ipynb`, aponte `CONSENSUS_JSON_PATH` para esse
-arquivo para usá-lo como gold final.
+divergências nota a nota. A interface também está publicada em
+[`consenso-notas.netlify.app`](https://consenso-notas.netlify.app/). O adjudicador exporta um JSON
+no mesmo contrato do anotador, com `papel = consenso_adjudicado`; no `notebook_conclusao.ipynb`,
+aponte `CONSENSUS_JSON_PATH` para esse arquivo para usá-lo como gold final.
 
 ## Dados
 
