@@ -22,10 +22,9 @@ Depois abra http://localhost:8000.
 
 Abrir `index.html` direto no browser (file://) também funciona — `data.js`/`app.js` são scripts, não fetch.
 
-## Como regerar `data.js` com notas atualizadas
-Edite o array no `_build_anotacao.py` do projeto e regere o monolítico, ou troque
-direto o array em `data.js` (mesmo formato: lista de objetos com noteId, tweet_text,
-note_text, e1_spans, e2_spans, consenso, macrotheme_label).
+## Dados do snapshot
+O arquivo `data.js` versionado contém o recorte de 60 notas usado na anotação pública. As anotações
+humanas consolidadas ficam preservadas em `data/gold/`.
 
 ## Exportar BIO
 O botao "Exportar BIO" chama o Space publico:

@@ -82,4 +82,5 @@ Uma linha JSON por nota das 60: o **raciocínio** do E2 (traduzido para PT) e ca
 
 Corpus derivado de [`histlearn/notas-comunidade-ptbr`](https://huggingface.co/datasets/histlearn/notas-comunidade-ptbr)
 (config `notes` para o texto; config `entities` para a lente de entidades GLiNER). As entidades
-**não** estão versionadas aqui — são baixadas sob demanda pelo `explorador/_build_entidades.py`.
+completas **não** estão versionadas aqui; o explorador publica apenas o snapshot agregado usado nas
+visões estáticas.

@@ -1,5 +1,0 @@
-source,notes_total,tokens_total,notes_available,raw_spans_total,invalid_spans,valid_spans_total,notes_projected,token_conflicts,bio_spans_total,notes_missing_spans
-e1,1901,70207,1901,3789,0,3789,1901,2236,3245,0
-e2,1901,70207,1901,4626,0,4626,1901,11,4625,0
-e2b,1901,70207,1901,5036,0,5036,1901,12,5032,0
-humano,1901,70207,60,224,0,224,60,0,224,1841

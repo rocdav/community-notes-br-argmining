@@ -51,3 +51,9 @@ deploy.zip
 # Diretorios de trabalho de execucoes locais dos notebooks
 notebooks/data/
 notebooks/outputs/
+
+# Artefatos locais de entrega/manutencao fora do repositorio publico
+docs/
+explorador/_*.py
+apps/adjudicador/build_data.py
+apps/anotador/_*.py

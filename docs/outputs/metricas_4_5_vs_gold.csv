@@ -1,7 +1,0 @@
-estrategia,leitura,F1_estrita,F1_relaxada,kappa_medio,kappa_pooled,F1_estrita_gold_nao_vazio,n,n_gold_nao_vazio
-E1,completa,0.364,0.499,0.438,0.553,0.405,60,49
-E1,sem FONTE-URL,0.128,0.316,0.317,0.238,0.014,60,47
-E2,completa,0.364,0.456,0.365,0.259,0.425,60,49
-E2,sem FONTE-URL,0.399,0.515,0.54,0.597,0.425,60,47
-E2b,completa,0.501,0.626,0.593,0.634,0.532,60,49
-E2b,sem FONTE-URL,0.329,0.481,0.541,0.57,0.313,60,47

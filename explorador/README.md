@@ -72,33 +72,11 @@ A ordem de carregamento das tags `<script>` no `index.html` importa: `data.js` �
   E2 assume no conteúdo decidido), **sensibilidade à régua** (anotador 1 × anotador 2 × consenso),
   acordo E1×E2 nos 3 cortes, cobertura por tipo e assinatura léxica (Dunning) por tipo.
 
-## Como regenerar
-Os dados são um snapshot pré-computado. Os scripts leem os artefatos versionados do repositório
-(o CSV canônico e as tabelas de métrica em `../docs/outputs/`, que saem da execução do notebook 2)
-e reescrevem apenas os `data_*.js` — `index.html`, `styles.css` e `js/` não mudam. O entregável do
-curso continua sendo só os notebooks.
-
-```bash
-pip install pandas duckdb huggingface_hub fastparquet
-
-# slice de avaliação (60): spans por nota (E1/E2b/Humano), vs_gold nas DUAS leituras e
-# sensibilidade à régua — números vêm das CSVs canônicas (metricas_4_5_vs_gold / _sensibilidade),
-# para baterem exatamente com o relatório.
-python _refresh_data.py            # reescreve data.js
-
-# dashboard do corpus (1901): anatomia e latência E1 × E2 × E2b, temas, alinhamento…
-python _build_conjunto.py          # reescreve data_conjunto.js
-
-# navegador de entidades: baixa 1× a tabela `entities` do HF (cache) e cruza com o CSV.
-# Filtragem dirigida pelo dataset: fonte_extracao=='gliner' vira perfil; score>=0,50; papel_no_texto
-# exposto. A posição é RELOCALIZADA por superfície no noteId (os offsets brutos estão desalinhados —
-# a auditoria pública quality_audit/entity_offset_audit.parquet marca ~51% como fora do texto).
-python _build_entidades.py         # reescreve data_entidades.js + data_notas.js
-
-# projeção BIO (token-level) das 60 com gold
-python _build_bio.py               # reescreve data_bio.js
-```
+## Snapshot público
+Este diretório versiona o explorador já renderizado: HTML, CSS, JS e `data*.js`. Os scripts de
+manutenção usados para reconstruir esses snapshots ficam fora do repositório público para manter
+o pacote enxuto.
 
 Todas as métricas contra o gold usam o **gold adjudicado** (duas anotações independentes +
-adjudicação com trilha auditável). As saídas do modelo local (E2b) e as tabelas de métrica das
-duas leituras são artefatos versionados; o explorador só as agrega e visualiza.
+adjudicação com trilha auditável). Para recomputar o experimento, use os notebooks da raiz do
+repositório; para navegar pelos resultados, basta abrir este snapshot estático.

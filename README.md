@@ -75,15 +75,6 @@ supervisão *silver* do LLM.
 │       ├── anotacao_manual_*.json
 │       ├── anotacao_manual_*_bio.conll
 │       └── anotacao_consenso_adjudicado_2026-07-02.*
-├── docs/                            # relatório, arquitetura e artefatos derivados
-│   ├── RELATORIO_FINAL.md
-│   ├── RELATORIO_FINAL.docx
-│   ├── ARQUITETURA.md
-│   ├── guia_anotacao.md
-│   ├── Proposta_PLN.docx
-│   ├── _reconciliar_relatorio.py
-│   ├── figuras_relatorio/           # figuras finais do relatório
-│   └── outputs/                     # métricas e tabelas exportadas pelos notebooks
 ├── explorador/                      # visualização estática interativa (5 visões)
 │   ├── index.html
 │   ├── data*.js                     # dados embutidos das visões
@@ -94,9 +85,6 @@ supervisão *silver* do LLM.
 │   │   ├── modal.js
 │   │   └── views/                   # conjunto, notas, BIO, entidades e painel
 │   ├── styles.css
-│   ├── _build_*.py                  # scripts de geração das visões
-│   ├── _explorador_template.py
-│   ├── _refresh_data.py
 │   └── README.md
 └── apps/
     ├── anotador/                    # interface estática de anotação humana
@@ -110,7 +98,6 @@ supervisão *silver* do LLM.
     │   ├── data.js
     │   ├── app.js
     │   ├── styles.css
-    │   ├── build_data.py
     │   └── README.md
     ├── anotador-llm/                # E2b: anotação automática local via Ollama
     │   ├── anotador_llm.py
@@ -140,24 +127,20 @@ python -m spacy download pt_core_news_md
 1. `notebooks/notebook_preparacao_v2.ipynb` — prepara o corpus e roda **E1** e **E2**.
    Para o E2, configure a credencial do provedor do LLM.
 2. `notebooks/notebook_conclusao.ipynb` — faz a normalização BIO, calcula as medidas de avaliação e
-   gera os gráficos. É a **fonte canônica dos números** do relatório; para o *gold*, aponte o(s)
-   JSON(s) de anotador. Detalhes em
-   [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md).
+   é a **fonte canônica dos números**; para o *gold*, aponte o(s) JSON(s) de anotador.
 3. `notebooks/notebook_destilacao.ipynb` — estratégia **E3**: treina modelos de rotulagem de
    sequência (Naive Bayes → HMM → reg. logística → CRF → BERTimbau) com supervisão *silver* do E2
    e testa no *gold* humano. Requer GPU (Colab).
 
 > Leia o Parquet com **DuckDB** ou **`engine="pyarrow"`** — as colunas de *span* são
-> `LIST<STRUCT>` aninhadas, e o `fastparquet` as devolve vazias em silêncio. Ver notas em
-> `docs/ARQUITETURA.md`.
+> `LIST<STRUCT>` aninhadas, e o `fastparquet` as devolve vazias em silêncio.
 
 ### Explorador (visualização)
 
 Abra **`explorador/index.html`** com duplo-clique — é estático e funciona offline (sem
 servidor). Cinco visões: *Conjunto* (panorama do corpus), *Explorador de notas*, *BIO
 (tokens)*, *Navegador de entidades* e *Painel de achados*. As visões também estão disponíveis em
-[`explorador-argumentos.netlify.app`](https://explorador-argumentos.netlify.app/). Para regenerar
-os dados embutidos, veja `explorador/README.md`.
+[`explorador-argumentos.netlify.app`](https://explorador-argumentos.netlify.app/).
 
 ### Anotador (ambiente de anotação)
 
@@ -186,8 +169,8 @@ dependências (`sintaxe_json`). O **dicionário de colunas** está em
 ## Limitações
 
 - **Gold adjudicado em rodada de parecer individual** — a revisão cruzada pelo segundo anotador
-  está prevista; quando ocorrer, os artefatos se atualizam por script (`explorador/_refresh_data.py`
-  e re-execução dos notebooks).
+  está prevista; quando ocorrer, os artefatos se atualizam pela re-execução dos notebooks e dos
+  snapshots locais.
 - **Fronteiras de *span*** seguem o ponto difícil — para máquinas e para humanos (κ 0,632 no
   conteúdo decidido, com fronteiras fluidas).
 - Escopo: dois LLMs de **uma mesma família**, **um** idioma (PT-BR), corpus de um período;

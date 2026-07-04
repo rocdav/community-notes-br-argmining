@@ -249,7 +249,7 @@ function renderLista() {
 function renderNota() {
   const n = NOTAS_DATA[state.notaIdx];
   if (!n) {
-    document.getElementById('painel-central').innerHTML = '<div class="placeholder-warning">Sem dados de notas carregados.<br>Rode <code>python _build_anotacao.py</code> para popular as 60.</div>';
+    document.getElementById('painel-central').innerHTML = '<div class="placeholder-warning">Sem dados de notas carregados.<br>Verifique se <code>data.js</code> foi carregado corretamente.</div>';
     return;
   }
   const a = state.anotacoes[n.noteId];

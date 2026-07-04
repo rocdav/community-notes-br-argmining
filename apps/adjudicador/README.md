@@ -99,18 +99,7 @@ revisada de novo.
   `manual`, `intersecao_davi_alvaro`, `uniao_davi_alvaro`, `peer`, sufixo
   `+tipo_editado`) e `adjudicated_at`.
 
-## Regenerar dados
+## Dados do snapshot
 
-Quando os JSONs humanos forem atualizados:
-
-```bash
-python apps/adjudicador/build_data.py
-```
-
-O script lê:
-
-- `apps/anotador/data.js`;
-- `data/gold/anotacao_manual_davi-machado-da-rocha_2026-05-20.json`;
-- `data/gold/anotacao_manual_alvaro-barros_2026-07-02.json`.
-
-Ele valida os offsets antes de escrever `apps/adjudicador/data.js`.
+O arquivo `data.js` versionado contém o recorte usado na adjudicação pública. Os JSONs humanos e o
+consenso final permanecem em `data/gold/`, que é a fonte de dados preservada no repositório.
