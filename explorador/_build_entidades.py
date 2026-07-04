@@ -34,7 +34,13 @@ CSV = os.path.join("..", "data", "dataset_anotado_final_com_bio.csv")
 OUT_ENT = "data_entidades.js"
 OUT_NOTAS = "data_notas.js"
 TIPOS = ["CLAIM", "EVIDENCIA", "FONTE", "QUALIFICADOR"]
-RX_SPAN = re.compile(r"'start':\s*(\d+),\s*'end':\s*(\d+),\s*'type':\s*'([A-Z]+)'")
+# spans do CSV = repr de array NumPy: campos em ORDEM LIVRE (vêm como end/start/type) e
+# itens separados por \n (sem vírgula). Parser robusto por bloco {…}, como no _refresh_data.py —
+# o regex antigo exigia start,end,type nessa ordem e zerava tudo (papel → "fora").
+RX_BLOCO = re.compile(r"\{[^{}]*\}")
+RX_S = re.compile(r"'start':\s*(\d+)")
+RX_E = re.compile(r"'end':\s*(\d+)")
+RX_T = re.compile(r"'type':\s*'([A-Z]+)'")
 
 # filtragem dirigida pelo dataset (não mais por listas à mão):
 SCORE_MIN = 0.50           # piso de confiança GLiNER p/ o navegador (o dataset já corta em 0,40)
@@ -49,7 +55,14 @@ OBJETO = {"obj", "iobj", "obl", "obl:arg", "obl:agent", "nsubj:pass"}
 
 
 def parse_e2(v):
-    return [(int(s), int(e), t) for s, e, t in RX_SPAN.findall(v)] if isinstance(v, str) else []
+    out = []
+    if not isinstance(v, str):
+        return out
+    for bloco in RX_BLOCO.findall(v):
+        s, e, t = RX_S.search(bloco), RX_E.search(bloco), RX_T.search(bloco)
+        if s and e and t and t.group(1) in TIPOS:
+            out.append((int(s.group(1)), int(e.group(1)), t.group(1)))
+    return out
 
 
 def dunning(a, b, c, d):
