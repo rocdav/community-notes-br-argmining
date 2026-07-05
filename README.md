@@ -21,6 +21,10 @@ Cada nota é segmentada em *spans* argumentativos de quatro tipos:
 | 🔵 **FONTE** | atribuição: veículo, órgão, documento ou URL citado como respaldo |
 | 🟡 **QUALIFICADOR** | modulação: ressalva, incerteza ou escopo |
 
+O protocolo usado pelos anotadores humanos está documentado em
+[`docs/guia_anotacao.md`](docs/guia_anotacao.md), incluindo critérios de fronteira, exemplos e
+casos ambíguos.
+
 Três estratégias produzem esses *spans*:
 
 - **E1 (regras)** — spaCy `pt_core_news_md` (POS, lema, dependências) + heurísticas + regex de URL. Determinística; ~10 ms/nota fim-a-fim.
@@ -62,6 +66,9 @@ supervisão *silver* do LLM.
 ├── README.md
 ├── LICENSE
 ├── requirements.txt
+├── docs/
+│   ├── ARQUITETURA.md               # pipeline, artefatos e decisões técnicas
+│   └── guia_anotacao.md             # protocolo da anotação humana
 ├── notebooks/                       # pipeline reprodutível (Colab/Jupyter)
 │   ├── notebook_preparacao_v2.ipynb # coleta, preparação, E1 (regras) e E2 (LLM)
 │   ├── notebook_conclusao.ipynb     # BIO, avaliação e resultados (fonte canônica)
@@ -117,6 +124,9 @@ supervisão *silver* do LLM.
 
 ## Como reproduzir
 
+Para uma descrição técnica do fluxo de dados, dos artefatos e das decisões de implementação, veja
+[`docs/ARQUITETURA.md`](docs/ARQUITETURA.md).
+
 ### Notebooks (resultado canônico)
 
 ```bash
@@ -148,7 +158,8 @@ O ambiente de anotação humana também é estático. Ele pode ser aberto localm
 **`apps/anotador/index.html`** e está publicado em
 [`anotador-argumentos.netlify.app`](https://anotador-argumentos.netlify.app/). A interface usa o
 recorte de 60 notas em `apps/anotador/data.js` e exporta as marcações para posterior conversão em
-BIO/CoNLL.
+BIO/CoNLL. Para novas rodadas humanas, use o
+[`guia de anotação`](docs/guia_anotacao.md) como protocolo de referência.
 
 ### Adjudicador (consenso humano)
 
@@ -165,6 +176,8 @@ O dataset principal é [`data/dataset_anotado_final_com_bio.csv`](data/dataset_a
 dependências (`sintaxe_json`). O **dicionário de colunas** está em
 [`data/README.md`](data/README.md). O corpus deriva do conjunto público
 [`histlearn/notas-comunidade-ptbr`](https://huggingface.co/datasets/histlearn/notas-comunidade-ptbr).
+Os arquivos de `data/gold/` seguem o protocolo de anotação descrito no
+[`guia de anotação`](docs/guia_anotacao.md).
 
 ## Limitações
 

@@ -53,7 +53,10 @@ notebooks/data/
 notebooks/outputs/
 
 # Artefatos locais de entrega/manutencao fora do repositorio publico
-docs/
+docs/*
+!docs/
+!docs/ARQUITETURA.md
+!docs/guia_anotacao.md
 explorador/_*.py
 apps/adjudicador/build_data.py
 apps/anotador/_*.py
